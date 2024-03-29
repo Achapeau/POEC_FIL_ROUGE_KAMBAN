@@ -3,10 +3,18 @@
         <div class="bg-pink">
             <h2>{{wrapper.title}}</h2>
         </div>
-        <div *ngFor="let card of cardList">
-            <div class="collectionContainer">
-                <app-card [card]="card"></app-card>
-            </div>              
+        <div
+            cdkDropList
+            [cdkDropListData]="cardList"
+            class="example-list"
+            (cdkDropListDropped)="drop($event)">
+            <div *ngFor="let card of cardList">
+                <div class="collectionContainer">
+                    <div class="example-box" cdkDrag>
+                        <app-card [card]="card"></app-card>
+                    </div>
+                </div> 
+            </div>
         </div>
         <!-- <button [hidden]="!this.user.connected" (click)="addToCart(project)">Add to project</button> -->
         <input type="text" [name]="newTitle" class="">

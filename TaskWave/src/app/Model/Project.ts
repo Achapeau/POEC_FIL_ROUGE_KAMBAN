@@ -5,6 +5,6 @@ export interface Project {
     title: string | null | undefined;
     description: string | null | undefined;
     background: string | null | undefined;
-    wrappers: Wrapper[];
+    wrappers: Wrapper[] | [];
     users: User[] | null | undefined;
 }

@@ -47,7 +47,7 @@ public class ProjectService {
     }
 
 
-    public ProjectDTO findById(Integer id) {
+    public ProjectDTO findByProjectId(Integer id) {
         return convertToProjectDTO(projectRepository.findById(id).get());
     }
 
