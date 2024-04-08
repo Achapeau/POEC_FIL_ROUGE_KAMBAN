@@ -1,6 +1,6 @@
-<div class="container">
-    <div class="m-3 p-3 bg-light">
-        <div class="bg-pink">
+<div class="container-flex col">
+    <div class="m-3 p-3 bg-light w-75">
+        <div class="">
             <h2>{{wrapper.title}}</h2>
         </div>
         <div
@@ -8,12 +8,13 @@
             [cdkDropListData]="cardList"
             class="example-list"
             (cdkDropListDropped)="drop($event)">
-            <div *ngFor="let card of cardList">
-                <div class="collectionContainer">
+            <div class="collectionContainer">
+                <div *ngFor="let card of cardList">
                     <div class="example-box" cdkDrag>
                         <app-card [card]="card"></app-card>
                     </div>
-                </div> 
+                </div>
+                <app-card-new [newTitle]="newTitle" (addTask)="addTask(newTitle, wrapper)"></app-card-new>
             </div>
         </div>
         <!-- <button [hidden]="!this.user.connected" (click)="addToCart(project)">Add to project</button> -->

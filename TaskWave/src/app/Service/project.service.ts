@@ -12,6 +12,9 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProjectService {
+  getProject(): Project {
+    return this.project;
+  }
 
   constructor(public http : HttpClient, private router : Router, private route : ActivatedRoute) { }
 
@@ -26,8 +29,12 @@ export class ProjectService {
   }
 
   // get project by id
-  getProjectById(id : number): Observable<Project> {
-	return this.http.get<Project>(this.serviceURL + '/' + id);
+  getProjectById(id : number): Project {
+    this.http.get<Project>(this.serviceURL + '/' + id).pipe(map((project : Project) => {
+      this.project = project;
+      return project;
+    }));
+    return this.project;
   }
 
   // add project

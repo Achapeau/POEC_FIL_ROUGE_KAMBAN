@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Wrapper } from '../Model/Wrapper';
 import { WrapperDTO } from '../Model/WrapperDTO';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WrapperService {
-
-  constructor(public http : HttpClient) { }
+  projectId! : number;
+  constructor(public http : HttpClient, private router : Router, private route : ActivatedRoute) { }
 
   serviceURL = 'http://localhost:3050/wrapper';
   // crud operations
@@ -25,8 +26,13 @@ export class WrapperService {
   }
 
   // add wrapper
-  addWrapper(wrapper : Wrapper) : Observable<Wrapper> {
-	return this.http.post<Wrapper>(this.serviceURL, wrapper);
+  addWrapper(wrapperDTO : WrapperDTO)  {
+	  this.http.post<Wrapper>(this.serviceURL, wrapperDTO).subscribe(
+      (data : Wrapper) => {
+      console.log(data);
+      this.router.navigate(['tab',wrapperDTO.projectId], { relativeTo: this.route });
+      }
+    );
   }
 
   // update wrapper
@@ -41,6 +47,7 @@ export class WrapperService {
   }
 
   getWrappersByProjectId(id: number): Observable<Wrapper[]> {
+    this.projectId = id;
     return this.http.get<Wrapper[]>(this.serviceURL + '/' + id);
   }
   

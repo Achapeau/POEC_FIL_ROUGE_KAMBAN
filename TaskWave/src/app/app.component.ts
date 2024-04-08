@@ -4,7 +4,6 @@ import { UserService } from './Service/user.service';
 import { ProjectListComponent } from './Components/project-list/project-list.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
-import { SidebarService } from './Service/sidebar.service';
 
 @Component({
   selector: 'app-root',

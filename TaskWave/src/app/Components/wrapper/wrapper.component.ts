@@ -14,11 +14,12 @@ import {
   CdkDropList,
 } from '@angular/cdk/drag-drop';
 import { CardService } from '../../Service/card.service';
+import { CardNewComponent } from '../card-new/card-new.component';
 
 @Component({
   selector: 'app-wrapper',
   standalone: true,
-  imports: [CommonModule, CardComponent, WrapperComponent, CdkDropList, CdkDrag],
+  imports: [CommonModule, CardComponent, WrapperComponent, CardNewComponent, CdkDropList, CdkDrag],
   templateUrl: './wrapper.component.html',
   styleUrl: './wrapper.component.css'
 })
@@ -48,6 +49,7 @@ export class WrapperComponent {
     // this.wrapperService.updateWrapper(Wrapper).subscribe();
   }
   drop(event: CdkDragDrop<Card[]>) {
+    // console.log(event.container.data[event.previousIndex].title);
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -58,9 +60,10 @@ export class WrapperComponent {
         event.currentIndex,
       );
       event.container.data[event.currentIndex].position = event.currentIndex + 1;
-      this.card.position = event.currentIndex + 1;
-      this.cardService.updateCard(this.card);
-      this.wrapperService.updateWrapper(this.wrapper);
+      // this.card.position = event.currentIndex + 1;
+      // this.card = event.container.data[event.currentIndex];
+      // this.cardService.updateCard(this.card);
+      // this.wrapperService.updateWrapper(this.wrapper);
     }
   }
 }

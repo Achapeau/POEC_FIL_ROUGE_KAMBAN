@@ -1,11 +1,10 @@
 <div class="container">
-	<div class="row">
-		<div class="collectionContainer" [ngStyle]="{ 'background-image': 'url(' + this.projectService.project.background + ')' }">
-			<div cdkDropListGroup>
+	<div class="">
+		<div class="collectionContainer" [ngStyle]="{ 'background-image': 'url(' + this.projectService.project.background + ')'}">
+			<div class="container" cdkDropListGroup>
 				<app-wrapper *ngFor="let wrapper of wrappersList" [wrapper]="wrapper"></app-wrapper>
+				<app-wrapper-create></app-wrapper-create>
 			</div>
 		</div>
 	</div>
 </div>
-  
-  
