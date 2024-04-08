@@ -24,9 +24,9 @@ export class WrapperListComponent {
 constructor(public wrapperService : WrapperService, public projectService : ProjectService, private route: ActivatedRoute) {
   this.projectId = this.route.snapshot.params['id'];
   this.wrappersList = this.getWrappers(this.projectId); 
-  this.project = this.projectService.getProjectById(this.projectId);
+  this.project = this.projectService.getProject();
 }
-onInit() {
+onNgOnInit() : void {
   console.log(this.projectId);
   console.log(this.project);
 }

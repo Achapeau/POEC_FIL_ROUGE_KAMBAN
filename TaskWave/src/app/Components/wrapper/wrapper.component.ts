@@ -15,6 +15,9 @@ import {
 } from '@angular/cdk/drag-drop';
 import { CardService } from '../../Service/card.service';
 import { CardNewComponent } from '../card-new/card-new.component';
+import { ProjectService } from '../../Service/project.service';
+import { Observable } from 'rxjs';
+import { CardDTO } from '../../Model/CardDTO';
 
 @Component({
   selector: 'app-wrapper',
@@ -31,7 +34,10 @@ export class WrapperComponent {
   cardList: Card[] = [];
   i: number = 0;
 
-  constructor(public wrapperService: WrapperService, public cardService: CardService, public users: UserService) { }
+  constructor(private projectService: ProjectService, public wrapperService: WrapperService, public cardService: CardService, public users: UserService) {
+    console.log("project id = " + this.wrapperService.projectId);
+    this.project = this.projectService.getProjectById(this.wrapperService.projectId);
+   }
 
   ngOnInit() {
     if (this.wrapper) {
@@ -43,10 +49,6 @@ export class WrapperComponent {
     console.log("change", this.i);
     this.wrapper.position = this.i;
     // this.wrapperService.updateWrapper(this.wrapper).subscribe();
-  }
-  addTask(newTitle: String, wrapper: Wrapper) {
-    // Wrapper.cards.push(this.card);
-    // this.wrapperService.updateWrapper(Wrapper).subscribe();
   }
   drop(event: CdkDragDrop<Card[]>) {
     // console.log(event.container.data[event.previousIndex].title);

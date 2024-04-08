@@ -14,11 +14,8 @@
                         <app-card [card]="card"></app-card>
                     </div>
                 </div>
-                <app-card-new [newTitle]="newTitle" (addTask)="addTask(newTitle, wrapper)"></app-card-new>
+                <app-card-new [wrapper]="wrapper" [cardList]="cardList"></app-card-new>
             </div>
         </div>
-        <!-- <button [hidden]="!this.user.connected" (click)="addToCart(project)">Add to project</button> -->
-        <input type="text" [name]="newTitle" class="">
-    <button (click)="addTask(newTitle, wrapper)">Ajouter une tâche</button>
     </div>
 </div>

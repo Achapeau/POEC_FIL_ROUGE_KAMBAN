@@ -1,7 +1,11 @@
 <div class="bg-secondary m-1 p-1 rounded-3 w-75 h-auto">
     <div class="m-2">
-        <!-- <input type="text" [(ngModel)]="newTitle"> -->
-        <input type="text" newTitle="newTitle" class="">
-        <!-- <button [hidden]="!this.user.connected" (click)="addToCart(project)">Add to project</button> -->
+        <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="newTitle">Nouvelle tâche</label>
+                <input id="newTitle" class="checkoutForm" type="text" formControlName="newTitle">
+            </div>
+            <button type="submit" class="btn btn-primary">Valider</button>
+        </form>
     </div>
 </div>
