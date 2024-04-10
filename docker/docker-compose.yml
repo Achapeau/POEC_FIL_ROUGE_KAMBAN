@@ -1,12 +1,12 @@
 version: '3'
 
 services:
-  # compilation:
-  #   image: maven:latest
-  #   volumes:
-  #     - ../.:/app
-  #   working_dir: /app
-  #   command: mvn -Dmaven.test.skip=true -DskipTests=true clean install
+  compilation:
+    image: maven:latest
+    volumes:
+      - ../.:/app
+    working_dir: /app
+    # command: mvn -Dmaven.test.skip=true -DskipTests=true clean install
 
   mysql:
     build:
@@ -32,7 +32,7 @@ services:
       - springboot-mysql-network
     depends_on:
       - mysql
-      # - compilation
+      - compilation
     # environment:
       # SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/Trello
       # SPRING_DATASOURCE_USERNAME: trello_admin
