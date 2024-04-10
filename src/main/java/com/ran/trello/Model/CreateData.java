@@ -11,7 +11,6 @@ import com.ran.trello.Model.Repository.WrapperRepository;
 import org.springframework.context.ApplicationContext;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CreateData {
 

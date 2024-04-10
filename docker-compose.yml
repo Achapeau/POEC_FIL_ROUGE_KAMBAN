@@ -43,11 +43,14 @@ services:
       - "8080:8080"
     networks:
       - springboot-mysql-network
+    # volumes:
+    #   - dev-front-repo:/app
     depends_on:
       - spring
 
 # volumes:
-#   maven-repo:
+#   dev-front-repo:
+#     external: true
   
 networks:
   springboot-mysql-network:
