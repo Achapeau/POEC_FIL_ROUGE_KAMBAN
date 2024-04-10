@@ -1,26 +1,18 @@
-# Utilisez l'image officielle Node.js comme point de départ
-FROM node:latest AS build
+# Utiliser l'image Node.js comme image de base
+FROM node:latest
 
-# Définissez le répertoire de travail
+# Définir le répertoire de travail dans l'image
 WORKDIR /app
 
-# Copiez les fichiers de votre application Angular dans le conteneur
-COPY . .
+# Copier les fichiers package.json et package-lock.json dans le répertoire de travail
+COPY ./ ./
 
-# Installez les dépendances
+# Installer les dépendances du projet
+RUN npm install -g npm@10.5.1
 RUN npm install
 
-# Construisez votre application Angular
-RUN npm run build --prod
-
-# Utilisez l'image officielle nginx pour servir votre application Angular
-FROM nginx:alpine
-
-# Copiez le build de votre application depuis l'étape de construction précédente vers le répertoire de travail de nginx
-COPY --from=build /app/dist /usr/share/nginx/html
-
-# Exposez le port 80
+# Exposer le port 4200 pour l'application Angular
 EXPOSE 8080
 
-# Commande par défaut pour démarrer nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Commande par défaut pour démarrer l'application avec ng serve
+CMD ["npm", "run", "start"]

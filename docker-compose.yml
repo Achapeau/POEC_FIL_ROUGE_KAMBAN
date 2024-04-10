@@ -1,21 +1,23 @@
 version: '3'
 
 services:
-  compilation:
-    image: maven:latest
-    volumes:
-      - ../.:/app
-    working_dir: /app
-    # command: mvn -Dmaven.test.skip=true -DskipTests=true clean install
+  # compilation:
+  #   image: maven:latest
+  #   volumes:
+  #     - ./.:/app
+  #   working_dir: /app
+  #   command: mvn -Dmaven.test.skip=true -DskipTests=true clean install
 
   mysql:
     build:
-      context: ./
+      context: ./docker/
       dockerfile: base.dockerfile
     ports:
       - "3306:3306"
     networks:
       - springboot-mysql-network
+    # depends_on:
+    #   - compilation
     environment:
       MYSQL_ROOT_PASSWORD: trello_admin
       MYSQL_DATABASE: trello
@@ -24,7 +26,7 @@ services:
 
   spring:
     build:
-      context: ../
+      context: ./
       dockerfile: java.dockerfile
     ports:
       - "3050:3050"
@@ -32,26 +34,16 @@ services:
       - springboot-mysql-network
     depends_on:
       - mysql
-      - compilation
-    # environment:
-      # SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/Trello
-      # SPRING_DATASOURCE_USERNAME: trello_admin
-      # SPRING_DATASOURCE_PASSWORD: trello_admin
-      # SERVER_PORT: 3050
-      # # SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.jdbc.Driver
-      # ORG_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL8Dialect
-      # SPRING_JPA_HIBERNATE_DDL_AUTO: create-drop
 
   node:
     build:
-      context: ../TaskWave
+      context: ./TaskWave/
       dockerfile: angular.dockerfile
     ports:
       - "8080:8080"
     networks:
       - springboot-mysql-network
     depends_on:
-      - mysql
       - spring
 
 # volumes:

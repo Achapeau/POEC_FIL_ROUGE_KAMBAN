@@ -5,10 +5,10 @@ FROM openjdk:21-jdk
 # WORKDIR /app
 
 # Copiez le fichier JAR de l'application dans le conteneur
-ARG JAR_FILE=./target/*.jar
+# ARG JAR_FILE=../target/*.jar
 WORKDIR /app
-COPY . /app
-COPY ${JAR_FILE} app.jar
+# COPY . /app
+COPY ./target/*.jar app.jar
 
 EXPOSE 3050
 
