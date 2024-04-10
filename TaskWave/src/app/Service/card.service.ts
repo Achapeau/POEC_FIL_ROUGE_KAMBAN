@@ -32,7 +32,7 @@ export class CardService {
       console.log(data);
       }
     );
-    return this.router.navigate(['tab',cardDTO.wrapperId], { relativeTo: this.route });
+    return this.router.navigate(['tab',cardDTO.wrapperId]);
   }
 
   // update Card

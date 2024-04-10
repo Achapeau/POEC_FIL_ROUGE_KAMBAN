@@ -35,22 +35,16 @@ services:
     depends_on:
       - mysql
 
-  node:
-    build:
-      context: ./TaskWave/
-      dockerfile: angular.dockerfile
-    ports:
-      - "8080:8080"
-    networks:
-      - springboot-mysql-network
-    # volumes:
-    #   - dev-front-repo:/app
-    depends_on:
-      - spring
-
-# volumes:
-#   dev-front-repo:
-#     external: true
+  # node:
+  #   build:
+  #     context: ./TaskWave/
+  #     dockerfile: angular.dockerfile
+  #   ports:
+  #     - "8080:8080"
+  #   networks:
+  #     - springboot-mysql-network
+  #   depends_on:
+  #     - spring
   
 networks:
   springboot-mysql-network:
