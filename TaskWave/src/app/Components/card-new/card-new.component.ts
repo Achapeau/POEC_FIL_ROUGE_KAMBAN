@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CardService } from '../../Service/card.service';
 import { Card } from '../../Model/Card';
 import { Wrapper } from '../../Model/Wrapper';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CardDTO } from '../../Model/CardDTO';
 import { WrapperService } from '../../Service/wrapper.service';
+import { WrapperComponent } from '../wrapper/wrapper.component';
 
 @Component({
   selector: 'app-card-new',
@@ -18,6 +19,8 @@ export class CardNewComponent {
   @Input() wrapper! : Wrapper;
   projectId : number = this.wrapperService.projectId;
   @Input() cardList : Card[] = [];
+  @Output() cardListChange = new EventEmitter<Card[]>();
+
 	constructor(public wrapperService : WrapperService, private cardService : CardService, public fb : FormBuilder) {
     // console.log("project id = " + this.projectId);
    }
@@ -36,7 +39,11 @@ export class CardNewComponent {
         status: this.wrapper.title
       }
       // console.log(newCard);
-      this.cardService.addCard(newCard);
+      let returnCard = this.cardService.addCard(newCard);
+      if (returnCard) {
+        this.cardList.push(returnCard);
+        this.cardListChange.emit(this.cardList);
+      }
       this.checkoutForm.reset();
     }
 	}

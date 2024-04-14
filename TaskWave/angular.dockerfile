@@ -10,9 +10,11 @@ COPY ./ ./
 # Installer les dépendances du projet
 RUN npm install -g npm@10.5.1
 RUN npm install
+RUN npm install -g @angular/cli
+
 
 # Exposer le port 4200 pour l'application Angular
 EXPOSE 8080
 
 # Commande par défaut pour démarrer l'application avec ng serve
-CMD ["npm", "run", "start"]
+CMD ["npm", "start"]

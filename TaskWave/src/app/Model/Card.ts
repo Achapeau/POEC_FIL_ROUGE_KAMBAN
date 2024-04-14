@@ -6,4 +6,4 @@ export interface Card {
     position: number | null | undefined;
     wrapperId: number | null | undefined;
     status: string | null | undefined;
-}
+} 

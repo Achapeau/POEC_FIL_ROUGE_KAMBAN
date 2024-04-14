@@ -26,13 +26,13 @@ export class CardService {
   }
 
   // add Card
-  addCard(cardDTO : CardDTO) {
+  addCard(cardDTO : CardDTO) : Card | null {
     this.http.post<Card>(this.serviceURL, cardDTO).subscribe(
       (data : Card) => {
-      console.log(data);
+        return data;
       }
     );
-    return this.router.navigate(['tab',cardDTO.wrapperId]);
+    return null;
   }
 
   // update Card

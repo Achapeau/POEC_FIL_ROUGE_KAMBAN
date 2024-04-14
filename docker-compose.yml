@@ -35,16 +35,23 @@ services:
     depends_on:
       - mysql
 
-  # node:
-  #   build:
-  #     context: ./TaskWave/
-  #     dockerfile: angular.dockerfile
-  #   ports:
-  #     - "8080:8080"
-  #   networks:
-  #     - springboot-mysql-network
-  #   depends_on:
-  #     - spring
+  node:
+    image: "node:alpine"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./TaskWave/:/home/node/app
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"
+    networks:
+      - springboot-mysql-network
+    command: ["npm install -g @angular/cli", "npm install -g npm@10.5.1", "npm install", "npm start"] 
+    depends_on:
+      - spring
   
 networks:
   springboot-mysql-network:
