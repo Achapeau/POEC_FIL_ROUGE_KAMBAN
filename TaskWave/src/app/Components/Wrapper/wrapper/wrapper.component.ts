@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { WrapperService } from '../../Service/wrapper.service';
-import { UserService } from '../../Service/user.service';
-import { Wrapper } from '../../Model/Wrapper';
-import { Card } from '../../Model/Card';
-import { CardComponent } from '../card/card.component';
+import { WrapperService } from '../../../Service/wrapper.service';
+import { UserService } from '../../../Service/user.service';
+import { Wrapper } from '../../../Model/Wrapper';
+import { Card } from '../../../Model/Card';
+import { CardComponent } from '../../Card/card/card.component';
 import { CommonModule } from '@angular/common';
-import { Project } from '../../Model/Project';
+import { Project } from '../../../Model/Project';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -13,12 +13,12 @@ import {
   CdkDrag,
   CdkDropList,
 } from '@angular/cdk/drag-drop';
-import { CardService } from '../../Service/card.service';
-import { CardNewComponent } from '../card-new/card-new.component';
-import { ProjectService } from '../../Service/project.service';
+import { CardService } from '../../../Service/card.service';
+import { CardNewComponent } from '../../Card/card-new/card-new.component';
+import { ProjectService } from '../../../Service/project.service';
 import { Observable } from 'rxjs';
-import { CardDTO } from '../../Model/CardDTO';
-import { ProjectDTO } from '../../Model/ProjectDTO';
+import { CardDTO } from '../../../Model/CardDTO';
+import { ProjectDTO } from '../../../Model/ProjectDTO';
 
 @Component({
   selector: 'app-wrapper',

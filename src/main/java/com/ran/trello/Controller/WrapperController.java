@@ -32,10 +32,10 @@ public class WrapperController {
         return wrapperService.getWrapperById(id);
     }
 
-    @GetMapping("/project/{id}")
-    public List<Wrapper> getWrapperByProjectId(@PathVariable Integer id) {
-        return wrapperService.getWrappersByProjectId(id);
-    }
+//    @GetMapping("/project/{id}")
+//    public List<Wrapper> getWrapperByProjectId(@PathVariable Integer id) {
+//        return wrapperService.getWrappersByProjectId(id);
+//    }
 
     @GetMapping
     public ResponseEntity<List<WrapperDTO>> getAllWrappers() {

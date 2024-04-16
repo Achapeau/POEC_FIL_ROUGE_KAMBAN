@@ -1,7 +1,7 @@
 import { Component, NgModule, NgModuleDecorator } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { UserService } from './Service/user.service';
-import { ProjectListComponent } from './Components/project-list/project-list.component';
+import { ProjectListComponent } from './Components/Project/project-list/project-list.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 

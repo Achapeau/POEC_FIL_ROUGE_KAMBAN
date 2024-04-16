@@ -1,14 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { WrapperService } from '../../Service/wrapper.service';
-import { Wrapper } from '../../Model/Wrapper';
+import { WrapperService } from '../../../Service/wrapper.service';
+import { Wrapper } from '../../../Model/Wrapper';
 import { CommonModule } from '@angular/common';
 import { WrapperComponent } from '../wrapper/wrapper.component';
 import { ActivatedRoute } from '@angular/router';
-import { Project } from '../../Model/Project';
-import { ProjectService } from '../../Service/project.service';
+import { Project } from '../../../Model/Project';
+import { ProjectService } from '../../../Service/project.service';
 import { CdkDropListGroup} from '@angular/cdk/drag-drop';
 import { WrapperCreateComponent } from '../wrapper-create/wrapper-create.component';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 @Component({
   selector: 'app-wrapper-list',
   standalone: true,
@@ -31,16 +31,14 @@ ngOnInit() : void {
   this.projectId = this.route.snapshot.params['id'];
   this.project = this.projectService.getProjectById(this.projectId);
   console.log(this.project.wrappersIds);
-  this.wrapperService.getWrappersByProjectId(this.projectId).subscribe((response: Wrapper[]) => {
-    this.wrappersList = response;
-    console.log(this.wrappersList);
-  });
+  this.getWrappers();
 }
-  getWrappers(projectId : number) : Wrapper[] {
-      this.wrapperService.getWrappersByProjectId(projectId).subscribe((response:Wrapper[]) => {
-        this.projectId = projectId;
-        return this.wrappersList = response;
+  
+  getWrappers(): void {
+    const observables = this.projectService.project.wrappersIds.map(id => this.wrapperService.getWrapperById(id));
+    
+    forkJoin(observables).subscribe((data: Wrapper[]) => {
+      this.wrappersList = data;
     });
-    return [];
   }
 }

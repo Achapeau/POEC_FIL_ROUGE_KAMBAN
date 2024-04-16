@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { UserService } from '../../Service/user.service';
+import { UserService } from '../../../Service/user.service';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { LogsDTO } from '../../Model/LogsDTO';
+import { LogsDTO } from '../../../Model/LogsDTO';
 
 @Component({
   selector: 'app-connection',

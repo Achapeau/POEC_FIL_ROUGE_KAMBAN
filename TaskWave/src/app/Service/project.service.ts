@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, Input } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Project } from '../Model/Project';
-import { WrapperComponent } from '../Components/wrapper/wrapper.component';
+import { WrapperComponent } from '../Components/Wrapper/wrapper/wrapper.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WrapperDTO } from '../Model/WrapperDTO';
 import { Wrapper } from '../Model/Wrapper';

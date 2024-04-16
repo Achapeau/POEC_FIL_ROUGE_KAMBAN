@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { UserService } from '../../Service/user.service';
+import { UserService } from '../../../Service/user.service';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UserDTO } from '../../Model/UserDTO';
+import { UserDTO } from '../../../Model/UserDTO';
 
 @Component({
   selector: 'app-inscription',

@@ -23,12 +23,8 @@ export class WrapperService {
   }
   
   // add wrapper
-  addWrapper(wrapperDTO : WrapperDTO)  {
-	  this.http.post<Wrapper>(this.serviceURL, wrapperDTO).subscribe(
-      (data : Wrapper) => {
-      console.log(data);
-      }
-    );
+  addWrapper(wrapperDTO : WrapperDTO) : Observable<Wrapper> {
+	  return this.http.post<Wrapper>(this.serviceURL, wrapperDTO);
   }
 
   // update wrapper

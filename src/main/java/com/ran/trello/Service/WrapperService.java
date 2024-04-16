@@ -57,7 +57,7 @@ public class WrapperService {
         return dto;
     }
 
-    public List<Wrapper> getWrappersByProjectId(Integer id) {
+    private List<Wrapper> getWrappersByProjectId(Integer id) {
         return wrapperRepository.findAll().stream().filter(wrapper -> wrapper.getProjectId().equals(id)).toList();
     }
 }

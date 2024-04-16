@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CardService } from '../../Service/card.service';
-import { Card } from '../../Model/Card';
-import { Wrapper } from '../../Model/Wrapper';
+import { CardService } from '../../../Service/card.service';
+import { Card } from '../../../Model/Card';
+import { Wrapper } from '../../../Model/Wrapper';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CardDTO } from '../../Model/CardDTO';
-import { WrapperService } from '../../Service/wrapper.service';
-import { WrapperComponent } from '../wrapper/wrapper.component';
+import { CardDTO } from '../../../Model/CardDTO';
+import { WrapperService } from '../../../Service/wrapper.service';
+import { WrapperComponent } from '../../Wrapper/wrapper/wrapper.component';
 import { Router } from '@angular/router';
-import { ProjectService } from '../../Service/project.service';
+import { ProjectService } from '../../../Service/project.service';
 
 @Component({
   selector: 'app-card-new',
@@ -33,7 +33,7 @@ export class CardNewComponent {
 
 	onSubmit() {
     if (this.checkoutForm.valid) {
-      let newCard : CardDTO = {
+      let newCard : Partial<Card> = {
         title: this.checkoutForm.value.newTitle,
         description: '',
         position: this.cardList.length + 1,
@@ -41,16 +41,16 @@ export class CardNewComponent {
         status: this.wrapper.title
       }
       // console.log(newCard);
-      let returnCard = this.cardService.addCard(newCard);
-      if (returnCard) {
-        this.cardList.push(returnCard);
-        this.cardListChange.emit(this.cardList);
-      }
+      this.cardService.addCard(newCard).subscribe((data : Card) => {
+         let returnCard = data;
+         this.cardList.push(returnCard);
+         this.cardListChange.emit(this.cardList);
+      });
       this.checkoutForm.reset();
       this.projectService.selectProject(this.projectService.getProjectById(this.projectId));
-      this.router.navigate(['tab', this.projectId], { skipLocationChange: true }).then(() => {
-        window.location.reload();
-      });
+      // this.router.navigate(['tab', this.projectId], { skipLocationChange: true }).then(() => {
+      //   window.location.reload();
+      // });
     }
 	}
 

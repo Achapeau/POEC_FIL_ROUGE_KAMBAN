@@ -26,13 +26,8 @@ export class CardService {
   }
 
   // add Card
-  addCard(cardDTO : CardDTO) : Card | null {
-    this.http.post<Card>(this.serviceURL, cardDTO).subscribe(
-      (data : Card) => {
-        return data;
-      }
-    );
-    return null;
+  addCard(card : Partial<Card>) : Observable<Card> {
+    return this.http.post<Card>(this.serviceURL, card);
   }
 
   // update Card
