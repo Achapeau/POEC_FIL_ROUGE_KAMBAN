@@ -42,9 +42,8 @@ export class WrapperService {
 	  return this.http.delete(this.serviceURL + '/' + id);
   }
 
-  getWrappersByProjectId(id: number): Observable<Wrapper[]> {
-    this.projectId = id;
-    return this.http.get<Wrapper[]>(this.serviceURL + '/project/' + id);
-  }
-  
+ getWrappersByProjectId(id: number): Observable<Wrapper[]> {
+   this.projectId = id;
+   return this.http.get<Wrapper[]>(this.serviceURL + '/project/' + id);
+ }
 }
