@@ -6,6 +6,8 @@ import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { CardDTO } from '../../Model/CardDTO';
 import { WrapperService } from '../../Service/wrapper.service';
 import { WrapperComponent } from '../wrapper/wrapper.component';
+import { Router } from '@angular/router';
+import { ProjectService } from '../../Service/project.service';
 
 @Component({
   selector: 'app-card-new',
@@ -21,7 +23,7 @@ export class CardNewComponent {
   @Input() cardList : Card[] = [];
   @Output() cardListChange = new EventEmitter<Card[]>();
 
-	constructor(public wrapperService : WrapperService, private cardService : CardService, public fb : FormBuilder) {
+	constructor(private projectService : ProjectService, public wrapperService : WrapperService, private cardService : CardService, public fb : FormBuilder, private router : Router) {
     // console.log("project id = " + this.projectId);
    }
 
@@ -45,6 +47,10 @@ export class CardNewComponent {
         this.cardListChange.emit(this.cardList);
       }
       this.checkoutForm.reset();
+      this.projectService.selectProject(this.projectService.getProjectById(this.projectId));
+      this.router.navigate(['tab', this.projectId], { skipLocationChange: true }).then(() => {
+        window.location.reload();
+      });
     }
 	}
 

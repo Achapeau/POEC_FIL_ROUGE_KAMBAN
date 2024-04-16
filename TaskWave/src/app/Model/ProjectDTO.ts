@@ -3,6 +3,6 @@ export interface ProjectDTO {
 	title: string | null | undefined;
 	description: string | null | undefined;
 	background: string | null | undefined;
-	wrappersIds: number[] | null | undefined;
-	userIds: number[] | null | undefined;
+	wrappersIds: number[] | [];
+	userIds: number[] | [];
 }

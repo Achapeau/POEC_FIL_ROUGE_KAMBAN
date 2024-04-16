@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { WrapperService } from '../../Service/wrapper.service';
 import { Wrapper } from '../../Model/Wrapper';
 import { CommonModule } from '@angular/common';
@@ -8,6 +8,8 @@ import { Project } from '../../Model/Project';
 import { ProjectService } from '../../Service/project.service';
 import { CdkDropListGroup} from '@angular/cdk/drag-drop';
 import { WrapperCreateComponent } from '../wrapper-create/wrapper-create.component';
+import { ProjectDTO } from '../../Model/ProjectDTO';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-wrapper-list',
   standalone: true,
@@ -15,24 +17,28 @@ import { WrapperCreateComponent } from '../wrapper-create/wrapper-create.compone
   templateUrl: './wrapper-list.component.html',
   styleUrl: './wrapper-list.component.css'
 })
-export class WrapperListComponent {
-  project! : Project;
-  projectId : number;
-  wrappersList : Wrapper[] = [];
+export class WrapperListComponent implements OnInit {
+  @Input() project! : Project;
+  // @Input() projectDTO! : ProjectDTO;
+  @Input() projectId! : number;
+  @Input() wrappersId! : number[];
+  @Input() wrappersList : Observable<Wrapper>[] | Wrapper[] = [];
   newTitle! : string;
 	
 constructor(public wrapperService : WrapperService, public projectService : ProjectService, private route: ActivatedRoute) {
+  
+}
+ngOnInit() : void {
   this.projectId = this.route.snapshot.params['id'];
-  this.wrappersList = this.getWrappers(this.projectId); 
-  this.project = this.projectService.getProject();
-}
-onNgOnInit() : void {
   console.log(this.projectId);
-  console.log(this.project);
+  this.project = this.projectService.getProjectById(this.projectId);
+  console.log(this.project.wrappersIds);
+  this.wrappersList = this.project.wrappersIds.map((id) => this.wrapperService.getWrapperById(id) as Observable<Wrapper>);
+  console.log(this.wrappersList);
 }
-  getWrappers(id : number) : Wrapper[] {
-      this.wrapperService.getWrappersByProjectId(id).subscribe((response:Wrapper[]) => {
-        this.projectId = id;
+  getWrappers(projectId : number) : Wrapper[] {
+      this.wrapperService.getWrappersByProjectId(projectId).subscribe((response:Wrapper[]) => {
+        this.projectId = projectId;
         return this.wrappersList = response;
     });
     return [];

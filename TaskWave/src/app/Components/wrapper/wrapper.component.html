@@ -1,5 +1,5 @@
 <div class="container-flex col">
-    <div class="m-3 p-3 bg-light w-75">
+    <div class="m-3 p-3 bg-light">
         <div class="">
             <h2>{{wrapper.title}}</h2>
         </div>
@@ -8,7 +8,7 @@
             [cdkDropListData]="cardList"
             class="example-list"
             (cdkDropListDropped)="drop($event)">
-            <div class="collectionContainer">
+            <div class="">
                 <app-card-new [wrapper]="wrapper" [cardList]="cardList"></app-card-new>
                 <div *ngFor="let card of cardList">
                     <div class="example-box" cdkDrag>

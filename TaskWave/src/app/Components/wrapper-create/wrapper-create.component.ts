@@ -1,4 +1,4 @@
-import { Component, Inject, Injectable } from '@angular/core';
+import { Component, Inject, Injectable, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WrapperService } from '../../Service/wrapper.service';
 import { WrapperDTO } from '../../Model/WrapperDTO';
@@ -10,16 +10,20 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './wrapper-create.component.html',
   styleUrl: './wrapper-create.component.css'
 })
-export class WrapperCreateComponent {
-  newTitle!: string | null;
-  projectId : number = this.wrapperService.projectId;
+export class WrapperCreateComponent implements OnInit {
+  @Input() newTitle!: string | null;
+  @Input() projectId : number = this.wrapperService.projectId;
 	constructor(public wrapperService : WrapperService, public fb : FormBuilder, private router : Router, private route : ActivatedRoute) {
-    console.log("project id = " + this.projectId);
+    
    }
 
 	public checkoutForm = this.fb.group({
 		newTitle: ['', [Validators.required]],
 	});
+
+  ngOnInit() : void {
+    console.log("project id = " + this.projectId);
+  }
 
 	onSubmit() {
     if (this.checkoutForm.valid) {

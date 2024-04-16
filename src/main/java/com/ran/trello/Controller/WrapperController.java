@@ -28,6 +28,11 @@ public class WrapperController {
     }
 
     @GetMapping("/{id}")
+    public Wrapper getWrapperById(@PathVariable Integer id) {
+        return wrapperService.getWrapperById(id);
+    }
+
+    @GetMapping("/project/{id}")
     public List<Wrapper> getWrapperByProjectId(@PathVariable Integer id) {
         return wrapperService.getWrappersByProjectId(id);
     }
@@ -39,8 +44,8 @@ public class WrapperController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<WrapperDTO> updateWrapper(@PathVariable Integer id, @RequestBody WrapperDTO wrapperDTO) {
-        WrapperDTO updatedWrapper = wrapperService.updateWrapper(id, wrapperDTO);
+    public ResponseEntity<WrapperDTO> updateWrapper(@PathVariable Integer id, @RequestBody Wrapper wrapper) {
+        WrapperDTO updatedWrapper = wrapperService.updateWrapper(id, wrapper);
         return ResponseEntity.ok(updatedWrapper);
     }
 

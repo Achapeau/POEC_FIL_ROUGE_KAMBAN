@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Wrapper } from '../Model/Wrapper';
 import { WrapperDTO } from '../Model/WrapperDTO';
@@ -9,25 +9,19 @@ import { ActivatedRoute, Router } from '@angular/router';
   providedIn: 'root'
 })
 export class WrapperService {
-  projectId! : number;
-  wrappers : Observable<Wrapper[]> = new Observable<Wrapper[]>();
-  wrapper!: Observable<Wrapper> | Wrapper;
+  @Input() projectId! : number;
+  @Input() wrappers : Wrapper[] = [];
+  wrapper!: Wrapper;
   constructor(public http : HttpClient, private router : Router, private route : ActivatedRoute) { }
 
   serviceURL = 'http://localhost:3050/wrapper';
   // crud operations
 
-  // get all wrapper
-  getWrappers() : Observable<Wrapper[]> {
-	  return this.http.get<Wrapper[]>(this.serviceURL);
+  // get wrapper by id
+  getWrapperById(id : number): Observable<Wrapper> {
+    return this.http.get<Wrapper>(this.serviceURL + '/' + id);
   }
-
-  // get wrapper by project id
-  getWrapperById(projectId : number): Observable<Wrapper> {
-    this.wrapper = this.http.get<Wrapper>(this.serviceURL + '/' + projectId);
-	  return this.http.get<Wrapper>(this.serviceURL + '/' + projectId);
-  }
-
+  
   // add wrapper
   addWrapper(wrapperDTO : WrapperDTO)  {
 	  this.http.post<Wrapper>(this.serviceURL, wrapperDTO).subscribe(
@@ -50,7 +44,7 @@ export class WrapperService {
 
   getWrappersByProjectId(id: number): Observable<Wrapper[]> {
     this.projectId = id;
-    return this.http.get<Wrapper[]>(this.serviceURL + '/' + id);
+    return this.http.get<Wrapper[]>(this.serviceURL + '/project/' + id);
   }
   
 }

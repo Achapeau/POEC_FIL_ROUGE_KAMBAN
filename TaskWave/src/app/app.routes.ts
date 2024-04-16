@@ -10,7 +10,7 @@ import { InscriptionComponent } from './Components/inscription/inscription.compo
 
 export const routes: Routes = [
     { path: '',   redirectTo: 'project-list', pathMatch: 'full' },
-    { path: 'project-component', component: ProjectComponent },
+    // { path: 'project-component', component: ProjectComponent },
     { path: 'project-list', component: ProjectListComponent },
     // { path: 'wrapper-component', component: WrapperComponent },
     { path: 'tab/:id', component: WrapperListComponent },
