@@ -5,3 +5,15 @@
   border-style: solid;
   border-radius: 5px;
 }
+
+.sidebar-service {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  height: 100vh;
+}
+
+.sidebar-service a {
+  margin: 1rem;
+}

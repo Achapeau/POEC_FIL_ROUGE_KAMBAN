@@ -3,7 +3,7 @@
   data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
   <div class="">
     <div class="">
-      <div class="p-3 text-white bg-dark" >
+      <div class="sidebar-service text-white bg-dark">
         <!-- <a href="/" class="d-flex align-items-center h-100 mb-3 mb-md-0 me-md-auto text-white text-decoration-none"> -->
           <!-- <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg> -->
           
@@ -15,17 +15,30 @@
           TaskWave
         </a>
         <!-- </a> -->
+        <div>
+          <h2>Bienvenue {{this.user.currentUser?.firstname}}</h2>
+        </div>
+        <div class="btn-group dropright">
+          <button type="button" class="btn btn-secondary">
+            Split dropright
+          </button>
+          <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <!-- <span class="sr-only">Toggle Dropright</span> -->
+          </button>
+          <div class="dropdown-menu">
+            <!-- Dropdown menu links -->
+          </div>
+        </div>
         <hr>
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
             <a class="button" routerLink="/project-list" class="nav-link active" aria-current="project">
               <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg> -->
-              project
+              Accueil projets
             </a>
           </li>
           <li class="nav-item">
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <a class="button" routerLink="/settings" class="nav-link active">settings</a>
           </li>
         </ul>
         <hr>
