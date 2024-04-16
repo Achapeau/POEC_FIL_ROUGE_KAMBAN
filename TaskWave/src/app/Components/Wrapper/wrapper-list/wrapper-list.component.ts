@@ -17,8 +17,7 @@ import { Observable, forkJoin } from 'rxjs';
   styleUrl: './wrapper-list.component.css'
 })
 export class WrapperListComponent implements OnInit {
-  @Input() project! : Project;
-  // @Input() projectDTO! : ProjectDTO;
+  project! : Project;
   @Input() projectId! : number;
   @Input() wrappersId! : number[];
   @Input() wrappersList : Wrapper[] = [];
@@ -29,8 +28,9 @@ constructor(public wrapperService : WrapperService, public projectService : Proj
 }
 ngOnInit() : void {
   this.projectId = this.route.snapshot.params['id'];
-  this.project = this.projectService.getProjectById(this.projectId);
-  console.log(this.project.wrappersIds);
+  this.projectService.getProjectById(this.projectId).subscribe((data : Project) => {
+    this.project = data;
+  });
   this.getWrappers();
 }
   
@@ -39,6 +39,7 @@ ngOnInit() : void {
     
     forkJoin(observables).subscribe((data: Wrapper[]) => {
       this.wrappersList = data;
+      this.projectService.wrappers = data;
     });
   }
 }

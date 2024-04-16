@@ -1,7 +1,7 @@
 import { Wrapper } from './Wrapper';
 import { User } from './User';
 import { UserDTO } from './UserDTO';
-export interface Project {
+export type Project =  {
     id: number;
     title: string | null | undefined;
     description: string | null | undefined;

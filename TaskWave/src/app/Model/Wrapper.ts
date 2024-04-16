@@ -4,5 +4,5 @@ export interface Wrapper {
     title: string | null | undefined;
     position: number | null | undefined;
     cards: Card[];
-    projectsId: number | null | undefined;
+    projectId: number | null | undefined;
 }

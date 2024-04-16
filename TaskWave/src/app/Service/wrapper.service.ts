@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, Input } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Wrapper } from '../Model/Wrapper';
-import { WrapperDTO } from '../Model/WrapperDTO';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({
@@ -23,8 +22,8 @@ export class WrapperService {
   }
   
   // add wrapper
-  addWrapper(wrapperDTO : WrapperDTO) : Observable<Wrapper> {
-	  return this.http.post<Wrapper>(this.serviceURL, wrapperDTO);
+  addWrapper(wrapper : Partial<Wrapper>) : Observable<Wrapper> {
+	  return this.http.post<Wrapper>(this.serviceURL, wrapper);
   }
 
   // update wrapper
@@ -38,8 +37,4 @@ export class WrapperService {
 	  return this.http.delete(this.serviceURL + '/' + id);
   }
 
- getWrappersByProjectId(id: number): Observable<Wrapper[]> {
-   this.projectId = id;
-   return this.http.get<Wrapper[]>(this.serviceURL + '/project/' + id);
- }
 }

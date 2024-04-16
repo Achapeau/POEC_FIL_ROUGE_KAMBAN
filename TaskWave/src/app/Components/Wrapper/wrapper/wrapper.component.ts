@@ -18,7 +18,6 @@ import { CardNewComponent } from '../../Card/card-new/card-new.component';
 import { ProjectService } from '../../../Service/project.service';
 import { Observable } from 'rxjs';
 import { CardDTO } from '../../../Model/CardDTO';
-import { ProjectDTO } from '../../../Model/ProjectDTO';
 
 @Component({
   selector: 'app-wrapper',
@@ -31,12 +30,14 @@ export class WrapperComponent {
   @Input() wrapper!: Wrapper;
   @Input() card!: Card;
   @Input() newTitle!: String;
-  project!: Project | ProjectDTO;
+  project!: Project;
   cardList: Card[] = [];
 
   constructor(private projectService: ProjectService, public wrapperService: WrapperService, public cardService: CardService, public users: UserService) {
     console.log("project id = " + this.projectService.project.id);
-    this.project = this.projectService.getProjectById(this.projectService.project.id);
+    this.projectService.getProjectById(this.projectService.project.id).subscribe((data : Project) => {
+      this.project = data;
+    });
    }
 
   ngOnInit() {
