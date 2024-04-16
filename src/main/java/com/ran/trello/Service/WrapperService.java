@@ -26,9 +26,8 @@ public class WrapperService {
         return convertToDTO(savedWrapper);
     }
 
-    public WrapperDTO getWrapperById(Integer id) {
-        Wrapper wrapper = wrapperRepository.findById(id).orElseThrow(() -> new RuntimeException("Wrapper not found"));
-        return convertToDTO(wrapper);
+    public Wrapper getWrapperById(Integer id) {
+        return wrapperRepository.findById(id).orElseThrow(() -> new RuntimeException("Wrapper not found"));
     }
 
     public List<WrapperDTO> getAllWrappers() {
@@ -36,10 +35,11 @@ public class WrapperService {
         return wrappers.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
-    public WrapperDTO updateWrapper(Integer id, WrapperDTO wrapperDTO) {
+    public WrapperDTO updateWrapper(Integer id, Wrapper wrapper) {
         Wrapper existingWrapper = wrapperRepository.findById(id).orElseThrow(() -> new RuntimeException("Wrapper not found"));
-        existingWrapper.setTitle(wrapperDTO.getTitle());
-        existingWrapper.setProjectId(wrapperDTO.getProjectId());
+        existingWrapper.setTitle(wrapper.getTitle());
+        existingWrapper.setPosition(wrapper.getPosition());
+        existingWrapper.setCards(wrapper.getCards());
         Wrapper updatedWrapper = wrapperRepository.save(existingWrapper);
         return convertToDTO(updatedWrapper);
     }
@@ -55,5 +55,9 @@ public class WrapperService {
         dto.setProjectId(wrapper.getProjectId());
         dto.setCardsIds(wrapper.getCards().stream().map(card -> card.getId()).collect(Collectors.toList()));
         return dto;
+    }
+
+    private List<Wrapper> getWrappersByProjectId(Integer id) {
+        return wrapperRepository.findAll().stream().filter(wrapper -> wrapper.getProjectId().equals(id)).toList();
     }
 }

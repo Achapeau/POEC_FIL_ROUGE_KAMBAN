@@ -1,0 +1,11 @@
+<div class="container-flex col">
+    <div class="m-3 p-3 bg-light w-75">
+        <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="newTitle">Nouvelle Colonne</label>
+                <input id="newTitle" class="checkoutForm" type="text" formControlName="newTitle">
+            </div>
+            <!-- <button type="submit" class="btn btn-primary">Valider</button> -->
+        </form>
+    </div>
+</div>

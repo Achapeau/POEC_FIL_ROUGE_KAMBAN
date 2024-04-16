@@ -1,0 +1,11 @@
+<button id="project" (click)="selectProject(project)" 
+	class="obj m-3 p-3 border" [ngStyle]="{ 'background-image': 'url(' + project.background + ')' }">
+	<!-- <img [src]="project.background" alt="project.title" class="obj__img"> -->
+	<div class="m-3">
+		<div class="obj__info m-3 text-white">
+			<h3>{{project.title}}</h3>
+			<p>{{project.description}}</p>
+			<!-- <button [hidden]="!this.user.connected" (click)="addToCart(project)">Add to project</button> -->
+		</div>
+	</div>
+</button>

@@ -1,6 +1,5 @@
 package com.ran.trello.Model.DTO;
 
-import com.ran.trello.Model.Entity.TaskCard;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

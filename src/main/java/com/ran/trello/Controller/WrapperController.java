@@ -1,6 +1,7 @@
 package com.ran.trello.Controller;
 
 import com.ran.trello.Model.DTO.WrapperDTO;
+import com.ran.trello.Model.Entity.Wrapper;
 import com.ran.trello.Service.WrapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,10 +28,14 @@ public class WrapperController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<WrapperDTO> getWrapperById(@PathVariable Integer id) {
-        WrapperDTO wrapper = wrapperService.getWrapperById(id);
-        return ResponseEntity.ok(wrapper);
+    public Wrapper getWrapperById(@PathVariable Integer id) {
+        return wrapperService.getWrapperById(id);
     }
+
+//    @GetMapping("/project/{id}")
+//    public List<Wrapper> getWrapperByProjectId(@PathVariable Integer id) {
+//        return wrapperService.getWrappersByProjectId(id);
+//    }
 
     @GetMapping
     public List<WrapperDTO> getAllWrappers() {
@@ -38,8 +43,8 @@ public class WrapperController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<WrapperDTO> updateWrapper(@PathVariable Integer id, @RequestBody WrapperDTO wrapperDTO) {
-        WrapperDTO updatedWrapper = wrapperService.updateWrapper(id, wrapperDTO);
+    public ResponseEntity<WrapperDTO> updateWrapper(@PathVariable Integer id, @RequestBody Wrapper wrapper) {
+        WrapperDTO updatedWrapper = wrapperService.updateWrapper(id, wrapper);
         return ResponseEntity.ok(updatedWrapper);
     }
 
