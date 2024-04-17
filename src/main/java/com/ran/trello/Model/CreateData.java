@@ -29,10 +29,10 @@ public class CreateData {
         userRepository.save(u3);
         userRepository.save(u4);
         System.out.println("utilisateur crées");
-        Project p1 = new Project("TrelloBis", "description de TrelloBis", "https://img.freepik.com/free-photo/painting-mountain-lake-with-mountain-background_188544-9126.jpg", new ArrayList<Wrapper>(), new ArrayList<UserP>());
+        Project p1 = new Project("TrelloBis", "description de TrelloBis", "https://cdn.pixabay.com/photo/2024/02/21/08/06/coast-8587004_1280.jpg", new ArrayList<Wrapper>(), new ArrayList<UserP>());
         p1.addUser(u1);
         p1.addUser(u2);
-        Project p2 = new Project("TaskManager", "description de TaskManager", "https://t4.ftcdn.net/jpg/04/61/47/03/360_F_461470323_6TMQSkCCs9XQoTtyer8VCsFypxwRiDGU.jpg", new ArrayList<Wrapper>(), new ArrayList<UserP>());
+        Project p2 = new Project("TaskManager", "description de TaskManager", "https://cdn.pixabay.com/photo/2020/08/31/09/33/beach-5531919_1280.jpg", new ArrayList<Wrapper>(), new ArrayList<UserP>());
         p2.addUser(u1);
         p2.addUser(u4);
         Project p3 = new Project("Trollolo", "description de Trollolo", "https://png.pngtree.com/thumb_back/fh260/background/20200714/pngtree-modern-double-color-futuristic-neon-background-image_351866.jpg", new ArrayList<Wrapper>(), new ArrayList<UserP>());

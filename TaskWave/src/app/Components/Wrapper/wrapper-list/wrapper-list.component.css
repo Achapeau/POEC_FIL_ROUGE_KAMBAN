@@ -14,6 +14,7 @@
 	align-items: center;
 	background-repeat: no-repeat;
 	background-size: cover;
+    background-position: center;
 }
 
 .wrapper {
@@ -23,7 +24,7 @@
     align-items: center; 
     justify-content: flex-start; 
     cursor: pointer;
-    background-color: rgb(225, 225, 225);
+    background-color: #F1F2F4;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease; 
