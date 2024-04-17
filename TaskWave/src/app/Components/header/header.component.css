@@ -4,14 +4,16 @@
 	width: 1.5em;
 	height: 1.5em;
 	vertical-align: middle;
-	/* content: ""; */
-	/* background: no-repeat center center; */
-		/* background-image: none; */
-		/* background-size: auto; */
 	background-size: 100% 100%;
 	border: 1px;
 	border-color: white;
 	border-style: solid;
 	border-radius: 5px;
 	padding: 1rem;
+}
+
+.bd-highlight{
+	height: 10vh;
+	opacity: 1;
+	background: transparent;
 }
