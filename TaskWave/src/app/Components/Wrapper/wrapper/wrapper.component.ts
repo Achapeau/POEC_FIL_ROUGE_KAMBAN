@@ -57,35 +57,24 @@ export class WrapperComponent implements OnInit, OnChanges {
         event.previousIndex,
         event.currentIndex,
       );
-      this.wrapperService.getWrapperById(event.previousContainer.data[0].wrapperId as number).subscribe((data : Wrapper) => {
+      event.previousContainer.data.forEach((card, index) => {
+        card.position = index;
+        this.cardService.updateCard(card).subscribe();
+      })
+      this.wrapperService.getWrapperById(Number(event.previousContainer.id)).subscribe((data : Wrapper) => {
         let prevWrapper = data;
         prevWrapper.cardsIds = event.previousContainer.data.map(card => card.id) as number[];
-        this.wrapperService.updateWrapper(prevWrapper).subscribe((data : Wrapper) => {
-        })
+        this.wrapperService.updateWrapper(prevWrapper).subscribe();
       });
-      console.log("event.item.data");
-      console.log(event.item.data);
-      console.log("event.item");
-      console.log(event.item);
-      console.log("event");
-      console.log(event);
     }
-    // this.cardList.forEach((card, index) => {
-    //   if (card.position != index || card.wrapperId != this.wrapper.id) {
-    //     card.position = index;
-    //     card.wrapperId = this.wrapper.id;
-    //     this.cardService.updateCard(card).subscribe((data : Card) => {
-    //       card = data;
-    //     })
-    //   }
-      // if(!this.cardList.includes(card)) {
-      //   this.cardList.push(card);
-      // }
-    // })
-    this.wrapper.cardsIds = this.cardList.map(card => card.id) as number[];
-    this.wrapperService.updateWrapper(this.wrapper).subscribe((data : Wrapper) => {
-      // console.log("data");
-      // console.log(data);
+    event.container.data.forEach((card, index) => {
+      card.position = index;
+      this.cardService.updateCard(card).subscribe();
     })
+    this.wrapperService.getWrapperById(Number(event.container.id)).subscribe((data : Wrapper) => {
+      let nextWrapper = data;
+      nextWrapper.cardsIds = event.container.data.map(card => card.id) as number[];
+      this.wrapperService.updateWrapper(nextWrapper).subscribe();
+    });
   }
 }
