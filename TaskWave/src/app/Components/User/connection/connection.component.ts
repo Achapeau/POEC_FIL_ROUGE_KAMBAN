@@ -20,15 +20,10 @@ export class ConnectionComponent {
 	});
 
 	onSubmit() {
-		console.log(this.connectionForm.value);
-
 		let user : LogsDTO = {
 			email: this.connectionForm.value.email,
 			password: this.connectionForm.value.password
 		}
-
 		this.user.connectUser(user);
-
 	}
-
 }

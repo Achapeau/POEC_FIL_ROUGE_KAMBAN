@@ -5,13 +5,16 @@ import { UserDTO } from '../Model/UserDTO';
 import { LogsDTO } from '../Model/LogsDTO';
 import { User } from '../Model/User';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from './auth.service';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http : HttpClient, private router : Router, private route : ActivatedRoute) { }
+  constructor(private authService : AuthService, private http : HttpClient, private router : Router, private route : ActivatedRoute) { }
 
   serviceURL = 'http://localhost:3050/user';
 
@@ -48,22 +51,24 @@ export class UserService {
 
   // Connect user
   connectUser(logDTO : LogsDTO)  {
-	this.http.post<UserDTO>(this.serviceURL + '/login', logDTO).subscribe(
-	  (data : UserDTO) => {
-		console.log(data);
-		this.currentUser = {
-		  id : data.id!,
-		  email : data.email!,
-		  password : data.password!,
-		  firstname : data.firstname!,
-		  lastname : data.lastname!,
-		  projectsIds : data.projectsIds!
-		};
-		this.token = this.getToken();
+	// this.http.post<UserDTO>(this.serviceURL + '/login', logDTO).subscribe(
+	//   (data : UserDTO) => {
+	// 	console.log(data);
+	// 	this.currentUser = {
+	// 	  id : data.id!,
+	// 	  email : data.email!,
+	// 	  password : data.password!,
+	// 	  firstname : data.firstname!,
+	// 	  lastname : data.lastname!,
+	// 	  projectsIds : data.projectsIds!
+	// 	};
+	
+		this.authService.login(logDTO.email as string, logDTO.password as string);
+		this.getToken();
 		this.connected = true;
 		this.router.navigate(['project-list'], { relativeTo: this.route });
-	  }
-	);
+	//   }
+	// );
   }
   inscription(userDTO : UserDTO) {
 	this.http.post<UserDTO>(this.serviceURL + '/register', userDTO).subscribe(
@@ -98,13 +103,8 @@ export class UserService {
     return authToken !== null ? true : false;
   }
   getToken() {
+    this.token = localStorage.getItem('access_token');
+	console.log('Token access_token :');
 	console.log(localStorage.getItem('access_token'));
-    return localStorage.getItem('access_token');
-  }
-  setToken() {
-	var jwt = require('jsonwebtoken');
-	var token = jwt.sign({ foo: 'bar' }, 'shhhhh');
-	console.log(token);
-	localStorage.setItem('access_token', token);
   }
 }
