@@ -8,12 +8,10 @@
             [cdkDropListData]="cardList"
             class="example-list"
             (cdkDropListDropped)="drop($event)">
-            <div class="">
-                <app-card-new [wrapper]="wrapper" [cardList]="cardList"></app-card-new>
-                <div *ngFor="let card of cardList">
-                    <div class="example-box" cdkDrag>
-                        <app-card [card]="card"></app-card>
-                    </div>
+            <app-card-new [wrapper]="wrapper" [cardList]="cardList"></app-card-new>
+            <div *ngFor="let card of cardList">
+                <div class="example-box" cdkDrag>
+                    <app-card [card]="card"></app-card>
                 </div>
             </div>
         </div>

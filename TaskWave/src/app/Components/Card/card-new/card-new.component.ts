@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { CardService } from '../../../Service/card.service';
 import { Card } from '../../../Model/Card';
 import { Wrapper } from '../../../Model/Wrapper';
@@ -15,7 +15,7 @@ import { Project } from '../../../Model/Project';
   templateUrl: './card-new.component.html',
   styleUrl: './card-new.component.css'
 })
-export class CardNewComponent implements OnInit {
+export class CardNewComponent implements OnInit, OnChanges {
   newTitle!: string | null;
   @Input() wrapper! : Wrapper;
   projectId : number = this.wrapperService.projectId;
@@ -34,6 +34,12 @@ export class CardNewComponent implements OnInit {
   ngOnInit() : void {
     this.projectId = this.projectService.project.id;
     this.project = this.projectService.project;
+    // this.cardList = this.cardService.convertIdListToCardList(this.wrapper.cardsIds);
+  }
+
+  ngOnChanges() {
+    this.projectId = this.projectService.project.id;
+    this.project = this.projectService.project;
   }
 
 	onSubmit() {
@@ -49,16 +55,9 @@ export class CardNewComponent implements OnInit {
       this.cardService.addCard(newCard).subscribe((data : Card) => {
          let returnCard = data;
          this.cardList.push(returnCard);
-         this.cardListChange.emit(this.cardList);
+         this.wrapper.cardsIds = this.cardList.map(card => card.id) as number[];
       });
       this.checkoutForm.reset();
-      this.projectService.getProjectById(this.projectId).subscribe((data : Project) => {
-        this.project = data;
-      });
-      this.projectService.selectProject(this.project);
-      // this.router.navigate(['tab', this.projectId], { skipLocationChange: true }).then(() => {
-      //   window.location.reload();
-      // });
     }
 	}
 

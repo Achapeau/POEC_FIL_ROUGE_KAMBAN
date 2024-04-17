@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, Input } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Wrapper } from '../Model/Wrapper';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class WrapperService {
   @Input() projectId! : number;
   @Input() wrappers : Wrapper[] = [];
-  wrapper!: Wrapper;
-  constructor(public http : HttpClient, private router : Router, private route : ActivatedRoute) { }
+  constructor(public http : HttpClient) { }
 
   serviceURL = 'http://localhost:3050/wrapper';
   // crud operations

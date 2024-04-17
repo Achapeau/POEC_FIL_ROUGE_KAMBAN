@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { WrapperService } from '../../../Service/wrapper.service';
 import { UserService } from '../../../Service/user.service';
 import { Wrapper } from '../../../Model/Wrapper';
@@ -16,8 +16,6 @@ import {
 import { CardService } from '../../../Service/card.service';
 import { CardNewComponent } from '../../Card/card-new/card-new.component';
 import { ProjectService } from '../../../Service/project.service';
-import { Observable } from 'rxjs';
-import { CardDTO } from '../../../Model/CardDTO';
 
 @Component({
   selector: 'app-wrapper',
@@ -26,32 +24,30 @@ import { CardDTO } from '../../../Model/CardDTO';
   templateUrl: './wrapper.component.html',
   styleUrl: './wrapper.component.css'
 })
-export class WrapperComponent {
+export class WrapperComponent implements OnInit, OnChanges {
   @Input() wrapper!: Wrapper;
   @Input() card!: Card;
   @Input() newTitle!: String;
-  project!: Project;
-  cardList: Card[] = [];
+  @Input() project!: Project;
+  @Input() cardList: Card[] = [];
 
   constructor(private projectService: ProjectService, public wrapperService: WrapperService, public cardService: CardService, public users: UserService) {
-    console.log("project id = " + this.projectService.project.id);
-    this.projectService.getProjectById(this.projectService.project.id).subscribe((data : Project) => {
-      this.project = data;
-    });
+    this.project = this.projectService.getProjectById(this.projectService.project.id)!;
    }
 
   ngOnInit() {
-    if (this.wrapper) {
-      this.cardList = this.wrapper.cards;
-    }
+    this.cardList = this.cardService.convertIdListToCardList(this.wrapper.cardsIds);
+    // console.log("before sort");
+    // console.log(this.cardList);
+    this.cardList = this.cardList.sort(function(a, b) { return a.position - b.position }) as Card[];
+    // console.log("after sort");
+    // console.log(this.cardList);
+    this.wrapper.cardsIds = this.cardList.map(card => card.id) as number[];
   }
   ngOnChanges() {
-    // this.wrapper.cards = this.cardList;
-    // this.wrapperService.updateWrapper(this.wrapper).subscribe();
+    // this.cardList = this.cardService.convertIdListToCardList(this.wrapper.cardsIds);
   }
   drop(event: CdkDragDrop<Card[]>) {
-    // console.log(event);
-    // console.log(event.currentIndex);
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -61,23 +57,35 @@ export class WrapperComponent {
         event.previousIndex,
         event.currentIndex,
       );
-      event.container.data[event.currentIndex].position = event.currentIndex + 1;
-      // this.card.position = event.currentIndex + 1;
-      // this.card = event.container.data[event.currentIndex];
-      // this.cardService.updateCard(this.card);
-      // this.wrapperService.updateWrapper(this.wrapper);
+      this.wrapperService.getWrapperById(event.previousContainer.data[0].wrapperId as number).subscribe((data : Wrapper) => {
+        let prevWrapper = data;
+        prevWrapper.cardsIds = event.previousContainer.data.map(card => card.id) as number[];
+        this.wrapperService.updateWrapper(prevWrapper).subscribe((data : Wrapper) => {
+        })
+      });
+      console.log("event.item.data");
+      console.log(event.item.data);
+      console.log("event.item");
+      console.log(event.item);
+      console.log("event");
+      console.log(event);
     }
-    this.cardList.forEach((card, index) => {
-      if (card.position != index || card.wrapperId != this.wrapper.id) {
-        card.position = index;
-        card.wrapperId = this.wrapper.id;
-        this.cardService.updateCard(card).subscribe();
-      }
-      if(!this.cardList.includes(card)) {
-        this.cardList.push(card);
-      }
+    // this.cardList.forEach((card, index) => {
+    //   if (card.position != index || card.wrapperId != this.wrapper.id) {
+    //     card.position = index;
+    //     card.wrapperId = this.wrapper.id;
+    //     this.cardService.updateCard(card).subscribe((data : Card) => {
+    //       card = data;
+    //     })
+    //   }
+      // if(!this.cardList.includes(card)) {
+      //   this.cardList.push(card);
+      // }
+    // })
+    this.wrapper.cardsIds = this.cardList.map(card => card.id) as number[];
+    this.wrapperService.updateWrapper(this.wrapper).subscribe((data : Wrapper) => {
+      // console.log("data");
+      // console.log(data);
     })
-    this.wrapper.cards = this.cardList;
-    this.wrapperService.updateWrapper(this.wrapper).subscribe();
   }
 }

@@ -13,7 +13,7 @@ export const routes: Routes = [
     // { path: 'project-component', component: ProjectComponent },
     { path: 'project-list', component: ProjectListComponent },
     // { path: 'wrapper-component', component: WrapperComponent },
-    { path: 'tab/:id', component: WrapperListComponent },
+    { path: 'project/:id', component: WrapperListComponent },
     { path: 'connection', component: ConnectionComponent },
     { path: 'inscription', component: InscriptionComponent },
     { path: '**', component: PageNotFoundComponent },
