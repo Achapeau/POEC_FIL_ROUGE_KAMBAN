@@ -17,6 +17,7 @@ export class UserService {
 
   connected : boolean = false;
   currentUser : UserDTO | null = null;
+  token : string | null = null;
 
 
   // get user by id
@@ -58,6 +59,7 @@ export class UserService {
 		  lastname : data.lastname!,
 		  projectsIds : data.projectsIds!
 		};
+		this.token = this.getToken();
 		this.connected = true;
 		this.router.navigate(['project-list'], { relativeTo: this.route });
 	  }
@@ -84,8 +86,25 @@ export class UserService {
 
   // Disconnect user
   disconnectUser() {
+    let removeToken = localStorage.removeItem('access_token');
+    if (removeToken == null) {
+	  this.router.navigate(['connexion']);
+	}
 	this.currentUser = null;
 	this.connected = false;
   }
-
+  get isLoggedIn(): boolean {
+    let authToken = localStorage.getItem('access_token');
+    return authToken !== null ? true : false;
+  }
+  getToken() {
+	console.log(localStorage.getItem('access_token'));
+    return localStorage.getItem('access_token');
+  }
+  setToken() {
+	var jwt = require('jsonwebtoken');
+	var token = jwt.sign({ foo: 'bar' }, 'shhhhh');
+	console.log(token);
+	localStorage.setItem('access_token', token);
+  }
 }

@@ -5,5 +5,5 @@ export interface User {
     password: string | null | undefined;
     firstname: string | null | undefined;
     lastname: string | null | undefined;
-    projects: Project[] | null | undefined;
+    projects: Project[];
 }
