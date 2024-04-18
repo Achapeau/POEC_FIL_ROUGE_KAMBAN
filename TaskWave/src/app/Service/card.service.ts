@@ -47,6 +47,7 @@ export class CardService {
     idList.forEach(id => {
       this.getCardById(id).subscribe((data : Card) => {
         cardList.push(data);
+        cardList.sort((a, b) => a.position - b.position);
       })
     });
     return cardList;

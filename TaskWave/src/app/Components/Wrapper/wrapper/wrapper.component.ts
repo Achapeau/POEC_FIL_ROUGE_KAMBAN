@@ -24,7 +24,7 @@ import { ProjectService } from '../../../Service/project.service';
   templateUrl: './wrapper.component.html',
   styleUrl: './wrapper.component.css'
 })
-export class WrapperComponent implements OnInit, OnChanges {
+export class WrapperComponent implements OnInit {
   @Input() wrapper!: Wrapper;
   @Input() card!: Card;
   @Input() newTitle!: String;
@@ -37,15 +37,6 @@ export class WrapperComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.cardList = this.cardService.convertIdListToCardList(this.wrapper.cardsIds);
-    // console.log("before sort");
-    // console.log(this.cardList);
-    this.cardList = this.cardList.sort(function(a, b) { return a.position - b.position }) as Card[];
-    // console.log("after sort");
-    // console.log(this.cardList);
-    this.wrapper.cardsIds = this.cardList.map(card => card.id) as number[];
-  }
-  ngOnChanges() {
-    // this.cardList = this.cardService.convertIdListToCardList(this.wrapper.cardsIds);
   }
   drop(event: CdkDragDrop<Card[]>) {
     if (event.previousContainer === event.container) {
