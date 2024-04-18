@@ -1,7 +1,8 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output, OnInit, OnChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Card } from '../../../Model/Card';
+import { ProjectService } from '../../../Service/project.service';
 
 @Component({
   selector: 'app-task-modal',
@@ -10,20 +11,24 @@ import { Card } from '../../../Model/Card';
   imports: [CommonModule, ReactiveFormsModule],
   standalone: true
 })
-export class TaskModalComponent {
+export class TaskModalComponent implements OnInit, OnChanges {
   @Input() isVisible: boolean = false;
   @Input() cardData: Card | null = null; 
   @Output() closeModalEvent = new EventEmitter<void>();
+  @Input() membersList: string[] = [];
+  
+  taskForm = this.fb.group({
+    description: ['', Validators.required],
+    deadline: ['', Validators.required],
+    member: ['', Validators.required],
+    status: ['', Validators.required]
+  });
+  constructor(private projectService: ProjectService, private fb: FormBuilder) {
+  }
 
-  taskForm!: FormGroup;
-
-  constructor(private fb: FormBuilder) {
-    this.taskForm = this.fb.group({
-      description: ['', Validators.required],
-      deadline: ['', Validators.required],
-      member: ['', Validators.required],
-      status: ['', Validators.required]
-    });
+  ngOnInit(): void {
+    console.log(this.cardData);
+    console.log(this.projectService.project.users);
   }
 
   ngOnChanges(): void {
@@ -31,7 +36,7 @@ export class TaskModalComponent {
       this.taskForm.reset({
         description: this.cardData.description || '',
         deadline: this.cardData.deadline || '',
-        member: this.cardData.memberId || '',
+        // member: this.cardData.memberId || '',
         status: this.cardData.status || ''
       });
     }
@@ -45,6 +50,7 @@ export class TaskModalComponent {
   submitTask(): void {
     if (this.taskForm.valid) {
       console.log(this.taskForm.value);
+
       this.closeModal();
     }
   }
