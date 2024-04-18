@@ -3,10 +3,7 @@
   data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
   <div class="">
     <div class="">
-      <div class="sidebar-service text-white bg-dark">
-        <!-- <a href="/" class="d-flex align-items-center h-100 mb-3 mb-md-0 me-md-auto text-white text-decoration-none"> -->
-          <!-- <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg> -->
-          
+      <div class="sidebar-service text-white bg-dark">        
         <a button class="btn btn-dark mx-3" href="/">
           <img 
           src="https://www.iconarchive.com/download/i120827/iconarchive/seaside/Water-Wave.1024.png" 
@@ -14,43 +11,19 @@
           width="50" height="50">
           TaskWave
         </a>
-        <!-- </a> -->
         <div>
           <h2>Bienvenue {{this.user.currentUser?.firstname}}</h2>
         </div>
-        <div class="btn-group dropright">
-          <button type="button" class="btn btn-secondary">
-            Split dropright
-          </button>
-          <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <!-- <span class="sr-only">Toggle Dropright</span> -->
-          </button>
-          <div class="dropdown-menu">
-            <!-- Dropdown menu links -->
+        <div>
+          <p>
+            Vos projets:
+          </p>
+          <div *ngFor="let project of this.user.currentUser?.projectsIds">
+            <p>{{project}}</p>
           </div>
-        </div>
-        <hr>
-        <ul class="nav nav-pills flex-column">
-          <li class="nav-item">
-            <a class="button" routerLink="/project-list" class="nav-link active" aria-current="project">
-              <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg> -->
-              Accueil projets
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="button" routerLink="/settings" class="nav-link active">settings</a>
-          </li>
-        </ul>
-        <hr>
+        </div> 
+        
       </div>
     </div>
   </div>
 </div>
-<!-- 
-<button
-  class="toggle-button"
-  (click)="this.sidebarService.toggleSidenav()"
-  [class.is-flipped]="sidebarService.isExpanded"
->
-  <mat-icon icon>chevron_right</mat-icon>
-</button> -->
