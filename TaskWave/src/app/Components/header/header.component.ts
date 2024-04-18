@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { UserService } from '../../Service/user.service';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,12 @@ import { CommonModule } from '@angular/common';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  @Output() sidebarToggle : boolean = false;
   constructor(public user : UserService) { }
+
+  sidebarClick(): boolean {
+    return this.sidebarToggle = !this.sidebarToggle;
+  }
 
   run () {
     console.log("header");

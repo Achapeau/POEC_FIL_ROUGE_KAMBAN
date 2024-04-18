@@ -50,16 +50,10 @@ export class UserService {
 	this.http.post<UserDTO>(this.serviceURL + '/login', logDTO).subscribe(
 	  (data : UserDTO) => {
 		console.log(data);
-		this.currentUser = {
-		  id : data.id!,
-		  email : data.email!,
-		  password : data.password!,
-		  firstname : data.firstname!,
-		  lastname : data.lastname!,
-		  projectsIds : data.projectsIds!
-		};
+		this.currentUser = data;
 		this.connected = true;
 		this.router.navigate(['project-list'], { relativeTo: this.route });
+		localStorage.setItem('currentUser', JSON.stringify({mail: this.currentUser.email, id: this.currentUser.id}));
 	  }
 	);
   }
@@ -67,14 +61,7 @@ export class UserService {
 	this.http.post<UserDTO>(this.serviceURL + '/register', userDTO).subscribe(
 	  (data : UserDTO) => {
 		console.log(data);
-		this.currentUser = {
-		  id : data.id!,
-		  email : data.email!,
-		  password : data.password!,
-		  firstname : data.firstname!,
-		  lastname : data.lastname!,
-		  projectsIds : data.projectsIds!
-		}
+		this.currentUser = data;
 		this.connected = true;
 		this.router.navigate(['project-list'], { relativeTo: this.route });
 	  }
@@ -84,6 +71,7 @@ export class UserService {
 
   // Disconnect user
   disconnectUser() {
+	localStorage.removeItem('currentUser');
 	this.currentUser = null;
 	this.connected = false;
   }

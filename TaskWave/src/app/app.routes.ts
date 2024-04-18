@@ -14,7 +14,7 @@ export const routes: Routes = [
     { path: 'project-list', component: ProjectListComponent },
     // { path: 'wrapper-component', component: WrapperComponent },
     { path: 'tab/:id', component: WrapperListComponent },
-    { path: 'connection', component: ConnectionComponent },
+    { path: 'connexion', component: ConnectionComponent },
     { path: 'inscription', component: InscriptionComponent },
     { path: '**', component: PageNotFoundComponent },
 ];
