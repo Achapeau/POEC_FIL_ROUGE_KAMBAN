@@ -7,14 +7,14 @@ export class AuthService {
     constructor() { }  
 
     setToken(token: string): void {
-        localStorage.setItem('token', token);
+        localStorage.setItem('currentUser', token);
     }
 
     getToken(): string | null {
-        return localStorage.getItem('token');
+        return localStorage.getItem('currentUser');
     }
 
     deleteToken(): void {
-        localStorage.removeItem('token');
+        localStorage.removeItem('currentUser');
     }
 }

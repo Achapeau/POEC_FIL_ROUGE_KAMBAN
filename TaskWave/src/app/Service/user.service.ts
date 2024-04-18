@@ -21,13 +21,18 @@ export class UserService {
 
   // get user by id
 
-  getUserById(id : number): UserDTO | null {
-	this.http.get<UserDTO>(this.serviceURL + '/' + id).subscribe((user : UserDTO) => {
-	  this.currentUser = user;
-	  return user;
-	});
-	return null;
+  getUserById(id : number): Observable<UserDTO | null> {
+	return this.http.get<UserDTO>(this.serviceURL + '/' + id).pipe(
+	  map((user: UserDTO) => {
+		this.currentUser = user;
+		return user;
+	  }),
+	  catchError(() => {
+		return of(null); // Retourner null en cas d'erreur
+	  })
+	);
   }
+  
   // update user
   updateUser(user: User) : Observable<User> {
 	return this.http.put<User>(this.serviceURL + '/' + user.id, user);

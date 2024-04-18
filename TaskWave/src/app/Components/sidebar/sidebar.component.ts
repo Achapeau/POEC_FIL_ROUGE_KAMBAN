@@ -1,11 +1,11 @@
-import { Component, Input, OnChanges,  SimpleChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {MatIconModule} from '@angular/material/icon'; 
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../Service/user.service';
 import { AuthService } from '../../Service/auth.service';
-import { UserDTO } from '../../Model/UserDTO';
-import { OnInit } from '@angular/core';
+import { Project } from '../../Model/Project';
+
 
 
 
@@ -16,30 +16,34 @@ import { OnInit } from '@angular/core';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
-export class SidebarComponent implements OnInit, OnChanges {
-  constructor(public userService : UserService, public authService : AuthService) { }
-  @Input() value!: string;
-  
-  userLog!: string | null;
-  isActive: boolean = false
-  
-  ngOnInit(): void {
-    console.log(this.userLog);
-       
-  }
+export class SidebarComponent{
+  constructor(public userService : UserService, public authService : AuthService) { }  
+  userLog: string | null = this.authService.getToken();
+  isActive: boolean = false;
+  projects: Project[] = []
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes) {
-      
-      console.log("user = " + this.userLog);
-    }
-  }
+
+
   
   toggle() {
     this.isActive = !this.isActive;
-    this.userLog = this.authService.getToken()
-    
+    this.userLog = this.authService.getToken();
+    console.log(this.userLog);
+    try {
+      const {id} = JSON.parse(this.userLog!);
+      console.log(typeof id);
+      console.log(this.userService.getUserById(id));
+      
+      
+      // this.userService.getUserById(number).subscribe((data : Project[]) => {
+      //   this.projects = data;
+      // });
+    } catch (error) {
+      console.log(error);
+    }    
   }
+
+  
 
 }
 
