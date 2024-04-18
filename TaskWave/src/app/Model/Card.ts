@@ -1,4 +1,3 @@
-
 export interface Card {
     id: number;
     title: string | null | undefined;
@@ -6,4 +5,6 @@ export interface Card {
     position: number;
     wrapperId: number | null | undefined;
     status: string | null | undefined;
-} 
+    deadline: string | null | undefined; 
+    memberId: number | null | undefined; 
+}

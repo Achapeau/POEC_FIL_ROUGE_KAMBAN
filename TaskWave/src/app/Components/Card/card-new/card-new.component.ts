@@ -7,13 +7,15 @@ import { WrapperService } from '../../../Service/wrapper.service';
 import { Router } from '@angular/router';
 import { ProjectService } from '../../../Service/project.service';
 import { Project } from '../../../Model/Project';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-card-new',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule,],
   templateUrl: './card-new.component.html',
   styleUrl: './card-new.component.css'
+  
 })
 export class CardNewComponent implements OnInit, OnChanges {
   newTitle!: string | null;
@@ -22,6 +24,7 @@ export class CardNewComponent implements OnInit, OnChanges {
   @Input() cardList : Card[] = [];
   @Output() cardListChange = new EventEmitter<Card[]>();
   @Input() project! : Project;
+  isAddingTask: boolean = false;
 
 	constructor(private projectService : ProjectService, public wrapperService : WrapperService, private cardService : CardService, public fb : FormBuilder, private router : Router) {
     // console.log("project id = " + this.projectId);
@@ -30,6 +33,16 @@ export class CardNewComponent implements OnInit, OnChanges {
 	public checkoutForm = this.fb.group({
 		newTitle: ['', [Validators.required]],
 	});
+
+  showInput(): void {
+    this.isAddingTask = true;
+  }
+
+
+  closeInput(): void {
+    this.isAddingTask = false;
+  }
+
 
   ngOnInit() : void {
     this.projectId = this.projectService.project.id;
@@ -42,7 +55,9 @@ export class CardNewComponent implements OnInit, OnChanges {
     this.project = this.projectService.project;
   }
 
-	onSubmit() {
+  
+
+	onSubmit(): void {
     if (this.checkoutForm.valid) {
       let newCard : Partial<Card> = {
         title: this.checkoutForm.value.newTitle,
@@ -56,6 +71,7 @@ export class CardNewComponent implements OnInit, OnChanges {
          let returnCard = data;
          this.cardList.push(returnCard);
          this.wrapper.cardsIds = this.cardList.map(card => card.id) as number[];
+         this.isAddingTask = false;
       });
       this.checkoutForm.reset();
     }
