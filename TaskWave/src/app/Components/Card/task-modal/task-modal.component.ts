@@ -1,7 +1,7 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Card } from '../Model/Card';
+import { Card } from '../../../Model/Card';
 
 @Component({
   selector: 'app-task-modal',

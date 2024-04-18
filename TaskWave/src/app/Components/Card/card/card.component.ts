@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Card } from '../../../Model/Card';
-import { TaskModalComponent } from '../../../task-modal/task-modal.component';
+import { TaskModalComponent } from '../task-modal/task-modal.component';
 import { CommonModule } from '@angular/common';
 
 @Component({

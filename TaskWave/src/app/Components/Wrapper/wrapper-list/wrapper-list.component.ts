@@ -42,10 +42,15 @@ ngOnChanges(changes: SimpleChanges): void {
     
     forkJoin(observables).subscribe((data: Wrapper[]) => {
       this.wrappersList = data;
-      this.projectService.wrappers = data;
+      this.wrappersList.sort((a, b) => a.position - b.position);
+      this.projectService.wrappers = this.wrappersList;
     });
   }
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<Wrapper[]>) {
     moveItemInArray(this.wrappersList, event.previousIndex, event.currentIndex);
+    this.wrappersList.forEach((wrapper, index) => {
+      wrapper.position = index;
+      this.wrapperService.updateWrapper(wrapper).subscribe();
+    })
   }
 }

@@ -30,7 +30,6 @@ export class WrapperService {
   }
 
   // delete wrapper
-
   deleteWrapper(id : number) {
 	  return this.http.delete(this.serviceURL + '/' + id);
   }

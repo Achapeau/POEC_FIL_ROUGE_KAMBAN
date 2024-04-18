@@ -1,13 +1,10 @@
 <div class="container-ok">
 	<div class="collectionContainer" [ngStyle]="{ 'background-image': 'url(' + this.projectService.project.background + ')'}">
-		<div class="container" cdkDropListGroup>
+		<div class="container">
 			<div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)">
-				@for (wrapper of wrappersList; track wrapper) {
-					<div class="example-box" cdkDrag>
-						<app-wrapper [wrapper]="wrapper"></app-wrapper>
-					</div>
-				}
-			</div>
+				<div class="example-box" cdkDropListGroup >
+					<app-wrapper *ngFor="let wrapper of wrappersList" [wrapper]="wrapper" cdkDrag></app-wrapper>
+				</div>
 			<app-wrapper-create></app-wrapper-create>
 		</div>
 	</div>
