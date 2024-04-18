@@ -21,12 +21,8 @@ export class UserService {
 
   // get user by id
 
-  getUserById(id : number): UserDTO | null {
-	this.http.get<UserDTO>(this.serviceURL + '/' + id).subscribe((user : UserDTO) => {
-	  this.currentUser = user;
-	  return user;
-	});
-	return null;
+  getUserById(id : number): Observable<UserDTO> {
+	return this.http.get<UserDTO>(this.serviceURL + '/' + id);
   }
   // update user
   updateUser(user: User) : Observable<User> {

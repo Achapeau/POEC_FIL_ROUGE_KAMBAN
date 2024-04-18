@@ -8,22 +8,21 @@
           <textarea id="description" formControlName="description"></textarea>
         </div>
         <div>
-          <label for="deadline">Deadline:</label>
-          <input type="date" id="deadline" formControlName="deadline">
+          <label for="dueDate">Date d'échéance:</label>
+          <input type="date" id="dueDate" formControlName="dueDate" value="2024-04-25">
         </div>
         <div>
-          <label for="member">Assigner à:</label>
-          <select id="member" formControlName="member">
-            <option value="1">John Doe</option>
-            <option value="2">Jane Smith</option>
+          <label for="assignedTo">Assigner à:</label>
+          <select id="assignedTo" formControlName="assignedTo">
+            <option *ngFor="let member of membersList" [value]="member.id">{{ member.firstname }} {{ member.lastname }}</option>
           </select>
         </div>
         <div>
           <label for="status">Statut:</label>
           <select id="status" formControlName="status">
-            <option value="todo">À faire</option>
-            <option value="inProgress">En cours</option>
-            <option value="done">Terminé</option>
+            <option value="à faire">À faire</option>
+            <option value="en cours">En cours</option>
+            <option value="terminé">Terminé</option>
           </select>
         </div>
         <button type="submit">Enregistrer</button>

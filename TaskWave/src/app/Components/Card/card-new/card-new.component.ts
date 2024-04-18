@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { ProjectService } from '../../../Service/project.service';
 import { Project } from '../../../Model/Project';
 import { CommonModule } from '@angular/common';
+import { TaskStatus } from '../../../Model/TaskStatus';
 
 @Component({
   selector: 'app-card-new',
@@ -64,9 +65,9 @@ export class CardNewComponent implements OnInit, OnChanges {
         description: '',
         position: this.cardList.length + 1,
         wrapperId: this.wrapper.id,
-        status: this.wrapper.title
+        status: TaskStatus.TODO,
       }
-      // console.log(newCard);
+      console.log(newCard);
       this.cardService.addCard(newCard).subscribe((data : Card) => {
          let returnCard = data;
          this.cardList.push(returnCard);

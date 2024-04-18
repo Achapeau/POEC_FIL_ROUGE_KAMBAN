@@ -6,4 +6,4 @@
         <p>{{card.status}}</p>
     </div>
 </div>
-<app-task-modal *ngIf="showModal" [isVisible]="showModal" [cardData]="selectedCard" (closeModalEvent)="closeModal()"></app-task-modal>
+<app-task-modal *ngIf="showModal" [isVisible]="showModal" [card]="card" [cardData]="selectedCard" (closeModalEvent)="closeModal()"></app-task-modal>
