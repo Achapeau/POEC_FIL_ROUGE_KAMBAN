@@ -17,7 +17,7 @@ export class TaskModalComponent {
 
   taskForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder) {
     this.taskForm = this.fb.group({
       description: ['', Validators.required],
       deadline: ['', Validators.required],

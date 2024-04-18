@@ -31,10 +31,10 @@ ngOnInit() : void {
   this.project = this.projectService.getProjectById(this.projectId);
   this.getWrappers();
 }
-ngOnChanges(changes: SimpleChanges): void {
-  this.projectId = this.route.snapshot.params['id'];
-  this.project = this.projectService.getProjectById(this.projectId);
-  this.getWrappers();
+ngOnChanges(): void {
+  // this.projectId = this.route.snapshot.params['id'];
+  // this.project = this.projectService.getProjectById(this.projectId);
+  // this.getWrappers();
 }
   
   getWrappers(): void {
@@ -42,7 +42,7 @@ ngOnChanges(changes: SimpleChanges): void {
     
     forkJoin(observables).subscribe((data: Wrapper[]) => {
       this.wrappersList = data;
-      this.wrappersList.sort((a, b) => a.position - b.position);
+      this.wrappersList = this.wrappersList.sort((a, b) => a.position - b.position);
       this.projectService.wrappers = this.wrappersList;
     });
   }
