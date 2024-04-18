@@ -16,7 +16,7 @@ import { OnInit } from '@angular/core';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
-export class SidebarComponent implements OnInit, OnChanges {
+export class SidebarComponent implements OnInit {
   constructor(public userService : UserService, public authService : AuthService) { }
   @Input() value!: string;
   
@@ -27,17 +27,11 @@ export class SidebarComponent implements OnInit, OnChanges {
     console.log(this.userLog);
        
   }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes) {
-      
-      console.log("user = " + this.userLog);
-    }
-  }
   
   toggle() {
     this.isActive = !this.isActive;
     this.userLog = this.authService.getToken()
+    console.log(this.userLog);
     
   }
 
