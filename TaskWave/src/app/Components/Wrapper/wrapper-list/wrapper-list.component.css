@@ -1,10 +1,9 @@
-
 .container-list {
   width: 100vw;
-  height: 90vh;
+  height: 90vh; /* Hauteur totale du viewport */
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start; /* Alignement au début pour aligner les éléments en haut */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -14,13 +13,16 @@
 }
 
 .container-box {
-  width: auto; /* Permet au box de s'adapter au contenu */
+  width: auto; /* S'adapte à la largeur du contenu */
+  height: 100%; /* Prend la pleine hauteur de son conteneur parent */
   display: flex;
   flex-direction: row;
   overflow-x: auto; /* Active le défilement horizontal */
+  align-items: start; /* Centre les éléments verticalement */
   box-sizing: border-box;
-  padding: 10px 0; /* Ajoute un peu de padding vertical pour la visibilité */
+  padding: 0 10px; /* Padding horizontal pour ne pas coller les éléments aux bords */
 }
+
 
   
   .cdk-drag-preview {
