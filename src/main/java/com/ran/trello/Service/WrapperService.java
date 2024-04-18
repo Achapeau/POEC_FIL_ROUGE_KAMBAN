@@ -70,6 +70,7 @@ public class WrapperService {
         dto.setId(wrapper.getId());
         dto.setTitle(wrapper.getTitle());
         dto.setProjectId(wrapper.getProjectId());
+        dto.setPosition(wrapper.getPosition());
         dto.setCardsIds(wrapper.getCards().stream().map(card -> card.getId()).collect(Collectors.toList()));
         return dto;
     }
