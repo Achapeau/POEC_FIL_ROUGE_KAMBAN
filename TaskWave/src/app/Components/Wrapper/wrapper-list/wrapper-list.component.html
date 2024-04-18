@@ -1,6 +1,6 @@
-<div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)" 
+<div cdkDropList cdkDropListOrientation="horizontal" class="container-list" (cdkDropListDropped)="drop($event)" 
      [ngStyle]="{ 'background-image': 'url(' + this.projectService.project.background + ')'}">
-    <div class="example-box" cdkDropListGroup>
+    <div class="container-box" cdkDropListGroup>
         <app-wrapper *ngFor="let wrapper of wrappersList" [wrapper]="wrapper" cdkDrag></app-wrapper>
     <app-wrapper-create></app-wrapper-create>
 </div>
