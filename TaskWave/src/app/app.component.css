@@ -1,4 +1,4 @@
-.container {
+.body-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,6 +6,26 @@
     width: 100vw;
 }
 
-.row {
+.app-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    width: 100vw;
+}
+
+.sidebar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    width: 2vw;
+}
+
+.router-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
     width: 100vw;
 }
