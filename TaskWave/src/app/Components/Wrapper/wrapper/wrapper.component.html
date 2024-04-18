@@ -1,5 +1,5 @@
-<div class="container-flex col">
-    <div class="m-3 p-3 bg-light">
+<div class="wrapper">
+    <div class="wrapper-inside">
         <div class="">
             <h2>{{wrapper.title}}</h2>
         </div>
@@ -9,12 +9,12 @@
             class="example-list"
             id="{{wrapper.id}}"
             (cdkDropListDropped)="drop($event)">
-            <app-card-new [wrapper]="wrapper" [cardList]="cardList"></app-card-new>
             @for (card of cardList; track card) {
                 <div class="example-box">
                     <app-card cdkDrag [cdkDragData]="card" [card]="card"></app-card>
                 </div>
             }
         </div>
+        <app-card-new [wrapper]="wrapper" [cardList]="cardList"></app-card-new>
     </div>
 </div>
