@@ -6,13 +6,13 @@ import { WrapperComponent } from '../wrapper/wrapper.component';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from '../../../Model/Project';
 import { ProjectService } from '../../../Service/project.service';
-import { CdkDropListGroup} from '@angular/cdk/drag-drop';
+import { CdkDropList, CdkDrag, CdkDragDrop, CdkDropListGroup, moveItemInArray} from '@angular/cdk/drag-drop';
 import { WrapperCreateComponent } from '../wrapper-create/wrapper-create.component';
 import { Observable, forkJoin } from 'rxjs';
 @Component({
   selector: 'app-wrapper-list',
   standalone: true,
-  imports: [CommonModule, WrapperComponent, CdkDropListGroup, WrapperCreateComponent],
+  imports: [CommonModule, WrapperComponent, CdkDropListGroup, WrapperCreateComponent, CdkDropList, CdkDrag],
   templateUrl: './wrapper-list.component.html',
   styleUrl: './wrapper-list.component.css'
 })
@@ -44,5 +44,8 @@ ngOnChanges(changes: SimpleChanges): void {
       this.wrappersList = data;
       this.projectService.wrappers = data;
     });
+  }
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.wrappersList, event.previousIndex, event.currentIndex);
   }
 }

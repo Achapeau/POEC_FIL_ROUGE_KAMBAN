@@ -10,8 +10,8 @@
             id="{{wrapper.id}}"
             (cdkDropListDropped)="drop($event)">
             @for (card of cardList; track card) {
-                <div class="example-box">
-                    <app-card cdkDrag [cdkDragData]="card" [card]="card"></app-card>
+                <div class="example-box" cdkDrag>
+                    <app-card [card]="card"></app-card>
                 </div>
             }
         </div>
