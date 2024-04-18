@@ -17,3 +17,22 @@
 .sidebar-service a {
   margin: 1rem;
 }
+
+button {
+  margin-top: 40vh;
+}
+
+.active {
+  
+  translate: 25rem;
+  transition: 400ms;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 1vw ;
+}
+

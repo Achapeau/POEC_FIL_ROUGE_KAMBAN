@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges,  SimpleChanges } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {MatIconModule} from '@angular/material/icon'; 
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../Service/user.service';
+import { AuthService } from '../../Service/auth.service';
+import { UserDTO } from '../../Model/UserDTO';
+import { OnInit } from '@angular/core';
+
 
 
 @Component({
@@ -12,6 +16,30 @@ import { UserService } from '../../Service/user.service';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
-export class SidebarComponent {
-  constructor(public user : UserService) { }
+export class SidebarComponent implements OnInit, OnChanges {
+  constructor(public userService : UserService, public authService : AuthService) { }
+  @Input() value!: string;
+  
+  userLog!: string | null;
+  isActive: boolean = false
+  
+  ngOnInit(): void {
+    console.log(this.userLog);
+       
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes) {
+      
+      console.log("user = " + this.userLog);
+    }
+  }
+  
+  toggle() {
+    this.isActive = !this.isActive;
+    this.userLog = this.authService.getToken()
+    
+  }
+
 }
+

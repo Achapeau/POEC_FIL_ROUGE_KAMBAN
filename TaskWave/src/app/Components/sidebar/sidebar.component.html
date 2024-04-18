@@ -1,29 +1,35 @@
-<div 
-  class="offcanvas offcanvas-start w-auto" 
-  data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-  <div class="">
+<div class="drawer">
+  <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
     <div class="">
-      <div class="sidebar-service text-white bg-dark">        
-        <a button class="btn btn-dark mx-3" href="/">
-          <img 
-          src="https://www.iconarchive.com/download/i120827/iconarchive/seaside/Water-Wave.1024.png" 
-          alt=""
-          width="50" height="50">
-          TaskWave
-        </a>
-        <div>
-          <h2>Bienvenue {{this.user.currentUser?.firstname}}</h2>
-        </div>
-        <div>
-          <p>
-            Vos projets:
-          </p>
-          <div *ngFor="let project of this.user.currentUser?.projectsIds">
-            <p>{{project}}</p>
+      <div class="">
+        <div class="sidebar-service text-white bg-dark">        
+          <a button class="btn btn-dark mx-3" href="/">
+            <img 
+            src="https://www.iconarchive.com/download/i120827/iconarchive/seaside/Water-Wave.1024.png" 
+            alt=""
+            width="50" height="50">
+            TaskWave
+          </a>
+          <div *ngIf="userLog">
+            <h2>Bienvenue {{this.userService.currentUser?.firstname}}</h2>
           </div>
-        </div> 
-        
+          <div>
+            <p>
+              Vos projets:
+            </p>
+            <div *ngFor="let project of this.userService.currentUser?.projectsIds">
+              <p>{{project}}</p>
+            </div>
+          </div> 
+          
+        </div>
       </div>
     </div>
+  </div>
+  <div class="btn-container">
+    <button class="navbar-toggler mx-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" (click)="toggle()" [ngClass]="{ 'active' : isActive }">
+
+      <span class="bi bi-chevron-right"></span>
+    </button>
   </div>
 </div>
