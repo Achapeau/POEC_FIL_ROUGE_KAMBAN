@@ -5,13 +5,14 @@ import { UserDTO } from '../Model/UserDTO';
 import { LogsDTO } from '../Model/LogsDTO';
 import { User } from '../Model/User';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http : HttpClient, private router : Router, private route : ActivatedRoute) { }
+  constructor(private http : HttpClient, private router : Router, private route : ActivatedRoute, private authService : AuthService) { }
 
   serviceURL = 'http://localhost:3050/user';
 
@@ -21,7 +22,7 @@ export class UserService {
 
   // get user by id
 
-  getUserById(id : number): UserDTO | null {
+  getUserById(id : number ): UserDTO | null {
 	this.http.get<UserDTO>(this.serviceURL + '/' + id).subscribe((user : UserDTO) => {
 	  this.currentUser = user;
 	  return user;
@@ -53,7 +54,8 @@ export class UserService {
 		this.currentUser = data;
 		this.connected = true;
 		this.router.navigate(['project-list'], { relativeTo: this.route });
-		localStorage.setItem('currentUser', JSON.stringify({mail: this.currentUser.email, id: this.currentUser.id}));
+		this.authService.setToken(JSON.stringify({mail: this.currentUser.email, id: this.currentUser.id}));
+		this.authService.setUserData(data)
 	  }
 	);
   }
