@@ -1,20 +1,44 @@
-.obj{
-	width: auto;
-	height: auto;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	background-color: #f5f5f5;
-	border-radius: 10px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	transition: 0.3s;
-	margin: 10px;
-	padding: 10px;
-	cursor: pointer;
+.project-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 250px; 
+    height: 150px; 
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    margin: 20px; 
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+    transition: transform 0.3s; 
+    cursor: pointer;
+    border: 1px solid #ccc; 
 }
 
-.obj__img{
-	width: 100px;
-	height: 100px;
+.project-container:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.project-card {
+    color: white;
+    text-align: center; 
+    padding: 10px 20px;
+    width: 100%;
+}
+
+.project-card h3 {
+    margin-top: 10px; 
+    margin-bottom: 5px;
+}
+
+.project-card p {
+    font-size: 14px; 
+    margin: 0; /* Pas de marge pour maximiser l'espace disponible */
+    overflow: hidden; /* Cache le texte qui déborderait */
+    text-overflow: ellipsis; /* Ajoute des points de suspension si le texte est trop long */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limite le texte à trois lignes */
+    -webkit-box-orient: vertical;
 }
