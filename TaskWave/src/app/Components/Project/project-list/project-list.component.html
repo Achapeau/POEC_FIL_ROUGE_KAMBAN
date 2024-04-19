@@ -16,6 +16,30 @@
         <div class="modal-content">
             <h2>Créer un nouveau projet</h2>
             <p>Entrez les détails du projet ici.</p>
+			<form class="project-form">
+				<div class="form-group">
+				  <label for="projectTitle">Titre du projet</label>
+				  <input type="text" id="projectTitle" class="form-control" placeholder="Entrez le titre du projet">
+				</div>
+			  
+				<div class="form-group">
+				  <label for="projectTheme">Thème du projet</label>
+				  <select id="projectTheme" class="form-control">
+					<option value="">Sélectionnez un thème</option>
+					<option value="light">Clair</option>
+					<option value="dark">Sombre</option>
+					<!-- Ajoutez d'autres thèmes ici -->
+				  </select>
+				</div>
+			  
+				<div class="form-group">
+				  <label for="projectMembers">Ajouter des membres</label>
+				  <input type="text" id="projectMembers" class="form-control" placeholder="Entrez les noms des membres">
+				</div>
+			  
+				<button type="submit" class="btn-submit">Créer le projet</button>
+			  </form>
+			  
             <!-- Ici vous pouvez ajouter un formulaire pour saisir les détails du nouveau projet -->
         </div>
     </app-modal>

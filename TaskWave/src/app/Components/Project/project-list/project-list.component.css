@@ -79,3 +79,54 @@ h2 {
 .my-projects p {
 	margin-right: 50px;
 }
+
+.modal-content {
+	background: #fff;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .project-form {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+  }
+  
+  .form-group {
+	display: flex;
+	flex-direction: column;
+  }
+  
+  .form-group label {
+	font-size: 16px;
+	color: #333;
+	margin-bottom: 5px;
+  }
+  
+  .form-control {
+	padding: 8px 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 16px;
+  }
+  
+  .form-control:focus {
+	border-color: #0056b3;
+	outline: none;
+  }
+  
+  .btn-submit {
+	background-color: #007bff;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	cursor: pointer;
+	border-radius: 5px;
+	transition: background-color 0.3s;
+  }
+  
+  .btn-submit:hover {
+	background-color: #0056b3;
+  }
+  
