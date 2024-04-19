@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WrapperService } from './wrapper.service';
 import { UserService } from './user.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, forkJoin } from 'rxjs';
 import { Project, Wrapper } from '../Model/model';
 
 
@@ -31,8 +31,7 @@ export class ProjectService {
   // crud operations
 
   setProjectData(projectData: Project[]) {
-    console.log(projectData);
-    
+    console.log(projectData);    
     this.projectDataSubject.next(projectData);
 
   }
@@ -47,6 +46,11 @@ export class ProjectService {
     return this.http.get<Project>(this.serviceURL + '/' + id);
   }
 
+  // getProjectsByArrayOfId(ids : number[]){
+  //   const dataProject = ids.map(id => this.getProjectById(id)); 
+  //   this.setProjectData(dataProject);
+    
+  // }
   
 
   // add project
