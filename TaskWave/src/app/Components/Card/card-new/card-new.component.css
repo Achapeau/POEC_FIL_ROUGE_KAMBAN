@@ -3,6 +3,7 @@ input {
 }
 
 .new-task {
+    display: flex;
     background-color: #F1F2F4; 
     margin: 1px;
     padding: 1px;
@@ -15,14 +16,6 @@ input {
 .new-task:hover {
     background-color: #E0E1E3; 
 }
-
-/* Style global pour la zone de formulaire */
-.new-task {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 /* Style pour les labels et form group */
 .label {
     font-size: 16px;
