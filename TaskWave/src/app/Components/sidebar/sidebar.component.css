@@ -55,12 +55,12 @@ button {
   width: 100vw;
 }
 
-.router-container {
+/* .router-container {
   display: flex;
   align-items: center;
   width: 100vw;
   min-width: auto;
-}
+} */
 
 .sidebar-service {
   display: flex;
@@ -68,7 +68,7 @@ button {
   justify-content: start;
   align-items: center;
   height: 100vh;
-  background-color: blanchedalmond;
+  background-color: #B7D3F2;
 }
 
 .btn-project {
