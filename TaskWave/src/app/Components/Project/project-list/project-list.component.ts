@@ -1,26 +1,36 @@
-import { Component, OnChanges, SimpleChanges } from '@angular/core';
-import { ProjectService } from '../../../Service/project.service';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectComponent } from '../project/project.component';
 import { Project } from '../../../Model/model';
+import { ModalComponent } from '../../../modal/modal.component';
+import { ProjectService } from '../../../Service/project.service';
 
 @Component({
   selector: 'app-project-list',
   standalone: true,
-  imports: [CommonModule, ProjectComponent],
+  imports: [CommonModule, ProjectComponent, ModalComponent],
   templateUrl: './project-list.component.html',
-  styleUrl: './project-list.component.css'
+  styleUrls: ['./project-list.component.css']
 })
 export class ProjectListComponent {
-	constructor(public projectService : ProjectService) {
-		this.getProjects();
-	}
+  projectsList: Project[] = [];
+  isModalOpen = false;
 
-	projectsList : Project[] = [];
+  constructor(private projectService: ProjectService) {
+    this.getProjects();
+  }
 
-	getProjects() {
-		this.projectService.getProjects().subscribe((data: Project[]) => {
-			this.projectsList = data;
-		});
-	}
+  getProjects() {
+    this.projectService.getProjects().subscribe((data: Project[]) => {
+      this.projectsList = data;
+    });
+  }
+
+  openCreateProjectModal() {
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+  }
 }
