@@ -9,21 +9,13 @@ export interface Card {
     assignedTo: number | null; 
 }
 
-// export interface CardDTO {
-//     title: string;
-//     description: string;
-//     position: number;
-//     wrapperId: number;
-//     status: string;
-// }
-
-export type Project =  {
+export interface Project {
     id: number;
     title: string;
     description: string;
     background: string;
     wrappersIds: number[];
-    usersId: number[];
+    userIds: number[];
 }
 
 export interface User {
@@ -34,15 +26,6 @@ export interface User {
     lastname: string;
     projectsIds: number[];
 }
-
-// export interface UserDTO {
-// 	id: number;
-//     email: string;
-//     password: string;
-//     firstname: string;
-//     lastname: string;
-//     projectsIds: (number)[];
-// }
 
 export interface Wrapper {
     id: number;
