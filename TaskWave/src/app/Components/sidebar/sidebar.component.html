@@ -18,9 +18,9 @@
               Vos projets:
             </p>
             
-            <div *ngFor="let project of this.myUser.projectsIds" class="div-project">
-              <button class="btn-project">
-                <span>{{project}}</span>
+            <div *ngFor="let project of this.myProjects" class="div-project">
+              <button class="btn-project" [ngStyle]="{ 'background-image': 'url(' + project.background + ')' }" (click)="selectProject(project)">
+                <span>{{project.title}}</span>
               </button>
             </div>
           </div>

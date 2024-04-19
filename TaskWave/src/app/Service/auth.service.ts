@@ -17,8 +17,6 @@ export class AuthService {
             lastname: userData.lastname,
             projectsIds: userData.projectsIds
         }
-        console.log(userData);
-        
         this.userDataSubject.next(filteredUserData);
     }
 
