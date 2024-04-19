@@ -10,15 +10,15 @@
             width="50" height="50">
             TaskWave
           </a>
-          <div *ngIf="userLog">
-            <h2>Bienvenue {{this.userService.currentUser?.firstname}}</h2>
+          <div>
+            <h2>Bienvenue {{this.myUser.firstname}}</h2>
           </div>
           <div>
             <p>
               Vos projets:
             </p>
-            <div *ngFor="let project of this.userService.currentUser?.projectsIds">
-              <p>{{project}}</p>
+            <div *ngFor="let project of this.myUser.projectsIds">
+              <p>test</p>
             </div>
           </div> 
           

@@ -17,5 +17,5 @@ public class UserDTO {
     private String password;
     private String firstname;
     private String lastname;
-    private List<Integer> projects;
+    private List<Integer> projectsIds;
 }
