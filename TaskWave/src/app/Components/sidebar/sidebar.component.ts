@@ -6,7 +6,6 @@ import { UserService } from '../../Service/user.service';
 import { AuthService } from '../../Service/auth.service';
 import { ProjectService } from '../../Service/project.service';
 import { User, Project } from '../../Model/model';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -34,10 +33,10 @@ export class SidebarComponent implements OnInit {
     });
     this.projectService.getProjects().subscribe((data: Project[]) => {
       this.projects = data;
-    })
+    });
   }
 
-  getProjects() {
+  getProject() {
     this.myProjects = this.projects.filter((project) =>
       project.userIds?.includes(this.myUser.id!)
     );
@@ -45,10 +44,10 @@ export class SidebarComponent implements OnInit {
 
   toggle() {
     this.isActive = !this.isActive;
-    this.getProjects();
+    this.getProject();
   }
 
-  selectProject(project : Project) {
-  	this.projectService.selectProject(project);
+  selectProject(project: Project) {
+    this.projectService.selectProject(project);
   }
 }
