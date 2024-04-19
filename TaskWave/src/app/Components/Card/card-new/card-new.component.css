@@ -4,11 +4,9 @@ input {
 
 .new-task {
     display: flex;
-    justify-content: start;
     background-color: #F1F2F4; 
     margin: 1px;
     padding: 1px;
-    padding-left: 15px;
     border-radius: .75rem; 
     width: 100%; 
     height: auto; 
