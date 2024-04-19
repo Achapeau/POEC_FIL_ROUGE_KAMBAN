@@ -1,13 +1,40 @@
-.create-wrapper{
-        margin: 10px;
-        padding: 15px;  
+.create-wrapper {
+        background-color: #F1F2F4;
+        border-radius: .75rem;
+        padding: 10px;
+        width: 100%; /* Ajuste selon le besoin de design de ton application */
+        transition: background-color 0.3s;
+    }
+    
+    .create-wrapper:hover {
+        background-color: #E0E1E3;
+    }
+    
+    .create-wrapper .form-group {
+        display: flex;
         justify-content: center;
-        align-items: center;  
+        align-items: center;
+        position: relative;
+        padding: 10px;
+    }
+    
+    .create-wrapper input {
+        width: 75%;
+        padding: 8px 10px;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        font-size: 16px;
+    }
+    
+    .create-wrapper button.btn-primary {
+        margin-top: 10px;
+        width: 100%;
+        padding: 10px;
+        border-radius: 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
         cursor: pointer;
-        background-color: #fff;  
-        border: none;  
-        border-radius: 8px; 
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
-        transition: transform 0.3s, box-shadow 0.3s;  
-}
-
+    }
+    
+    

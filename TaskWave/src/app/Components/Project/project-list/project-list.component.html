@@ -1,3 +1,26 @@
-<div class="collectionContainer">
-	<app-project *ngFor="let project of projectsList" [project]="project"></app-project>
+<div class="container">
+    <h1>TaskWave</h1>
+    <p>Transformez votre manière de gérer les projets et collaborez efficacement, où que vous soyez.</p>
+    <section class="popular-models">
+        <h2>Créez votre espace de travail unique :</h2>
+        <div class="create-project">
+            <button class="create-button">
+                <span class="plus-icon">+</span>
+            </button>
+            <p>Commencez par donner un nom à votre projet, définissez les grandes lignes et invitez votre équipe à collaborer.</p>
+        </div>
+    </section>
+
+    <!-- Section Projets en Cours -->
+    <!-- Section Projets en Cours -->
+<section class="my-projects">
+    <h2>Vos Projets en cours</h2>
+    <div class="projects-container">
+        <p class="project-intro">Reprenez votre projet là où vous l'avez laissé :</p>
+        <div class="list-projects">
+            <app-project *ngFor="let project of projectsList" [project]="project"></app-project>
+        </div>
+    </div>
+</section>
+
 </div>
