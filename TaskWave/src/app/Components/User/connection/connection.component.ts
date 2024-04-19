@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../../Service/user.service';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { LogsDTO } from '../../../Model/LogsDTO';
+import { LogsDTO } from '../../../Model/model';
 
 @Component({
   selector: 'app-connection',
@@ -23,8 +23,8 @@ export class ConnectionComponent {
 		console.log(this.connectionForm.value);
 
 		let user : LogsDTO = {
-			email: this.connectionForm.value.email,
-			password: this.connectionForm.value.password
+			email: this.connectionForm.value.email as string,
+			password: this.connectionForm.value.password as string
 		}
 
 		this.user.connectUser(user);

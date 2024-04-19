@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../../Service/user.service';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UserDTO } from '../../../Model/UserDTO';
+import { User} from '../../../Model/model';
 
 @Component({
   selector: 'app-inscription',
@@ -24,13 +24,13 @@ export class InscriptionComponent {
 	onSubmit() {
 		console.log(this.connectionForm.value);
 
-		let user : UserDTO = {
+		let user : Partial<User> = {
 			id : 0,
-			email : this.connectionForm.value.email,
-			password : this.connectionForm.value.password,
-			firstname : this.connectionForm.value.firstname,
-			lastname : this.connectionForm.value.lastname,
-      projectsIds : []
+			email : this.connectionForm.value.email as string,
+			password : this.connectionForm.value.password 	as string,
+			firstname : this.connectionForm.value.firstname 	as string,
+			lastname : this.connectionForm.value.lastname	as string,
+      		projectsIds : []
 		};
 
 		this.user.inscription(user);

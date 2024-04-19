@@ -1,12 +1,10 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { CardService } from '../../../Service/card.service';
-import { Card } from '../../../Model/Card';
-import { Wrapper } from '../../../Model/Wrapper';
+import { Card, Project, Wrapper } from '../../../Model/model';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WrapperService } from '../../../Service/wrapper.service';
 import { Router } from '@angular/router';
 import { ProjectService } from '../../../Service/project.service';
-import { Project } from '../../../Model/Project';
 import { CommonModule } from '@angular/common';
 import { TaskStatus } from '../../../Model/TaskStatus';
 
@@ -19,7 +17,7 @@ import { TaskStatus } from '../../../Model/TaskStatus';
   
 })
 export class CardNewComponent implements OnInit, OnChanges {
-  newTitle!: string | null;
+  newTitle!: string;
   @Input() wrapper! : Wrapper;
   projectId : number = this.wrapperService.projectId;
   @Input() cardList : Card[] = [];
@@ -54,7 +52,7 @@ export class CardNewComponent implements OnInit, OnChanges {
 	onSubmit(): void {
     if (this.checkoutForm.valid) {
       let newCard : Partial<Card> = {
-        title: this.checkoutForm.value.newTitle,
+        title: this.checkoutForm.value.newTitle as string,
         description: '',
         position: this.cardList.length + 1,
         wrapperId: this.wrapper.id,

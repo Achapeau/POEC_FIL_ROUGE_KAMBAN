@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { UserDTO } from '../Model/UserDTO';
+import { User } from '../Model/model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
     constructor() { }  
-    private userDataSubject: BehaviorSubject<Partial<UserDTO>> = new BehaviorSubject<Partial<UserDTO>>({} as UserDTO);
-    userData$: Observable<Partial<UserDTO>> = this.userDataSubject.asObservable();
+    private userDataSubject: BehaviorSubject<Partial<User>> = new BehaviorSubject<Partial<User>>({} as User);
+    userData$: Observable<Partial<User>> = this.userDataSubject.asObservable();
 
-    setUserData(userData: UserDTO): void {
+    setUserData(userData: User): void {
         const filteredUserData = {
             id: userData.id,
             firstname: userData.firstname,

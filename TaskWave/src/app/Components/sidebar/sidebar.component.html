@@ -2,8 +2,8 @@
   <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
     <div class="">
       <div class="">
-        <div class="sidebar-service text-white bg-dark">        
-          <a button class="btn btn-dark mx-3" href="/">
+        <div class="sidebar-service">        
+          <a button class="btn  mx-3" href="/">
             <img 
             src="https://www.iconarchive.com/download/i120827/iconarchive/seaside/Water-Wave.1024.png" 
             alt=""
@@ -11,25 +11,40 @@
             TaskWave
           </a>
           <div>
-            <h2>Bienvenue {{this.myUser.firstname}}</h2>
+            <h2>Votre espace de travail : </h2>
           </div>
-          <div>
+          <div *ngIf="this.myUser != null">
             <p>
               Vos projets:
             </p>
-            <div *ngFor="let project of this.myUser.projectsIds">
-              <p>test</p>
+            
+            <div *ngFor="let project of this.myUser.projectsIds" class="div-project">
+              <button class="btn-project">
+                <span>{{project}}</span>
+              </button>
             </div>
-          </div> 
+          </div>
+          <div>
+            <hr>
+            <button class="btn-settings">
+              <p>
+                paramètres de projet:
+              </p>
+            </button>
+          </div>
           
         </div>
       </div>
     </div>
   </div>
   <div class="btn-container">
-    <button class="navbar-toggler mx-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" (click)="toggle()" [ngClass]="{ 'active' : isActive }">
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" (click)="toggle()" [ngClass]="{ 'active' : isActive }">
 
-      <span class="bi bi-chevron-right"></span>
+      <i class="bi bi-arrow-left-right"></i>
     </button>
   </div>
+  <div class="router-container" [ngClass]="{ 'active' : isActive }">
+    <router-outlet></router-outlet>
+  </div>
+  
 </div>

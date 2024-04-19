@@ -24,8 +24,7 @@ button {
   transition: 500ms;
 }
 
-.active {
-  
+.active {  
   translate: 25rem;
   transition: 400ms;
 }
@@ -33,8 +32,63 @@ button {
 .btn-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 1vw ;
+  justify-content: start;
+  height: 3em;
+  width: 1vh;
+  
 }
 
+.navbar-toggler {
+  height: 10vh;
+  margin: 0;
+  top: 10vh;
+}
+
+.drawer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw
+}
+
+.router-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  min-width: auto;
+}
+
+.sidebar-service {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  height: 100vh;
+  background-color: blanchedalmond;
+}
+
+.btn-project {
+  border-radius: 1rem;
+  width: 10rem;
+  height: 3rem;
+  margin: 0;
+}
+
+.div-project {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem;
+}
+
+.btn-settings {
+  border-radius: 1rem;
+  width: 10rem;
+  height: 3rem;
+  margin: 0;
+}
+
+hr {
+  margin: 0.5rem;
+}

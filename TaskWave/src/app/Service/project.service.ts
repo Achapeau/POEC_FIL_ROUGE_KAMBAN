@@ -1,20 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Input } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { Project } from '../Model/Project';
-import { WrapperComponent } from '../Components/Wrapper/wrapper/wrapper.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Wrapper } from '../Model/Wrapper';
-import { map } from 'rxjs/operators';
 import { WrapperService } from './wrapper.service';
-import { User } from '../Model/User';
 import { UserService } from './user.service';
-import { UserDTO } from '../Model/UserDTO';
+import { BehaviorSubject } from 'rxjs';
+import { Project, Wrapper } from '../Model/model';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
+
   getProject(): Project {
     return this.project;
   }
@@ -28,7 +26,16 @@ export class ProjectService {
 
   @Input() wrappers : Wrapper[] = [];
   @Input() project!: Project;
+  private projectDataSubject: BehaviorSubject<Project[]> = new BehaviorSubject<Project[]>([]);
+  projectData$: Observable<Project[]> = this.projectDataSubject.asObservable();
   // crud operations
+
+  setProjectData(projectData: Project[]) {
+    console.log(projectData);
+    
+    this.projectDataSubject.next(projectData);
+
+  }
 
   // get all project
   getProjects() : Observable<Project[]> {
@@ -39,6 +46,8 @@ export class ProjectService {
   getProjectById(id : number): Observable<Project> {
     return this.http.get<Project>(this.serviceURL + '/' + id);
   }
+
+  
 
   // add project
   addProject(project : Project) : Observable<Project> {

@@ -2,7 +2,7 @@ import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { ProjectService } from '../../../Service/project.service';
 import { CommonModule } from '@angular/common';
 import { ProjectComponent } from '../project/project.component';
-import { Project } from '../../../Model/Project';
+import { Project } from '../../../Model/model';
 
 @Component({
   selector: 'app-project-list',

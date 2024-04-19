@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ProjectService } from '../../../Service/project.service';
 import { UserService } from '../../../Service/user.service';
-import { Project } from '../../../Model/Project';
+import { Project } from '../../../Model/model';
 import { CommonModule } from '@angular/common';
 
     
