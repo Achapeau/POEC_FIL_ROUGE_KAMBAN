@@ -1,15 +1,19 @@
 <div class="modal" *ngIf="isVisible">
     <div class="modal-content">
       <span class="close-btn" (click)="closeModal()">&times;</span>
-      <h2>Détails de la tâche</h2>
       <form [formGroup]="taskForm" (ngSubmit)="submitTask()">
+        <div>
+          <h2>
+            <input type="text" id="title" formControlName="title">
+          </h2>
+        </div>
         <div>
           <label for="description">Description:</label>
           <textarea id="description" formControlName="description"></textarea>
         </div>
         <div>
           <label for="dueDate">Date d'échéance:</label>
-          <input type="date" id="dueDate" formControlName="dueDate" value="2024-04-25">
+          <input type="datetime-local" id="dueDate" formControlName="dueDate" value="2018-06-24T09:30">
         </div>
         <div>
           <label for="assignedTo">Assigner à:</label>

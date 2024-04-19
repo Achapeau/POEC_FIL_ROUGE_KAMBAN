@@ -6,6 +6,6 @@ export interface Card {
     position: number;
     wrapperId: number | null | undefined;
     status: string | null | undefined;
-    dueDate: Date | null; 
+    dueDate: string | null; 
     assignedTo: number | null; 
 }

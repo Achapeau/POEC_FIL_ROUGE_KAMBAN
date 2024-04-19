@@ -1,9 +1,6 @@
 <div class="task-card" (click)="openModal()">
     <div>
         <h4>{{card.title}}</h4>
-        <p>{{card.description}}</p>
-        <p>{{card.position}}</p>
-        <p>{{card.status}}</p>
     </div>
 </div>
 <app-task-modal *ngIf="showModal" [isVisible]="showModal" [card]="card" [cardData]="selectedCard" (closeModalEvent)="closeModal()"></app-task-modal>

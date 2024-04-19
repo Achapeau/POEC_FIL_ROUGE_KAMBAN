@@ -32,7 +32,7 @@ export class WrapperComponent implements OnInit {
   @Input() cardList: Card[] = [];
 
   constructor(private projectService: ProjectService, public wrapperService: WrapperService, public cardService: CardService, public users: UserService) {
-    this.project = this.projectService.getProjectById(this.projectService.project.id)!;
+    this.projectService.getProjectById(this.projectService.project.id).subscribe(project => this.project = project);
    }
 
   ngOnInit() {
