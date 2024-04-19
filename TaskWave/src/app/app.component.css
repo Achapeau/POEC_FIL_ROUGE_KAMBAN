@@ -6,6 +6,12 @@
     width: 100vw;
 }
 
+.content-container {
+    margin-left: 250px; /* La largeur de ta sidebar */
+    transition: margin-left 0.3s; /* Si tu veux une transition douce */
+  }
+  
+
 .app-container {
     display: flex;
     justify-content: center;

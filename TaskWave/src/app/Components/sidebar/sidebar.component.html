@@ -1,50 +1,34 @@
-<div class="drawer">
-  <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-    <div class="">
-      <div class="">
-        <div class="sidebar-service">        
-          <a button class="btn  mx-3" href="/">
-            <img 
-            src="https://www.iconarchive.com/download/i120827/iconarchive/seaside/Water-Wave.1024.png" 
-            alt=""
-            width="50" height="50">
-            TaskWave
-          </a>
-          <div>
-            <h2>Votre espace de travail : </h2>
-          </div>
-          <div *ngIf="this.myUser != null">
-            <p>
-              Vos projets:
-            </p>
-            
-            <div *ngFor="let project of this.myUser.projectsIds" class="div-project">
-              <button class="btn-project">
-                <span>{{project}}</span>
-              </button>
-            </div>
-          </div>
-          <div>
-            <hr>
-            <button class="btn-settings">
-              <p>
-                paramètres de projet:
-              </p>
-            </button>
-          </div>
-          
-        </div>
+<div class="sidebar">
+  <div class="sidebar-service">
+    <!-- Icône et nom d'utilisateur -->
+    <div class="user-section">
+      <!-- Remplacer avec l'icône et le nom de l'utilisateur -->
+      <img src="path-to-user-icon.png" alt="User" class="user-icon">
+      <span>Robin</span>
+    </div>
+
+    <!-- Lien Accueil -->
+    <div class="sidebar-item">
+      <a href="/" class="nav-link">
+        <i class="fa-regular fa-house"></i>
+        Home
+      </a>
+    </div>
+
+    <!-- Section Projets -->
+    <div class="projects-section">
+      <div class="projects-header">
+        <span>Projects</span>
+        <button class="add-project-btn" >+</button>
+      </div>
+      <!-- Liste des projets existants -->
+      <div *ngFor="let project of this.myUser.projectsIds" class="sidebar-item">
+        <a class="nav-link">
+          <span>{{ project }}</span>
+        </a>
       </div>
     </div>
+    
+    <!-- Autres sections ... -->
   </div>
-  <div class="btn-container">
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" (click)="toggle()" [ngClass]="{ 'active' : isActive }">
-
-      <i class="bi bi-arrow-left-right"></i>
-    </button>
-  </div>
-  <div class="router-container" [ngClass]="{ 'active' : isActive }">
-    <router-outlet></router-outlet>
-  </div>
-  
 </div>

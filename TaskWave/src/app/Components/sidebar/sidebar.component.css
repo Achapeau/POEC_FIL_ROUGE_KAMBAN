@@ -1,97 +1,61 @@
-.navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-  border: 1px;
-  border-color: black;
-  border-style: solid;
-  border-radius: 5px;
-}
-
-.offcanvas-start {
-  width: 250px; 
-}
-
-
-.sidebar-service {
+.sidebar {
+  width: 250px; /* Largeur de la sidebar */
+  height: 100vh; /* Hauteur totale de la vue */
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #B7D3F2; /* Couleur de fond */
   display: flex;
   flex-direction: column;
-  justify-content: start;
   align-items: center;
-  height: 100vh;
+  overflow-y: auto; /* Permet de défiler si le contenu est trop long */
+  z-index: 1000; /* S'assurer que la sidebar est au-dessus du contenu */
 }
 
-.sidebar-service a {
-  margin: 1rem;
-}
-
-button {
-  margin-top: 40vh;
-  translate: 0;
-  transition: 500ms;
-}
-
-.active {  
-  translate: 260px;
-  transition: 400ms;
-}
-
-.btn-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  height: 3em;
-  width: 1vh;
-  
-}
-
-.navbar-toggler {
-  height: 10vh;
-  margin: 0;
-  top: 10vh;
-}
-
-.drawer {
+.user-section {
   display: flex;
   align-items: center;
-  width: 100vw;
+  padding: 1rem;
+  /* Ajouter des styles pour la section utilisateur ici */
 }
 
-/* .router-container {
+.user-icon {
+  border-radius: 50%;
+  margin-right: 1rem;
+  /* Définir la taille de l'icône utilisateur */
+}
+
+.sidebar-item {
   display: flex;
   align-items: center;
-  width: 100vw;
-  min-width: auto;
-} */
+  padding: 2rem 1rem;
+  /* Ajouter des styles pour les éléments de la barre latérale ici */
+}
 
-.sidebar-service {
+.nav-link {
   display: flex;
-  flex-direction: column;
-  justify-content: start;
   align-items: center;
-  height: 100vh;
-  background-color: #B7D3F2;
+  text-decoration: none;
+  color: inherit; /* Ou une couleur spécifique si tu préfères */
 }
 
-.btn-project {
-  border-radius: 1rem;
-  width: 10rem;
-  height: 3rem;
-  margin: 0;
+.icon {
+  margin-right: 0.5rem;
+  /* Définir la taille des icônes ici */
 }
 
-.div-project {
+.projects-header {
   display: flex;
-  justify-content: center;
+  color: gray;
+  justify-content: space-between;
   align-items: center;
-  margin: 0.5rem;
+  padding: 3rem 1rem;
+  /* Ajouter des styles pour l'en-tête de la section des projets ici */
 }
 
-.btn-settings {
-  border-radius: 1rem;
-  width: 10rem;
-  height: 3rem;
-  margin: 0;
-}
-
-hr {
-  margin: 0.5rem;
+.add-project-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  /* Style pour le bouton d'ajout de projet */
 }
