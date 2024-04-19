@@ -36,12 +36,8 @@ export class ProjectService {
   }
 
   // get project by id
-  getProjectById(id : number): Project {
-    this.http.get<Project>(this.serviceURL + '/' + id).subscribe((data : Project) => {
-      this.project = data;
-      return data;
-    });
-    return this.project;
+  getProjectById(id : number): Observable<Project> {
+    return this.http.get<Project>(this.serviceURL + '/' + id);
   }
 
   // add project

@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { ProjectService } from '../../../Service/project.service';
 import { Project } from '../../../Model/Project';
 import { CommonModule } from '@angular/common';
+import { TaskStatus } from '../../../Model/TaskStatus';
 
 @Component({
   selector: 'app-card-new',
@@ -26,9 +27,7 @@ export class CardNewComponent implements OnInit, OnChanges {
   @Input() project! : Project;
   isAddingTask: boolean = false;
 
-	constructor(private projectService : ProjectService, public wrapperService : WrapperService, private cardService : CardService, public fb : FormBuilder, private router : Router) {
-    // console.log("project id = " + this.projectId);
-   }
+	constructor(private projectService : ProjectService, public wrapperService : WrapperService, private cardService : CardService, public fb : FormBuilder, private router : Router) {  }
 
 	public checkoutForm = this.fb.group({
 		newTitle: ['', [Validators.required]],
@@ -38,24 +37,19 @@ export class CardNewComponent implements OnInit, OnChanges {
     this.isAddingTask = true;
   }
 
-
   closeInput(): void {
     this.isAddingTask = false;
   }
 
-
   ngOnInit() : void {
     this.projectId = this.projectService.project.id;
     this.project = this.projectService.project;
-    // this.cardList = this.cardService.convertIdListToCardList(this.wrapper.cardsIds);
   }
 
   ngOnChanges() {
     this.projectId = this.projectService.project.id;
     this.project = this.projectService.project;
   }
-
-  
 
 	onSubmit(): void {
     if (this.checkoutForm.valid) {
@@ -64,9 +58,8 @@ export class CardNewComponent implements OnInit, OnChanges {
         description: '',
         position: this.cardList.length + 1,
         wrapperId: this.wrapper.id,
-        status: this.wrapper.title
+        status: TaskStatus.TODO,
       }
-      // console.log(newCard);
       this.cardService.addCard(newCard).subscribe((data : Card) => {
          let returnCard = data;
          this.cardList.push(returnCard);
@@ -76,6 +69,4 @@ export class CardNewComponent implements OnInit, OnChanges {
       this.checkoutForm.reset();
     }
 	}
-
-
 }

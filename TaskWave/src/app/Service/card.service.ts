@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Card } from '../Model/Card';
 import { CardDTO } from '../Model/CardDTO';
@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   providedIn: 'root'
 })
 export class CardService {
+  @Input() card!: Card;
 
   constructor(public http : HttpClient, private router : Router, private route : ActivatedRoute) { }
 
@@ -31,7 +32,7 @@ export class CardService {
   }
 
   // update Card
-  updateCard(card : Card) : Observable<Card>  {
+  updateCard(card : Partial<Card>) : Observable<Card>  {
 	  return this.http.put<Card>(this.serviceURL + '/' + card.id, card);
   }
 

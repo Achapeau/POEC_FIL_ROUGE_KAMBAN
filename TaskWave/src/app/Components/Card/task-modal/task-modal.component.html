@@ -1,29 +1,32 @@
 <div class="modal" *ngIf="isVisible">
     <div class="modal-content">
       <span class="close-btn" (click)="closeModal()">&times;</span>
-      <h2>Détails de la tâche</h2>
       <form [formGroup]="taskForm" (ngSubmit)="submitTask()">
+        <div>
+          <h2>
+            <input type="text" id="title" formControlName="title">
+          </h2>
+        </div>
         <div>
           <label for="description">Description:</label>
           <textarea id="description" formControlName="description"></textarea>
         </div>
         <div>
-          <label for="deadline">Deadline:</label>
-          <input type="date" id="deadline" formControlName="deadline">
+          <label for="dueDate">Date d'échéance:</label>
+          <input type="datetime-local" id="dueDate" formControlName="dueDate" value="2018-06-24T09:30">
         </div>
         <div>
-          <label for="member">Assigner à:</label>
-          <select id="member" formControlName="member">
-            <option value="1">John Doe</option>
-            <option value="2">Jane Smith</option>
+          <label for="assignedTo">Assigner à:</label>
+          <select id="assignedTo" formControlName="assignedTo">
+            <option *ngFor="let member of membersList" [value]="member.id">{{ member.firstname }} {{ member.lastname }}</option>
           </select>
         </div>
         <div>
           <label for="status">Statut:</label>
           <select id="status" formControlName="status">
-            <option value="todo">À faire</option>
-            <option value="inProgress">En cours</option>
-            <option value="done">Terminé</option>
+            <option value="à faire">À faire</option>
+            <option value="en cours">En cours</option>
+            <option value="terminé">Terminé</option>
           </select>
         </div>
         <button type="submit">Enregistrer</button>

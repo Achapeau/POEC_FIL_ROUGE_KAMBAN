@@ -18,6 +18,6 @@ public class ProjectDTO {
     private String description;
     private String background;
     private List<Integer> wrappersIds = new ArrayList<>();
-    private List<Integer> userId;
+    private List<Integer> userIds;
 
 }

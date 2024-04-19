@@ -7,5 +7,5 @@ export type Project =  {
     description: string | null | undefined;
     background: string | null | undefined;
     wrappersIds: number[] | [];
-    users: UserDTO[] | [];
+    userIds: number[] | [];
 }

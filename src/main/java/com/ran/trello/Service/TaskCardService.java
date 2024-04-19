@@ -28,6 +28,8 @@ public class TaskCardService {
             newTaskCard.setPosition(taskCard.getPosition());
             newTaskCard.setWrapperId(taskCard.getWrapperId());
             newTaskCard.setStatus(taskCard.getStatus());
+            newTaskCard.setAssignedTo(taskCard.getAssignedTo());
+            newTaskCard.setDueDate(taskCard.getDueDate());
             newTaskCard = taskCardRepository.save(newTaskCard);
             wrapper.addCard(newTaskCard);
             wrapperRepository.save(wrapper);
@@ -52,6 +54,8 @@ public class TaskCardService {
         taskCard.setDescription(body.getDescription());
         taskCard.setPosition(body.getPosition());
         taskCard.setStatus(body.getStatus());
+        taskCard.setAssignedTo(body.getAssignedTo());
+        taskCard.setDueDate(body.getDueDate());
         return taskCardRepository.save(taskCard);
     }
 

@@ -15,7 +15,7 @@ import { Card } from '../../../Model/Card';
 export class WrapperCreateComponent implements OnInit {
   @Input() newTitle!: string | null;
   @Input() projectId : number = this.wrapperService.projectId;
-  @Input() wrapperList : Wrapper[] = [];
+  @Input() wrappersList : Wrapper[] = [];
   @Input() cardList : Card[] = [];
 	constructor(private wrapperService : WrapperService, private projectService : ProjectService, public fb : FormBuilder) {
     
@@ -27,21 +27,23 @@ export class WrapperCreateComponent implements OnInit {
 
   ngOnInit() : void {
     this.projectId = this.projectService.project.id;
-    this.wrapperList = this.projectService.wrappers;
+    this.wrappersList = this.projectService.wrappers;
   }
 
 	onSubmit() {
     if (this.checkoutForm.valid) {
+      this.wrappersList = this.projectService.wrappers;
       let newWrapper : Partial<Wrapper> = {
         title: this.checkoutForm.value.newTitle,
-        position: this.wrapperList.length,
+        position: this.wrappersList.length,
         projectId: this.projectId
       }
       this.wrapperService.addWrapper(newWrapper).subscribe((data : Wrapper) => {
         let returnWrapper = data;
-        this.wrapperList = this.projectService.wrappers;
-        this.wrapperList.push(returnWrapper);
-        this.projectService.wrappers = this.wrapperList;
+        this.wrappersList = this.projectService.wrappers;
+        this.wrappersList.push(returnWrapper);
+
+        this.projectService.wrappers = this.wrappersList;
       });
       this.checkoutForm.reset();
     }
