@@ -6,6 +6,11 @@
   border-radius: 5px;
 }
 
+.offcanvas-start {
+  width: 250px; 
+}
+
+
 .sidebar-service {
   display: flex;
   flex-direction: column;
@@ -25,7 +30,7 @@ button {
 }
 
 .active {  
-  translate: 25rem;
+  translate: 260px;
   transition: 400ms;
 }
 
@@ -46,14 +51,12 @@ button {
 
 .drawer {
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 100vw
+  width: 100vw;
 }
 
 .router-container {
   display: flex;
-  justify-content: center;
   align-items: center;
   width: 100vw;
   min-width: auto;
