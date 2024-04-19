@@ -15,7 +15,7 @@ import { map } from 'rxjs';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
   constructor(
     public userService: UserService,
     public authService: AuthService,
