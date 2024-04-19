@@ -40,4 +40,16 @@ export class CardService {
   deleteCard(id : number) {
 	  return this.http.delete(this.serviceURL + '/' + id);
   }
+  
+  // return a list of cards
+  convertIdListToCardList(idList : number[]) : Card[] {
+    let cardList : Card[] = [];
+    idList.forEach(id => {
+      this.getCardById(id).subscribe((data : Card) => {
+        cardList.push(data);
+        cardList.sort((a, b) => a.position - b.position);
+      })
+    });
+    return cardList;
+  }
 }

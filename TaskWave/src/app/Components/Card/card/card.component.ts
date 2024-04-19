@@ -1,16 +1,27 @@
 import { Component, Input } from '@angular/core';
 import { Card } from '../../../Model/Card';
-import { CardService } from '../../../Service/card.service';
+import { TaskModalComponent } from '../task-modal/task-modal.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, TaskModalComponent],
   templateUrl: './card.component.html',
-  styleUrl: './card.component.css'
+  styleUrls: ['./card.component.css']
 })
 export class CardComponent {
-  constructor(cardService : CardService) { }
-	@Input() card! : Card;
+  @Input() card!: Card;
 
+  showModal: boolean = false;
+  selectedCard: Card | null = null;
+
+  openModal(): void {
+    this.selectedCard = this.card;
+    this.showModal = true;
+  }
+
+  closeModal(): void {
+    this.showModal = false;
+  }
 }

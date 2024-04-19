@@ -1,0 +1,58 @@
+version: '3'
+
+services:
+  # compilation:
+  #   image: maven:latest
+  #   volumes:
+  #     - ./.:/app
+  #   working_dir: /app
+  #   command: mvn -Dmaven.test.skip=true -DskipTests=true clean install
+
+  mysql:
+    build:
+      context: ./docker/
+      dockerfile: base.dockerfile
+    ports:
+      - "3306:3306"
+    networks:
+      - springboot-mysql-network
+    # depends_on:
+    #   - compilation
+    environment:
+      MYSQL_ROOT_PASSWORD: trello_admin
+      MYSQL_DATABASE: trello
+      MYSQL_USER: trello_admin
+      MYSQL_PASSWORD: trello_admin
+
+  spring:
+    build:
+      context: ./
+      dockerfile: java.dockerfile
+    ports:
+      - "3050:3050"
+    networks:
+      - springboot-mysql-network
+    depends_on:
+      - mysql
+
+  node:
+    image: "node:alpine"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./TaskWave/:/home/node/app
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"
+    networks:
+      - springboot-mysql-network
+    command: ["npm install -g @angular/cli", "npm install -g npm@10.5.1", "npm install", "npm start"] 
+    depends_on:
+      - spring
+  
+networks:
+  springboot-mysql-network:
+    name: springboot-mysql-network

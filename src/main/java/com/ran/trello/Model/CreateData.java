@@ -31,7 +31,7 @@ public class CreateData {
         userRepository.save(u4);
         userRepository.save(u5);
         System.out.println("utilisateur crées");
-        Project p1 = new Project("TrelloBis", "description de TrelloBis", "https://img.freepik.com/free-photo/painting-mountain-lake-with-mountain-background_188544-9126.jpg", new ArrayList<Wrapper>(), new ArrayList<UserP>());
+        Project p1 = new Project("TrelloBis", "description de TrelloBis", "https://cdn.pixabay.com/photo/2024/02/21/08/06/coast-8587004_1280.jpg", new ArrayList<Wrapper>(), new ArrayList<UserP>());
         p1.addUser(u1);
         p1.addUser(u2);
         p1.addUser(u5);

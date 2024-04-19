@@ -4,6 +4,7 @@ import { WrapperService } from '../../../Service/wrapper.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Wrapper } from '../../../Model/Wrapper';
 import { ProjectService } from '../../../Service/project.service';
+import { Card } from '../../../Model/Card';
 @Component({
   selector: 'app-wrapper-create',
   standalone: true,
@@ -15,7 +16,8 @@ export class WrapperCreateComponent implements OnInit {
   @Input() newTitle!: string | null;
   @Input() projectId : number = this.wrapperService.projectId;
   @Input() wrapperList : Wrapper[] = [];
-	constructor(private wrapperService : WrapperService, private projectService : ProjectService, public fb : FormBuilder, private router : Router, private route : ActivatedRoute) {
+  @Input() cardList : Card[] = [];
+	constructor(private wrapperService : WrapperService, private projectService : ProjectService, public fb : FormBuilder) {
     
    }
 
@@ -25,22 +27,21 @@ export class WrapperCreateComponent implements OnInit {
 
   ngOnInit() : void {
     this.projectId = this.projectService.project.id;
-    console.log("project id = " + this.projectId);
-    console.log("this.wrapperList = " + this.wrapperList);
-    console.log("this.wrapperService.wrappers = " + this.wrapperService.wrappers);
+    this.wrapperList = this.projectService.wrappers;
   }
 
 	onSubmit() {
     if (this.checkoutForm.valid) {
       let newWrapper : Partial<Wrapper> = {
         title: this.checkoutForm.value.newTitle,
+        position: this.wrapperList.length,
         projectId: this.projectId
       }
-      console.log(newWrapper);
       this.wrapperService.addWrapper(newWrapper).subscribe((data : Wrapper) => {
         let returnWrapper = data;
         this.wrapperList = this.projectService.wrappers;
         this.wrapperList.push(returnWrapper);
+        this.projectService.wrappers = this.wrapperList;
       });
       this.checkoutForm.reset();
     }

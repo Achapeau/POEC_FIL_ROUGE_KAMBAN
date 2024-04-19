@@ -32,17 +32,21 @@ export class ProjectService {
 
   // get all project
   getProjects() : Observable<Project[]> {
-	return this.http.get<Project[]>(this.serviceURL);
+	  return this.http.get<Project[]>(this.serviceURL);
   }
 
   // get project by id
-  getProjectById(id : number): Observable<Project> {
-    return this.http.get<Project>(this.serviceURL + '/' + id);
+  getProjectById(id : number): Project {
+    this.http.get<Project>(this.serviceURL + '/' + id).subscribe((data : Project) => {
+      this.project = data;
+      return data;
+    });
+    return this.project;
   }
 
   // add project
   addProject(project : Project) : Observable<Project> {
-	return this.http.post<Project>(this.serviceURL, project);
+	  return this.http.post<Project>(this.serviceURL, project);
   }
 
   // update project
@@ -59,7 +63,7 @@ export class ProjectService {
   // select project
   selectProject(project : Project) {
     this.project = project;
-    this.router.navigate(['tab',project.id], { relativeTo: this.route });
+    this.router.navigate(['project',project.id], { relativeTo: this.route });
   }
 
 }
