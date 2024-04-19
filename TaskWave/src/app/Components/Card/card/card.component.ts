@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { Card } from '../../../Model/Card';
+import { Card } from '../../../Model/model';
 import { TaskModalComponent } from '../task-modal/task-modal.component';
 import { CommonModule } from '@angular/common';
 import { CardService } from '../../../Service/card.service';

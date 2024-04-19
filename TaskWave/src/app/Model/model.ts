@@ -5,8 +5,8 @@ export interface Card {
     position: number;
     wrapperId: number;
     status: string;
-    deadline: string; 
-    memberId: number; 
+    dueDate: string | null; 
+    assignedTo: number | null; 
 }
 
 // export interface CardDTO {
@@ -64,3 +64,4 @@ export interface LogsDTO {
 	email: string;
 	password: string;
 }
+

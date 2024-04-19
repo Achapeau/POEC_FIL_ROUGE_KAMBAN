@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Input } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { Card } from '../Model/Card';
-import { CardDTO } from '../Model/CardDTO';
+import { Card } from '../Model/model';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({

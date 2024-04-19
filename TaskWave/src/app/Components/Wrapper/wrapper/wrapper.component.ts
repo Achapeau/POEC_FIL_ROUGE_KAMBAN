@@ -1,11 +1,9 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { WrapperService } from '../../../Service/wrapper.service';
 import { UserService } from '../../../Service/user.service';
-import { Wrapper } from '../../../Model/Wrapper';
-import { Card } from '../../../Model/Card';
+import { Wrapper, Card, Project } from '../../../Model/model';
 import { CardComponent } from '../../Card/card/card.component';
 import { CommonModule } from '@angular/common';
-import { Project } from '../../../Model/Project';
 import {
   CdkDragDrop,
   moveItemInArray,

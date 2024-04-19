@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Input } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { Wrapper } from '../Model/Wrapper';
+import { Wrapper } from '../Model/model';
 
 @Injectable({
   providedIn: 'root'

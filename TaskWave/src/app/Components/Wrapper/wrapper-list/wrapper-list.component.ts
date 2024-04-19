@@ -1,14 +1,13 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { WrapperService } from '../../../Service/wrapper.service';
-import { Wrapper } from '../../../Model/Wrapper';
+import { Wrapper, Project } from '../../../Model/model';
 import { CommonModule } from '@angular/common';
 import { WrapperComponent } from '../wrapper/wrapper.component';
 import { ActivatedRoute } from '@angular/router';
-import { Project } from '../../../Model/Project';
 import { ProjectService } from '../../../Service/project.service';
 import { CdkDropList, CdkDrag, CdkDragDrop, CdkDropListGroup, moveItemInArray} from '@angular/cdk/drag-drop';
 import { WrapperCreateComponent } from '../wrapper-create/wrapper-create.component';
-import { Observable, forkJoin } from 'rxjs';
+import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-wrapper-list',
   standalone: true,

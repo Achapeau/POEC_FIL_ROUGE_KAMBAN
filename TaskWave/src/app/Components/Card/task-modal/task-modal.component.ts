@@ -1,12 +1,11 @@
 import { Component, Input, EventEmitter, Output, OnInit, OnChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Card } from '../../../Model/Card';
+import { Card, User } from '../../../Model/model';
 import { ProjectService } from '../../../Service/project.service';
-import { TaskStatus } from '../../../Model/TaskStatus';
 import { UserService } from '../../../Service/user.service';
-import { User } from '../../../Model/User';
 import { CardService } from '../../../Service/card.service';
+import { TaskStatus } from '../../../Model/TaskStatus';
 
 @Component({
   selector: 'app-task-modal',
@@ -34,7 +33,7 @@ export class TaskModalComponent implements OnInit, OnChanges {
     status: ['']
   });
   ngOnInit(): void {
-    this.projectService.project.userIds.map(id => this.userService.getUserById(id).subscribe(user => this.membersList.push(user)));
+    this.projectService.project.usersId.map(id => this.userService.getUserById(id).subscribe(user => this.membersList.push(user)));
   }
 
   ngOnChanges(): void {
@@ -59,13 +58,13 @@ export class TaskModalComponent implements OnInit, OnChanges {
     if (this.taskForm.valid) {
       let updatedCard : Partial<Card> = {
         id: this.cardData?.id,
-        title: this.taskForm.value.title,
+        title: this.taskForm.value.title as string,
         position: this.cardData?.position,
         wrapperId: this.cardData?.wrapperId,
-        description: this.taskForm.value.description,
+        description: this.taskForm.value.description as string,
         dueDate: this.taskForm.value.dueDate ? this.taskForm.value.dueDate : null,
         assignedTo: this.taskForm.value.assignedTo ? parseInt(this.taskForm.value.assignedTo, 10) : null,
-        status: this.taskForm.value.status  || null,
+        status: this.taskForm.value.status  || undefined,
       }
       this.cardService.updateCard(updatedCard).subscribe(
         (response) => {

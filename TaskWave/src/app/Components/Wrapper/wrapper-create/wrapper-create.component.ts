@@ -1,10 +1,8 @@
 import { Component, Inject, Injectable, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WrapperService } from '../../../Service/wrapper.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Wrapper } from '../../../Model/Wrapper';
+import { Wrapper, Card } from '../../../Model/model';
 import { ProjectService } from '../../../Service/project.service';
-import { Card } from '../../../Model/Card';
 @Component({
   selector: 'app-wrapper-create',
   standalone: true,
@@ -34,7 +32,7 @@ export class WrapperCreateComponent implements OnInit {
     if (this.checkoutForm.valid) {
       this.wrappersList = this.projectService.wrappers;
       let newWrapper : Partial<Wrapper> = {
-        title: this.checkoutForm.value.newTitle,
+        title: this.checkoutForm.value.newTitle as string,
         position: this.wrappersList.length,
         projectId: this.projectId
       }

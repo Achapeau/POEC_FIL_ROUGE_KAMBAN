@@ -11,7 +11,7 @@ import { User} from '../../../Model/model';
   styleUrl: './inscription.component.css'
 })
 export class InscriptionComponent {
-	constructor(public user: UserService, public fb : FormBuilder) { }
+	constructor(public userService: UserService, public fb : FormBuilder) { }
 
 	public connectionForm = this.fb.group({
 		name: ['', [Validators.required]],
@@ -22,18 +22,20 @@ export class InscriptionComponent {
 	});
 
 	onSubmit() {
-		console.log(this.connectionForm.value);
+			if (this.connectionForm.valid) {
+			console.log(this.connectionForm.value);
 
-		let user : Partial<User> = {
-			id : 0,
-			email : this.connectionForm.value.email as string,
-			password : this.connectionForm.value.password 	as string,
-			firstname : this.connectionForm.value.firstname 	as string,
-			lastname : this.connectionForm.value.lastname	as string,
-      		projectsIds : []
-		};
+			let user : Partial<User> = {
+				id : 0,
+				email : this.connectionForm.value.email as string,
+				password : this.connectionForm.value.password 	as string,
+				firstname : this.connectionForm.value.firstname 	as string,
+				lastname : this.connectionForm.value.lastname as string,
+				projectsIds : []
+			};
 
-		this.user.inscription(user);
+			this.userService.inscription(user);
+		}
 	}
 
 }
