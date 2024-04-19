@@ -35,7 +35,7 @@ public class CreateData {
         Project p2 = new Project("TaskManager", "description de TaskManager", "https://cdn.pixabay.com/photo/2020/08/31/09/33/beach-5531919_1280.jpg", new ArrayList<Wrapper>(), new ArrayList<UserP>());
         p2.addUser(u1);
         p2.addUser(u4);
-        Project p3 = new Project("Trollolo", "description de Trollolo", "https://png.pngtree.com/thumb_back/fh260/background/20200714/pngtree-modern-double-color-futuristic-neon-background-image_351866.jpg", new ArrayList<Wrapper>(), new ArrayList<UserP>());
+        Project p3 = new Project("Trollolo", "description de Trollolo", "https://cdn.pixabay.com/photo/2021/01/08/07/52/trees-5899195_1280.jpg", new ArrayList<Wrapper>(), new ArrayList<UserP>());
         p3.addUser(u1);
         p3.addUser(u2);
         p3.addUser(u3);

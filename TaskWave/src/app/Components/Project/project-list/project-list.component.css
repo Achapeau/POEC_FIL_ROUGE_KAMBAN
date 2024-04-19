@@ -54,7 +54,28 @@ h2 {
     align-items: stretch;
 }
 
-app-project {
-    flex: 1;
-    box-sizing: border-box;
+.my-projects {
+    margin: 20px 0;
+}
+
+.projects-container {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Espacement entre le texte et les projets */
+}
+
+.project-intro {
+    flex: 1; /* Prend l'espace nécessaire sans dépasser la largeur du contenu */
+    max-width: 200px; /* Fixe une largeur maximale pour le texte */
+}
+
+.list-projects {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    flex-grow: 1; /* Permet aux projets de remplir l'espace restant */
+}
+
+.my-projects p {
+	margin-right: 50px;
 }
