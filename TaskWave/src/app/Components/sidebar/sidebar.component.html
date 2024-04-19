@@ -2,16 +2,14 @@
   <div class="sidebar-service">
     <!-- Icône et nom d'utilisateur -->
     <div class="user-section">
-      <!-- Remplacer avec l'icône et le nom de l'utilisateur -->
       <img src="path-to-user-icon.png" alt="User" class="user-icon">
-      <span>Robin</span>
+      <!-- <span>{{ myUser?.firstname }} {{ myUser?.lastname }}</span> -->
     </div>
 
     <!-- Lien Accueil -->
     <div class="sidebar-item">
       <a href="/" class="nav-link">
-        <i class="fa-regular fa-house"></i>
-        Home
+        <i class="fa fa-home"></i> Home
       </a>
     </div>
 
@@ -19,12 +17,12 @@
     <div class="projects-section">
       <div class="projects-header">
         <span>Projects</span>
-        <button class="add-project-btn" >+</button>
+        <!-- <button class="add-project-btn" (click)="addProject()">+</button> -->
       </div>
       <!-- Liste des projets existants -->
-      <div *ngFor="let project of this.myUser.projectsIds" class="sidebar-item">
-        <a class="nav-link">
-          <span>{{ project }}</span>
+      <div *ngFor="let project of myProjects" class="sidebar-item">
+        <a class="nav-link" (click)="selectProject(project)">
+          <span>{{ project.title }}</span>
         </a>
       </div>
     </div>
