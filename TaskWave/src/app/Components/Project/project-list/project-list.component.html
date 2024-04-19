@@ -4,23 +4,30 @@
     <section class="popular-models">
         <h2>Créez votre espace de travail unique :</h2>
         <div class="create-project">
-            <button class="create-button">
+            <button class="create-button" (click)="openCreateProjectModal()">
                 <span class="plus-icon">+</span>
             </button>
             <p>Commencez par donner un nom à votre projet, définissez les grandes lignes et invitez votre équipe à collaborer.</p>
         </div>
     </section>
 
-    <!-- Section Projets en Cours -->
-    <!-- Section Projets en Cours -->
-<section class="my-projects">
-    <h2>Vos Projets en cours</h2>
-    <div class="projects-container">
-        <p class="project-intro">Reprenez votre projet là où vous l'avez laissé :</p>
-        <div class="list-projects">
-            <app-project *ngFor="let project of projectsList" [project]="project"></app-project>
+    <!-- Modal pour créer un projet -->
+    <app-modal [(isOpen)]="isModalOpen" (close)="closeModal()">
+        <div class="modal-content">
+            <h2>Créer un nouveau projet</h2>
+            <p>Entrez les détails du projet ici.</p>
+            <!-- Ici vous pouvez ajouter un formulaire pour saisir les détails du nouveau projet -->
         </div>
-    </div>
-</section>
+    </app-modal>
 
+    <!-- Section Projets en Cours -->
+    <section class="my-projects">
+        <h2>Vos Projets en cours</h2>
+        <div class="projects-container">
+            <p class="project-intro">Reprenez votre projet là où vous l'avez laissé :</p>
+            <div class="list-projects">
+                <app-project *ngFor="let project of projectsList" [project]="project"></app-project>
+            </div>
+        </div>
+    </section>
 </div>
