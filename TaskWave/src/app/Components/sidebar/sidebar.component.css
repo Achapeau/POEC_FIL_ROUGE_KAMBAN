@@ -12,16 +12,14 @@
 
 
 .sidebar-service {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: start;
-  align-items: center;
+  align-items: center; */
   height: 100vh;
 }
 
-.sidebar-service a {
-  margin: 1rem;
-}
+
 
 button {
   translate: 0;
@@ -32,6 +30,91 @@ button {
   translate: 260px;
   transition: 400ms;
 }
+
+
+.home {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0; /* Padding vertical réduit */
+  margin-bottom: 2rem; /* Espace en dessous */
+  cursor: pointer;
+}
+
+.home-icon {
+  margin-right: 0.5rem;
+  font-size: 1rem;
+}
+
+.home  {
+  text-decoration: none;
+  color: inherit;
+  border-radius: 0.5rem; /* Bords arrondis pour l'effet de survol */
+  transition: background-color 0.3s ease; /* Animation douce pour le survol */
+}
+
+.home:hover  {
+  background-color: #f2f2f2; /* Couleur de fond au survol */
+  padding: 0.5rem 2rem; /* Padding horizontal encore plus augmenté au survol */
+}
+
+.home-icon i {
+  transition: color 0.3s ease; /* Animation douce pour le changement de couleur */
+  padding-right: 20px;
+}
+.sidebar-project-creation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 1rem; /* Pour pousser le texte plus à gauche */
+}
+
+.projects-title {
+  /* Si vous avez besoin de plus de contrôle sur l'espace autour du texte, vous pouvez ajuster les valeurs ici. */
+  padding-right: 0.5rem; /* Pour donner de l'espace avant le bouton */
+}
+
+.add-project-button {
+  background: none;
+  border: none;
+  cursor: pointer; /* Le curseur se transforme en pointeur au survol */
+}
+
+.add-project-button i {
+  font-size: 1.5rem;
+  color: inherit;
+}
+
+.div-project {
+  display: flex;
+  padding-left: 1rem; /* Ajoute du padding pour aligner à gauche dans la sidebar */
+}
+
+.btn-project {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem 0.5rem 0; /* Padding supérieur, inférieur et gauche */
+  padding-right: 2rem; /* Padding droit étendu */
+  border: none;
+  background: none;
+  width: 100%; /* Assurez-vous que le bouton s'étend sur toute la largeur */
+  text-align: left; /* Alignement du texte à gauche */
+  cursor: pointer;
+  border-radius: 0.25rem; /* Bords légèrement arrondis */
+  transition: background-color 0.3s ease; /* Animation douce pour le survol */
+}
+
+.btn-project:hover {
+  background-color: #f2f2f2; /* Couleur de fond fin au survol */
+}
+
+.fa-folder {
+  margin-right: 0.5rem; /* Espace entre l'icône et le titre */
+  font-size: 1rem; /* Taille de l'icône */
+}
+
+
+
+
 
 .btn-container {
   display: flex;

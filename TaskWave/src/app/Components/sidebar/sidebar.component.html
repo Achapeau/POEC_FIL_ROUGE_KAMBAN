@@ -5,21 +5,25 @@
         <img src="https://www.iconarchive.com/download/i120827/iconarchive/seaside/Water-Wave.1024.png" alt="" width="50" height="50">
         TaskWave
       </a>
-      <div>
+      <div class="home">
+        <span class="home-icon"><i class="fa-solid fa-house"></i></span>
         <a (click)="goHomework()">Home</a>
-        <span class="home-icon"></span>
       </div>
-      <div *ngIf="this.myUser != null">
-        <p>Projects</p>
+      <div class="sidebar-project-creation">
+        <span class="projects-title">Projects</span>
         <button class="add-project-button" (click)="openCreateProjectModal()">
           <i class="fa fa-plus"></i>
         </button>
+      </div>       
+      <div *ngIf="this.myUser != null">
         <div *ngFor="let project of this.myProjects" class="div-project">
-          <button class="btn-project" [ngStyle]="{ 'background-image': 'url(' + project.background + ')' }" (click)="selectProject(project)">
-            <span>{{ project.title }}</span>
+          <button class="btn-project" (click)="selectProject(project)">
+            <i class="fa-regular fa-folder"></i>
+            <span class="project-title">{{ project.title }}</span>
           </button>
         </div>
       </div>
+      
       <div>
         <hr>
         <button class="btn-settings">
