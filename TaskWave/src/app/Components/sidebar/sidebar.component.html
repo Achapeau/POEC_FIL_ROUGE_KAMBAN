@@ -6,9 +6,9 @@
         TaskWave
       </a>
       <div class="home">
-        <span class="home-icon"><i class="fa-solid fa-house"></i></span>
+        <i class="fa-solid fa-house home-icon"></i>
         <a (click)="goHomework()">Home</a>
-      </div>
+      </div>      
       <div class="sidebar-project-creation">
         <span class="projects-title">Projects</span>
         <button class="add-project-button" (click)="openCreateProjectModal()">
@@ -24,12 +24,14 @@
         </div>
       </div>
       
-      <div>
+      <div class="settings-container">
         <hr>
-        <button class="btn-settings">
-          Paramètres de projet
-        </button>
+        <a class="btn-settings">
+          <i class="fa-light fa-gear"></i>
+          <span>Settings</span>
+        </a>
       </div>
+      
     </div>
   </div>
   <div class="btn-container">
