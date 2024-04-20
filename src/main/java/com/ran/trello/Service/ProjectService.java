@@ -36,7 +36,7 @@ public class ProjectService {
         project.setDescription(projectDTO.getDescription());
         project.setBackground(projectDTO.getBackground());
         project.setId(projectDTO.getId());
-        project.setUsers(userPRepository.findAllById(projectDTO.getUserId()));
+        project.setUsers(userPRepository.findAllById(projectDTO.getUserIds()));
         project.setWrappers(wrapperRepository.findAllById(projectDTO.getWrappersIds()));
         return project;
     }
@@ -47,7 +47,7 @@ public class ProjectService {
     }
 
 
-    public ProjectDTO findById(Integer id) {
+    public ProjectDTO findByProjectId(Integer id) {
         return convertToProjectDTO(projectRepository.findById(id).get());
     }
 
@@ -55,8 +55,8 @@ public class ProjectService {
         return projectRepository.findByTitle(title).stream().map(project -> convertToProjectDTO(project)).toList();
     }
 
-    public ProjectDTO saveProject(ProjectDTO project) {
-        return convertToProjectDTO(projectRepository.save(convertToProject(project)));
+    public ProjectDTO saveProject(ProjectDTO projectDTO) {
+        return convertToProjectDTO(projectRepository.save(convertToProject(projectDTO)));
     }
 
     public ProjectDTO update(Integer id, ProjectDTO projectDTO) {

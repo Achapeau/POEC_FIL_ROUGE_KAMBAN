@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WrapperRepository extends JpaRepository<Wrapper, Integer> {
+    Wrapper findByProjectId(Integer id);
 }

@@ -1,0 +1,43 @@
+
+.container-list {
+  width: 100vw;
+  height: 90vh; /* Assurez-vous que la hauteur totale est visible */
+  display: flex;
+  flex-direction: column; /* Organise les enfants en colonne */
+  align-items: center; /* Centre les enfants horizontalement */
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Empêche le débordement */
+}
+
+.header-wrapper {
+  width: 100%; 
+  background-color: rgba(255, 255, 255, 0.4); 
+  border: 1px solid #ccc; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  box-sizing: border-box;
+}
+
+.container-box {
+  width: 100%; /* Assure la pleine largeur dans le flux de flex */
+  height: calc(100% - 40px); /* Calcule la hauteur moins le header */
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto; /* Permet le défilement horizontal si nécessaire */
+  align-items: start; /* Alignement au début pour les éléments */
+}
+
+/* Styles pour le drag-drop CDK */
+.cdk-drag-preview {
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}

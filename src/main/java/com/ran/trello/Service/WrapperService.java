@@ -1,7 +1,10 @@
 package com.ran.trello.Service;
 
 import com.ran.trello.Model.DTO.WrapperDTO;
+import com.ran.trello.Model.Entity.Project;
 import com.ran.trello.Model.Entity.Wrapper;
+import com.ran.trello.Model.Repository.ProjectRepository;
+import com.ran.trello.Model.Repository.TaskCardRepository;
 import com.ran.trello.Model.Repository.WrapperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,24 +14,31 @@ import java.util.stream.Collectors;
 @Service
 public class WrapperService {
 
+    private final TaskCardRepository taskCardRepository;
     private final WrapperRepository wrapperRepository;
+    private final ProjectRepository projectRepository;
 
     @Autowired
-    public WrapperService(WrapperRepository wrapperRepository) {
+    public WrapperService(WrapperRepository wrapperRepository, ProjectRepository projectRepository, TaskCardRepository taskCardRepository) {
+        this.taskCardRepository = taskCardRepository;
         this.wrapperRepository = wrapperRepository;
+        this.projectRepository = projectRepository;
     }
 
     public WrapperDTO createWrapper(WrapperDTO wrapperDTO) {
         Wrapper wrapper = new Wrapper();
         wrapper.setTitle(wrapperDTO.getTitle());
         wrapper.setProjectId(wrapperDTO.getProjectId());
+        wrapper.setPosition(wrapperDTO.getPosition());
         Wrapper savedWrapper = wrapperRepository.save(wrapper);
+        Project project = projectRepository.findById(wrapperDTO.getProjectId()).get();
+        project.addWrapper(wrapper);
+        projectRepository.save(project);
         return convertToDTO(savedWrapper);
     }
 
     public WrapperDTO getWrapperById(Integer id) {
-        Wrapper wrapper = wrapperRepository.findById(id).orElseThrow(() -> new RuntimeException("Wrapper not found"));
-        return convertToDTO(wrapper);
+        return convertToDTO(wrapperRepository.findById(id).get());
     }
 
     public List<WrapperDTO> getAllWrappers() {
@@ -37,11 +47,18 @@ public class WrapperService {
     }
 
     public WrapperDTO updateWrapper(Integer id, WrapperDTO wrapperDTO) {
-        Wrapper existingWrapper = wrapperRepository.findById(id).orElseThrow(() -> new RuntimeException("Wrapper not found"));
+        Wrapper existingWrapper = wrapperRepository.findById(id).get();
         existingWrapper.setTitle(wrapperDTO.getTitle());
-        existingWrapper.setProjectId(wrapperDTO.getProjectId());
-        Wrapper updatedWrapper = wrapperRepository.save(existingWrapper);
-        return convertToDTO(updatedWrapper);
+        existingWrapper.setPosition(wrapperDTO.getPosition());
+        existingWrapper.setCards(wrapperDTO.getCardsIds()
+                .stream()
+                .map(cardId -> taskCardRepository.findById(cardId).get())
+                .collect(Collectors.toList()));
+        existingWrapper.getCards().forEach(card -> {
+            card.setWrapperId(existingWrapper.getId());
+            taskCardRepository.save(card);
+        });
+        return convertToDTO(wrapperRepository.save(existingWrapper));
     }
 
     public void deleteWrapper(Integer id) {
@@ -53,7 +70,12 @@ public class WrapperService {
         dto.setId(wrapper.getId());
         dto.setTitle(wrapper.getTitle());
         dto.setProjectId(wrapper.getProjectId());
+        dto.setPosition(wrapper.getPosition());
         dto.setCardsIds(wrapper.getCards().stream().map(card -> card.getId()).collect(Collectors.toList()));
         return dto;
+    }
+
+    private List<Wrapper> getWrappersByProjectId(Integer id) {
+        return wrapperRepository.findAll().stream().filter(wrapper -> wrapper.getProjectId().equals(id)).toList();
     }
 }

@@ -1,0 +1,6 @@
+<div class="task-card" (click)="openModal()">
+    <div>
+        <h4>{{card.title}}</h4>
+    </div>
+</div>
+<app-task-modal *ngIf="showModal" [isVisible]="showModal" [card]="card" [cardData]="selectedCard" (closeModalEvent)="closeModal()"></app-task-modal>

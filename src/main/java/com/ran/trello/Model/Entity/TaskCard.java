@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -18,6 +20,8 @@ public class TaskCard {
     private Integer position;
     private Integer wrapperId;
     private String status;
+    private Integer assignedTo;
+    private Date dueDate;
 
     public TaskCard(String title, String description, int position, int wrapperId, String status) {
         this.title = title;

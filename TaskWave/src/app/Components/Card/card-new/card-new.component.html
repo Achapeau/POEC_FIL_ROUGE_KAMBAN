@@ -1,0 +1,18 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+<div class="new-task">
+    <!-- Bouton pour ouvrir le formulaire, visible uniquement si le formulaire n'est pas actif -->
+    <div class="m-2" *ngIf="!isAddingTask" (click)="showInput()">
+      <label for="newTitle">+ Ajouter une WaveTask</label>
+    </div>
+
+    <!-- Formulaire d'ajout de tâche, visible uniquement si isAddingTask est true -->
+    <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" *ngIf="isAddingTask">
+      <div class="form-group">
+        <!-- Input pour saisir le titre de la nouvelle tâche -->
+        <input id="newTitle" class="checkoutForm" type="text" formControlName="newTitle" placeholder="Entrez le titre de la tâche..." (blur)="closeInput()">
+        <button type="button" class="close-button" (click)="closeInput()"><i class="fas fa-times"></i></button>
+        
+      </div>
+    </form>
+</div>

@@ -23,13 +23,8 @@ public class ProjectController {
     }
 
     @GetMapping("/{id}")
-    public ProjectDTO findById(@PathVariable Integer id) {
-        return projectService.findById(id);
-    }
-
-    @GetMapping("/{title}")
-    public List<ProjectDTO> findByTitle(@PathVariable String title) {
-        return projectService.findByTitle(title);
+    public ProjectDTO getByProjectId(@PathVariable Integer id) {
+        return projectService.findByProjectId(id);
     }
 
     @PostMapping

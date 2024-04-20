@@ -26,10 +26,11 @@ public class UserP {
             inverseJoinColumns = @JoinColumn(name = "project_id"))
     private List<Project> projects = new ArrayList<>();
 
-    public UserP(String email, String password, String firstname, String lastname) {
+    public UserP(String email, String password, String firstname, String lastname, List<Project> projects) {
         this.email = email;
         this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.projects = projects;
     }
 }

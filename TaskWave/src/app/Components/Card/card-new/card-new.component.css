@@ -1,0 +1,65 @@
+input {
+    width: 75%;
+}
+
+.new-task {
+    display: flex;
+    background-color: #F1F2F4; 
+    margin: 1px;
+    padding: 1px;
+    border-radius: .75rem; 
+    width: 100%; 
+    height: auto; 
+    transition: background-color 0.3s; 
+}
+
+.new-task:hover {
+    background-color: #E0E1E3; 
+}
+/* Style pour les labels et form group */
+.label {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+.new-task .form-group {
+    position: relative;
+    padding: 10px;
+}
+
+.new-task input.checkoutForm {
+    width: 100%;
+    padding: 8px 45px 8px 10px; /* Padding à droite pour le bouton de fermeture */
+    border: 1px solid #ccc;
+    border-radius: 20px; /* Input arrondi */
+    font-size: 16px;
+}
+
+.new-task button.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #707070;
+    cursor: pointer;
+}
+
+.new-task button.close-button:hover {
+    color: #FF0000; /* Changement de couleur lors du survol pour plus de visibilité */
+}
+
+.new-task button.btn-primary {
+    margin-top: 10px; /* Espacement au-dessus du bouton submit pour une séparation claire */
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
+
+.new-task button.btn-primary:hover {
+    background-color: #0056b3;
+}
