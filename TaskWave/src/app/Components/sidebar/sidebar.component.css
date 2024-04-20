@@ -6,6 +6,11 @@
   border-radius: 5px;
 }
 
+.offcanvas-start {
+  width: 250px; 
+}
+
+
 .sidebar-service {
   display: flex;
   flex-direction: column;
@@ -25,7 +30,7 @@ button {
 }
 
 .active {  
-  translate: 25rem;
+  translate: 260px;
   transition: 400ms;
 }
 
@@ -46,18 +51,16 @@ button {
 
 .drawer {
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 100vw
+  width: 100vw;
 }
 
-.router-container {
+/* .router-container {
   display: flex;
-  justify-content: center;
   align-items: center;
   width: 100vw;
   min-width: auto;
-}
+} */
 
 .sidebar-service {
   display: flex;
@@ -65,7 +68,7 @@ button {
   justify-content: start;
   align-items: center;
   height: 100vh;
-  background-color: blanchedalmond;
+  background-color: #B7D3F2;
 }
 
 .btn-project {
