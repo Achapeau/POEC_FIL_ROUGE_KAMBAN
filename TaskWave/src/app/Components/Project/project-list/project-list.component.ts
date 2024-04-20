@@ -5,6 +5,7 @@ import { Project, User } from '../../../Model/model';
 import { ModalComponent } from '../../../modal/modal.component';
 import { ProjectService } from '../../../Service/project.service';
 import { AuthService } from '../../../Service/auth.service';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-project-list',
@@ -20,11 +21,17 @@ export class ProjectListComponent implements OnInit {
 
   constructor(
     private projectService: ProjectService,
-    private authService: AuthService
+    private authService: AuthService,
+    public fb: FormBuilder
   ) {
     this.getProject();
-    console.log(this.projects);
   }
+
+  public checkoutForm = this.fb.group({
+    newTitle: ['', [Validators.required]],
+    newTheme: [0],
+    newMembers: [null],
+  });
 
   ngOnInit(): void {
     this.authService.userData$.subscribe((myUser) => {
@@ -46,5 +53,13 @@ export class ProjectListComponent implements OnInit {
 
   closeModal() {
     this.isModalOpen = false;
+  }
+
+  onSubmit() {
+    if (this.checkoutForm.valid) {
+      console.log('Titre : ', this.checkoutForm.value.newTitle);
+    } else {
+      console.log('Formulaire invalide');
+    }
   }
 }
