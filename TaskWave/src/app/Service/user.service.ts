@@ -56,12 +56,14 @@ export class UserService {
           JSON.stringify({
             mail: this.currentUser.email,
             id: this.currentUser.id,
+            connected: this.connected,
           })
         );
         this.authService.setUserData(data);
       });
   }
   inscription(User: Partial<User>) {
+    console.log(User);
     this.http
       .post<User>(this.serviceURL + '/register', User)
       .subscribe((data: User) => {
