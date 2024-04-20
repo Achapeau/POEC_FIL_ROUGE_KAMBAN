@@ -20,9 +20,8 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.task-card h4, .task-card p, .task-card .dueDate, .task-card .status {
+.task-card h4, .task-card p, .task-card .dueDate, .task-card .status-and-options {
     align-self: flex-start; /* Assure que chaque élément texte s'aligne à gauche */
-    width: 100%; /* Prend la pleine largeur pour maintenir l'alignement dans le flex container */
 }
 
 .task-card h4 {
@@ -41,16 +40,31 @@
     font-size: 0.9em;
 }
 
+.task-card .status-and-options {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
 .task-card .status {
     display: inline-block;
     padding: 3px 10px;
-    background-color: #f0f0f0; /* Couleur de fond */
-    border-radius: 15px; /* Rend les bords ovales pour un effet de bulle */
-    margin-top: 5px;
+    background-color: #f0f0f0;
+    border-radius: 15px;
     font-size: 0.8em;
     color: #333;
-    font-weight: 600; /* Semi-bold */
-    width: auto; /* S'assurer que la largeur est automatique et non définie ou étendue */
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.task-card .options-icon {
+    visibility: hidden;
+    color: #666;
+}
+
+.task-card:hover .options-icon {
+    visibility: visible; /* Rend l'icône visible lors du survol de la carte */
 }
 
 .task-card .dueDate {
