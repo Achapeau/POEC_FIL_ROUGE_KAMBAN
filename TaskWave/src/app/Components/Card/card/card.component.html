@@ -1,6 +1,15 @@
 <div class="task-card" (click)="openModal()">
     <div>
+        <p class="status">{{card.status}}</p>
         <h4>{{card.title}}</h4>
+        <p>{{card.description}}</p>
+        <div class="dueDate">
+            <i class="fa-solid fa-calendar-days"></i>
+            {{ card.dueDate | date: 'mediumDate' }}  <!-- Formate la date sans l'heure -->
+        </div>
+        <!-- Commenté car non utilisé actuellement -->
+        <!-- <p>{{card.assignedTo.firstname}} {{card.assignedTo.lastname}}</p> -->
     </div>
 </div>
+
 <app-task-modal *ngIf="showModal" [isVisible]="showModal" [card]="card" [cardData]="selectedCard" (closeModalEvent)="closeModal()"></app-task-modal>

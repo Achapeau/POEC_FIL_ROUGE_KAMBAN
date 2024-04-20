@@ -1,35 +1,66 @@
 .task-card {
     max-width: 260px;
     min-width: 240px;
+    height: 180px;  /* Hauteur fixe, ajustez selon votre contenu */
     margin: 10px;
-    padding: 15px;  
-    justify-content: center;
-    align-items: center; 
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alignement des enfants à gauche */
     cursor: pointer;
-    background-color: #fff;  
-    border: none;  
-    border-radius: 8px;  
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
-    transition: transform 0.3s, box-shadow 0.3s;  
-    
+    background-color: #fff;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .task-card:hover {
-    transform: translateY(-3px);  
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);  
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.task-card h4, .task-card p, .task-card .dueDate, .task-card .status {
+    align-self: flex-start; /* Assure que chaque élément texte s'aligne à gauche */
+    width: 100%; /* Prend la pleine largeur pour maintenir l'alignement dans le flex container */
 }
 
 .task-card h4 {
     margin-top: 0;
-    margin-bottom: 5px;  
-    font-size: 0.875rem;  
-    color: #333;  
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: bold;
     overflow: hidden;
-    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .task-card p {
-    margin: 5px 0;  
-    color: #666;  
-    font-size: 0.9em; 
+    color: #666;
+    font-size: 0.9em;
+}
+
+.task-card .status {
+    display: inline-block;
+    padding: 3px 10px;
+    background-color: #f0f0f0; /* Couleur de fond */
+    border-radius: 15px; /* Rend les bords ovales pour un effet de bulle */
+    margin-top: 5px;
+    font-size: 0.8em;
+    color: #333;
+    font-weight: 600; /* Semi-bold */
+    width: auto; /* S'assurer que la largeur est automatique et non définie ou étendue */
+}
+
+.task-card .dueDate {
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 5px;
+}
+
+.task-card .dueDate i {
+    margin-right: 5px;
 }
