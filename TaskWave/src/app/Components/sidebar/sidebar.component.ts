@@ -1,5 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import {
+  ActivatedRoute,
+  Router,
+  RouterLink,
+  RouterOutlet,
+} from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../Service/user.service';
@@ -18,7 +23,9 @@ export class SidebarComponent implements OnInit {
   constructor(
     public userService: UserService,
     public authService: AuthService,
-    public projectService: ProjectService
+    public projectService: ProjectService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
   userLog!: string;
   isActive: boolean = false;
@@ -49,5 +56,9 @@ export class SidebarComponent implements OnInit {
 
   selectProject(project: Project) {
     this.projectService.selectProject(project);
+  }
+
+  goHomework() {
+    this.router.navigate(['project-list'], { relativeTo: this.route });
   }
 }
