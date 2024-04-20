@@ -21,56 +21,51 @@
 .home {
   display: flex;
   align-items: center;
-  padding: 0.5rem 0; /* Padding vertical réduit */
-  margin-bottom: 2rem; /* Espace en dessous */
+  padding: 0.5rem 1rem; /* Assure un padding uniforme autour du texte et de l'icône */
+  margin-top: 20px; 
+  margin-bottom: 30px;/* Augmente la marge en haut */
+  width: 100%; /* Assure que l'élément s'étend à toute la largeur pour alignement */
+  text-align: left; /* Garantit que le texte est aligné à gauche */
   cursor: pointer;
+  border-radius: 0.25rem;
+  transition: background-color 0.3s ease;
+}
+
+.home:hover {
+  background-color: #f2f2f2; /* Couleur de fond au survol */
 }
 
 .home-icon {
-  margin-right: 0.5rem;
-  font-size: 1rem;
-}
-
-.home  {
-  text-decoration: none;
-  color: inherit;
-  border-radius: 0.5rem; /* Bords arrondis pour l'effet de survol */
-  transition: background-color 0.3s ease; /* Animation douce pour le survol */
-}
-
-.home:hover  {
-  background-color: #f2f2f2; /* Couleur de fond au survol */
-  padding: 0.5rem 2rem; /* Padding horizontal encore plus augmenté au survol */
-}
-
-.home-icon i {
-  transition: color 0.3s ease; /* Animation douce pour le changement de couleur */
-  padding-right: 20px;
+  font-size: 1rem; /* Taille de l'icône ajustée pour l'uniformité */
+  margin-right: 1.5rem; /* Espace entre l'icône et le texte */
 }
 
 /* project style */
 
 .sidebar-project-creation {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding-left: 1rem; /* Pour pousser le texte plus à gauche */
+  padding-left: 1rem; 
+  margin-bottom: 1.5rem;
 }
 
 .projects-title {
-  padding-right: 0.5rem; /* Pour donner de l'espace avant le bouton */
+  font-size: 14px;
+  color: grey;
+  margin-right: 5.5rem; 
 }
 
 .add-project-button {
   background: none;
   border: none;
-  cursor: pointer; /* Le curseur se transforme en pointeur au survol */
+  cursor: pointer;
 }
 
 .add-project-button i {
-  font-size: 1.5rem;
+  font-size: 1rem;
   color: inherit;
 }
+
 
 .div-project {
   display: flex;
@@ -108,31 +103,32 @@
   justify-content: space-between; /* Sépare le contenu en haut et les paramètres en bas */
   height: 100%;
 }
-
 .settings-container {
-  margin-top: auto; /* Pousse la section en bas de la sidebar */
+  margin-top: auto; /* Pousse la section vers le bas */
+  margin-bottom: 20px; /* Ajoute un espace en bas pour éviter que 'Settings' soit trop collé */
 }
 
 .btn-settings {
   display: flex;
   align-items: center;
-  padding: 0.5rem 1rem; /* Padding uniforme */
-  cursor: pointer; /* Change le curseur au survol */
-  text-decoration: none; /* Supprime le soulignement par défaut des liens */
-  color: inherit; /* Utilise la couleur de texte parente */
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
   width: 100%;
   border-radius: 0.25rem;
   transition: background-color 0.3s ease;
 }
 
 .btn-settings:hover {
-  background-color: #f2f2f2; /* Effet de survol */
+  background-color: #f2f2f2;
 }
 
 .btn-settings i {
-  margin-right: 0.5rem; /* Espace entre l'icône et le texte */
-  font-size: 1rem; /* Taille de l'icône ajustée pour uniformité */
+  font-size: 1rem;
+  margin-right: 0.5rem;
 }
+
 
 
 
