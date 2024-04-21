@@ -1,47 +1,201 @@
-.navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-  border: 1px;
-  border-color: black;
-  border-style: solid;
-  border-radius: 5px;
+.drawer {
+  width: 250px; /* Largeur fixe pour la sidebar */
+  height: 100vh; /* Hauteur totale de la vue */
+  position: fixed; /* Fixe la sidebar à gauche */
+  left: 0;
+  top: 0;
+  background-color: #f8f9fa; /* Couleur de fond de la sidebar */
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Ombre pour un effet de profondeur */
+  z-index: 1000; /* Assure que la sidebar est toujours visible */
 }
-
-.offcanvas-start {
-  width: 250px; 
-}
-
 
 .sidebar-service {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  align-items: flex-start; /* Alignement des éléments à gauche */
+  padding: 15px; /* Espacement interne */
+  height: 100%; /* Utilisation de la hauteur totale */
+}
+
+.btn, .home, .sidebar-project-creation, .sidebar-tags, .settings-container {
+  margin-bottom: 10px; /* Espacement entre les éléments */
+}
+
+
+
+/* Home direction style */
+
+.home {
+  display: flex;
   align-items: center;
-  height: 100vh;
+  padding: 0.5rem 1rem; /* Assure un padding uniforme autour du texte et de l'icône */
+  margin-top: 20px; 
+  margin-bottom: 30px;/* Augmente la marge en haut */
+  width: 100%; /* Assure que l'élément s'étend à toute la largeur pour alignement */
+  text-align: left; /* Garantit que le texte est aligné à gauche */
+  cursor: pointer;
+  border-radius: 0.25rem;
+  transition: background-color 0.3s ease;
 }
 
-.sidebar-service a {
-  margin: 1rem;
+.home:hover {
+  background-color: #f2f2f2; /* Couleur de fond au survol */
 }
 
-button {
-  margin-top: 40vh;
-  translate: 0;
-  transition: 500ms;
+.home-icon {
+  font-size: 1rem; /* Taille de l'icône ajustée pour l'uniformité */
+  margin-right: 1.5rem; /* Espace entre l'icône et le texte */
 }
 
-.active {  
-  translate: 260px;
-  transition: 400ms;
+/* project style */
+
+.sidebar-project-creation {
+  display: flex;
+  align-items: center;
+  padding-left: 1rem; 
+  margin-bottom: 1.5rem;
 }
 
-.btn-container {
+.projects-title {
+  font-size: 14px;
+  color: grey;
+  margin-right: 5.5rem; 
+}
+
+.add-project-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.add-project-button i {
+  font-size: 1rem;
+  color: inherit;
+}
+
+
+.div-project {
+  display: flex;
+  padding-left: 1rem; /* Ajoute du padding pour aligner à gauche dans la sidebar */
+}
+
+.btn-project {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem 0.5rem 0; /* Padding supérieur, inférieur et gauche */
+  padding-right: 2rem; /* Padding droit étendu */
+  border: none;
+  background: none;
+  width: 100%; /* Assurez-vous que le bouton s'étend sur toute la largeur */
+  text-align: left; /* Alignement du texte à gauche */
+  cursor: pointer;
+  border-radius: 0.25rem; /* Bords légèrement arrondis */
+  transition: background-color 0.3s ease; /* Animation douce pour le survol */
+}
+
+.btn-project:hover {
+  background-color: #f2f2f2; /* Couleur de fond fin au survol */
+}
+
+.fa-folder {
+  margin-right: 0.5rem; /* Espace entre l'icône et le titre */
+  font-size: 1rem; /* Taille de l'icône */
+}
+
+/* tags style */
+.sidebar-tags {
   display: flex;
   flex-direction: column;
-  justify-content: start;
-  height: 3em;
-  width: 1vh;
-  
+  margin-bottom: 1.5rem;  /* Marges pour espacer cette section des autres */
 }
+
+.tags-title {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: grey;
+  justify-content: space-between; /* Utilise toute la largeur, mais assure un espace entre les éléments */
+  width: 100%;
+  margin-top: 24px;
+  margin-bottom: 24px; /* Espacement sous le titre "Tags" */
+}
+
+.add-tag-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: grey;
+  padding-right: 72px; /* Réduisez le padding à droite pour rapprocher le bouton de "+ Tags" */
+}
+
+.add-tag-button i {
+  font-size: 16px; /* Taille de l'icône pour "+ Tags" */
+}
+
+.tag-list {
+  display: flex;
+  flex-direction: column;
+  padding-left: 1rem; /* Padding pour aligner les tags sous le titre */
+}
+
+.tag-item {
+  display: flex;
+  align-items: center;
+  border-radius: 0.25rem; /* Bords arrondis pour le style lors du hover */
+  transition: background-color 0.3s ease; /* Transition douce pour le changement de couleur de fond */
+  cursor: pointer;
+  margin-bottom: 5px; /* Espacement entre chaque tag */
+}
+
+.tag-item:hover {
+  background-color: #f2f2f2; /* Couleur de fond lors du survol */
+}
+
+.tag-color {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%; /* Forme ronde */
+  margin-right: 10px; /* Espace entre la couleur et le texte */
+}
+
+
+
+/* Settings style */
+
+.sidebar-service {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Sépare le contenu en haut et les paramètres en bas */
+  height: 100%;
+}
+.settings-container {
+  margin-top: auto; /* Pousse la section vers le bas */
+  margin-bottom: 20px; /* Ajoute un espace en bas pour éviter que 'Settings' soit trop collé */
+}
+
+.btn-settings {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  border-radius: 0.25rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-settings:hover {
+  background-color: #f2f2f2;
+}
+
+.btn-settings i {
+  font-size: 1rem;
+  margin-right: 0.5rem;
+}
+
+
+
 
 .navbar-toggler {
   height: 10vh;
@@ -49,49 +203,12 @@ button {
   top: 10vh;
 }
 
-.drawer {
-  display: flex;
-  align-items: center;
-  width: 100vw;
-}
 
-/* .router-container {
-  display: flex;
-  align-items: center;
-  width: 100vw;
-  min-width: auto;
-} */
 
-.sidebar-service {
+/* User style */
+
+.sidebar-user {
   display: flex;
-  flex-direction: column;
   justify-content: start;
-  align-items: center;
-  height: 100vh;
-  background-color: #B7D3F2;
-}
-
-.btn-project {
-  border-radius: 1rem;
-  width: 10rem;
-  height: 3rem;
-  margin: 0;
-}
-
-.div-project {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0.5rem;
-}
-
-.btn-settings {
-  border-radius: 1rem;
-  width: 10rem;
-  height: 3rem;
-  margin: 0;
-}
-
-hr {
-  margin: 0.5rem;
+  color: black;
 }

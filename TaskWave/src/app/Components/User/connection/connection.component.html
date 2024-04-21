@@ -1,5 +1,5 @@
 <div class="container m-3 p-3">
-    <h1>Connection</h1>
+    <h1>Connexion</h1>
     <form [formGroup]="connectionForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="email">Email</label>
@@ -11,4 +11,13 @@
         </div>
         <button type="submit" class="btn btn-primary">Valider</button>
     </form>
+    <hr>
+    <div class="inscription">
+        <p>
+            Vous n'avez pas encore de compte? Inscrivez vous!
+        </p>
+        <button type="button" class="btn btn-primary">
+            <a [routerLink]="['/inscription']" class="text-white">Inscription</a>
+        </button>
+    </div>
 </div>
