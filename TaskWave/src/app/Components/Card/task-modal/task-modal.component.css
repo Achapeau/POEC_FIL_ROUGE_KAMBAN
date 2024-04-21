@@ -7,66 +7,54 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.5); /* Fond sombre semi-transparent */
-  z-index: 1000; /* Assure que la modal est bien au-dessus des autres éléments */
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
 }
 
 .modal-content {
-  background: white;
+  background: #C9C19F; /* Bleu marine */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 50%; /* ou une largeur selon ton design */
-  max-width: 600px; /* Une largeur maximale pour les grands écrans */
+  width: 60%;
+  max-width: 600px;
   animation: slideIn 0.3s;
 }
 
-@keyframes slideIn {
-  from {
-    transform: translateY(-20%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+.form-half {
+  display: inline-block;
+  width: 48%; /* Chaque élément prend moins de la moitié pour s'aligner côte à côte */
+  padding: 1%;
+  vertical-align: top;
 }
 
 .close-btn {
   float: right;
   font-size: 1.5em;
-  color: #333;
+  color: #fff;
   cursor: pointer;
 }
 
-form {
-  margin-top: 20px;
+textarea {
+  width: 100%; /* Ajustez si nécessaire */
+  height: 100px; /* Hauteur fixe pour la textarea */
 }
 
-label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-input[type="date"],
-textarea,
-select {
-  width: 100%;
+input[type="datetime-local"] {
   padding: 8px;
-  margin-bottom: 10px;
-  border-radius: 4px;
   border: 1px solid #ccc;
+  border-radius: 10px;
 }
 
 button {
-  background-color: #0056b3;
+  background-color: #f1f1f1;
   color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  display: block; /* pour le mettre en bas du formulaire */
+  width: 100%;
 }
 
 button:hover {

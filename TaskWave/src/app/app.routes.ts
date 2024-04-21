@@ -9,7 +9,7 @@ import { ConnectionComponent } from './Components/User/connection/connection.com
 import { InscriptionComponent } from './Components/User/inscription/inscription.component';
 
 export const routes: Routes = [
-    { path: '',   redirectTo: 'project-list', pathMatch: 'full' },
+    { path: '',   redirectTo: 'connexion', pathMatch: 'full' },
     // { path: 'project-component', component: ProjectComponent },
     { path: 'project-list', component: ProjectListComponent },
     // { path: 'wrapper-component', component: WrapperComponent },

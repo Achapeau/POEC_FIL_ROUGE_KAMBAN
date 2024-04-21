@@ -8,9 +8,15 @@
     <!-- Header pour le titre et la description du projet -->
     <div class="header-wrapper">
         <h1>{{ this.projectService.project.title }}</h1>
-        <p>{{ this.projectService.project.description }}</p>
+        <div class="header-actions">
+            <div class="user-add-icon">
+                <i class="fa-solid fa-user-plus"></i>
+            </div>
+            <button class="share-button">Partager</button>
+            <i class="fa-solid fa-ellipsis-vertical settings-icon"></i>
+        </div>
     </div>
-
+    
     <!-- Box contenant les éléments de la liste, séparée du header -->
     <div class="container-box" cdkDropListGroup>
         <app-wrapper *ngFor="let wrapper of wrappersList" [wrapper]="wrapper" cdkDrag></app-wrapper>

@@ -4,7 +4,7 @@ input {
 
 .new-task {
     display: flex;
-    background-color: #F1F2F4; 
+    background-color: #f7f8f9; 
     margin: 1px;
     padding: 1px;
     border-radius: .75rem; 
