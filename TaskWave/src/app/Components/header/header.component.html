@@ -11,12 +11,12 @@
 			
 		</div>
 		<!-- Dropdown list -->
-		<div class="ms-auto p-2 bd-highlight" *ngIf="!this.user.connected">
+		<div class="ms-auto p-2 bd-highlight" *ngIf="!this.userService.connected">
 			<a class="btn btn-secondary m-3" [routerLink]="['/inscription']" >Inscription</a>
 			<a class="btn btn-primary m-3" [routerLink]="['/connexion']" >Connexion</a>
 		</div>
-		<!-- <a [routerLink]="['/profil']" *ngIf="this.user.connected">Profil</a> -->
-		<div class="dropdown ms-auto p-2 bd-highlight" *ngIf="this.user.connected">
+		<!-- <a [routerLink]="['/profil']" *ngIf="this.userService.connected">Profil</a> -->
+		<div class="dropdown ms-auto p-2 bd-highlight" *ngIf="this.userService.connected">
 			<a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 			<img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
 			<strong>dude</strong>

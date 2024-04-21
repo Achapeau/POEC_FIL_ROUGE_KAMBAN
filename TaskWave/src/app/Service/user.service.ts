@@ -77,6 +77,7 @@ export class UserService {
     localStorage.removeItem('currentUser');
     this.currentUser = null;
     this.connected = false;
+    this.router.navigate([''], { relativeTo: this.route });
   }
 
   getUsers(): Observable<User[]> {
