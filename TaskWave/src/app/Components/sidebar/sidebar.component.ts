@@ -71,4 +71,7 @@ export class SidebarComponent implements OnInit {
   closeModal() {
     this.isModalOpen = false;
   }
+  logout() {
+    this.userService.disconnectUser();
+  }
 }

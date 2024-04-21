@@ -204,3 +204,11 @@
 }
 
 
+
+/* User style */
+
+.sidebar-user {
+  display: flex;
+  justify-content: start;
+  color: black;
+}
