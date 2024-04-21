@@ -13,8 +13,8 @@
         <i class="fa fa-plus"></i>
       </button>
     </div>
-    <div *ngIf="this.myUser != null">
-      <div *ngFor="let project of this.myProjects" class="div-project">
+    <div *ngIf="myUser">
+      <div *ngFor="let project of projects" class="div-project">
         <button class="btn-project" (click)="selectProject(project)">
           <i class="fa-regular fa-folder"></i>
           <span>{{ project.title }}</span>
@@ -55,7 +55,8 @@
         <li><a class="dropdown-item" (click)="logout()">Déconnexion</a></li>
 			</ul>
 		</div>
-      
   </div>
+</div>
+<app-modal-new-project *ngIf="isModalOpen" [(isOpen)]="isModalOpen"></app-modal-new-project>
 
 

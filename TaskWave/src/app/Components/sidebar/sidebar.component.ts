@@ -12,11 +12,12 @@ import { AuthService } from '../../Service/auth.service';
 import { ProjectService } from '../../Service/project.service';
 import { User, Project } from '../../Model/model';
 import { ModalComponent } from '../../modal/modal.component';
+import { ModalNewProjectComponent } from '../../modal/modal-new-project/modal-new-project.component';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [RouterLink, MatIconModule, CommonModule, RouterOutlet, ModalComponent],
+  imports: [RouterLink, MatIconModule, CommonModule, RouterOutlet, ModalNewProjectComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
 })
@@ -29,7 +30,7 @@ export class SidebarComponent implements OnInit {
     private router: Router
   ) {}
   userLog!: string;
-  isActive: boolean = false;
+  isActive: boolean = true;
   myUser!: Partial<User>;
   userId: number = 0;
   projects!: Project[];
@@ -40,9 +41,7 @@ export class SidebarComponent implements OnInit {
     this.authService.userData$.subscribe((myUser) => {
       this.myUser = myUser;
     });
-    this.projectService.getProjects().subscribe((data: Project[]) => {
-      this.projects = data;
-    });
+    this.projects = this.projectService.convertProjectIdsToProjects(this.myUser.projectsIds!);
   }
 
   getProject() {

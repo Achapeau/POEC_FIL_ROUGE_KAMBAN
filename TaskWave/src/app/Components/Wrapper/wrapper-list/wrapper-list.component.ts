@@ -26,8 +26,8 @@ constructor(public wrapperService : WrapperService, public projectService : Proj
   
 }
 ngOnInit() : void {
-  this.projectId = this.route.snapshot.params['id'];
-  this.projectService.getProjectById(this.projectId).subscribe(project => this.project = project);
+  // this.projectId = this.route.snapshot.params['id'];
+  // this.projectService.getProjectById(this.projectId).subscribe(project => this.project = project);
   this.getWrappers();
 }
 ngOnChanges(): void {

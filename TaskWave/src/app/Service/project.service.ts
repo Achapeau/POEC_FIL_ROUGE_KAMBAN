@@ -75,4 +75,14 @@ export class ProjectService {
     this.project = project;
     this.router.navigate(['project', project.id], { relativeTo: this.route });
   }
+
+  convertProjectIdsToProjects(projectIds: number[]): Project[] {
+    let projects: Project[] = [];
+    projectIds.map((id) => {
+      return this.getProjectById(id).subscribe((project) => {
+        projects.push(project);
+      });
+    });
+    return projects;
+  }
 }

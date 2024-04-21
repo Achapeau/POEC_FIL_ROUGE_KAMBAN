@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   standalone: true
 })
 export class ModalComponent {
-  @Input() isOpen = false;
+  @Input() isOpen = true;
   @Output() isOpenChange = new EventEmitter<boolean>(); // Ajout pour le two-way binding
 
   onClose() {
