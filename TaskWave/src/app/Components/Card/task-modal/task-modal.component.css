@@ -43,7 +43,7 @@ textarea {
 input[type="datetime-local"] {
   padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 10px;
 }
 
 button {
