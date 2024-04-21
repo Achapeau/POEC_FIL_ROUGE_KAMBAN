@@ -1,24 +1,26 @@
-.navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-  border: 1px;
-  border-color: black;
-  border-style: solid;
-  border-radius: 5px;
+.drawer {
+  width: 250px; /* Largeur fixe pour la sidebar */
+  height: 100vh; /* Hauteur totale de la vue */
+  position: fixed; /* Fixe la sidebar à gauche */
+  left: 0;
+  top: 0;
+  background-color: #f8f9fa; /* Couleur de fond de la sidebar */
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Ombre pour un effet de profondeur */
+  z-index: 1000; /* Assure que la sidebar est toujours visible */
 }
 
-.offcanvas-start {
-  width: 250px; 
+.sidebar-service {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alignement des éléments à gauche */
+  padding: 15px; /* Espacement interne */
+  height: 100%; /* Utilisation de la hauteur totale */
 }
 
-
-.active {  
-  translate: 260px;
-  transition: 400ms;
+.btn, .home, .sidebar-project-creation, .sidebar-tags, .settings-container {
+  margin-bottom: 10px; /* Espacement entre les éléments */
 }
 
-.sidebar-service > div {
-  padding-left: 1rem; /* Alignement uniforme pour tous les éléments de la sidebar */
-}
 
 
 /* Home direction style */
@@ -201,9 +203,4 @@
   top: 10vh;
 }
 
-.drawer {
-  display: flex;
-  align-items: center;
-  width: 98vw;
-}
 
