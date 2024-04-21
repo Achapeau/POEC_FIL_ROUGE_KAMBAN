@@ -16,6 +16,11 @@
   transition: 400ms;
 }
 
+.sidebar-service > div {
+  padding-left: 1rem; /* Alignement uniforme pour tous les éléments de la sidebar */
+}
+
+
 /* Home direction style */
 
 .home {
@@ -94,6 +99,64 @@
   margin-right: 0.5rem; /* Espace entre l'icône et le titre */
   font-size: 1rem; /* Taille de l'icône */
 }
+
+/* tags style */
+.sidebar-tags {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;  /* Marges pour espacer cette section des autres */
+}
+
+.tags-title {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: grey;
+  justify-content: space-between; /* Utilise toute la largeur, mais assure un espace entre les éléments */
+  width: 100%;
+  margin-top: 24px;
+  margin-bottom: 24px; /* Espacement sous le titre "Tags" */
+}
+
+.add-tag-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: grey;
+  padding-right: 72px; /* Réduisez le padding à droite pour rapprocher le bouton de "+ Tags" */
+}
+
+.add-tag-button i {
+  font-size: 16px; /* Taille de l'icône pour "+ Tags" */
+}
+
+.tag-list {
+  display: flex;
+  flex-direction: column;
+  padding-left: 1rem; /* Padding pour aligner les tags sous le titre */
+}
+
+.tag-item {
+  display: flex;
+  align-items: center;
+  border-radius: 0.25rem; /* Bords arrondis pour le style lors du hover */
+  transition: background-color 0.3s ease; /* Transition douce pour le changement de couleur de fond */
+  cursor: pointer;
+  margin-bottom: 5px; /* Espacement entre chaque tag */
+}
+
+.tag-item:hover {
+  background-color: #f2f2f2; /* Couleur de fond lors du survol */
+}
+
+.tag-color {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%; /* Forme ronde */
+  margin-right: 10px; /* Espace entre la couleur et le texte */
+}
+
+
 
 /* Settings style */
 
