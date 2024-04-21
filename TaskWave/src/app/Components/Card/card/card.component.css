@@ -46,13 +46,27 @@
     align-items: center;
 }
 
+.status-to-do {
+    background-color: #ffa502; /* Orange pour 'à faire' */
+    color: white;
+}
+
+.status-in-progress {
+    background-color: #346BC8; /* Bleu pour 'en cours' */
+    color: white;
+}
+
+.status-done {
+    background-color: #28B463; /* Vert pour 'terminé' */
+    color: white;
+}
+
 .task-card .status {
     display: inline-block;
     padding: 3px 10px;
-    background-color: #f0f0f0;
     border-radius: 15px;
     font-size: 0.8em;
-    color: #333;
+    color: #ffffff;
     font-weight: 600;
     margin-top: 5px;
 }
@@ -76,4 +90,5 @@
 
 .task-card .dueDate i {
     margin-right: 5px;
+    color: #346BC8;
 }

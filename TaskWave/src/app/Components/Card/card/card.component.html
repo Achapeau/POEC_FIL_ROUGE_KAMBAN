@@ -1,7 +1,7 @@
 <div class="task-card" (click)="openModal()">
     <div>
         <div class="status-and-options">
-            <p class="status">{{card.status}}</p>
+            <p class="status" [ngClass]="{'status-to-do': card.status === 'à faire', 'status-in-progress': card.status === 'en cours', 'status-done': card.status === 'terminé'}">{{card.status}}</p>
             <i class="fa-solid fa-ellipsis-vertical options-icon"></i>
         </div>
         <h4>{{card.title}}</h4>
@@ -12,5 +12,6 @@
         </div>
     </div>
 </div>
+
 
 <app-task-modal *ngIf="showModal" [isVisible]="showModal" [card]="card" [cardData]="selectedCard" (closeModalEvent)="closeModal()"></app-task-modal>
