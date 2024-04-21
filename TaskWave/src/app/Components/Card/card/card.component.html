@@ -1,6 +1,16 @@
 <div class="task-card" (click)="openModal()">
     <div>
+        <div class="status-and-options">
+            <p class="status">{{card.status}}</p>
+            <i class="fa-solid fa-ellipsis-vertical options-icon"></i>
+        </div>
         <h4>{{card.title}}</h4>
+        <p>{{card.description}}</p>
+        <div class="dueDate">
+            <i class="fa-solid fa-calendar-days"></i>
+            {{card.dueDate | date: 'mediumDate'}}
+        </div>
     </div>
 </div>
+
 <app-task-modal *ngIf="showModal" [isVisible]="showModal" [card]="card" [cardData]="selectedCard" (closeModalEvent)="closeModal()"></app-task-modal>

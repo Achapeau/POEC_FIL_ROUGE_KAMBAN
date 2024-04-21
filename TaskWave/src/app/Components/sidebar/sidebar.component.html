@@ -1,50 +1,75 @@
 <div class="drawer">
   <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-    <div class="">
-      <div class="">
-        <div class="sidebar-service">        
-          <a button class="btn  mx-3" (click)="goHomework()">
-            <img 
-            src="https://www.iconarchive.com/download/i120827/iconarchive/seaside/Water-Wave.1024.png" 
-            alt=""
-            width="50" height="50">
-            TaskWave
-          </a>
-          <div>
-            <h2>Votre espace de travail : </h2>
-          </div>
-          <div *ngIf="this.myUser != null">
-            <p>
-              Vos projets:
-            </p>
-            
-            <div *ngFor="let project of this.myProjects" class="div-project">
-              <button class="btn-project" [ngStyle]="{ 'background-image': 'url(' + project.background + ')' }" (click)="selectProject(project)">
-                <span>{{project.title}}</span>
-              </button>
-            </div>
-          </div>
-          <div>
-            <hr>
-            <button class="btn-settings">
-              <p>
-                paramètres de projet:
-              </p>
-            </button>
-          </div>
-          
+    <div class="sidebar-service">        
+      <a class="btn mx-3" (click)="goHomework()">
+        <img src="https://www.iconarchive.com/download/i120827/iconarchive/seaside/Water-Wave.1024.png" alt="" width="50" height="50">
+        TaskWave
+      </a>
+      <div class="home">
+        <i class="fa-solid fa-house"></i>
+        <a (click)="goHomework()">Home</a>
+      </div>      
+      <div class="sidebar-project-creation">
+        <span class="projects-title">Projects</span>
+        <button class="add-project-button" (click)="openCreateProjectModal()">
+          <i class="fa fa-plus"></i>
+        </button>
+      </div>       
+      <div *ngIf="this.myUser != null">
+        <div *ngFor="let project of this.myProjects" class="div-project">
+          <button class="btn-project" (click)="selectProject(project)">
+            <i class="fa-regular fa-folder"></i>
+            <span class="project-title">{{ project.title }}</span>
+          </button>
         </div>
       </div>
+      
+      <div class="settings-container">
+        <a class="btn-settings">
+          <i class="fa-light fa-gear"></i>
+          <span>Settings</span>
+        </a>
+      </div>
+      
     </div>
   </div>
   <div class="btn-container">
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" (click)="toggle()" [ngClass]="{ 'active' : isActive }">
-
       <i class="bi bi-arrow-left-right"></i>
     </button>
   </div>
   <div class="router-container" [ngClass]="{ 'active' : isActive }">
     <router-outlet></router-outlet>
   </div>
-  
 </div>
+
+<!-- Modal pour créer un projet -->
+<app-modal [(isOpen)]="isModalOpen" (close)="closeModal()">
+    <div class="modal-content">
+        <h2>Créer un nouveau projet</h2>
+        <p>Entrez les détails du projet ici.</p>
+        <form class="project-form">
+            <div class="form-group">
+              <label for="projectTitle">Titre du projet</label>
+              <input type="text" id="projectTitle" class="form-control" placeholder="Entrez le titre du projet">
+            </div>
+
+            <div class="form-group">
+              <label for="projectTheme">Thème du projet</label>
+              <select id="projectTheme" class="form-control">
+                <option value="">Sélectionnez un thème</option>
+                <option value="light">Clair</option>
+                <option value="dark">Sombre</option>
+                <!-- Ajoutez d'autres thèmes ici -->
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="projectMembers">Ajouter des membres</label>
+              <input type="text" id="projectMembers" class="form-control" placeholder="Entrez les noms des membres">
+            </div>
+
+            <button type="submit" class="btn-submit">Créer le projet</button>
+        </form>
+    </div>
+</app-modal>

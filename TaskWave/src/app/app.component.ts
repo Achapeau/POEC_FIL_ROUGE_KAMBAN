@@ -5,6 +5,7 @@ import { ProjectListComponent } from './Components/Project/project-list/project-
 import { HeaderComponent } from './Components/header/header.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,

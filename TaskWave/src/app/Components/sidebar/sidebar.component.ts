@@ -11,11 +11,12 @@ import { UserService } from '../../Service/user.service';
 import { AuthService } from '../../Service/auth.service';
 import { ProjectService } from '../../Service/project.service';
 import { User, Project } from '../../Model/model';
+import { ModalComponent } from '../../modal/modal.component';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [RouterLink, MatIconModule, CommonModule, RouterOutlet],
+  imports: [RouterLink, MatIconModule, CommonModule, RouterOutlet, ModalComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
 })
@@ -33,6 +34,7 @@ export class SidebarComponent implements OnInit {
   userId: number = 0;
   projects!: Project[];
   myProjects!: Project[];
+  isModalOpen = false;
 
   ngOnInit(): void {
     this.authService.userData$.subscribe((myUser) => {
@@ -60,5 +62,13 @@ export class SidebarComponent implements OnInit {
 
   goHomework() {
     this.router.navigate(['project-list'], { relativeTo: this.route });
+  }
+
+  openCreateProjectModal() {
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
   }
 }
