@@ -1,7 +1,7 @@
 .task-card {
     max-width: 260px;
     min-width: 240px;
-    height: 180px;  /* Hauteur fixe, ajustez selon votre contenu */
+    height: 180px;
     margin: 10px;
     padding: 15px;
     display: flex;
@@ -9,9 +9,8 @@
     align-items: flex-start; /* Alignement des enfants à gauche */
     cursor: pointer;
     background-color: #fff;
-    border: none;
+    border: 1px solid #e7e7e7;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
