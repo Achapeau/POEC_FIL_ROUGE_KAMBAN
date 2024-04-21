@@ -1,11 +1,11 @@
-<header>
+<header *ngIf="this.userService.connected">
     <app-header></app-header>
 </header>
+<div *ngIf="this.userService.connected" class="sidebar-container">
+    <app-sidebar></app-sidebar>
+</div>
 <div class="body-container">
     <div class="app-container">
-        <div class="sidebar-container">
-            <app-sidebar></app-sidebar>
-        </div>
-        
+        <router-outlet></router-outlet>
     </div>
 </div>

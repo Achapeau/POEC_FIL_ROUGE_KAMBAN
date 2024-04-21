@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UserService } from '../../Service/user.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -10,13 +10,20 @@ import { CommonModule } from '@angular/common';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  connected: boolean = true;
   @Output() sidebarToggle: boolean = false;
   constructor(
-    public user: UserService,
+    public userService: UserService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
+
+  ngOnInit(): void {
+    this.connected = this.userService.connected;
+    console.log("header connected" + this.connected);
+  }
+
 
   sidebarClick(): boolean {
     return (this.sidebarToggle = !this.sidebarToggle);
@@ -27,7 +34,7 @@ export class HeaderComponent {
   }
 
   logout() {
-    this.user.disconnectUser();
+    this.userService.disconnectUser();
   }
 
   goHomework() {
