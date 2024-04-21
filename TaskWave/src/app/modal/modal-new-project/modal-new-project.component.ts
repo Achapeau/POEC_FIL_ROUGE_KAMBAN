@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { ProjectComponent } from '../../Components/Project/project/project.component';
 import { ModalComponent } from '../modal.component';
 import { UserService } from '../../Service/user.service';
+import { WrapperService } from '../../Service/wrapper.service';
 
 @Component({
   selector: 'app-modal-new-project',
@@ -22,7 +23,7 @@ import { UserService } from '../../Service/user.service';
 })
 export class ModalNewProjectComponent implements OnInit, OnChanges {
 
-  constructor(private userService: UserService, public fb: FormBuilder, private projectService: ProjectService, private authService: AuthService) { }
+  constructor(private userService: UserService, public fb: FormBuilder, private projectService: ProjectService, private wrapperService: WrapperService, private authService: AuthService) { }
   myUser!: Partial<User>;
   @Input() isOpen = true;
   @Output() isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -59,7 +60,6 @@ export class ModalNewProjectComponent implements OnInit, OnChanges {
   });
 
   ngOnInit(): void {
-    console.log("init modal new project");
     this.authService.userData$.subscribe((myUser) => {
       this.myUser = myUser;
     });
@@ -94,10 +94,10 @@ export class ModalNewProjectComponent implements OnInit, OnChanges {
         userIds: memberIds,
         // description: this.checkoutForm.value.newDesciption as string
       };
-      console.log(newProject);
-
       this.projectService.addProject(newProject).subscribe((res) => {
         console.log(res);
+        this.wrapperService.wrappers = [];
+        this.projectService.selectProject(res);
       });
       this.closeModal();
     } else {

@@ -15,11 +15,11 @@ import { forkJoin } from 'rxjs';
   templateUrl: './wrapper-list.component.html',
   styleUrl: './wrapper-list.component.css'
 })
-export class WrapperListComponent implements OnInit, OnChanges {
-  project! : Project;
+export class WrapperListComponent implements OnInit {
+  @Input() project : Project = this.projectService.project;
   @Input() projectId! : number;
-  @Input() wrappersId! : number[];
-  @Input() wrappersList : Wrapper[] = [];
+  @Input() wrappersId : number[] = [];
+  @Input() wrappersList : Wrapper[] = this.wrapperService.wrappers;
   newTitle! : string;
 	
 constructor(public wrapperService : WrapperService, public projectService : ProjectService, private route: ActivatedRoute) {
@@ -28,12 +28,13 @@ constructor(public wrapperService : WrapperService, public projectService : Proj
 ngOnInit() : void {
   // this.projectId = this.route.snapshot.params['id'];
   // this.projectService.getProjectById(this.projectId).subscribe(project => this.project = project);
-  this.getWrappers();
-}
-ngOnChanges(): void {
-  // this.projectId = this.route.snapshot.params['id'];
-  // this.project = this.projectService.getProjectById(this.projectId);
-  // this.getWrappers();
+  
+  this.route.paramMap.subscribe(params => {
+    const projectId = Number(params.get('id'));
+    this.projectService.getProjectById(projectId).subscribe(project => this.project = project);
+    console.log(this.project);
+    this.getWrappers();
+  });
 }
   
   getWrappers(): void {
@@ -42,7 +43,7 @@ ngOnChanges(): void {
     forkJoin(observables).subscribe((data: Wrapper[]) => {
       this.wrappersList = data;
       this.wrappersList = this.wrappersList.sort((a, b) => a.position - b.position);
-      this.projectService.wrappers = this.wrappersList;
+      this.wrapperService.wrappers = this.wrappersList;
     });
   }
   drop(event: CdkDragDrop<Wrapper[]>) {

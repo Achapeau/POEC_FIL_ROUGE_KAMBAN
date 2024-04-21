@@ -25,7 +25,6 @@ export class ProjectService {
 
   serviceURL = 'http://localhost:3050/project';
 
-  @Input() wrappers: Wrapper[] = [];
   @Input() project!: Project;
   private projectDataSubject: BehaviorSubject<Project[]> = new BehaviorSubject<
     Project[]
@@ -73,7 +72,7 @@ export class ProjectService {
   // select project
   selectProject(project: Project) {
     this.project = project;
-    this.router.navigate(['project', project.id], { relativeTo: this.route });
+    this.router.navigate(['project', project.id]);
   }
 
   convertProjectIdsToProjects(projectIds: number[]): Project[] {

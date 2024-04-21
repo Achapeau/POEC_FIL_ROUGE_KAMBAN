@@ -12,7 +12,7 @@ import { ProjectService } from '../../../Service/project.service';
 })
 export class WrapperCreateComponent implements OnInit {
   @Input() newTitle!: string | null;
-  @Input() projectId : number = this.wrapperService.projectId;
+  @Input() projectId : number = this.projectService.project.id;
   @Input() wrappersList : Wrapper[] = [];
   @Input() cardList : Card[] = [];
 	constructor(private wrapperService : WrapperService, private projectService : ProjectService, public fb : FormBuilder) {
@@ -24,13 +24,12 @@ export class WrapperCreateComponent implements OnInit {
 	});
 
   ngOnInit() : void {
-    this.projectId = this.projectService.project.id;
-    this.wrappersList = this.projectService.wrappers;
+    this.wrappersList = this.wrapperService.wrappers;
   }
 
 	onSubmit() {
     if (this.checkoutForm.valid) {
-      this.wrappersList = this.projectService.wrappers;
+      this.wrappersList = this.wrapperService.wrappers;
       let newWrapper : Partial<Wrapper> = {
         title: this.checkoutForm.value.newTitle as string,
         position: this.wrappersList.length,
@@ -38,10 +37,9 @@ export class WrapperCreateComponent implements OnInit {
       }
       this.wrapperService.addWrapper(newWrapper).subscribe((data : Wrapper) => {
         let returnWrapper = data;
-        this.wrappersList = this.projectService.wrappers;
         this.wrappersList.push(returnWrapper);
 
-        this.projectService.wrappers = this.wrappersList;
+        this.wrapperService.wrappers = this.wrappersList;
       });
       this.checkoutForm.reset();
     }
