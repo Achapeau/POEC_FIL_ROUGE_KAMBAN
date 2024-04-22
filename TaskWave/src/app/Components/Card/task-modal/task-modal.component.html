@@ -6,7 +6,7 @@
         <h2>
           <input type="text" id="title" formControlName="title" placeholder="Titre de la tâche">
         </h2>
-        <button (click)="deleteTask()" type="button">Supprimer</button>
+        
       </div>
       <div class="form-half">
         <label for="description">Description:</label>
@@ -31,6 +31,7 @@
         </select>
       </div>
       <button type="submit">Enregistrer</button>
+      <button (click)="deleteTask()" type="button">Supprimer</button>
     </form>
   </div>
 </div>
