@@ -12,9 +12,8 @@
 .sidebar-service {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Alignement des éléments à gauche */
-  padding: 15px; /* Espacement interne */
-  height: 100%; /* Utilisation de la hauteur totale */
+  padding: 15px; 
+  height: 100%; 
 }
 
 .btn, .home, .sidebar-project-creation, .sidebar-tags, .settings-container {
@@ -159,56 +158,14 @@
 }
 
 
-
-/* Settings style */
-
-.sidebar-service {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Sépare le contenu en haut et les paramètres en bas */
-  height: 100%;
-}
-.settings-container {
-  margin-top: auto; /* Pousse la section vers le bas */
-  margin-bottom: 20px; /* Ajoute un espace en bas pour éviter que 'Settings' soit trop collé */
-}
-
-.btn-settings {
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  text-decoration: none;
-  color: inherit;
-  width: 100%;
-  border-radius: 0.25rem;
-  transition: background-color 0.3s ease;
-}
-
-.btn-settings:hover {
-  background-color: #f2f2f2;
-}
-
-.btn-settings i {
-  font-size: 1rem;
-  margin-right: 0.5rem;
-}
-
-
-
-
-.navbar-toggler {
-  height: 10vh;
-  margin: 0;
-  top: 10vh;
-}
-
-
-
 /* User style */
 
 .sidebar-user {
-  display: flex;
-  justify-content: start;
-  color: black;
+  margin-top: auto; /* Ceci pousse le bloc utilisateur vers le bas */
+  width: 100%;  /* Assurez-vous que le bloc utilisateur prend toute la largeur pour alignement et style */
+}
+
+.sidebar-user {
+  margin-top: auto; /* Ceci pousse le bloc utilisateur vers le bas */
+  width: 100%;  /* Assurez-vous que le bloc utilisateur prend toute la largeur pour alignement et style */
 }

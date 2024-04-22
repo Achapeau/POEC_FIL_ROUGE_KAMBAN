@@ -72,13 +72,9 @@
 }
 
 .task-card .options-icon {
-    visibility: hidden;
     color: #666;
 }
 
-.task-card:hover .options-icon {
-    visibility: visible; /* Rend l'icône visible lors du survol de la carte */
-}
 
 .task-card .dueDate {
     display: flex;
