@@ -1,26 +1,23 @@
 <div class="wrapper">
     <div class="wrapper-title">
-            <h2>{{wrapper.title}}</h2>
+        <h2>{{wrapper.title}}</h2>
             <div>
                 <button class="trash" (click)="deleteWrapper()">
                     <img src="../../../../assets/svg/trash-can-regular.svg" alt="trash wrapper">
                 </button>
-
+            </div>  
+    </div>
+    <div
+        cdkDropList
+        [cdkDropListData]="cardList"
+        class="example-list"
+        id="{{wrapper.id}}"
+        (cdkDropListDropped)="drop($event)">
+        @for (card of cardList; track card) {
+            <div class="example-box" cdkDrag>
+            <app-card [card]="card"></app-card>
             </div>
-            
-            
-        </div>
-        <div
-            cdkDropList
-            [cdkDropListData]="cardList"
-            class="example-list"
-            id="{{wrapper.id}}"
-            (cdkDropListDropped)="drop($event)">
-            @for (card of cardList; track card) {
-                <div class="example-box" cdkDrag>
-                    <app-card [card]="card"></app-card>
-                </div>
             }
-        </div>
-        <app-card-new [wrapper]="wrapper" [cardList]="cardList"></app-card-new>
+    </div>
+    <app-card-new [wrapper]="wrapper" [cardList]="cardList"></app-card-new>
 </div>
