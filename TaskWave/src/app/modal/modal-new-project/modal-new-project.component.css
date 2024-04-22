@@ -151,7 +151,6 @@ h2 {
   background: white;
   padding: 20px;
   border-radius: 8px;
-  width: 50%; /* Ajuster la largeur de la modal */
   max-width: 600px; /* Maximum width */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden; /* Assure que tout le contenu reste dans la boîte */
