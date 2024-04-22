@@ -37,6 +37,12 @@
 .task-card p {
     color: #666;
     font-size: 0.9em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.task-card-content{
+    width: 200px;
 }
 
 .task-card .status-and-options {
@@ -45,6 +51,7 @@
     width: 100%;
     align-items: center;
 }
+
 
 .status-to-do {
     background-color: #ffa502; /* Orange pour 'à faire' */
