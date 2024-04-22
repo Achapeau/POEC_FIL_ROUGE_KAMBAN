@@ -25,8 +25,8 @@ export class ModalNewProjectComponent implements OnInit, OnChanges {
 
   constructor(private userService: UserService, public fb: FormBuilder, private projectService: ProjectService, private wrapperService: WrapperService, private authService: AuthService) { }
   myUser!: Partial<User>;
-  @Input() isOpen = true;
-  @Output() isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() isOpen = false;
+  @Output() isOpenChange = new EventEmitter<boolean>();
   membersList!: Partial<User>[];
   themesList: Themes[] = [
     {
@@ -109,6 +109,7 @@ export class ModalNewProjectComponent implements OnInit, OnChanges {
   }
   closeModal() {
     this.isOpen = false;
+    this.isOpenChange.emit(this.isOpen); 
   }
 
 }

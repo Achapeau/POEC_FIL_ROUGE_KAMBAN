@@ -13,6 +13,7 @@ export class ModalComponent {
   @Output() isOpenChange = new EventEmitter<boolean>(); // Ajout pour le two-way binding
 
   onClose() {
+    console.log('onClose');
     this.isOpen = false;
     this.isOpenChange.emit(this.isOpen); // Notifier le changement
   }
