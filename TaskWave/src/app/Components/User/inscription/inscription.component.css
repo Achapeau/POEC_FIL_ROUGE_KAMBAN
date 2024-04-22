@@ -69,3 +69,10 @@
 .link-secondary:hover {
     color: #004494;
 }
+
+.invalid-input {
+    color: black;
+    font-size: 10px;
+    margin-top: 5px;
+    font-style: italic;
+}
