@@ -16,9 +16,6 @@
   height: 100%; 
 }
 
-.btn, .home, .sidebar-project-creation, .sidebar-tags, .settings-container {
-  margin-bottom: 10px; /* Espacement entre les éléments */
-}
 
 
 
@@ -53,12 +50,12 @@
   align-items: center;
   padding-left: 1rem; 
   margin-bottom: 1.5rem;
+  justify-content: space-between;
 }
 
 .projects-title {
   font-size: 14px;
-  color: grey;
-  margin-right: 5.5rem; 
+  color: grey; 
 }
 
 .add-project-button {
@@ -96,9 +93,8 @@
   background-color: #f2f2f2; /* Couleur de fond fin au survol */
 }
 
-.fa-folder {
-  margin-right: 0.5rem; /* Espace entre l'icône et le titre */
-  font-size: 1rem; /* Taille de l'icône */
+.project-icon{
+  margin-right: 1.5rem;
 }
 
 /* tags style */
@@ -116,19 +112,19 @@
   justify-content: space-between; /* Utilise toute la largeur, mais assure un espace entre les éléments */
   width: 100%;
   margin-top: 24px;
-  margin-bottom: 24px; /* Espacement sous le titre "Tags" */
+  margin-bottom: 24px;
+  padding-left: 1rem;
 }
 
 .add-tag-button {
   background: none;
   border: none;
   cursor: pointer;
-  color: grey;
-  padding-right: 72px; /* Réduisez le padding à droite pour rapprocher le bouton de "+ Tags" */
+  color: rgb(0, 0, 0);
 }
 
 .add-tag-button i {
-  font-size: 16px; /* Taille de l'icône pour "+ Tags" */
+  font-size: 14px; /
 }
 
 .tag-list {
@@ -143,7 +139,8 @@
   border-radius: 0.25rem; /* Bords arrondis pour le style lors du hover */
   transition: background-color 0.3s ease; /* Transition douce pour le changement de couleur de fond */
   cursor: pointer;
-  margin-bottom: 5px; /* Espacement entre chaque tag */
+  margin-bottom: 5px;
+  padding: 0.5rem 1rem 0.5rem 0;
 }
 
 .tag-item:hover {
