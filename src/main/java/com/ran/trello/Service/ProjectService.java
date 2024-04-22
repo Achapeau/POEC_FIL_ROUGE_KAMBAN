@@ -17,11 +17,13 @@ public class ProjectService {
     private final UserPRepository userPRepository;
 
     private final WrapperRepository wrapperRepository;
+    private final WrapperService wrapperService;
 
-    public ProjectService(ProjectRepository projectRepository, UserPRepository userPRepository, WrapperRepository wrapperRepository) {
+    public ProjectService(ProjectRepository projectRepository, UserPRepository userPRepository, WrapperRepository wrapperRepository, WrapperService wrapperService) {
         this.projectRepository = projectRepository;
         this.userPRepository = userPRepository;
         this.wrapperRepository = wrapperRepository;
+        this.wrapperService = wrapperService;
     }
 
 
@@ -64,6 +66,14 @@ public class ProjectService {
     }
 
     public void deleteById(Integer id) {
+        Project project = projectRepository.findById(id).get();
+        project.getWrappers().forEach(wrapper -> {
+            wrapperService.deleteWrapper(wrapper.getId());
+        });
+        project.getUsers().forEach(user -> {
+            user.removeProject(project);
+            userPRepository.save(user);
+        });
         projectRepository.deleteById(id);
     }
 }

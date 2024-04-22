@@ -45,4 +45,8 @@ public class Project {
     public void addUser(UserP user) {
         this.users.add(user);
     }
+
+    public void removeWrapper(Wrapper wrapper) {
+        this.wrappers.remove(wrapper);
+    }
 }

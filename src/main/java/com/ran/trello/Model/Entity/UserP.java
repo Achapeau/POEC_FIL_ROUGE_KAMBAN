@@ -33,4 +33,8 @@ public class UserP {
         this.lastname = lastname;
         this.projects = projects;
     }
+
+    public void removeProject(Project project) {
+        this.projects.remove(project);
+    }
 }

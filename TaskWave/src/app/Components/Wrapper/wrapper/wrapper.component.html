@@ -1,6 +1,14 @@
 <div class="wrapper">
     <div class="wrapper-title">
             <h2>{{wrapper.title}}</h2>
+            <div>
+                <button class="trash" (click)="deleteWrapper()">
+                    <img src="../../../../assets/svg/trash-can-regular.svg" alt="trash wrapper">
+                </button>
+
+            </div>
+            
+            
         </div>
         <div
             cdkDropList

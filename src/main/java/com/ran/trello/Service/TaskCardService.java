@@ -60,6 +60,10 @@ public class TaskCardService {
     }
 
     public void deleteTaskCard(Integer id) {
-        taskCardRepository.deleteById(id);
+        TaskCard taskCard = taskCardRepository.findById(id).get();
+        Wrapper wrapper = wrapperRepository.findById(taskCard.getWrapperId()).get();
+        wrapper.removeCard(taskCard);
+        wrapperRepository.save(wrapper);
+        taskCardRepository.delete(taskCard);
     }
 }

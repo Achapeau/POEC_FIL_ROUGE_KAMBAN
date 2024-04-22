@@ -28,11 +28,11 @@ export class WrapperComponent implements OnInit {
   @Input() newTitle!: String;
   @Input() project!: Project;
   @Input() cardList: Card[] = [];
-
+  
   constructor(private projectService: ProjectService, public wrapperService: WrapperService, public cardService: CardService, public users: UserService) {
     this.projectService.getProjectById(this.projectService.project.id).subscribe(project => this.project = project);
-   }
-
+  }
+  
   ngOnInit() {
     this.cardList = this.cardService.convertIdListToCardList(this.wrapper.cardsIds);
   }
@@ -65,5 +65,13 @@ export class WrapperComponent implements OnInit {
       nextWrapper.cardsIds = event.container.data.map(card => card.id) as number[];
       this.wrapperService.updateWrapper(nextWrapper).subscribe();
     });
+  }
+  deleteWrapper() {
+   const confirmation = confirm('Etes vous étes sur de vouloir supprimer cette liste ?');
+   if (confirmation) {
+     this.wrapperService.deleteWrapper(this.wrapper.id).subscribe();
+   }
+   console.log(this.wrapper);
+   
   }
 }

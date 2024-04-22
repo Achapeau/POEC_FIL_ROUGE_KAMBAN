@@ -15,12 +15,14 @@ import java.util.stream.Collectors;
 public class WrapperService {
 
     private final TaskCardRepository taskCardRepository;
+    private final TaskCardService taskCardService;
     private final WrapperRepository wrapperRepository;
     private final ProjectRepository projectRepository;
 
     @Autowired
-    public WrapperService(WrapperRepository wrapperRepository, ProjectRepository projectRepository, TaskCardRepository taskCardRepository) {
+    public WrapperService(WrapperRepository wrapperRepository, ProjectRepository projectRepository, TaskCardRepository taskCardRepository, TaskCardService taskCardService) {
         this.taskCardRepository = taskCardRepository;
+        this.taskCardService = taskCardService;
         this.wrapperRepository = wrapperRepository;
         this.projectRepository = projectRepository;
     }
@@ -62,7 +64,14 @@ public class WrapperService {
     }
 
     public void deleteWrapper(Integer id) {
-        wrapperRepository.deleteById(id);
+        Wrapper wrapper = wrapperRepository.findById(id).get();
+        Project project = projectRepository.findById(wrapper.getProjectId()).get();
+        wrapper.getCards().forEach(card -> {
+            taskCardService.deleteTaskCard(card.getId());
+        });
+        project.removeWrapper(wrapper);
+        projectRepository.save(project);
+        wrapperRepository.delete(wrapper);
     }
 
     private WrapperDTO convertToDTO(Wrapper wrapper) {
