@@ -94,9 +94,8 @@ export class ModalNewProjectComponent implements OnInit, OnChanges {
         userIds: memberIds,
         // description: this.checkoutForm.value.newDesciption as string
       };
+      this.wrapperService.wrappers = [];
       this.projectService.addProject(newProject).subscribe((res) => {
-        console.log(res);
-        this.wrapperService.wrappers = [];
         this.projectService.selectProject(res);
       });
       this.closeModal();

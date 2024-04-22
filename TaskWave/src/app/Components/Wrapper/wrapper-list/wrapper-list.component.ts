@@ -31,9 +31,11 @@ ngOnInit() : void {
   
   this.route.paramMap.subscribe(params => {
     const projectId = Number(params.get('id'));
-    this.projectService.getProjectById(projectId).subscribe(project => this.project = project);
-    console.log(this.project);
-    this.getWrappers();
+    this.projectService.getProjectById(projectId).subscribe(project => {
+      this.project = project;
+      this.wrappersList = this.wrapperService.wrappers;
+      this.getWrappers();
+    });
   });
 }
   

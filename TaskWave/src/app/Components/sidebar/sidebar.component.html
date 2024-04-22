@@ -3,9 +3,9 @@
     <a class="btn mx-3" (click)="goHomework()">
       <img src="../../../assets/images/Wavetask-logo.png" alt="" width="80" height="80">
     </a>
-    <div class="home">
+    <div (click)="goHomework()" class="home">
       <div class="home-icon"><i class="fa-solid fa-house"></i></div>
-      <a (click)="goHomework()">Home</a>
+      <a >Home</a>
     </div>
     <div class="sidebar-project-creation">
       <span class="projects-title">Projects</span>
@@ -13,7 +13,7 @@
         <i class="fa fa-plus"></i>
       </button>
     </div>
-    <div *ngIf="myUser">
+    <div>
       <div *ngFor="let project of projects" class="div-project">
         <button class="btn-project" (click)="selectProject(project)">
           <i class="fa-regular fa-folder"></i>

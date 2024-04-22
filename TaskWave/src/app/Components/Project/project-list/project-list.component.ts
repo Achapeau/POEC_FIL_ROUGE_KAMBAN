@@ -47,7 +47,7 @@ export class ProjectListComponent implements OnInit, OnChanges {
     });
     this.projectService
       .getProject()
-      .userIds.map((id) =>
+      ?.userIds.map((id) =>
         this.userService
           .getUserById(id)
           .subscribe((user) => this.membersList.push(user))

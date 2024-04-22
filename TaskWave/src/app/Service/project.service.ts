@@ -72,7 +72,7 @@ export class ProjectService {
   // select project
   selectProject(project: Project) {
     this.project = project;
-    this.router.navigate(['project', project.id]);
+    this.router.navigate(['project', project.id], { relativeTo: this.route });
   }
 
   convertProjectIdsToProjects(projectIds: number[]): Project[] {
