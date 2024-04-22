@@ -47,8 +47,7 @@ public class WrapperController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteWrapper(@PathVariable Integer id) {
+    public void deleteWrapper(@PathVariable Integer id) {
         wrapperService.deleteWrapper(id);
-        return ResponseEntity.ok().build();
     }
 }

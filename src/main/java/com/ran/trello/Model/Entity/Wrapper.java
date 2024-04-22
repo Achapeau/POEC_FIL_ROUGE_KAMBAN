@@ -32,7 +32,11 @@ public class Wrapper {
         this.projectId = projectId;
     }
 
-    public void addCard(TaskCard card) {
-        this.cards.add(card);
+    public void addCard(TaskCard taskCard) {
+        this.cards.add(taskCard);
+    }
+
+    public void removeCard(TaskCard taskCard) {
+        this.cards.remove(taskCard);
     }
 }

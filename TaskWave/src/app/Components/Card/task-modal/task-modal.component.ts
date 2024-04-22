@@ -80,4 +80,12 @@ export class TaskModalComponent implements OnInit, OnChanges {
       this.taskForm.reset();
     }
   }
+  
+  deleteTask() {
+    const result = confirm("Vous vous appretiez à supprimer cette tâche ?");
+    if (result) {
+      this.cardService.deleteCard(this.cardData?.id as number).subscribe();
+      this.closeModal();
+    }
+  }
 }
