@@ -25,8 +25,8 @@ export class ModalNewProjectComponent implements OnInit, OnChanges {
 
   constructor(private userService: UserService, public fb: FormBuilder, private projectService: ProjectService, private wrapperService: WrapperService, private authService: AuthService) { }
   myUser!: Partial<User>;
-  @Input() isOpen = true;
-  @Output() isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() isOpen = false;
+  @Output() isOpenChange = new EventEmitter<boolean>();
   membersList!: Partial<User>[];
   themesList: Themes[] = [
     {
@@ -94,9 +94,8 @@ export class ModalNewProjectComponent implements OnInit, OnChanges {
         userIds: memberIds,
         // description: this.checkoutForm.value.newDesciption as string
       };
+      this.wrapperService.wrappers = [];
       this.projectService.addProject(newProject).subscribe((res) => {
-        console.log(res);
-        this.wrapperService.wrappers = [];
         this.projectService.selectProject(res);
       });
       this.closeModal();
@@ -110,6 +109,7 @@ export class ModalNewProjectComponent implements OnInit, OnChanges {
   }
   closeModal() {
     this.isOpen = false;
+    this.isOpenChange.emit(this.isOpen); 
   }
 
 }

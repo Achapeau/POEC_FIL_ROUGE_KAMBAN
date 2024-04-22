@@ -23,7 +23,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.connected = this.userService.connected;
-    console.log(this.connected);
   }
 
 
