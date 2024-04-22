@@ -66,7 +66,9 @@ export class ProjectService {
   // delete project
 
   deleteProject(id: number) {
-    return this.http.delete(this.serviceURL + '/' + id);
+    const deleteProject = this.http.delete(this.serviceURL + '/' + id);
+    this.router.navigate(['project-list'], { relativeTo: this.route });
+    return deleteProject;
   }
 
   // select project

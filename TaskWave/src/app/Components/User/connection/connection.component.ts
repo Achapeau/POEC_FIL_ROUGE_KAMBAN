@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { UserService } from '../../../Service/user.service';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LogsDTO } from '../../../Model/model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-connection',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, RouterLink],
   templateUrl: './connection.component.html',
   styleUrl: './connection.component.css'
 })

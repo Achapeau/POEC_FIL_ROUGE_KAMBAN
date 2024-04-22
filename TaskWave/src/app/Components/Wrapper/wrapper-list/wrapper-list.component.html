@@ -10,15 +10,51 @@
         <h1>{{ this.projectService.project.title }}</h1>
         <div class="header-actions">
             <div class="user-add-icon">
-                <i class="fa-solid fa-user-plus"></i>
+                    <i class="fa-solid fa-user-plus"></i>                
             </div>
             <button class="share-button">Partager</button>
-            <i class="fa-solid fa-ellipsis-vertical settings-icon"></i>
+            <div class="sidebar-user" >
+                
+
+                    <button class="d-flex align-items-center text-dark text-decoration-none" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-ellipsis-vertical settings-icon"></i>
+                    </button>    
+                
+                <ul class="dropdown-menu dropdown-menu-dark text-small shadow text-dark" aria-labelledby="dropdownUser1">
+                    <li>
+                        <button>
+                            <a class="dropdown-item">Settings</a>
+                        </button>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <button (click)="active = true">                    
+                            <a class="dropdown-item" >Suprimer votre projet</a>
+                        </button>
+                    </li>
+                </ul>
+            </div>            
         </div>
     </div>
     
     <!-- Box contenant les éléments de la liste, séparée du header -->
     <div class="container-box" cdkDropListGroup>
+        <app-modal *ngIf="active === true">
+            <div class="delete-project">
+                <div class="confirmation-message">
+                    Etes vous sûr de bien vouloir supprimer votre projet ?
+                </div>
+                <div class="button-choice">
+                    <button class="cancel">
+                        Annuler
+                    </button>
+                    <button class="delete" (click)="deleteProject()">
+                        Supprimer
+                        </button>
+                </div>
+            </div>
+        
+        </app-modal>
         <app-wrapper *ngFor="let wrapper of wrappersList" [wrapper]="wrapper" cdkDrag></app-wrapper>
         <app-wrapper-create></app-wrapper-create>
     </div>

@@ -3,15 +3,16 @@ import { WrapperService } from '../../../Service/wrapper.service';
 import { Wrapper, Project } from '../../../Model/model';
 import { CommonModule } from '@angular/common';
 import { WrapperComponent } from '../wrapper/wrapper.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
 import { ProjectService } from '../../../Service/project.service';
 import { CdkDropList, CdkDrag, CdkDragDrop, CdkDropListGroup, moveItemInArray} from '@angular/cdk/drag-drop';
 import { WrapperCreateComponent } from '../wrapper-create/wrapper-create.component';
 import { forkJoin } from 'rxjs';
+import { ModalComponent } from '../../../modal/modal.component';
 @Component({
   selector: 'app-wrapper-list',
   standalone: true,
-  imports: [CommonModule, WrapperComponent, CdkDropListGroup, WrapperCreateComponent, CdkDropList, CdkDrag],
+  imports: [CommonModule, WrapperComponent, CdkDropListGroup, WrapperCreateComponent, CdkDropList, CdkDrag, ModalComponent ],
   templateUrl: './wrapper-list.component.html',
   styleUrl: './wrapper-list.component.css'
 })
@@ -21,12 +22,14 @@ export class WrapperListComponent implements OnInit {
   @Input() wrappersId : number[] = [];
   @Input() wrappersList : Wrapper[] = this.wrapperService.wrappers;
   newTitle! : string;
+  active: boolean = false;
+routeParam: any;
 	
 constructor(public wrapperService : WrapperService, public projectService : ProjectService, private route: ActivatedRoute) {
   
 }
 ngOnInit() : void {
-  // this.projectId = this.route.snapshot.params['id'];
+  this.projectId = this.route.snapshot.params['id'];
   // this.projectService.getProjectById(this.projectId).subscribe(project => this.project = project);
   
   this.route.paramMap.subscribe(params => {
@@ -53,4 +56,12 @@ ngOnInit() : void {
       this.wrapperService.updateWrapper(wrapper).subscribe();
     })
   }
+
+  deleteProject() {
+    console.log(this.projectId);
+    
+    this.active = false;
+    this.projectService.deleteProject(this.projectId).subscribe();
+  }
+
 }
