@@ -20,6 +20,7 @@ public class UserP {
     private String password;
     private String firstname;
     private String lastname;
+    private String role;
     @ManyToMany
     @JoinTable(name = "project_users",
             joinColumns = @JoinColumn(name = "userP_id"),

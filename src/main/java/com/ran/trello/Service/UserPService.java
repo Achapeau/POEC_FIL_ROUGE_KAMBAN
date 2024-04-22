@@ -37,6 +37,7 @@ public class UserPService {
         userP.setFirstname(body.getFirstname());
         userP.setLastname(body.getLastname());
         userP.setPassword(body.getPassword());
+        userP.setRole(body.getRole());
         return convertToUserDTO(userPRepository.save(userP));
     }
 
@@ -44,7 +45,7 @@ public class UserPService {
         userPRepository.deleteById(id);
     }
     public UserDTO convertToUserDTO(UserP userP) {
-        return new UserDTO(userP.getId(), userP.getEmail(), userP.getPassword(), userP.getFirstname(), userP.getLastname(), userP.getProjects().stream().map(project -> project.getId()).toList() );
+        return new UserDTO(userP.getId(), userP.getEmail(), userP.getPassword(), userP.getFirstname(), userP.getLastname(),  userP.getProjects().stream().map(project -> project.getId()).toList(), userP.getRole());
     }
     public UserP convertToUserP(UserDTO userDTO) {
         UserP userP = new UserP();
