@@ -9,6 +9,7 @@ import { CdkDropList, CdkDrag, CdkDragDrop, CdkDropListGroup, moveItemInArray} f
 import { WrapperCreateComponent } from '../wrapper-create/wrapper-create.component';
 import { forkJoin } from 'rxjs';
 import { ModalComponent } from '../../../modal/modal.component';
+import { SidebarComponent } from '../../sidebar/sidebar.component';
 @Component({
   selector: 'app-wrapper-list',
   standalone: true,
@@ -23,7 +24,7 @@ export class WrapperListComponent implements OnInit {
   @Input() wrappersList : Wrapper[] = this.wrapperService.wrappers;
   newTitle! : string;
   active: boolean = false;
-routeParam: any;
+  routeParam: any;
 	
 constructor(public wrapperService : WrapperService, public projectService : ProjectService, private route: ActivatedRoute) {
   
@@ -33,6 +34,7 @@ ngOnInit() : void {
   // this.projectService.getProjectById(this.projectId).subscribe(project => this.project = project);
   
   this.route.paramMap.subscribe(params => {
+    console.log(params.get('id'));
     const projectId = Number(params.get('id'));
     this.projectService.getProjectById(projectId).subscribe(project => {
       this.project = project;
@@ -63,6 +65,7 @@ ngOnInit() : void {
     console.log(this.projectId);
     
     this.active = false;
+    // this.sidebarComponent.projects = this.sidebarComponent.projects.filter(project => project.id !== this.projectId);
     this.projectService.deleteProject(this.projectId).subscribe();
   }
 

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import {
   ActivatedRoute,
   Router,
@@ -21,7 +21,7 @@ import { ModalNewProjectComponent } from '../../modal/modal-new-project/modal-ne
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, OnChanges {
   constructor(
     public userService: UserService,
     public authService: AuthService,
@@ -33,7 +33,8 @@ export class SidebarComponent implements OnInit {
   isActive: boolean = true;
   myUser!: Partial<User>;
   userId: number = 0;
-  projects!: Project[];
+  projects: Project[] = this.projectService.projects;
+
   myProjects!: Project[];
   isModalOpen = false;
 
@@ -42,6 +43,11 @@ export class SidebarComponent implements OnInit {
       this.myUser = myUser;
     });
     this.projects = this.projectService.convertProjectIdsToProjects(this.myUser.projectsIds!);
+    this.projectService.projects = this.projects;
+  }
+
+  ngOnChanges(): void {
+    console.log(this.projects);
   }
 
   getProject() {

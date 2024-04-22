@@ -8,6 +8,7 @@ import { ProjectComponent } from '../../Components/Project/project/project.compo
 import { ModalComponent } from '../modal.component';
 import { UserService } from '../../Service/user.service';
 import { WrapperService } from '../../Service/wrapper.service';
+import { SidebarComponent } from '../../Components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-modal-new-project',
@@ -23,7 +24,7 @@ import { WrapperService } from '../../Service/wrapper.service';
 })
 export class ModalNewProjectComponent implements OnInit, OnChanges {
 
-  constructor(private userService: UserService, public fb: FormBuilder, private projectService: ProjectService, private wrapperService: WrapperService, private authService: AuthService) { }
+  constructor(private sidebarComponent: SidebarComponent, private userService: UserService, public fb: FormBuilder, private projectService: ProjectService, private wrapperService: WrapperService, private authService: AuthService) { }
   myUser!: Partial<User>;
   @Input() isOpen = false;
   @Output() isOpenChange = new EventEmitter<boolean>();
@@ -96,6 +97,7 @@ export class ModalNewProjectComponent implements OnInit, OnChanges {
       };
       this.wrapperService.wrappers = [];
       this.projectService.addProject(newProject).subscribe((res) => {
+        this.sidebarComponent.projects.push(res);
         this.projectService.selectProject(res);
       });
       this.closeModal();

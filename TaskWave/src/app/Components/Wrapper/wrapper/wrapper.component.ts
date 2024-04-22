@@ -14,11 +14,12 @@ import {
 import { CardService } from '../../../Service/card.service';
 import { CardNewComponent } from '../../Card/card-new/card-new.component';
 import { ProjectService } from '../../../Service/project.service';
+import { WrapperListComponent } from '../wrapper-list/wrapper-list.component';
 
 @Component({
   selector: 'app-wrapper',
   standalone: true,
-  imports: [CommonModule, CardComponent, WrapperComponent, CardNewComponent, CdkDropList, CdkDrag],
+  imports: [CommonModule, CardComponent, WrapperComponent, WrapperListComponent, CardNewComponent, CdkDropList, CdkDrag],
   templateUrl: './wrapper.component.html',
   styleUrl: './wrapper.component.css'
 })
@@ -29,11 +30,12 @@ export class WrapperComponent implements OnInit {
   @Input() project!: Project;
   @Input() cardList: Card[] = [];
   
-  constructor(private projectService: ProjectService, public wrapperService: WrapperService, public cardService: CardService, public users: UserService) {
-    this.projectService.getProjectById(this.projectService.project.id).subscribe(project => this.project = project);
-  }
-  
+  constructor(private wrapperListComponent: WrapperListComponent, private projectService: ProjectService, public wrapperService: WrapperService, public cardService: CardService, public users: UserService) {
+    
+   }
+
   ngOnInit() {
+    this.projectService.getProjectById(this.projectService.project.id).subscribe(project => this.project = project);
     this.cardList = this.cardService.convertIdListToCardList(this.wrapper.cardsIds);
   }
   drop(event: CdkDragDrop<Card[]>) {
@@ -70,8 +72,9 @@ export class WrapperComponent implements OnInit {
    const confirmation = confirm('Etes vous étes sur de vouloir supprimer cette liste ?');
    if (confirmation) {
      this.wrapperService.deleteWrapper(this.wrapper.id).subscribe();
+     this.wrapperService.wrappers = this.wrapperService.wrappers.filter(wrapper => wrapper.id != this.wrapper.id);
+     this.wrapperListComponent.wrappersList = this.wrapperService.wrappers;
    }
-   console.log(this.wrapper);
    
   }
 }

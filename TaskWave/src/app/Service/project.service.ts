@@ -25,11 +25,13 @@ export class ProjectService {
 
   serviceURL = 'http://localhost:3050/project';
 
-  @Input() project!: Project;
+  project!: Project;
+  projects!: Project[];
   private projectDataSubject: BehaviorSubject<Project[]> = new BehaviorSubject<
     Project[]
   >([]);
   projectData$: Observable<Project[]> = this.projectDataSubject.asObservable();
+
   // crud operations
 
   setProjectData(projectData: Project[]) {
