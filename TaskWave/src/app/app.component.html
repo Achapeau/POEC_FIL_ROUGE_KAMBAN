@@ -1,10 +1,7 @@
-<!-- <header *ngIf="this.userService.connected">
-    <app-header></app-header>
-</header> -->
 <div *ngIf="this.userService.connected" class="sidebar-container">
     <app-sidebar></app-sidebar>
 </div>
-<div class="body-container">
+<div [class.body-container]="this.userService.connected">
     <div class="app-container">
         <router-outlet></router-outlet>
     </div>

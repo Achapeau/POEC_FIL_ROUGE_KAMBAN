@@ -23,6 +23,19 @@
     align-items: center;
     width: 100%;
     padding-left: 15px;
+    justify-content: space-between;
+
+}
+
+.trash{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    
+}
+
+.trash svg {
+    vertical-align:top;
 }
 
 

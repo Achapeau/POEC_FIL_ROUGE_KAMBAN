@@ -1,0 +1,71 @@
+.login-container {
+    display: flex;
+    height: 100vh; /* Pleine hauteur de la fenêtre */
+}
+
+.login-container p{
+    font-size: 14px;
+    color : gray;
+}
+
+
+
+.login-image, .login-form {
+    flex: 1; /* Chaque section prend exactement la moitié de l'espace disponible */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-image {
+    overflow: hidden; /* Empêche toute débordement de l'image hors de cette division */
+}
+
+.login-image img {
+    width: 100%; /* S'assure que l'image couvre bien la largeur de sa section */
+    height: 100%; /* S'assure que l'image couvre bien la hauteur de sa section */
+    object-fit: cover; /* Garantit que l'image couvre la zone sans déformation */
+}
+
+.login-form {
+    padding: 20px; /* Ajoute un peu de padding autour du formulaire */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+}
+
+.form-control, .btn-primary, .btn-secondary {
+    width: 100%; /* Utilise toute la largeur disponible du conteneur de formulaire */
+}
+
+.form-control {
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 18px;
+}
+
+.connexion{
+    padding: 10px 0;
+    border-radius: 18px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    background-color: rgb(80, 80, 248);
+    border: none;
+}
+
+.connexion:hover{
+    background-color: rgb(255, 255, 255);
+    color: rgb(80, 80, 248);
+    border: 1px solid rgb(80, 80, 248);
+    transition: 0.5s;
+}
