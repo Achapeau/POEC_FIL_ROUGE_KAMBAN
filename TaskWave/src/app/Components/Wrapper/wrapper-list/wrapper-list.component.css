@@ -79,6 +79,7 @@
   flex-direction: row;
   overflow-x: auto; /* Permet le défilement horizontal si nécessaire */
   align-items: start; /* Alignement au début pour les éléments */
+  margin-left: 15px;
 }
 
 /* Styles pour le drag-drop CDK */
