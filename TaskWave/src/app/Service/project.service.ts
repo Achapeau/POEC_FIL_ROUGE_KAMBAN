@@ -11,8 +11,11 @@ import { Project, Wrapper } from '../Model/model';
   providedIn: 'root',
 })
 export class ProjectService {
-  getProject(): Project {
-    return this.project;
+  getProject(): Observable<Project> {
+    let proj = new Observable<Project>(observer => {
+      observer.next(this.project);
+    });
+    return proj;
   }
 
   constructor(
@@ -27,17 +30,17 @@ export class ProjectService {
 
   project!: Project;
   projects!: Project[];
-  private projectDataSubject: BehaviorSubject<Project[]> = new BehaviorSubject<
-    Project[]
-  >([]);
-  projectData$: Observable<Project[]> = this.projectDataSubject.asObservable();
+  // private projectDataSubject: BehaviorSubject<Project[]> = new BehaviorSubject<
+  //   Project[]
+  // >([]);
+  // projectData$: Observable<Project[]> = this.projectDataSubject.asObservable();
 
   // crud operations
 
-  setProjectData(projectData: Project[]) {
-    console.log(projectData);
-    this.projectDataSubject.next(projectData);
-  }
+  // setProjectData(projectData: Project[]) {
+  //   console.log(projectData);
+  //   this.projectDataSubject.next(projectData);
+  // }
 
   // get all project
   getProjects(): Observable<Project[]> {
@@ -67,15 +70,30 @@ export class ProjectService {
 
   // delete project
 
-  deleteProject(id: number) {
-    const deleteProject = this.http.delete(this.serviceURL + '/' + id);
+  deleteProject(id: number) : Observable<void> {
+    if (this.userService.currentUser && this.userService.currentUser.projectsIds) {
+      const index = this.userService.currentUser.projectsIds.indexOf(id);
+      if (index !== -1) {
+        this.userService.currentUser.projectsIds.splice(index, 1);
+      }
+    }
+    return this.http.delete<void>(this.serviceURL + '/' + id);
+  }
+
+  redirectToProjectList() {
     this.router.navigate(['project-list'], { relativeTo: this.route });
-    return deleteProject;
   }
 
   // select project
   selectProject(project: Project) {
     this.project = project;
+    this.wrapperService.convertIdListToWrapperList(project.wrappersIds as number[]);
+    // this.wrapperService.wrappers = []
+    // project.wrappersIds.map((id) => {
+    //   this.wrapperService.getWrapperById(id).subscribe((wrapper) => {
+    //     this.wrapperService.wrappers.push(wrapper);
+    //   });
+    // })
     this.router.navigate(['project', project.id], { relativeTo: this.route });
   }
 
@@ -86,6 +104,11 @@ export class ProjectService {
         projects.push(project);
       });
     });
+    this.projects = projects;
     return projects;
+  }
+  getProjectsForCurrentUser(): Project[] {
+    this.projects = this.convertProjectIdsToProjects(this.userService.currentUser?.projectsIds as number[]);
+    return this.projects;
   }
 }

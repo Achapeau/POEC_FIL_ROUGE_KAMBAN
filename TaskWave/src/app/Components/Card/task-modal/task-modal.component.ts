@@ -33,7 +33,7 @@ export class TaskModalComponent implements OnInit, OnChanges {
     status: ['']
   });
   ngOnInit(): void {
-    this.projectService.getProject().userIds.map(id => this.userService.getUserById(id).subscribe(user => this.membersList.push(user)));
+    this.projectService.project.userIds.map(id => this.userService.getUserById(id).subscribe(user => this.membersList.push(user)));
   }
 
   ngOnChanges(): void {

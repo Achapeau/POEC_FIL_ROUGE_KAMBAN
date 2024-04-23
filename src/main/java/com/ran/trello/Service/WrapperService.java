@@ -69,6 +69,7 @@ public class WrapperService {
         wrapper.getCards().forEach(card -> {
             taskCardService.deleteTaskCard(card.getId());
         });
+        wrapperRepository.save(wrapper);
         project.removeWrapper(wrapper);
         projectRepository.save(project);
         wrapperRepository.delete(wrapper);

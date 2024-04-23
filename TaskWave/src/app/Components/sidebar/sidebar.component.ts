@@ -33,7 +33,7 @@ export class SidebarComponent implements OnInit, OnChanges {
   isActive: boolean = true;
   myUser!: Partial<User>;
   userId: number = 0;
-  projects: Project[] = this.projectService.projects;
+  @Input() projects!: Project[] ;
 
   myProjects!: Project[];
   isModalOpen = false;
@@ -42,12 +42,15 @@ export class SidebarComponent implements OnInit, OnChanges {
     this.authService.userData$.subscribe((myUser) => {
       this.myUser = myUser;
     });
-    this.projects = this.projectService.convertProjectIdsToProjects(this.myUser.projectsIds!);
-    this.projectService.projects = this.projects;
+    console.log("init sidebar");
+    this.projects = this.projectService.getProjectsForCurrentUser();
+    // this.projectService.projects = this.projects;
+    console.log(this.projects);
   }
 
   ngOnChanges(): void {
     console.log(this.projects);
+    this.projects = this.projectService.projects;
   }
 
   getProject() {
@@ -62,6 +65,7 @@ export class SidebarComponent implements OnInit, OnChanges {
   }
 
   selectProject(project: Project) {
+    this.projects = this.projectService.projects;
     this.projectService.selectProject(project);
   }
 

@@ -19,7 +19,7 @@ import { TaskStatus } from '../../../Model/TaskStatus';
 export class CardNewComponent implements OnInit, OnChanges {
   newTitle!: string;
   @Input() wrapper! : Wrapper;
-  projectId : number = this.wrapperService.projectId;
+  projectId : number = this.projectService.project.id;
   @Input() cardList : Card[] = [];
   @Output() cardListChange = new EventEmitter<Card[]>();
   @Input() project! : Project;

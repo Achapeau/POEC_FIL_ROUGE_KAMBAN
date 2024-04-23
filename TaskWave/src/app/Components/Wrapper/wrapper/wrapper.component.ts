@@ -27,7 +27,7 @@ export class WrapperComponent implements OnInit {
   @Input() wrapper!: Wrapper;
   @Input() card!: Card;
   @Input() newTitle!: String;
-  @Input() project!: Project;
+  @Input() project: Project = this.projectService.project;
   @Input() cardList: Card[] = [];
   
   constructor(private wrapperListComponent: WrapperListComponent, private projectService: ProjectService, public wrapperService: WrapperService, public cardService: CardService, public users: UserService) {
@@ -35,7 +35,7 @@ export class WrapperComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.projectService.getProjectById(this.projectService.project.id).subscribe(project => this.project = project);
+    // this.projectService.getProjectById(this.projectService.project.id).subscribe(project => this.project = project);
     this.cardList = this.cardService.convertIdListToCardList(this.wrapper.cardsIds);
   }
   drop(event: CdkDragDrop<Card[]>) {
@@ -69,12 +69,20 @@ export class WrapperComponent implements OnInit {
     });
   }
   deleteWrapper() {
-   const confirmation = confirm('Etes vous étes sur de vouloir supprimer cette liste ?');
-   if (confirmation) {
-     this.wrapperService.deleteWrapper(this.wrapper.id).subscribe();
-     this.wrapperService.wrappers = this.wrapperService.wrappers.filter(wrapper => wrapper.id != this.wrapper.id);
-     this.wrapperListComponent.wrappersList = this.wrapperService.wrappers;
-   }
+  //   console.log(this.cardList);
+  // if (this.cardList.length > 0) {
+  //   alert('Veuillez d\'abord supprimer ou déplacer tous les cartes de cette liste !');
+  //   return;
+  // }else {
+    const confirmation = confirm('Etes vous étes sur de vouloir supprimer cette liste ?');
+    if (confirmation) {
+      this.wrapperService.deleteWrapper(this.wrapper.id).subscribe();
+      this.wrapperService.wrappers = this.wrapperService.wrappers.filter(wrapper => wrapper.id != this.wrapper.id);
+      this.wrapperListComponent.wrappersList = this.wrapperService.wrappers;
+      this.projectService.project.wrappersIds = this.wrapperService.wrappers.map(wrapper => wrapper.id).filter(id => id != this.wrapper.id) as number[];
+
+    }
+  // }
    
   }
 }

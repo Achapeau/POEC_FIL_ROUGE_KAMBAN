@@ -28,7 +28,7 @@
                     </li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
-                        <button (click)="active = true">                    
+                        <button (click)="deleteProject()">                    
                             <a class="dropdown-item" >Supprimer votre projet</a>
                         </button>
                     </li>
@@ -39,22 +39,6 @@
     
     <!-- Box contenant les éléments de la liste, séparée du header -->
     <div class="container-box" cdkDropListGroup>
-        <app-modal *ngIf="active === true">
-            <div class="delete-project">
-                <div class="confirmation-message">
-                    Etes vous sûr de bien vouloir supprimer votre projet ?
-                </div>
-                <div class="button-choice">
-                    <button class="cancel" (click)="active = false">
-                        Annuler
-                    </button>
-                    <button class="delete" (click)="deleteProject()">
-                        Supprimer
-                        </button>
-                </div>
-            </div>
-        
-        </app-modal>
         <app-wrapper *ngFor="let wrapper of wrappersList" [wrapper]="wrapper" cdkDrag></app-wrapper>
         <app-wrapper-create></app-wrapper-create>
     </div>

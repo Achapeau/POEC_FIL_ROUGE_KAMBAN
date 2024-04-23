@@ -8,7 +8,6 @@ import { ProjectComponent } from '../../Components/Project/project/project.compo
 import { ModalComponent } from '../modal.component';
 import { UserService } from '../../Service/user.service';
 import { WrapperService } from '../../Service/wrapper.service';
-import { SidebarComponent } from '../../Components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-modal-new-project',
@@ -20,11 +19,11 @@ import { SidebarComponent } from '../../Components/sidebar/sidebar.component';
     ReactiveFormsModule,
   ],
   templateUrl: './modal-new-project.component.html',
-  styleUrl: './modal-new-project.component.css'
+  styleUrl: './modal-new-project.component.css',
 })
 export class ModalNewProjectComponent implements OnInit, OnChanges {
 
-  constructor(private sidebarComponent: SidebarComponent, private userService: UserService, public fb: FormBuilder, private projectService: ProjectService, private wrapperService: WrapperService, private authService: AuthService) { }
+  constructor(private userService: UserService, public fb: FormBuilder, private projectService: ProjectService, private wrapperService: WrapperService, private authService: AuthService) { }
   myUser!: Partial<User>;
   @Input() isOpen = false;
   @Output() isOpenChange = new EventEmitter<boolean>();
@@ -97,9 +96,17 @@ export class ModalNewProjectComponent implements OnInit, OnChanges {
       };
       this.wrapperService.wrappers = [];
       this.projectService.addProject(newProject).subscribe((res) => {
-        this.sidebarComponent.projects.push(res);
+        
+        this.userService.currentUser?.projectsIds?.push(res.id!);
+            
+        console.log("this.projectService.projects");
+        console.log(this.projectService.projects);
+        this.projectService.projects.push(res);
+        // this.sidebarComponent.projects.push(res);
+        console.log(this.projectService.projects);
         this.projectService.selectProject(res);
       });
+
       this.closeModal();
     } else {
       alert('Formulaire invalide');

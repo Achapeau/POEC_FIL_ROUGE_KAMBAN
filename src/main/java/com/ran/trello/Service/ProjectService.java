@@ -70,10 +70,14 @@ public class ProjectService {
         project.getWrappers().forEach(wrapper -> {
             wrapperService.deleteWrapper(wrapper.getId());
         });
+        project.getWrappers().removeAll(project.getWrappers());
+        projectRepository.save(project);
         project.getUsers().forEach(user -> {
             user.removeProject(project);
             userPRepository.save(user);
         });
-        projectRepository.deleteById(id);
+        project.getUsers().removeAll(project.getUsers());
+        projectRepository.save(project);
+        projectRepository.delete(project);
     }
 }
