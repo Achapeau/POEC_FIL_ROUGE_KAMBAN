@@ -9,6 +9,10 @@
   z-index: 1000; /* Assure que la sidebar est toujours visible */
 }
 
+.drawer span{
+  font-size: 14px;
+}
+
 .sidebar-service {
   display: flex;
   flex-direction: column;
@@ -25,7 +29,7 @@
   display: flex;
   align-items: center;
   padding: 0.5rem 1rem; /* Assure un padding uniforme autour du texte et de l'icône */
-  margin-bottom: 30px;/* Augmente la marge en haut */
+  margin-bottom: 15px;/* Augmente la marge en haut */
   width: 100%; /* Assure que l'élément s'étend à toute la largeur pour alignement */
   text-align: left; /* Garantit que le texte est aligné à gauche */
   cursor: pointer;
@@ -44,6 +48,18 @@
   margin-right: 1.5rem; /* Espace entre l'icône et le texte */
 }
 
+.project-search{
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+  
+}
+
+.project-search-input{
+  border-radius: 0.35rem;
+  border: solid 1px #9d9d9d;
+}
+ 
 /* project style */
 
 .sidebar-project-creation {
