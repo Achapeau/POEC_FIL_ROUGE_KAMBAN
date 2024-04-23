@@ -39,6 +39,7 @@
   border-radius: 10px;
   cursor: pointer;
   margin-right: 10px;
+  margin-left: 10px;
   border: none;
 }
 
@@ -102,16 +103,7 @@
   padding-left: 30px;
 }
 
-.filter-button{
-  display: flex;
-  font-size: 14px;
-  align-items: center;
-  color: #000000;
-  background-color: white;
-  border: solid 1px #b5b5b5;
-  border-radius: 10px;
-  padding: 10px;
-}
+
 
 .container-box {
   width: 100%; /* Assure la pleine largeur dans le flux de flex */
@@ -134,4 +126,29 @@
 
 .cdk-drag-animating {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+
+/* Cible le menu déroulant et ajuste le fond et les bordures */
+.dropdown-menu.dropdown-menu-dark.text-small.shadow.text-dark.show {
+  background-color: #343a40;  /* Fond noir pour le menu déroulant */
+  border-color: #343a40;  /* Bordure de la même couleur que le fond pour une apparence uniforme */
+}
+
+/* Cible tous les liens dans le menu déroulant */
+.dropdown-menu a.dropdown-item {
+  color: #fff;  /* Couleur du texte blanc */
+  background-color: #343a40;  /* Assure que le fond est noir */
+}
+
+/* Cible les boutons dans le menu déroulant pour assurer l'uniformité du style */
+.dropdown-menu button {
+  background: none;  /* Aucun fond pour les boutons */
+  border: none;  /* Aucune bordure pour les boutons */
+  width: 100%;  /* Largeur totale pour aligner avec les autres éléments */
+}
+
+/* Cible les diviseurs pour maintenir une apparence cohérente */
+.dropdown-divider {
+  border-top-color: #555;  /* Couleur de la bordure des diviseurs pour une meilleure visibilité sur fond noir */
 }
