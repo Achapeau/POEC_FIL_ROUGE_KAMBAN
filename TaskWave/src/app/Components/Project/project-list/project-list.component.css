@@ -1,5 +1,7 @@
 .container {
     width: 100%;
+    margin-top: 15px;
+    margin-left: 30px;
 
 }
 
@@ -61,7 +63,7 @@ h2 {
 .projects-container {
     display: flex;
     align-items: center;
-    gap: 20px; /* Espacement entre le texte et les projets */
+    gap: 50px; /* Espacement entre le texte et les projets */
 }
 
 .project-intro {
@@ -76,9 +78,6 @@ h2 {
     flex-grow: 1; /* Permet aux projets de remplir l'espace restant */
 }
 
-.my-projects p {
-	margin-right: 50px;
-}
 
 .modal-content {
 	background: #fff;
