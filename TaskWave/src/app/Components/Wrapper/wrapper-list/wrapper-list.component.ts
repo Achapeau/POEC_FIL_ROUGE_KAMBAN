@@ -9,6 +9,8 @@ import { CdkDropList, CdkDrag, CdkDragDrop, CdkDropListGroup, moveItemInArray} f
 import { WrapperCreateComponent } from '../wrapper-create/wrapper-create.component';
 import { forkJoin } from 'rxjs';
 import { ModalComponent } from '../../../modal/modal.component';
+import { UserService } from '../../../Service/user.service';
+import { User} from '../../../Model/model';
 @Component({
   selector: 'app-wrapper-list',
   standalone: true,
@@ -23,9 +25,9 @@ export class WrapperListComponent implements OnInit {
   @Input() wrappersList : Wrapper[] = this.wrapperService.wrappers;
   newTitle! : string;
   active: boolean = false;
-routeParam: any;
+  routeParam: any;
 	
-constructor(public wrapperService : WrapperService, public projectService : ProjectService, private route: ActivatedRoute) {
+constructor(public wrapperService : WrapperService, public projectService : ProjectService, private route: ActivatedRoute, public userService: UserService) {
   
 }
 ngOnInit() : void {

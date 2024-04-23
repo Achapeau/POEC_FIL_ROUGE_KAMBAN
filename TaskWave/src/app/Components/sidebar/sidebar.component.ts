@@ -27,7 +27,7 @@ export class SidebarComponent implements OnInit {
   myProjects!: Project[];
   isModalOpen = false;
   isModalOpenUpdateUser = false;
-  searchQuery: string = ''; // Ajout pour la gestion de la recherche
+  searchQuery: string = ''; 
 
   constructor(
     public userService: UserService,
@@ -42,7 +42,7 @@ export class SidebarComponent implements OnInit {
       this.myUser = myUser;
     });
     this.projects = this.projectService.convertProjectIdsToProjects(this.userService.currentUser?.projectsIds!);
-    this.getProject(); // Assurez-vous que la liste des projets est mise à jour au démarrage
+    this.getProject();
     this.router.events.subscribe(() => {
       this.projects = this.projectService.convertProjectIdsToProjects(this.userService.currentUser?.projectsIds!);
       this.getProject();

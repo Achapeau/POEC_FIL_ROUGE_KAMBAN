@@ -3,11 +3,12 @@ import { Card } from '../../../Model/model';
 import { TaskModalComponent } from '../task-modal/task-modal.component';
 import { CommonModule } from '@angular/common';
 import { CardService } from '../../../Service/card.service';
+import { UserService } from '../../../Service/user.service';
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [CommonModule, TaskModalComponent],
+  imports: [CommonModule, TaskModalComponent, ],
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css']
 })
