@@ -6,6 +6,7 @@ import { ProjectService } from '../../../Service/project.service';
 import { UserService } from '../../../Service/user.service';
 import { CardService } from '../../../Service/card.service';
 import { TaskStatus } from '../../../Model/TaskStatus';
+import { WrapperComponent } from '../../Wrapper/wrapper/wrapper.component';
 
 @Component({
   selector: 'app-task-modal',
@@ -17,12 +18,11 @@ import { TaskStatus } from '../../../Model/TaskStatus';
 export class TaskModalComponent implements OnInit, OnChanges {
   @Input() isVisible: boolean = false;
   @Input() card!: Card;
-  @Input() cardData!: Card | null; 
   @Output() closeModalEvent = new EventEmitter<void>();
   @Input() membersList: Partial<User>[] = [];
   taskStatusOptions: string[] = Object.values(TaskStatus);
   
-  constructor(private projectService: ProjectService, private userService: UserService, private cardService: CardService, private fb: FormBuilder) {
+  constructor(private projectService: ProjectService, private userService: UserService, private cardService: CardService, private fb: FormBuilder, private wrapperComponent: WrapperComponent) {
   }
 
   public taskForm = this.fb.group({
@@ -33,18 +33,18 @@ export class TaskModalComponent implements OnInit, OnChanges {
     status: ['']
   });
   ngOnInit(): void {
-    this.projectService.getProject().userIds.map(id => this.userService.getUserById(id).subscribe(user => this.membersList.push(user)));
+    this.projectService.project.userIds.map(id => this.userService.getUserById(id).subscribe(user => this.membersList.push(user)));
   }
 
   ngOnChanges(): void {
     // this.cardData = this.card;
-    if (this.cardData) {
+    if (this.card) {
       this.taskForm.reset({
-        title: this.cardData.title || '',
-        description: this.cardData.description || '',
-        dueDate: this.cardData.dueDate?.split('.')[0] || null,
-        assignedTo: this.cardData.assignedTo?.toString() || '',
-        status: this.cardData?.status || '',
+        title: this.card.title || '',
+        description: this.card.description || '',
+        dueDate: this.card.dueDate?.split('.')[0] || null,
+        assignedTo: this.card.assignedTo?.toString() || '',
+        status: this.card?.status || '',
       });
     }
   }
@@ -57,10 +57,10 @@ export class TaskModalComponent implements OnInit, OnChanges {
   submitTask(): void {
     if (this.taskForm.valid) {
       let updatedCard : Partial<Card> = {
-        id: this.cardData?.id,
+        id: this.card?.id,
         title: this.taskForm.value.title as string,
-        position: this.cardData?.position,
-        wrapperId: this.cardData?.wrapperId,
+        position: this.card?.position,
+        wrapperId: this.card?.wrapperId,
         description: this.taskForm.value.description as string,
         dueDate: this.taskForm.value.dueDate ? this.taskForm.value.dueDate : null,
         assignedTo: this.taskForm.value.assignedTo ? parseInt(this.taskForm.value.assignedTo, 10) : null,
@@ -68,7 +68,6 @@ export class TaskModalComponent implements OnInit, OnChanges {
       }
       this.cardService.updateCard(updatedCard).subscribe(
         (response) => {
-          this.cardData = response;
           this.card = response;
           this.cardService.card = response;
           this.closeModal();
@@ -84,7 +83,8 @@ export class TaskModalComponent implements OnInit, OnChanges {
   deleteTask() {
     const result = confirm("Vous vous appretiez à supprimer cette tâche ?");
     if (result) {
-      this.cardService.deleteCard(this.cardData?.id as number).subscribe();
+      this.cardService.deleteCard(this.card?.id as number).subscribe();
+      this.wrapperComponent.cardList = this.wrapperComponent.cardList.filter(card => card.id !== this.card.id);
       this.closeModal();
     }
   }

@@ -21,9 +21,9 @@
       </button>
     </div>
     <div class="project-search">
-      <input [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange()" type="text" placeholder="Search projects..." class="project-search-input">
+      <input [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange()" type="text" placeholder="Rechercher un project..." class="project-search-input">
     </div>
-    <div *ngIf="myUser">
+    <div>
       <div *ngFor="let project of myProjects | slice:0:4" class="div-project">
         <button class="btn-project" (click)="selectProject(project)">
           <div class="project-icon">

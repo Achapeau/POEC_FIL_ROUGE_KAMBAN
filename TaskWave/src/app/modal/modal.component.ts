@@ -12,7 +12,6 @@ export class ModalComponent {
   @Input() isOpen = true;
   @Output() isOpenChange = new EventEmitter<boolean>(); 
   onClose() {
-    console.log('onClose');
     this.isOpen = false;
     this.isOpenChange.emit(this.isOpen); 
   }

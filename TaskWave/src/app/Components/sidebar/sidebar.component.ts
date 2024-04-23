@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import {
+  ActivatedRoute,
+  Router,
+  RouterLink,
+  RouterOutlet,
+} from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../Service/user.service';
@@ -19,16 +24,6 @@ import { ModalUpdateUserComponent } from '../../modal/modal-update-user/modal-up
   styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent implements OnInit {
-  userLog!: string;
-  isActive: boolean = true;
-  myUser!: Partial<User>;
-  userId: number = 0;
-  projects: Project[] = this.projectService.convertProjectIdsToProjects(this.userService.currentUser?.projectsIds!);
-  myProjects!: Project[];
-  isModalOpen = false;
-  isModalOpenUpdateUser = false;
-  searchQuery: string = ''; 
-
   constructor(
     public userService: UserService,
     public authService: AuthService,
@@ -36,6 +31,15 @@ export class SidebarComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {}
+  userLog!: string;
+  isActive: boolean = true;
+  myUser!: Partial<User>;
+  userId: number = 0;
+  projects: Project[] = this.projectService.projects;
+  myProjects!: Project[];
+  isModalOpen = false;
+  isModalOpenUpdateUser = false;
+  searchQuery: string = '';
 
   ngOnInit(): void {
     this.authService.userData$.subscribe((myUser) => {
@@ -71,8 +75,9 @@ export class SidebarComponent implements OnInit {
   }
 
   selectProject(project: Project) {
+    this.myProjects = this.projectService.getProjectsForCurrentUser();
+    this.projects = this.projectService.projects
     this.searchQuery = '';
-    this.getProject();
     this.projectService.selectProject(project);
   }
 

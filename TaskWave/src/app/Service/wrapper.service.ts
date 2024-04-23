@@ -7,7 +7,6 @@ import { Wrapper } from '../Model/model';
   providedIn: 'root'
 })
 export class WrapperService {
-  @Input() projectId! : number;
   @Input() wrappers : Wrapper[] = [];
   constructor(public http : HttpClient) { }
 
@@ -31,7 +30,18 @@ export class WrapperService {
 
   // delete wrapper
   deleteWrapper(id : number) {
+    
 	  return this.http.delete(this.serviceURL + '/' + id);
+  }
+
+  convertIdListToWrapperList(wrapperIds: number[]) {
+    this.wrappers = [];
+    wrapperIds.map(id => {
+      this.getWrapperById(id).subscribe((data : Wrapper) => {
+        this.wrappers.push(data);
+        this.wrappers.sort((a, b) => a.position - b.position);
+      })
+    })
   }
 
 }

@@ -19,7 +19,7 @@ import { WrapperService } from '../../Service/wrapper.service';
     ReactiveFormsModule,
   ],
   templateUrl: './modal-new-project.component.html',
-  styleUrl: './modal-new-project.component.css'
+  styleUrl: './modal-new-project.component.css',
 })
 export class ModalNewProjectComponent implements OnInit, OnChanges {
 
@@ -116,8 +116,17 @@ export class ModalNewProjectComponent implements OnInit, OnChanges {
       };
       this.wrapperService.wrappers = [];
       this.projectService.addProject(newProject).subscribe((res) => {
+        
+        this.userService.currentUser?.projectsIds?.push(res.id!);
+            
+        console.log("this.projectService.projects");
+        console.log(this.projectService.projects);
+        this.projectService.projects.push(res);
+        // this.sidebarComponent.projects.push(res);
+        console.log(this.projectService.projects);
         this.projectService.selectProject(res);
       });
+
       this.closeModal();
     } else {
       alert('Formulaire invalide');
