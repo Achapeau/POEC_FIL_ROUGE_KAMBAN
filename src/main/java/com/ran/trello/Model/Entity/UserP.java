@@ -20,17 +20,19 @@ public class UserP {
     private String password;
     private String firstname;
     private String lastname;
+    private String icon;
     @ManyToMany
     @JoinTable(name = "project_users",
             joinColumns = @JoinColumn(name = "userP_id"),
             inverseJoinColumns = @JoinColumn(name = "project_id"))
     private List<Project> projects = new ArrayList<>();
 
-    public UserP(String email, String password, String firstname, String lastname, List<Project> projects) {
+    public UserP(String email, String password, String firstname, String lastname, String icon, List<Project> projects) {
         this.email = email;
         this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.icon = icon;
         this.projects = projects;
     }
 

@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { User } from '../../../Model/model';
+import { Icon, User } from '../../../Model/model';
 import { NgIf } from '@angular/common';
 
 @Component({
@@ -26,6 +26,20 @@ export class InscriptionComponent {
     firstname: ['', [Validators.required]],
     lastname: ['', [Validators.required]],
   });
+  iconsList: Icon[] = [
+    {
+      lien: 'Island',
+    },
+    {
+      lien: 'Canada',
+    },
+    {
+      lien: 'Bali',
+    },
+    {
+      lien: 'Sand wave',
+    },
+  ];
 
   onSubmit(event: Event) {
     // event.preventDefault();

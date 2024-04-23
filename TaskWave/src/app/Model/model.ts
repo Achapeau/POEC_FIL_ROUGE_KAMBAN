@@ -52,3 +52,7 @@ export interface Themes {
   name: string;
   background: string;
 }
+
+export interface Icon {
+  lien: string;
+}
