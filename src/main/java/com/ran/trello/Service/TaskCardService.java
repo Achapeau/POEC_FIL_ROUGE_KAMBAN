@@ -60,10 +60,22 @@ public class TaskCardService {
     }
 
     public void deleteTaskCard(Integer id) {
-        TaskCard taskCard = taskCardRepository.findById(id).get();
-        Wrapper wrapper = wrapperRepository.findById(taskCard.getWrapperId()).get();
-        wrapper.removeCard(taskCard);
-        wrapperRepository.save(wrapper);
-        taskCardRepository.delete(taskCard);
+        if (taskCardRepository.findById(id).isPresent()) {
+            TaskCard taskCard = taskCardRepository.findById(id).get();
+            if (wrapperRepository.findById(taskCard.getWrapperId()).isPresent()) {
+                Wrapper wrapper = wrapperRepository.findById(taskCard.getWrapperId()).get();
+                wrapper.removeCard(taskCard);
+                wrapperRepository.save(wrapper);
+                taskCardRepository.delete(taskCard);
+            }else {
+                System.out.println("Wrapper not found");
+                throw new RuntimeException("Wrapper not found");
+            }
+        }else{
+            System.out.println("Task card not found");
+            throw new RuntimeException("Task card not found");
+        }
+
+
     }
 }
