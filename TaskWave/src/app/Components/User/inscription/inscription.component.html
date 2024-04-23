@@ -25,6 +25,14 @@
                 <label for="password"   class="form-label">Mot de passe</label>
                 <input type="password" class="form-control" id="password" formControlName="password" required="">
             </div>
+            <div class="form-group">
+                <label for="iconUser">Choisissez une icône</label>
+                <select id="iconUser" class="form-control" formControlName="icon">
+                  <option *ngFor="let icon of iconsList" value= {{icon.lien}}>
+                      {{icon.lien}}
+                  </option>
+                </select>
+              </div>
             <button type="submit" class="submit-btn">Valider</button>
         </form>
         <div>

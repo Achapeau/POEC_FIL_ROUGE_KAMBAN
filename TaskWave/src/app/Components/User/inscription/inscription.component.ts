@@ -7,12 +7,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { Icon, User } from '../../../Model/model';
-import { NgIf } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-inscription',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, NgIf],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgIf],
   templateUrl: './inscription.component.html',
   styleUrl: './inscription.component.css',
 })
@@ -25,20 +25,27 @@ export class InscriptionComponent {
     email: ['', [Validators.required, Validators.email]],
     firstname: ['', [Validators.required]],
     lastname: ['', [Validators.required]],
+    icon: ['', [Validators.required]],
   });
   iconsList: Icon[] = [
     {
-      lien: 'Island',
+      lien: 'icone-admin.svg',
     },
     {
-      lien: 'Canada',
+      lien: 'icone-admin2.svg',
     },
     {
-      lien: 'Bali',
+      lien: 'icone-admin3.svg',
     },
     {
-      lien: 'Sand wave',
+      lien: 'icone-admin4.svg',
     },
+    {
+      lien: 'icone-admin5.svg',
+    },
+    {
+      lien: 'icone-admin6.svg',
+    }
   ];
 
   onSubmit(event: Event) {
@@ -52,6 +59,7 @@ export class InscriptionComponent {
         password: this.connectionForm.value.password as string,
         firstname: this.connectionForm.value.firstname as string,
         lastname: this.connectionForm.value.lastname as string,
+        icon: this.connectionForm.value.icon as string,
         projectsIds: [],
       };
 

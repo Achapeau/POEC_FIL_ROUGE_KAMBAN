@@ -38,6 +38,7 @@ export class UserService {
       password: user.password,
       firstname: user.firstname,
       lastname: user.lastname,
+      icon: user.icon,
       projectsIds: user.projectsIds,
     };
     return User;

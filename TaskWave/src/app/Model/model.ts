@@ -24,6 +24,7 @@ export interface User {
   password: string;
   firstname: string;
   lastname: string;
+  icon: string;
   projectsIds: number[];
 }
 
