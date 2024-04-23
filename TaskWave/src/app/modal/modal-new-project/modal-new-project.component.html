@@ -10,6 +10,10 @@
               <!-- <div class="invalid-tooltip">Le titre ne doit pas être vide.</div> -->
               <!-- on peut rajouter la classe bootstrap "needs-validation" à form si on veut dire à l'utilisateur qu'il doit remplir le titre pour pouvoir valider -->
             </div>
+            <div class="form-group">
+              <label for="projectDescription">Description du projet</label>
+              <textarea id="projectDescription" class="form-control" placeholder="Entrez une description du projet" formControlName="newDesciption"></textarea>
+            </div>
     
             <div class="form-group">
               <label for="projectTheme">Thème du projet</label>
@@ -30,8 +34,7 @@
           
             <button type="submit" class="btn-submit">Créer le projet</button>
         </form>
-          
-        <!-- Ici vous pouvez ajouter un formulaire pour saisir les détails du nouveau projet -->
+  
     </div>
   </div>
 </div>
