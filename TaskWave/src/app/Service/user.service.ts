@@ -27,7 +27,7 @@ export class UserService {
     return this.http.get<User>(this.serviceURL + '/' + id);
   }
   // update user
-  updateUser(user: User): Observable<User> {
+  updateUser(user: Partial<User>): Observable<User> {
     return this.http.put<User>(this.serviceURL + '/' + user.id, user);
   }
 
@@ -62,9 +62,10 @@ export class UserService {
         this.authService.setUserData(data);
       });
   }
-  inscription(User: Partial<User>) {
+  inscription(newUser: Partial<User>) {
+    console.log(newUser);
     this.http
-      .post<User>(this.serviceURL + '/register', User)
+      .post<User>(this.serviceURL + '/register', newUser)
       .subscribe((data: User) => {
         console.log(data);
         this.currentUser = data;

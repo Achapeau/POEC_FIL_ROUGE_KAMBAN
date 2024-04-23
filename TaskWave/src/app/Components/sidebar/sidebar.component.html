@@ -3,13 +3,13 @@
     <a class="btn mx-3" (click)="goHomework()">
       <img src="../../../assets/images/Wavetask-logo.png" alt="" width="80" height="80">
     </a>
-    <div class="home">
+    <div (click)="goHomework()" class="home">
       <div class="home-icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
           <path stroke="currentColor" stroke-width="2" d="M3.5 11.1213V19C3.5 19.8284 4.17157 20.5 5 20.5H8.5C9.32843 20.5 10 19.8284 10 19V14.75C10 14.3358 10.3358 14 10.75 14H13.25C13.6642 14 14 14.3358 14 14.75V19C14 19.8284 14.6716 20.5 15.5 20.5H19C19.8284 20.5 20.5 19.8284 20.5 19V11.1213C20.5 10.7235 20.342 10.342 20.0607 10.0607L13.0607 3.06066C12.4749 2.47487 11.5251 2.47487 10.9393 3.06066L3.93934 10.0607C3.65804 10.342 3.5 10.7235 3.5 11.1213Z"/>
         </svg>
       </div>
-      <a (click)="goHomework()">Home</a>
+      <a>Home</a>
     </div>
     <!-- Champ de recherche ajouté ici juste sous le Home -->
     
@@ -66,11 +66,11 @@
 		<div class="sidebar-user">
       <a href="#" class="d-flex align-items-center text-dark text-decoration-none ps-3" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
         <img src="../../../assets/svg/{{this.userService.currentUser?.icon}}" alt="{{ this.userService.currentUser?.firstname }}" width="45" height="45" class="rounded-circle me-3">
-        <strong style="font-weight: normal; text-transform: capitalize;">{{ myUser.firstname }}</strong>
+        <strong style="font-weight: normal; text-transform: capitalize;">{{ this.userService.currentUser?.firstname }}</strong>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
           <li><a class="dropdown-item">Settings</a></li>
-          <li><a class="dropdown-item">Profile</a></li>
+          <li><a class="dropdown-item" (click)="openUpdateUserModal()">Profile</a></li>
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" (click)="logout()">Déconnexion</a></li>
       </ul>
@@ -78,6 +78,7 @@
   
   </div>
 </div>
-<app-modal-new-project  [(isOpen)]="isModalOpen"></app-modal-new-project>
+<app-modal-new-project [(isOpen)]="isModalOpen"></app-modal-new-project>
+<app-modal-update-user [(isOpen)]="isModalOpenUpdateUser"></app-modal-update-user>
 
 

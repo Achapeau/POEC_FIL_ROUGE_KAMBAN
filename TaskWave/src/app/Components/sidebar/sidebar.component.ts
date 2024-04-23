@@ -9,11 +9,12 @@ import { User, Project } from '../../Model/model';
 import { ModalComponent } from '../../modal/modal.component';
 import { ModalNewProjectComponent } from '../../modal/modal-new-project/modal-new-project.component';
 import { FormsModule } from '@angular/forms';
+import { ModalUpdateUserComponent } from '../../modal/modal-update-user/modal-update-user.component';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [RouterLink, MatIconModule, CommonModule, RouterOutlet, ModalNewProjectComponent, ModalComponent, FormsModule],
+  imports: [RouterLink, MatIconModule, CommonModule, RouterOutlet, ModalNewProjectComponent, ModalUpdateUserComponent, ModalComponent, FormsModule],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css'],
 })
@@ -25,6 +26,7 @@ export class SidebarComponent implements OnInit {
   projects: Project[] = this.projectService.convertProjectIdsToProjects(this.userService.currentUser?.projectsIds!);
   myProjects!: Project[];
   isModalOpen = false;
+  isModalOpenUpdateUser = false;
   searchQuery: string = ''; // Ajout pour la gestion de la recherche
 
   constructor(
@@ -54,7 +56,7 @@ export class SidebarComponent implements OnInit {
       );
     } else {
       this.myProjects = this.projects.filter((project) =>
-        project.userIds?.includes(this.myUser.id!)
+        project.userIds?.includes(this.userService.currentUser?.id!)
       );
     }
   }
@@ -69,6 +71,8 @@ export class SidebarComponent implements OnInit {
   }
 
   selectProject(project: Project) {
+    this.searchQuery = '';
+    this.getProject();
     this.projectService.selectProject(project);
   }
 
@@ -82,6 +86,10 @@ export class SidebarComponent implements OnInit {
 
   closeModal() {
     this.isModalOpen = false;
+  }
+  openUpdateUserModal() {
+    console.log("openUpdateUserModal");
+    this.isModalOpenUpdateUser = true;
   }
 
   logout() {

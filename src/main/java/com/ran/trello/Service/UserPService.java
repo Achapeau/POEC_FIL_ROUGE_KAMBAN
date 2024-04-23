@@ -33,11 +33,11 @@ public class UserPService {
 
     public UserDTO updateUser(Integer id, UserDTO body) {
         UserP userP = userPRepository.findById(id).get();
-        userP.setEmail(body.getEmail());
-        userP.setFirstname(body.getFirstname());
-        userP.setLastname(body.getLastname());
-        userP.setPassword(body.getPassword());
-        userP.setIcon(body.getIcon());
+        if (body.getEmail() != null) userP.setEmail(body.getEmail());
+        if (body.getFirstname() != null) userP.setFirstname(body.getFirstname());
+        if (body.getLastname() != null) userP.setLastname(body.getLastname());
+        if (body.getPassword() != null) userP.setPassword(body.getPassword());
+        if (body.getIcon() != null) userP.setIcon(body.getIcon());
         return convertToUserDTO(userPRepository.save(userP));
     }
 
@@ -54,6 +54,7 @@ public class UserPService {
         userP.setFirstname(userDTO.getFirstname());
         userP.setLastname(userDTO.getLastname());
         userP.setPassword(userDTO.getPassword());
+        userP.setIcon(userDTO.getIcon());
         return userP;
     }
 }
