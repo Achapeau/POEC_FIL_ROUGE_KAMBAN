@@ -3,29 +3,33 @@
     <a class="btn mx-3" (click)="goHomework()">
       <img src="../../../assets/images/Wavetask-logo.png" alt="" width="80" height="80">
     </a>
-     <div class="home">
-        <div class="home-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-width="2" d="M3.5 11.1213V19C3.5 19.8284 4.17157 20.5 5 20.5H8.5C9.32843 20.5 10 19.8284 10 19V14.75C10 14.3358 10.3358 14 10.75 14H13.25C13.6642 14 14 14.3358 14 14.75V19C14 19.8284 14.6716 20.5 15.5 20.5H19C19.8284 20.5 20.5 19.8284 20.5 19V11.1213C20.5 10.7235 20.342 10.342 20.0607 10.0607L13.0607 3.06066C12.4749 2.47487 11.5251 2.47487 10.9393 3.06066L3.93934 10.0607C3.65804 10.342 3.5 10.7235 3.5 11.1213Z"/>
-          </svg>
-        </div>
-          <a (click)="goHomework()">Home</a>
+    <div class="home">
+      <div class="home-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-width="2" d="M3.5 11.1213V19C3.5 19.8284 4.17157 20.5 5 20.5H8.5C9.32843 20.5 10 19.8284 10 19V14.75C10 14.3358 10.3358 14 10.75 14H13.25C13.6642 14 14 14.3358 14 14.75V19C14 19.8284 14.6716 20.5 15.5 20.5H19C19.8284 20.5 20.5 19.8284 20.5 19V11.1213C20.5 10.7235 20.342 10.342 20.0607 10.0607L13.0607 3.06066C12.4749 2.47487 11.5251 2.47487 10.9393 3.06066L3.93934 10.0607C3.65804 10.342 3.5 10.7235 3.5 11.1213Z"/>
+        </svg>
       </div>
-      
-      <div class="sidebar-project-creation">
-        <span class="projects-title">Projects</span>
-        <button class="add-project-button" (click)="openCreateProjectModal()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M3.5 12H20.5"/>
-            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M12 20.5L12 3.5"/>
-          </svg>
-        </button>
-      </div>
-      <div *ngIf="myUser">
-        <div *ngFor="let project of projects | slice:0:4" class="div-project">
-          <button class="btn-project" (click)="selectProject(project)">
-            <div class="project-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+      <a (click)="goHomework()">Home</a>
+    </div>
+    <!-- Champ de recherche ajouté ici juste sous le Home -->
+    
+    <div class="sidebar-project-creation">
+      <span class="projects-title">Projects</span>
+      <button class="add-project-button" (click)="openCreateProjectModal()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M3.5 12H20.5"/>
+          <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M12 20.5L12 3.5"/>
+        </svg>
+      </button>
+    </div>
+    <div class="project-search">
+      <input [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange()" type="text" placeholder="Search projects..." class="project-search-input">
+    </div>
+    <div *ngIf="myUser">
+      <div *ngFor="let project of myProjects | slice:0:4" class="div-project">
+        <button class="btn-project" (click)="selectProject(project)">
+          <div class="project-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-width="2" d="M2 5C2 4.17157 2.67157 3.5 3.5 3.5H8.87868C9.2765 3.5 9.65804 3.65804 9.93934 3.93934L11.5607 5.56066C11.842 5.84197 12.2235 6 12.6213 6H20.5C21.3284 6 22 6.67157 22 7.5V18C22 18.8284 21.3284 19.5 20.5 19.5H3.5C2.67157 19.5 2 18.8284 2 18V5Z"/>
               </svg>
             </div>
