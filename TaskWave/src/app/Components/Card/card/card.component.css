@@ -88,6 +88,7 @@
 
 .task-card .dueDate {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     font-size: 0.9em;
     color: #666;
@@ -98,3 +99,5 @@
     margin-right: 5px;
     color: #346BC8;
 }
+
+
