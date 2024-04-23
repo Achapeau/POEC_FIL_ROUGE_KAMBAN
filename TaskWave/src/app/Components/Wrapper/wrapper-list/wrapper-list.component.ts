@@ -19,8 +19,9 @@ import { UserService } from '../../../Service/user.service';
 })
 export class WrapperListComponent implements OnInit {
   @Input() project: Project = this.projectService.project;
+  @Input() projectId!: number;
   @Input() wrappersId : number[] = [];
-  @Input() wrappersList : Wrapper[] = [];
+  @Input() wrappersList : Wrapper[] = this.wrapperService.wrappers;
   newTitle! : string;
   active: boolean = false;
   routeParam: any;
@@ -31,6 +32,8 @@ constructor(public userService : UserService, public wrapperService : WrapperSer
 
 }
 ngOnInit() : void {
+  this.routeParam = this.route.snapshot.params['id'];
+  this.loadProjectDetails();
   this.projectService.getProject().subscribe(project => console.log(project));
   this.route.paramMap.subscribe(params => {
     let projectId = Number(params.get('id'));
@@ -39,7 +42,6 @@ ngOnInit() : void {
       this.projectService.project = project;
       this.wrapperService.convertIdListToWrapperList(this.project.wrappersIds);
       this.wrappersList = this.wrapperService.wrappers;
-      this.loadProjectDetails();
     });
   });
   }
@@ -50,7 +52,7 @@ ngOnInit() : void {
       this.getWrappers();
       this.loadMemberIcons(project);
     });
-}
+  }
 
   
   getWrappers(): void {
