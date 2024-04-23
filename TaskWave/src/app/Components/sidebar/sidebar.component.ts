@@ -38,6 +38,8 @@ export class SidebarComponent implements OnInit {
   projects!: Project[];
   myProjects!: Project[];
   isModalOpen = false;
+  isModalOpenUpdateUser = false;
+  searchQuery: string = '';
 
   ngOnInit(): void {
     this.authService.userData$.subscribe((myUser) => {
