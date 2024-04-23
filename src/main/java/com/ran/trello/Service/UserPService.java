@@ -45,7 +45,7 @@ public class UserPService {
         userPRepository.deleteById(id);
     }
     public UserDTO convertToUserDTO(UserP userP) {
-        return new UserDTO(userP.getId(), userP.getEmail(), userP.getPassword(), userP.getFirstname(), userP.getLastname(),  userP.getProjects().stream().map(project -> project.getId()).toList(), userP.getRole());
+        return new UserDTO(userP.getId(), userP.getEmail(), userP.getPassword(), userP.getFirstname(), userP.getLastname(),  userP.getProjects().stream().map(project -> project.getId()).toList(), userP.getRole(), userP.getIcon());
     }
     public UserP convertToUserP(UserDTO userDTO) {
         UserP userP = new UserP();

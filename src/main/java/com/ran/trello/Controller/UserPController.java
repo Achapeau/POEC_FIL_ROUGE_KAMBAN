@@ -1,8 +1,14 @@
 package com.ran.trello.Controller;
 
 import com.ran.trello.Model.DTO.LogDTO;
+import com.ran.trello.Model.DTO.RegisterUserDTO;
 import com.ran.trello.Model.DTO.UserDTO;
+import com.ran.trello.Model.Entity.UserP;
+import com.ran.trello.Model.LoginResponse;
+import com.ran.trello.Service.AuthenticationService;
+import com.ran.trello.Service.JwtService;
 import com.ran.trello.Service.UserPService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,9 +17,14 @@ import java.util.List;
 @RequestMapping("/user")
 @CrossOrigin("*")
 public class UserPController {
+    private final JwtService jwtService;
+
+    private final AuthenticationService authenticationService;
     private UserPService userPService;
 
-    public UserPController(UserPService userPService) {
+    public UserPController(UserPService userPService, JwtService jwtService, AuthenticationService authenticationService) {
+        this.jwtService = jwtService;
+        this.authenticationService = authenticationService;
         this.userPService = userPService;
     }
     @GetMapping
@@ -27,10 +38,11 @@ public class UserPController {
         return userPService.findUserById(id);
     }
     @PostMapping("/register")
-    public UserDTO register(@RequestBody UserDTO body)
-    {
-        return userPService.addUser(body);
+    public ResponseEntity<UserP> register(@RequestBody RegisterUserDTO registerUserDTO){
+        UserP registeredUser = authenticationService.signup(registerUserDTO);
+        return  ResponseEntity.ok(registeredUser);
     }
+
     @PutMapping("/{id}")
     public UserDTO updateUser(@PathVariable Integer id, @RequestBody UserDTO body)
     {
@@ -41,7 +53,12 @@ public class UserPController {
         userPService.deleteUser(id);
     }
     @PostMapping("/login")
-    public UserDTO loginUser(@RequestBody LogDTO body) {
-        return userPService.loginUser(body);
+    public ResponseEntity<LoginResponse> authenticate(@RequestBody LogDTO logDTO) {
+        UserP authenticatedUser = authenticationService.authenticate(logDTO);
+        String jwtToken = jwtService.generateToken(authenticatedUser);
+        LoginResponse loginResponse = new LoginResponse().setToken(jwtToken).setExpiresIn(jwtService.getExpirationTime());
+
+        return ResponseEntity.ok(loginResponse);
     }
+
 }

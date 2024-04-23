@@ -10,30 +10,20 @@
             <div class="form-group">
                 <label for="firstname" class="form-label">Prénom</label>
                 <input type="text" class="form-control" id="firstname" formControlName="firstname">
-                <div *ngIf="connectionForm.get('firstname')?.invalid" class="invalid-input">
-                    Le champ Prénom est requis.
-                </div>
+                
             </div>
             <div class="form-group">
                 <label for="lastname" class="form-label">Nom</label>
                 <input type="text" class="form-control" id="lastname" formControlName="lastname">
-                <div *ngIf="connectionForm.get('lastname')?.invalid" class="invalid-input">
-                    Le champ Nom est requis.
-                </div>
+                
             </div>
             <div class="form-group">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" formControlName="email">
-                <div *ngIf="connectionForm.get('email')?.invalid" class="invalid-input">
-                    Le champ Email est requis.
-                </div>
-            </div>
+           </div>
             <div class="form-group">
                 <label for="password"   class="form-label">Mot de passe</label>
                 <input type="password" class="form-control" id="password" formControlName="password" required="">
-                <div *ngIf="connectionForm.get('password')?.invalid" class="invalid-input">
-                    Le champ Mot de passe est requis.
-                </div>
             </div>
             <button type="submit" class="submit-btn">Valider</button>
         </form>

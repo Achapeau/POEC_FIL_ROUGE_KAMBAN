@@ -1,3 +1,4 @@
+/* Style de base du modal */
 .modal {
   position: fixed;
   top: 0;
@@ -7,56 +8,64 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.6); /* Fond légèrement plus clair pour moins d'opacité */
   z-index: 1000;
 }
 
+.card-title h2{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Contenu du modal avec une meilleure couleur de fond et de l'ombre pour un effet de profondeur */
 .modal-content {
-  background: #C9C19F; /* Bleu marine */
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 60%;
-  max-width: 600px;
+  background: #FFFFFF; /* Fond clair pour le contraste */
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 500px; /* Taille plus adaptée pour les modales */
   animation: slideIn 0.3s;
 }
 
+/* Disposition des champs form-half avec ajustements pour l'alignement */
 .form-half {
   display: inline-block;
-  width: 48%; /* Chaque élément prend moins de la moitié pour s'aligner côte à côte */
+  width: 48%;
   padding: 1%;
   vertical-align: top;
+  margin: 0 1% 20px 0; /* Ajouter des marges pour une meilleure séparation */
 }
 
+/* Bouton de fermeture amélioré pour mieux se distinguer */
 .close-btn {
   float: right;
-  font-size: 1.5em;
-  color: #fff;
+  font-size: 24px;
+  color: #606060; /* Couleur plus douce */
   cursor: pointer;
 }
 
-textarea {
-  width: 100%; /* Ajustez si nécessaire */
-  height: 100px; /* Hauteur fixe pour la textarea */
-}
-
-input[type="datetime-local"] {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-}
-
-button {
-  background-color: #f1f1f1;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  display: block; /* pour le mettre en bas du formulaire */
+/* Textarea et input améliorés pour mieux se fondre dans le design */
+textarea, input[type="datetime-local"], select {
   width: 100%;
+  padding: 8px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* S'assure que padding ne déborde pas */
+}
+
+/* Style des boutons pour une meilleure intégration */
+button {
+  background-color: #007BFF; /* Bleu plus vif */
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: block;
+  margin-top: 20px; /* Ajouter de l'espace avant le bouton */
 }
 
 button:hover {
-  background-color: #004494;
+  background-color: #0056b3;
 }

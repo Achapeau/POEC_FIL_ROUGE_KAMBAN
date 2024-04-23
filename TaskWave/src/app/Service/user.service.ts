@@ -39,6 +39,7 @@ export class UserService {
       firstname: user.firstname,
       lastname: user.lastname,
       projectsIds: user.projectsIds,
+      token: user.token,
     };
     return User;
   }
@@ -52,13 +53,7 @@ export class UserService {
         this.currentUser = data;
         this.connected = true;
         this.router.navigate(['project-list'], { relativeTo: this.route });
-        this.authService.setToken(
-          JSON.stringify({
-            mail: this.currentUser.email,
-            id: this.currentUser.id,
-          })
-        );
-        this.authService.setUserData(data);
+        
       });
   }
   inscription(User: Partial<User>) {
@@ -74,7 +69,7 @@ export class UserService {
 
   // Disconnect user
   disconnectUser() {
-    localStorage.removeItem('currentUser');
+    this.authService.deleteToken()
     this.currentUser = null;
     this.connected = false;
     this.router.navigate([''], { relativeTo: this.route });

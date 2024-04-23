@@ -52,18 +52,42 @@
 
 .share-button {
   padding: 8px 16px;
-  background-color: #6901fb;
+  background-color: #346BC8;
   color: rgb(249, 249, 249);
   border-radius: 5px;
   cursor: pointer;
   margin-right: 10px;
+  border: none;
+}
+
+.custom-dropdown-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: solid 1px #4578ab; /* Pas de bordure */
+  color: #495057; /* Couleur pour l'icône, ajustable selon le thème */
+  padding: 8px; /* Espacement autour de l'icône pour facilité de clic */
+  border-radius: 10px; /* Bouton rond */
+  cursor: pointer; /* Indique que le bouton est cliquable */
+  transition: background-color 0.3s ease; /* Transition douce pour le survol */
+}
+
+.custom-dropdown-toggle:hover {
+  background-color: #e9ecef; /* Changement de couleur au survol pour une interaction visible */
+}
+
+.custom-dropdown-toggle:focus {
+  outline: none; /* Supprime la bordure de focus pour un look plus net */
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Lueur de focus subtile */
 }
 
 
 .settings-icon {
-  font-size: 20px;
-  color: #333;
-  cursor: pointer;
+  padding: 8px; /* Espace autour de l'icône */
+  border-radius: 10px;
+  background-color: #e9ecef; /* Fond clair */
+  color: #495057; /* Couleur de l'icône */
 }
 
 .settings-icon:hover {
