@@ -24,6 +24,7 @@ export interface User {
   password: string;
   firstname: string;
   lastname: string;
+  icon: string;
   projectsIds: number[];
 }
 
@@ -51,4 +52,8 @@ export interface LogsDTO {
 export interface Themes {
   name: string;
   background: string;
+}
+
+export interface Icon {
+  lien: string;
 }

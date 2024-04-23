@@ -7,19 +7,18 @@
      
     <!-- Header pour le titre et la description du projet -->
     <div class="header-wrapper">
-        <h1>{{ this.projectService.project.title }}</h1>
+        <div class="titre-description"><h1><strong>{{ this.projectService.project.title }}</strong></h1>
+        <p>{{ this.projectService.project.description }}</p>
+    </div>
         <div class="header-actions">
-            <div class="user-add-icon">
-                    <i class="fa-solid fa-user-plus"></i>                
-            </div>
+            <button class="user-add-icon">
+                    <p>Membres</p>               
+            </button>
             <button class="share-button">Partager</button>
             <div class="sidebar-user" >
-                
-
-                    <button class="d-flex align-items-center text-dark text-decoration-none" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-solid fa-ellipsis-vertical settings-icon"></i>
-                    </button>    
-                
+                <button class="custom-dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                  </button>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow text-dark" aria-labelledby="dropdownUser1">
                     <li>
                         <button>
@@ -36,6 +35,13 @@
             </div>            
         </div>
     </div>
+    <!-- <div class="second-header">
+        <p>{{ this.projectService.project.description }}</p>
+        <div class="filter">
+            <button class="filter-button">
+                <i class="fa-solid fa-filter"></i>Filtrer</button>
+        </div>
+    </div> -->
     
     <!-- Box contenant les éléments de la liste, séparée du header -->
     <div class="container-box" cdkDropListGroup>

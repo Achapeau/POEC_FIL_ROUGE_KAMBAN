@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   ActivatedRoute,
   Router,
@@ -13,15 +13,17 @@ import { ProjectService } from '../../Service/project.service';
 import { User, Project } from '../../Model/model';
 import { ModalComponent } from '../../modal/modal.component';
 import { ModalNewProjectComponent } from '../../modal/modal-new-project/modal-new-project.component';
+import { FormsModule } from '@angular/forms';
+import { ModalUpdateUserComponent } from '../../modal/modal-update-user/modal-update-user.component';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [RouterLink, MatIconModule, CommonModule, RouterOutlet, ModalNewProjectComponent],
+  imports: [RouterLink, MatIconModule, CommonModule, RouterOutlet, ModalNewProjectComponent, ModalUpdateUserComponent, ModalComponent, FormsModule],
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.css',
+  styleUrls: ['./sidebar.component.css'],
 })
-export class SidebarComponent implements OnInit, OnChanges {
+export class SidebarComponent implements OnInit {
   constructor(
     public userService: UserService,
     public authService: AuthService,
@@ -33,8 +35,7 @@ export class SidebarComponent implements OnInit, OnChanges {
   isActive: boolean = true;
   myUser!: Partial<User>;
   userId: number = 0;
-  @Input() projects!: Project[] ;
-
+  projects!: Project[];
   myProjects!: Project[];
   isModalOpen = false;
 
@@ -42,21 +43,23 @@ export class SidebarComponent implements OnInit, OnChanges {
     this.authService.userData$.subscribe((myUser) => {
       this.myUser = myUser;
     });
-    console.log("init sidebar");
-    this.projects = this.projectService.getProjectsForCurrentUser();
-    // this.projectService.projects = this.projects;
-    console.log(this.projects);
-  }
-
-  ngOnChanges(): void {
-    console.log(this.projects);
-    this.projects = this.projectService.projects;
+    this.projects = this.projectService.convertProjectIdsToProjects(this.myUser.projectsIds!);
   }
 
   getProject() {
-    this.myProjects = this.projects.filter((project) =>
-      project.userIds?.includes(this.myUser.id!)
-    );
+    if (this.searchQuery) {
+      this.myProjects = this.projects.filter((project) =>
+        project.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    } else {
+      this.myProjects = this.projects.filter((project) =>
+        project.userIds?.includes(this.userService.currentUser?.id!)
+      );
+    }
+  }
+
+  onSearchChange(): void {
+    this.getProject(); // Mise à jour des projets filtrés lors de chaque modification de recherche
   }
 
   toggle() {
@@ -65,7 +68,6 @@ export class SidebarComponent implements OnInit, OnChanges {
   }
 
   selectProject(project: Project) {
-    this.projects = this.projectService.projects;
     this.projectService.selectProject(project);
   }
 
@@ -80,6 +82,11 @@ export class SidebarComponent implements OnInit, OnChanges {
   closeModal() {
     this.isModalOpen = false;
   }
+  openUpdateUserModal() {
+    console.log("openUpdateUserModal");
+    this.isModalOpenUpdateUser = true;
+  }
+
   logout() {
     this.userService.disconnectUser();
   }

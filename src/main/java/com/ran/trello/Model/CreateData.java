@@ -16,11 +16,11 @@ public class CreateData {
         ProjectRepository projectRepository = context.getBean(ProjectRepository.class);
         WrapperRepository wrapperRepository = context.getBean(WrapperRepository.class);
         TaskCardRepository taskCardRepository = context.getBean(TaskCardRepository.class);
-        UserP u1 = new UserP("JeanValJean@gmail.com", "Jean", "Jean", "ValJean", new ArrayList<Project>());
-        UserP u2 = new UserP("BillyBob@gmail.com", "Billy", "Billy", "Bob", new ArrayList<Project>());
-        UserP u3 = new UserP("BobbyLarnak@gmail.com", "Bobby", "Bobby", "larnak", new ArrayList<Project>());
-        UserP u4 = new UserP("JohnnyLembrouille@gmail.com", "Johnny", "Johnny", "lembrouille", new ArrayList<Project>());
-        UserP u5 = new UserP("admin@mail.com", "admin", "admin", "admin", new ArrayList<Project>());
+        UserP u1 = new UserP("JeanValJean@gmail.com", "Jean", "Jean", "ValJean", "icone-admin6.svg", new ArrayList<Project>());
+        UserP u2 = new UserP("BillyBob@gmail.com", "Billy", "Billy", "Bob", "icone-admin2.svg", new ArrayList<Project>());
+        UserP u3 = new UserP("BobbyLarnak@gmail.com", "Bobby", "Bobby", "larnak", "icone-admin3.svg", new ArrayList<Project>());
+        UserP u4 = new UserP("JohnnyLembrouille@gmail.com", "Johnny", "Johnny", "lembrouille", "icone-admin4.svg", new ArrayList<Project>());
+        UserP u5 = new UserP("admin@mail.com", "admin", "admin", "admin", "icone-admin5.svg", new ArrayList<Project>());
 
         userRepository.save(u1);
         userRepository.save(u2);

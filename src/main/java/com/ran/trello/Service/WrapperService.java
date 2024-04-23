@@ -2,6 +2,7 @@ package com.ran.trello.Service;
 
 import com.ran.trello.Model.DTO.WrapperDTO;
 import com.ran.trello.Model.Entity.Project;
+import com.ran.trello.Model.Entity.TaskCard;
 import com.ran.trello.Model.Entity.Wrapper;
 import com.ran.trello.Model.Repository.ProjectRepository;
 import com.ran.trello.Model.Repository.TaskCardRepository;
@@ -64,15 +65,27 @@ public class WrapperService {
     }
 
     public void deleteWrapper(Integer id) {
-        Wrapper wrapper = wrapperRepository.findById(id).get();
-        Project project = projectRepository.findById(wrapper.getProjectId()).get();
-        wrapper.getCards().forEach(card -> {
-            taskCardService.deleteTaskCard(card.getId());
-        });
-        wrapperRepository.save(wrapper);
-        project.removeWrapper(wrapper);
-        projectRepository.save(project);
-        wrapperRepository.delete(wrapper);
+        if (wrapperRepository.findById(id).isPresent()) {
+            Wrapper wrapper = wrapperRepository.findById(id).get();
+            List<Integer> cardsIds = wrapper.getCards().stream().map(card -> card.getId()).toList();
+            for (Integer cardId : cardsIds) {
+                TaskCard card = taskCardRepository.findById(cardId).get();
+                wrapper.removeCard(card);
+                taskCardRepository.delete(card);
+            }
+            if (projectRepository.findById(wrapper.getProjectId()).isPresent()) {
+                Project project = projectRepository.findById(wrapper.getProjectId()).get();
+                project.removeWrapper(wrapper);
+                projectRepository.save(project);
+                wrapperRepository.delete(wrapper);
+            }else {
+                System.out.println("Project not found with id: " + wrapper.getProjectId());
+                throw new RuntimeException("Project not found with id: " + wrapper.getProjectId());
+            }
+        }else {
+            System.out.println("Wrapper not found with id: " + id);
+            throw new RuntimeException("Wrapper not found with id: " + id);
+        }
     }
 
     private WrapperDTO convertToDTO(Wrapper wrapper) {

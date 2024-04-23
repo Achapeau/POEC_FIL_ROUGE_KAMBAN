@@ -2,6 +2,9 @@ package com.ran.trello.Service;
 
 import com.ran.trello.Model.DTO.ProjectDTO;
 import com.ran.trello.Model.Entity.Project;
+import com.ran.trello.Model.Entity.TaskCard;
+import com.ran.trello.Model.Entity.UserP;
+import com.ran.trello.Model.Entity.Wrapper;
 import com.ran.trello.Model.Repository.ProjectRepository;
 import com.ran.trello.Model.Repository.UserPRepository;
 import com.ran.trello.Model.Repository.WrapperRepository;
@@ -67,17 +70,16 @@ public class ProjectService {
 
     public void deleteById(Integer id) {
         Project project = projectRepository.findById(id).get();
-        project.getWrappers().forEach(wrapper -> {
-            wrapperService.deleteWrapper(wrapper.getId());
-        });
-        project.getWrappers().removeAll(project.getWrappers());
-        projectRepository.save(project);
-        project.getUsers().forEach(user -> {
+        List<Integer> wrappersIds = project.getWrappers().stream().map(wrapper -> wrapper.getId()).toList();
+        for (Integer wrapperId : wrappersIds) {
+            wrapperService.deleteWrapper(wrapperId);
+        }
+        List<UserP> users = project.getUsers();
+        for (UserP user : users) {
             user.removeProject(project);
             userPRepository.save(user);
-        });
+        }
         project.getUsers().removeAll(project.getUsers());
-        projectRepository.save(project);
-        projectRepository.delete(project);
+        projectRepository.deleteById(id);
     }
 }

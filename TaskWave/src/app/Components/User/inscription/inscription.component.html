@@ -6,23 +6,33 @@
         <img src="../../../../assets/images/Wavetask-logo.png" alt="logo wavetask">
         <h1>Inscription chez WaveTask</h1>
         <p>Entrez vos informations pour vous inscrire.</p>
-        <form [formGroup]="connectionForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="connectionForm" (ngSubmit)="onSubmit($event)" >
             <div class="form-group">
-                <label for="firstname">Prénom</label>
-                <input type="text" class="input-control" id="firstname" formControlName="firstname">
+                <label for="firstname" class="form-label">Prénom</label>
+                <input type="text" class="form-control" id="firstname" formControlName="firstname">
+                
             </div>
             <div class="form-group">
-                <label for="lastname">Nom</label>
-                <input type="text" class="input-control" id="lastname" formControlName="lastname">
+                <label for="lastname" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="lastname" formControlName="lastname">
+                
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="input-control" id="email" formControlName="email">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" formControlName="email">
+           </div>
+            <div class="form-group">
+                <label for="password"   class="form-label">Mot de passe</label>
+                <input type="password" class="form-control" id="password" formControlName="password" required="">
             </div>
             <div class="form-group">
-                <label for="password">Mot de passe</label>
-                <input type="password" class="input-control" id="password" formControlName="password">
-            </div>
+                <label for="icon">Choisissez une icône</label>
+                <select id="icon" class="form-control" formControlName="icon">
+                  <option *ngFor="let icon of iconsList" value={{icon.lien}}>
+                      {{icon.lien}}
+                  </option>
+                </select>
+              </div>
             <button type="submit" class="submit-btn">Valider</button>
         </form>
         <div>

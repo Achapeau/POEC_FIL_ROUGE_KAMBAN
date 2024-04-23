@@ -33,10 +33,11 @@ public class UserPService {
 
     public UserDTO updateUser(Integer id, UserDTO body) {
         UserP userP = userPRepository.findById(id).get();
-        userP.setEmail(body.getEmail());
-        userP.setFirstname(body.getFirstname());
-        userP.setLastname(body.getLastname());
-        userP.setPassword(body.getPassword());
+        if (body.getEmail() != null) userP.setEmail(body.getEmail());
+        if (body.getFirstname() != null) userP.setFirstname(body.getFirstname());
+        if (body.getLastname() != null) userP.setLastname(body.getLastname());
+        if (body.getPassword() != null) userP.setPassword(body.getPassword());
+        if (body.getIcon() != null) userP.setIcon(body.getIcon());
         return convertToUserDTO(userPRepository.save(userP));
     }
 
@@ -44,7 +45,7 @@ public class UserPService {
         userPRepository.deleteById(id);
     }
     public UserDTO convertToUserDTO(UserP userP) {
-        return new UserDTO(userP.getId(), userP.getEmail(), userP.getPassword(), userP.getFirstname(), userP.getLastname(), userP.getProjects().stream().map(project -> project.getId()).toList() );
+        return new UserDTO(userP.getId(), userP.getEmail(), userP.getPassword(), userP.getFirstname(), userP.getLastname(), userP.getIcon(), userP.getProjects().stream().map(project -> project.getId()).toList() );
     }
     public UserP convertToUserP(UserDTO userDTO) {
         UserP userP = new UserP();
@@ -53,6 +54,7 @@ public class UserPService {
         userP.setFirstname(userDTO.getFirstname());
         userP.setLastname(userDTO.getLastname());
         userP.setPassword(userDTO.getPassword());
+        userP.setIcon(userDTO.getIcon());
         return userP;
     }
 }

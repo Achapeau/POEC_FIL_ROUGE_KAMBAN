@@ -17,8 +17,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  padding-left: 30px;
+  margin-top: 5px;
   width: 100%;
 }
 
@@ -33,37 +33,54 @@
 }
 
 .user-add-icon {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  border: 1px solid #000000;
-  background-color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: rgb(0, 0, 0);
+  padding: 8px 16px;
+  background-color: #346BC8;
+  color: rgb(249, 249, 249);
+  border-radius: 10px;
   cursor: pointer;
   margin-right: 10px;
+  border: none;
 }
 
-.user-add-icon i {
-  font-size: 16px;
+
+.user-add-icon p {
+  margin: 0;
 }
 
 .share-button {
   padding: 8px 16px;
-  background-color: #6901fb;
-  color: rgb(249, 249, 249);
-  border-radius: 5px;
+  background-color: #fbfbfb;
+  color: rgb(0, 0, 0);
+  border-radius: 10px;
   cursor: pointer;
   margin-right: 10px;
+  border: solid 1px #8c8c8c;
+}
+
+.custom-dropdown-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: solid 1px #8c8c8c; /* Pas de bordure */
+  color: #495057; /* Couleur pour l'icône, ajustable selon le thème */
+  padding: 12px 16px; /* Espacement autour de l'icône pour facilité de clic */
+  border-radius: 10px; /* Bouton rond */
+  cursor: pointer; /* Indique que le bouton est cliquable */
+}
+
+
+.custom-dropdown-toggle:focus {
+  outline: none; /* Supprime la bordure de focus pour un look plus net */
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Lueur de focus subtile */
 }
 
 
 .settings-icon {
-  font-size: 20px;
-  color: #333;
-  cursor: pointer;
+  padding: 8px; /* Espace autour de l'icône */
+  border-radius: 10px;
+  background-color: #e9ecef; /* Fond clair */
+  color: #495057; /* Couleur de l'icône */
 }
 
 .settings-icon:hover {
@@ -71,6 +88,30 @@
   background-color: #0d4659;
 }
 
+.second-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.second-header p {
+  padding-left: 30px;
+}
+
+.filter-button{
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+  color: #000000;
+  background-color: white;
+  border: solid 1px #b5b5b5;
+  border-radius: 10px;
+  padding: 10px;
+}
 
 .container-box {
   width: 100%; /* Assure la pleine largeur dans le flux de flex */
@@ -79,6 +120,7 @@
   flex-direction: row;
   overflow-x: auto; /* Permet le défilement horizontal si nécessaire */
   align-items: start; /* Alignement au début pour les éléments */
+  margin-left: 15px;
 }
 
 /* Styles pour le drag-drop CDK */
