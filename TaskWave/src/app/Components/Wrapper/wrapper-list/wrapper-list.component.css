@@ -152,3 +152,60 @@
 .dropdown-divider {
   border-top-color: #555;  /* Couleur de la bordure des diviseurs pour une meilleure visibilité sur fond noir */
 }
+
+
+/* Style général du conteneur du modal */
+
+
+
+
+/* Style du conteneur interne du modal */
+.delete-project {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 500px; /* Taille maximale du modal */
+}
+
+/* Message de confirmation */
+.confirmation-message {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Conteneur pour les boutons */
+.button-choice {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* Styles pour les boutons */
+.button-choice button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cancel {
+  background-color: #ccc; /* Gris pour annuler */
+  color: #333;
+}
+
+.cancel:hover {
+  background-color: #bbb; /* Un peu plus foncé au survol */
+}
+
+.delete {
+  background-color: #ff4444; /* Rouge pour la suppression */
+  color: white;
+}
+
+.delete:hover {
+  background-color: #cc0000; /* Rouge plus foncé au survol */
+}
