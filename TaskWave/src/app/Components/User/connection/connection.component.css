@@ -1,6 +1,6 @@
 .login-container {
     display: flex;
-    height: 100vh; /* Pleine hauteur de la fenêtre */
+    height: 100vh;
 }
 
 .login-container p{
@@ -11,24 +11,24 @@
 
 
 .login-image, .login-form {
-    flex: 1; /* Chaque section prend exactement la moitié de l'espace disponible */
+    flex: 1; 
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .login-image {
-    overflow: hidden; /* Empêche toute débordement de l'image hors de cette division */
+    overflow: hidden;  
 }
 
 .login-image img {
-    width: 100%; /* S'assure que l'image couvre bien la largeur de sa section */
-    height: 100%; /* S'assure que l'image couvre bien la hauteur de sa section */
-    object-fit: cover; /* Garantit que l'image couvre la zone sans déformation */
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover;
 }
 
 .login-form {
-    padding: 20px; /* Ajoute un peu de padding autour du formulaire */
+    padding: 20px; 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -42,7 +42,7 @@
 }
 
 .form-control, .btn-primary, .btn-secondary {
-    width: 100%; /* Utilise toute la largeur disponible du conteneur de formulaire */
+    width: 100%;
 }
 
 .form-control {
@@ -59,7 +59,7 @@
     text-align: center;
     cursor: pointer;
     color: white;
-    background-color: rgb(80, 80, 248);
+    background-color: #346BC8;
     border: none;
 }
 

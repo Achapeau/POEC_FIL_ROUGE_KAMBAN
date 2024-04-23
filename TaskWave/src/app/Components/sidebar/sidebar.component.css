@@ -1,12 +1,12 @@
 .drawer {
-  width: 250px; /* Largeur fixe pour la sidebar */
-  height: 100vh; /* Hauteur totale de la vue */
-  position: fixed; /* Fixe la sidebar à gauche */
+  width: 250px;
+  height: 100vh; 
+  position: fixed; 
   left: 0;
   top: 0;
-  background-color: #f8f9fa; /* Couleur de fond de la sidebar */
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Ombre pour un effet de profondeur */
-  z-index: 1000; /* Assure que la sidebar est toujours visible */
+  background-color: #f8f9fa; 
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1); 
+  z-index: 1000; 
 }
 
 .drawer span{
@@ -28,24 +28,24 @@
 .home {
   display: flex;
   align-items: center;
-  padding: 0.5rem 1rem; /* Assure un padding uniforme autour du texte et de l'icône */
-  margin-bottom: 15px;/* Augmente la marge en haut */
-  width: 100%; /* Assure que l'élément s'étend à toute la largeur pour alignement */
-  text-align: left; /* Garantit que le texte est aligné à gauche */
+  padding: 0.5rem 1rem; 
+  margin-bottom: 15px;
+  width: 100%; 
+  text-align: left;
   cursor: pointer;
   border-radius: 0.35rem;
   transition: background-color 0.3s ease;
 }
 
 .home:hover {
-  background-color: #B6D8F2; /* Couleur de fond fin au survol */
+  background-color: #B6D8F2; 
   color: #346BC8;
   padding: 10px;
 }
 
 .home-icon {
-  font-size: 1rem; /* Taille de l'icône ajustée pour l'uniformité */
-  margin-right: 1.5rem; /* Espace entre l'icône et le texte */
+  font-size: 1rem; 
+  margin-right: 1.5rem; 
 }
 
 .project-search{
@@ -89,25 +89,25 @@
 
 .div-project {
   display: flex;
-  padding-left: 1rem; /* Ajoute du padding pour aligner à gauche dans la sidebar */
+  padding-left: 1rem;
 }
 
 .btn-project {
   display: flex;
   align-items: center;
-  padding: 0.5rem 1rem 0.5rem 0; /* Padding supérieur, inférieur et gauche */
-  padding-right: 2rem; /* Padding droit étendu */
+  padding: 0.5rem 1rem 0.5rem 0; 
+  padding-right: 2rem; 
   border: none;
   background: none;
-  width: 100%; /* Assurez-vous que le bouton s'étend sur toute la largeur */
-  text-align: left; /* Alignement du texte à gauche */
+  width: 100%; 
+  text-align: left;
   cursor: pointer;
-  border-radius: 0.35rem; /* Bords légèrement arrondis */
-  transition: background-color 0.3s ease; /* Animation douce pour le survol */
+  border-radius: 0.35rem;
+  transition: background-color 0.3s ease;
 }
 
 .btn-project:hover {
-  background-color: #B6D8F2; /* Couleur de fond fin au survol */
+  background-color: #B6D8F2; 
   color: #346BC8;
   padding: 10px;
 }
@@ -120,7 +120,7 @@
 .sidebar-tags {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1.5rem;  /* Marges pour espacer cette section des autres */
+  margin-bottom: 1.5rem;  
 }
 
 .tags-title {
@@ -128,7 +128,7 @@
   align-items: center;
   font-size: 14px;
   color: grey;
-  justify-content: space-between; /* Utilise toute la largeur, mais assure un espace entre les éléments */
+  justify-content: space-between; 
   width: 100%;
   margin-top: 24px;
   margin-bottom: 24px;
@@ -149,21 +149,21 @@
 .tag-list {
   display: flex;
   flex-direction: column;
-  padding-left: 1rem; /* Padding pour aligner les tags sous le titre */
+  padding-left: 1rem; 
 }
 
 .tag-item {
   display: flex;
   align-items: center;
-  border-radius: 0.35rem; /* Bords arrondis pour le style lors du hover */
-  transition: background-color 0.3s ease; /* Transition douce pour le changement de couleur de fond */
+  border-radius: 0.35rem; 
+  transition: background-color 0.3s ease; 
   cursor: pointer;
   margin-bottom: 5px;
   padding: 0.5rem 1rem 0.5rem 0;
 }
 
 .tag-item:hover {
-  background-color: #B6D8F2; /* Couleur de fond fin au survol */
+  background-color: #B6D8F2; 
   color: #346BC8;
   padding: 10px;
 }
@@ -171,8 +171,8 @@
 .tag-color {
   width: 10px;
   height: 10px;
-  border-radius: 50%; /* Forme ronde */
-  margin-right: 10px; /* Espace entre la couleur et le texte */
+  border-radius: 50%; 
+  margin-right: 10px;
 }
 
 

@@ -44,9 +44,11 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.authService.userData$.subscribe((myUser) => {
       this.myUser = myUser;
-      this.myProjects = this.projectService.convertProjectIdsToProjects(this.myUser.projectsIds!);
-      console.log("this.projects", this.projects);
-      console.log("myUser", myUser);
+    });
+    this.projects = this.projectService.convertProjectIdsToProjects(this.userService.currentUser?.projectsIds!);
+    this.getProject();
+    this.router.events.subscribe(() => {
+      this.projects = this.projectService.convertProjectIdsToProjects(this.userService.currentUser?.projectsIds!);
       this.getProject();
     });
   }
@@ -64,7 +66,7 @@ export class SidebarComponent implements OnInit {
   }
 
   onSearchChange(): void {
-    this.getProject(); // Mise à jour des projets filtrés lors de chaque modification de recherche
+    this.getProject();
   }
 
   toggle() {

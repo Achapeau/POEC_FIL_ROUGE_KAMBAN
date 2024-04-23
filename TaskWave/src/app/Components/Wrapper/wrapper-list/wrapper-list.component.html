@@ -10,11 +10,14 @@
         <div class="titre-description"><h1><strong>{{ this.projectService.project.title }}</strong></h1>
         <p>{{ this.projectService.project.description }}</p>
     </div>
-        <div class="header-actions">
-            <button class="user-add-icon">
-                    <p>Membres</p>               
-            </button>
-            <button class="share-button">Partager</button>
+    <div class="header-actions">
+        <ng-container *ngFor="let userId of project.userIds">
+            <img *ngIf="membersIcons[userId]" [src]="membersIcons[userId]" width="38" height="38" class="rounded-circle me-1" alt="Member Icon">
+        </ng-container>
+        <button class="user-add-icon">
+            <p>Membres</p>
+        </button>
+        <button class="share-button">Partager</button>
             <div class="sidebar-user" >
                 <button class="custom-dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -35,14 +38,6 @@
             </div>            
         </div>
     </div>
-    <!-- <div class="second-header">
-        <p>{{ this.projectService.project.description }}</p>
-        <div class="filter">
-            <button class="filter-button">
-                <i class="fa-solid fa-filter"></i>Filtrer</button>
-        </div>
-    </div> -->
-    
     <!-- Box contenant les éléments de la liste, séparée du header -->
     <div class="container-box" cdkDropListGroup>
         <app-wrapper *ngFor="let wrapper of wrappersList" [wrapper]="wrapper" cdkDrag></app-wrapper>

@@ -30,9 +30,9 @@ input {
 
 .new-task input.checkoutForm {
     width: 100%;
-    padding: 8px 45px 8px 10px; /* Padding à droite pour le bouton de fermeture */
+    padding: 8px 45px 8px 10px; 
     border: 1px solid #ccc;
-    border-radius: 20px; /* Input arrondi */
+    border-radius: 20px; 
     font-size: 16px;
 }
 
@@ -47,11 +47,11 @@ input {
 }
 
 .new-task button.close-button:hover {
-    color: #FF0000; /* Changement de couleur lors du survol pour plus de visibilité */
+    color: #FF0000; 
 }
 
 .new-task button.btn-primary {
-    margin-top: 10px; /* Espacement au-dessus du bouton submit pour une séparation claire */
+    margin-top: 10px; 
     width: 100%;
     padding: 10px;
     border-radius: 20px;
