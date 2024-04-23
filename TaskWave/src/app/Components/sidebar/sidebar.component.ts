@@ -22,7 +22,7 @@ export class SidebarComponent implements OnInit {
   isActive: boolean = true;
   myUser!: Partial<User>;
   userId: number = 0;
-  projects!: Project[];
+  projects: Project[] = this.projectService.convertProjectIdsToProjects(this.userService.currentUser?.projectsIds!);
   myProjects!: Project[];
   isModalOpen = false;
   searchQuery: string = ''; // Ajout pour la gestion de la recherche
@@ -39,8 +39,12 @@ export class SidebarComponent implements OnInit {
     this.authService.userData$.subscribe((myUser) => {
       this.myUser = myUser;
     });
-    this.projects = this.projectService.convertProjectIdsToProjects(this.myUser.projectsIds!);
+    this.projects = this.projectService.convertProjectIdsToProjects(this.userService.currentUser?.projectsIds!);
     this.getProject(); // Assurez-vous que la liste des projets est mise à jour au démarrage
+    this.router.events.subscribe(() => {
+      this.projects = this.projectService.convertProjectIdsToProjects(this.userService.currentUser?.projectsIds!);
+      this.getProject();
+    });
   }
 
   getProject() {

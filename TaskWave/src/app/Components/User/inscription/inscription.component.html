@@ -26,9 +26,9 @@
                 <input type="password" class="form-control" id="password" formControlName="password" required="">
             </div>
             <div class="form-group">
-                <label for="iconUser">Choisissez une icône</label>
-                <select id="iconUser" class="form-control" formControlName="icon">
-                  <option *ngFor="let icon of iconsList" value= {{icon.lien}}>
+                <label for="icon">Choisissez une icône</label>
+                <select id="icon" class="form-control" formControlName="icon">
+                  <option *ngFor="let icon of iconsList" value={{icon.lien}}>
                       {{icon.lien}}
                   </option>
                 </select>

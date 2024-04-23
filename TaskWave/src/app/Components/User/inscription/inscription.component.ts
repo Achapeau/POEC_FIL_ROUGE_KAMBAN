@@ -54,7 +54,6 @@ export class InscriptionComponent {
       console.log(this.connectionForm.value);
 
       let user: Partial<User> = {
-        id: 0,
         email: this.connectionForm.value.email as string,
         password: this.connectionForm.value.password as string,
         firstname: this.connectionForm.value.firstname as string,
@@ -62,7 +61,7 @@ export class InscriptionComponent {
         icon: this.connectionForm.value.icon as string,
         projectsIds: [],
       };
-
+      console.log(user);
       this.userService.inscription(user);
     } else {
       let alerts = [];
@@ -82,6 +81,9 @@ export class InscriptionComponent {
         } else {
           alerts.push(' Email');
         }
+      }
+      if (this.connectionForm.controls['icon'].invalid) {
+        alerts.push(' icon');
       }
       if (alerts.length > 0 && mail != '') {
         alert(`Le ou les champs suivants sont requis: ${alerts}. ${mail}`);
