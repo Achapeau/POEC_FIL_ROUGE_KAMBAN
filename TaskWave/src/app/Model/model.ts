@@ -25,6 +25,7 @@ export interface User {
   firstname: string;
   lastname: string;
   projectsIds: number[];
+  token: Token;
 }
 
 export interface Wrapper {
@@ -51,4 +52,9 @@ export interface LogsDTO {
 export interface Themes {
   name: string;
   background: string;
+}
+
+export interface Token {
+  token: string;
+  expiresIn: number;
 }
