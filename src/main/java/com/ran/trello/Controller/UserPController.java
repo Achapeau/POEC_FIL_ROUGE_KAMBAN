@@ -40,6 +40,7 @@ public class UserPController {
     @PostMapping("/register")
     public ResponseEntity<UserP> register(@RequestBody RegisterUserDTO registerUserDTO){
         UserP registeredUser = authenticationService.signup(registerUserDTO);
+        registeredUser.setPassword(null);
         return  ResponseEntity.ok(registeredUser);
     }
 

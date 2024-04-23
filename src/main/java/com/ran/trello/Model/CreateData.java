@@ -16,11 +16,11 @@ public class CreateData {
         ProjectRepository projectRepository = context.getBean(ProjectRepository.class);
         WrapperRepository wrapperRepository = context.getBean(WrapperRepository.class);
         TaskCardRepository taskCardRepository = context.getBean(TaskCardRepository.class);
-        UserP u1 = new UserP("JeanValJean@gmail.com", "Jean", "Jean", "ValJean", new ArrayList<Project>(),"");
-        UserP u2 = new UserP("BillyBob@gmail.com", "Billy", "Billy", "Bob", new ArrayList<Project>(),"");
-        UserP u3 = new UserP("BobbyLarnak@gmail.com", "Bobby", "Bobby", "larnak", new ArrayList<Project>(), "");
-        UserP u4 = new UserP("JohnnyLembrouille@gmail.com", "Johnny", "Johnny", "lembrouille", new ArrayList<Project>(), "");
-        UserP u5 = new UserP("admin@mail.com", "admin", "admin", "admin", new ArrayList<Project>(), "");
+        UserP u1 = new UserP("JeanValJean@gmail.com", "$2a$10$kfitBkbrOnmtDEoiYthDxOtdZ4LU/oAM9ZZe3Ul3bERcPkHtT8ZTO", "Jean", "ValJean", new ArrayList<Project>(),"");
+        UserP u2 = new UserP("BillyBob@gmail.com", "$2a$10$PGv61eS8L6US3nChav/YjOWuuQEZvBWb2j6aWulwDzd1oVAoCKzVq", "Billy", "Bob", new ArrayList<Project>(),"");
+        UserP u3 = new UserP("BobbyLarnak@gmail.com", "$2a$10$9A0Zevq15btphGS4MYcX0uwuUD/uLw2B5YPSiQKBeFlQiRXyKqihG", "Bobby", "larnak", new ArrayList<Project>(), "");
+        UserP u4 = new UserP("JohnnyLembrouille@gmail.com", "$2a$10$vjmZ/ljcSG.6gz/u4FXdNOC3nujhhCataT8g1Dzr/hV8svSUQtUSW", "Johnny", "lembrouille", new ArrayList<Project>(), "");
+        UserP u5 = new UserP("admin@mail.com", "$2a$10$HAutSR2yVEP9ZrMINr9hQu/ky2JwbL2/gDplfh5P6MmrxukLWdh2O", "admin", "admin", new ArrayList<Project>(), "");
 
         userRepository.save(u1);
         userRepository.save(u2);
