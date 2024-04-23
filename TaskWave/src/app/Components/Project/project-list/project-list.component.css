@@ -63,19 +63,19 @@ h2 {
 .projects-container {
     display: flex;
     align-items: center;
-    gap: 50px; /* Espacement entre le texte et les projets */
+    gap: 50px; 
 }
 
 .project-intro {
-    flex: 1; /* Prend l'espace nécessaire sans dépasser la largeur du contenu */
-    max-width: 200px; /* Fixe une largeur maximale pour le texte */
+    flex: 1; 
+    max-width: 200px; 
 }
 
 .list-projects {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    flex-grow: 1; /* Permet aux projets de remplir l'espace restant */
+    flex-grow: 1; 
 }
 
 

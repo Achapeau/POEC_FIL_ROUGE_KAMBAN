@@ -6,7 +6,7 @@
     padding: 15px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Alignement des enfants à gauche */
+    align-items: flex-start;
     cursor: pointer;
     background-color: #fff;
     border: 1px solid #e7e7e7;
@@ -55,17 +55,17 @@
 
 
 .status-to-do {
-    background-color: #ffa502; /* Orange pour 'à faire' */
+    background-color: #ffa502; 
     color: white;
 }
 
 .status-in-progress {
-    background-color: #346BC8; /* Bleu pour 'en cours' */
+    background-color: #346BC8; 
     color: white;
 }
 
 .status-done {
-    background-color: #28B463; /* Vert pour 'terminé' */
+    background-color: #28B463; 
     color: white;
 }
 

@@ -62,7 +62,7 @@ export class SidebarComponent implements OnInit {
   }
 
   onSearchChange(): void {
-    this.getProject(); // Mise à jour des projets filtrés lors de chaque modification de recherche
+    this.getProject();
   }
 
   toggle() {

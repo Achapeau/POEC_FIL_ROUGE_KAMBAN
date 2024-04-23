@@ -1,15 +1,15 @@
 
 .container-list {
   width: 100%;
-  height: 100vh; /* Assurez-vous que la hauteur totale est visible */
+  height: 100vh;
   display: flex;
-  flex-direction: column; /* Organise les enfants en colonne */
-  align-items: center; /* Centre les enfants horizontalement */
+  flex-direction: column;
+  align-items: center;
   overflow: hidden;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed; /* Empêche le débordement */
+  background-attachment: fixed;
 }
 
 .header-wrapper {
@@ -63,25 +63,25 @@
   align-items: center;
   justify-content: center;
   background: white;
-  border: solid 1px #8c8c8c; /* Pas de bordure */
-  color: #495057; /* Couleur pour l'icône, ajustable selon le thème */
-  padding: 12px 16px; /* Espacement autour de l'icône pour facilité de clic */
-  border-radius: 10px; /* Bouton rond */
-  cursor: pointer; /* Indique que le bouton est cliquable */
+  border: solid 1px #8c8c8c;
+  color: #495057;
+  padding: 12px 16px;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 
 .custom-dropdown-toggle:focus {
-  outline: none; /* Supprime la bordure de focus pour un look plus net */
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Lueur de focus subtile */
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 
 .settings-icon {
-  padding: 8px; /* Espace autour de l'icône */
+  padding: 8px;
   border-radius: 10px;
-  background-color: #e9ecef; /* Fond clair */
-  color: #495057; /* Couleur de l'icône */
+  background-color: #e9ecef;
+  color: #495057;
 }
 
 .settings-icon:hover {
@@ -106,12 +106,12 @@
 
 
 .container-box {
-  width: 100%; /* Assure la pleine largeur dans le flux de flex */
-  height: 100%; /* Calcule la hauteur moins le header */
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: row;
-  overflow-x: auto; /* Permet le défilement horizontal si nécessaire */
-  align-items: start; /* Alignement au début pour les éléments */
+  overflow-x: auto;
+  align-items: start;
   margin-left: 15px;
 }
 
@@ -131,30 +131,27 @@
 
 /* Cible le menu déroulant et ajuste le fond et les bordures */
 .dropdown-menu.dropdown-menu-dark.text-small.shadow.text-dark.show {
-  background-color: #343a40;  /* Fond noir pour le menu déroulant */
-  border-color: #343a40;  /* Bordure de la même couleur que le fond pour une apparence uniforme */
+  background-color: #343a40;  
+  border-color: #343a40; 
 }
 
 /* Cible tous les liens dans le menu déroulant */
 .dropdown-menu a.dropdown-item {
-  color: #fff;  /* Couleur du texte blanc */
-  background-color: #343a40;  /* Assure que le fond est noir */
+  color: #fff; 
+  background-color: #343a40; 
 }
 
 /* Cible les boutons dans le menu déroulant pour assurer l'uniformité du style */
 .dropdown-menu button {
-  background: none;  /* Aucun fond pour les boutons */
-  border: none;  /* Aucune bordure pour les boutons */
-  width: 100%;  /* Largeur totale pour aligner avec les autres éléments */
+  background: none; 
+  border: none;  
+  width: 100%;  
 }
 
 /* Cible les diviseurs pour maintenir une apparence cohérente */
 .dropdown-divider {
-  border-top-color: #555;  /* Couleur de la bordure des diviseurs pour une meilleure visibilité sur fond noir */
+  border-top-color: #555;  
 }
-
-
-/* Style général du conteneur du modal */
 
 
 
@@ -166,7 +163,7 @@
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   width: 90%;
-  max-width: 500px; /* Taille maximale du modal */
+  max-width: 500px; 
 }
 
 /* Message de confirmation */
@@ -193,19 +190,19 @@
 }
 
 .cancel {
-  background-color: #ccc; /* Gris pour annuler */
+  background-color: #ccc; 
   color: #333;
 }
 
 .cancel:hover {
-  background-color: #bbb; /* Un peu plus foncé au survol */
+  background-color: #bbb; 
 }
 
 .delete {
-  background-color: #ff4444; /* Rouge pour la suppression */
+  background-color: #ff4444; 
   color: white;
 }
 
 .delete:hover {
-  background-color: #cc0000; /* Rouge plus foncé au survol */
+  background-color: #cc0000; 
 }

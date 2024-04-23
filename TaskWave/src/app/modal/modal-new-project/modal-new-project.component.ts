@@ -72,7 +72,6 @@ export class ModalNewProjectComponent implements OnInit, OnChanges {
       newMembers: [0],
       newTheme: '',
       newTitle: '',
-      // newDesciption: '',
     });
   }
 

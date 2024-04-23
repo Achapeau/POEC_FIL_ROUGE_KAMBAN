@@ -26,7 +26,7 @@ export class WrapperListComponent implements OnInit {
   newTitle!: string;
   active: boolean = false;
   routeParam: any;
-  membersIcons: { [key: number]: string } = {}; // Store user icons by user ID
+  membersIcons: { [key: number]: string } = {}; 
 
   constructor(public wrapperService: WrapperService, public projectService: ProjectService, private route: ActivatedRoute, public userService: UserService) {}
 
@@ -55,7 +55,7 @@ export class WrapperListComponent implements OnInit {
   loadMemberIcons(project: Project): void {
     project.userIds.forEach(userId => {
       this.userService.getUserById(userId).subscribe(user => {
-        this.membersIcons[user.id] = `/assets/svg/${user.icon}`; // Store icons with the path
+        this.membersIcons[user.id] = `/assets/svg/${user.icon}`; 
       });
     });
   }
@@ -71,7 +71,7 @@ export class WrapperListComponent implements OnInit {
   deleteProject(): void {
     this.projectService.deleteProject(this.routeParam).subscribe(() => {
       this.active = false;
-      // Redirect or handle UI update here
+      
     });
   }
 }

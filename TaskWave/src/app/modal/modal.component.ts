@@ -10,11 +10,10 @@ import { CommonModule } from '@angular/common';
 })
 export class ModalComponent {
   @Input() isOpen = true;
-  @Output() isOpenChange = new EventEmitter<boolean>(); // Ajout pour le two-way binding
-
+  @Output() isOpenChange = new EventEmitter<boolean>(); 
   onClose() {
     console.log('onClose');
     this.isOpen = false;
-    this.isOpenChange.emit(this.isOpen); // Notifier le changement
+    this.isOpenChange.emit(this.isOpen); 
   }
 }
