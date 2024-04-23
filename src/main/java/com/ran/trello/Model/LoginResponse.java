@@ -1,12 +1,9 @@
 package com.ran.trello.Model;
 
-import lombok.Getter;
-import lombok.Setter;
-
-
 public class LoginResponse {
     private String token;
     private long expiresIn;
+
     public String getToken() {
         return token;
     }

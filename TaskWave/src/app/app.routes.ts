@@ -7,14 +7,23 @@ import { ProjectListComponent } from './Components/Project/project-list/project-
 import { PageNotFoundComponent } from './Components/page-not-found/page-not-found.component';
 import { ConnectionComponent } from './Components/User/connection/connection.component';
 import { InscriptionComponent } from './Components/User/inscription/inscription.component';
+import { authGuard } from './shared/auth.guard';
 
 export const routes: Routes = [
-    { path: '',   redirectTo: 'connexion', pathMatch: 'full' },
-    // { path: 'project-component', component: ProjectComponent },
-    { path: 'project-list', component: ProjectListComponent },
-    // { path: 'wrapper-component', component: WrapperComponent },
-    { path: 'project/:id', component: WrapperListComponent },
-    { path: 'connexion', component: ConnectionComponent },
-    { path: 'inscription', component: InscriptionComponent },
-    { path: '**', component: PageNotFoundComponent },
+  { path: '', redirectTo: 'connexion', pathMatch: 'full' },
+  // { path: 'project-component', component: ProjectComponent },
+  {
+    path: 'project-list',
+    component: ProjectListComponent,
+    canActivate: [authGuard],
+  },
+  // { path: 'wrapper-component', component: WrapperComponent },
+  {
+    path: 'project/:id',
+    component: WrapperListComponent,
+    canActivate: [authGuard],
+  },
+  { path: 'connexion', component: ConnectionComponent },
+  { path: 'inscription', component: InscriptionComponent },
+  { path: '**', component: PageNotFoundComponent },
 ];

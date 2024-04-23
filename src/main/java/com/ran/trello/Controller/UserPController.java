@@ -22,44 +22,53 @@ public class UserPController {
     private final AuthenticationService authenticationService;
     private UserPService userPService;
 
-    public UserPController(UserPService userPService, JwtService jwtService, AuthenticationService authenticationService) {
+    public UserPController(UserPService userPService, JwtService jwtService,
+            AuthenticationService authenticationService) {
         this.jwtService = jwtService;
         this.authenticationService = authenticationService;
         this.userPService = userPService;
     }
+
     @GetMapping
-    public List<UserDTO> getAllUsers()
-    {
+    public List<UserDTO> getAllUsers() {
         return userPService.findAllUsers();
     }
+
     @GetMapping("/{id}")
-    public UserDTO getUserById(@PathVariable Integer id)
-    {
+    public UserDTO getUserById(@PathVariable Integer id) {
         return userPService.findUserById(id);
     }
+
     @PostMapping("/register")
-    public ResponseEntity<UserP> register(@RequestBody RegisterUserDTO registerUserDTO){
+    public ResponseEntity<UserP> register(@RequestBody RegisterUserDTO registerUserDTO) {
         UserP registeredUser = authenticationService.signup(registerUserDTO);
         registeredUser.setPassword(null);
-        return  ResponseEntity.ok(registeredUser);
+        return ResponseEntity.ok(registeredUser);
     }
 
     @PutMapping("/{id}")
-    public UserDTO updateUser(@PathVariable Integer id, @RequestBody UserDTO body)
-    {
+    public UserDTO updateUser(@PathVariable Integer id, @RequestBody UserDTO body) {
         return userPService.updateUser(id, body);
     }
+
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Integer id) {
         userPService.deleteUser(id);
     }
+
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> authenticate(@RequestBody LogDTO logDTO) {
         UserP authenticatedUser = authenticationService.authenticate(logDTO);
         String jwtToken = jwtService.generateToken(authenticatedUser);
-        LoginResponse loginResponse = new LoginResponse().setToken(jwtToken).setExpiresIn(jwtService.getExpirationTime());
+        LoginResponse loginResponse = new LoginResponse().setToken(jwtToken)
+                .setExpiresIn(jwtService.getExpirationTime());
 
         return ResponseEntity.ok(loginResponse);
+    }
+
+    @GetMapping("/mail/{email}")
+    public UserDTO findByEmail(@PathVariable String email) {
+        return userPService.findByEmail(email);
     }
 
 }

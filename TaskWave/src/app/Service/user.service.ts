@@ -49,13 +49,19 @@ export class UserService {
     this.http
       .post<User>(this.serviceURL + '/login', logDTO)
       .subscribe((data: User) => {
-        console.log(data);
-        this.currentUser = data;
-        this.connected = true;
-        this.router.navigate(['project-list'], { relativeTo: this.route });
-        
+        this.authService.doLoginUser(logDTO.email, data.token);
+        const userMail = this.authService.decodeToken()?.sub;
+        this.getUserByEmail(userMail as string).subscribe((user) => {
+          this.currentUser = user;
+          this.connected = true;
+          this.router.navigate(['project-list'], { relativeTo: this.route });
+        });
       });
+    let Log = this.authService.getToken();
+
+    console.log(Log);
   }
+
   inscription(User: Partial<User>) {
     this.http
       .post<User>(this.serviceURL + '/register', User)
@@ -69,7 +75,7 @@ export class UserService {
 
   // Disconnect user
   disconnectUser() {
-    this.authService.deleteToken()
+    this.authService.deleteToken();
     this.currentUser = null;
     this.connected = false;
     this.router.navigate([''], { relativeTo: this.route });
@@ -77,5 +83,9 @@ export class UserService {
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.serviceURL);
+  }
+
+  getUserByEmail(email: string): Observable<User> {
+    return this.http.get<User>(this.serviceURL + '/email/' + email);
   }
 }

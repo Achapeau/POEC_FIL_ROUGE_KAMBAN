@@ -56,4 +56,8 @@ public class UserPService {
         userP.setPassword(userDTO.getPassword());
         return userP;
     }
+
+    public UserDTO findByEmail(String email) {
+        return convertToUserDTO(userPRepository.findByEmail(email).get());
+    }
 }

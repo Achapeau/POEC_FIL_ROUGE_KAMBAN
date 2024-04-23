@@ -10,4 +10,5 @@ import lombok.Setter;
 public class LogDTO {
     private String email;
     private String password;
+    private Integer id;
 }
