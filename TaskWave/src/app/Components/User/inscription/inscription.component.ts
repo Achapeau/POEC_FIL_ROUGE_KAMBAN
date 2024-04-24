@@ -8,11 +8,12 @@ import {
 } from '@angular/forms';
 import { Icon, User } from '../../../Model/model';
 import { CommonModule, NgIf } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-inscription',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgIf],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgIf, RouterLink],
   templateUrl: './inscription.component.html',
   styleUrl: './inscription.component.css',
 })
