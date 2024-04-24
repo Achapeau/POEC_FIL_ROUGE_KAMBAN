@@ -111,6 +111,7 @@ export class ModalNewProjectComponent implements OnInit, OnChanges {
       let newProject: Partial<Project> = {
         title: this.checkoutForm.value.newTitle as string,
         background: this.checkoutForm.value.newTheme as string,
+        description: this.checkoutForm.value.newDesciption as string,
         wrappersIds: [],
         userIds: memberIds,
       };
