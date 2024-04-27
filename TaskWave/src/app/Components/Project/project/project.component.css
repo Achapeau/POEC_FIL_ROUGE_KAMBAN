@@ -34,10 +34,10 @@
 
 .project-card p {
     font-size: 14px; 
-    margin: 0; /* Pas de marge pour maximiser l'espace disponible */
-    overflow: hidden; /* Cache le texte qui déborderait */
-    text-overflow: ellipsis; /* Ajoute des points de suspension si le texte est trop long */
+    margin: 0; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* Limite le texte à trois lignes */
+    -webkit-line-clamp: 3; 
     -webkit-box-orient: vertical;
 }

@@ -24,6 +24,7 @@ export interface User {
   password: string;
   firstname: string;
   lastname: string;
+  icon: string;
   projectsIds: number[];
   token: Token;
 }
@@ -57,4 +58,8 @@ export interface Themes {
 export interface Token {
   token: string;
   expiresIn: number;
+}
+
+export interface Icon {
+  lien: string;
 }

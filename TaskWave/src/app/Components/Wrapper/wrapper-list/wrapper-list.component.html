@@ -7,12 +7,17 @@
      
     <!-- Header pour le titre et la description du projet -->
     <div class="header-wrapper">
-        <h1>{{ this.projectService.project.title }}</h1>
-        <div class="header-actions">
-            <div class="user-add-icon">
-                    <i class="fa-solid fa-user-plus"></i>                
-            </div>
-            <button class="share-button">Partager</button>
+        <div class="titre-description"><h1><strong>{{ this.projectService.project.title }}</strong></h1>
+        <p>{{ this.projectService.project.description }}</p>
+    </div>
+    <div class="header-actions">
+        <ng-container *ngFor="let userId of project.userIds">
+            <img *ngIf="membersIcons[userId]" [src]="membersIcons[userId]" width="38" height="38" class="rounded-circle me-1" alt="Member Icon">
+        </ng-container>
+        <button class="user-add-icon">
+            <p>Membres</p>
+        </button>
+        <button class="share-button">Partager</button>
             <div class="sidebar-user" >
                 <button class="custom-dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -25,33 +30,16 @@
                     </li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
-                        <button (click)="active = true">                    
-                            <a class="dropdown-item" >Suprimer votre projet</a>
+                        <button (click)="deleteProject()">                    
+                            <a class="dropdown-item" >Supprimer votre projet</a>
                         </button>
                     </li>
                 </ul>
             </div>            
         </div>
     </div>
-    
     <!-- Box contenant les éléments de la liste, séparée du header -->
     <div class="container-box" cdkDropListGroup>
-        <app-modal *ngIf="active === true">
-            <div class="delete-project">
-                <div class="confirmation-message">
-                    Etes vous sûr de bien vouloir supprimer votre projet ?
-                </div>
-                <div class="button-choice">
-                    <button class="cancel" (click)="active = false">
-                        Annuler
-                    </button>
-                    <button class="delete" (click)="deleteProject()">
-                        Supprimer
-                        </button>
-                </div>
-            </div>
-        
-        </app-modal>
         <app-wrapper *ngFor="let wrapper of wrappersList" [wrapper]="wrapper" cdkDrag></app-wrapper>
         <app-wrapper-create></app-wrapper-create>
     </div>

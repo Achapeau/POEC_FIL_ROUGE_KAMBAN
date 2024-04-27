@@ -1,37 +1,40 @@
 <div *ngIf="isOpen" class="modal-background" (click)="closeModal()">
   <div class="modal-content" (click)="$event.stopPropagation()">
-        <div class="modal-content">
-            <h2>Créer un nouveau projet</h2>
-            <p>Entrez les détails du projet ici.</p>
-            <form class="project-form" [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
-                <div class="form-group">
-                  <label for="projectTitle">Titre du projet</label>
-                  <input type="text" id="projectTitle" class="form-control is-invalid is-valid" placeholder="Entrez le titre du projet" formControlName="newTitle">
-                  <!-- <div class="invalid-tooltip">Le titre ne doit pas être vide.</div> -->
-                  <!-- on peut rajouter la classe bootstrap "needs-validation" à form si on veut dire à l'utilisateur qu'il doit remplir le titre pour pouvoir valider -->
-                </div>
-        
-                <div class="form-group">
-                  <label for="projectTheme">Thème du projet</label>
-                  <select id="projectTheme" class="form-control" formControlName="newTheme">
-                    <option *ngFor="let theme of themesList" value= {{theme.background}}>
-                        {{theme.name}}
-                    </option>
-                  </select>
-                </div>
-              
-                <div class="form-group">
-                  <label for="projectMembers">Ajouter des membres</label>
-                  <select id="projectMembers" class="form-control" formControlName="newMembers" multiple>
-                    <option *ngFor="let member of membersList" [value]="member.id" class="member-option">{{ member.firstname }} {{ member.lastname }}</option>
-                  </select>
-                  <!-- <input type="number" id="projectMembers" class="form-control" placeholder="Entrez les noms des membres" formControlName="newMembers"> -->
-                </div>
-              
-                <button type="submit" class="btn-submit">Créer le projet</button>
-            </form>
-              
-            <!-- Ici vous pouvez ajouter un formulaire pour saisir les détails du nouveau projet -->
-        </div>
+    <div class="modal-content">
+        <h2>Créer un nouveau projet</h2>
+        <p>Entrez les détails du projet ici.</p>
+        <form class="project-form" [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="projectTitle">Titre du projet</label>
+              <input type="text" id="projectTitle" class="form-control is-invalid is-valid" placeholder="Entrez le titre du projet" formControlName="newTitle">
+              <!-- <div class="invalid-tooltip">Le titre ne doit pas être vide.</div> -->
+              <!-- on peut rajouter la classe bootstrap "needs-validation" à form si on veut dire à l'utilisateur qu'il doit remplir le titre pour pouvoir valider -->
+            </div>
+            <div class="form-group">
+              <label for="projectDescription">Description du projet</label>
+              <textarea id="projectDescription" class="form-control" placeholder="Entrez une description du projet" formControlName="newDesciption"></textarea>
+            </div>
+    
+            <div class="form-group">
+              <label for="projectTheme">Thème du projet</label>
+              <select id="projectTheme" class="form-control" formControlName="newTheme">
+                <option *ngFor="let theme of themesList" value= {{theme.background}}>
+                    {{theme.name}}
+                </option>
+              </select>
+            </div>
+          
+            <div class="form-group">
+              <label for="projectMembers">Ajouter des membres</label>
+              <select id="projectMembers" class="form-control" formControlName="newMembers" multiple>
+                <option *ngFor="let member of membersList" [value]="member.id" class="member-option">{{ member.firstname }} {{ member.lastname }}</option>
+              </select>
+              <!-- <input type="number" id="projectMembers" class="form-control" placeholder="Entrez les noms des membres" formControlName="newMembers"> -->
+            </div>
+          
+            <button type="submit" class="btn-submit">Créer le projet</button>
+        </form>
+  
+    </div>
   </div>
 </div>

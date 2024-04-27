@@ -23,7 +23,7 @@ import { ModalNewProjectComponent } from '../../../modal/modal-new-project/modal
   styleUrls: ['./project-list.component.css'],
 })
 export class ProjectListComponent implements OnInit, OnChanges {
-  projects: Project[] = [];
+  projects: Project[] = this.projectService.projects;
   @Input() isOpenChange!: boolean;
   isModalOpen: boolean = this.isOpenChange;
   myUser!: Partial<User>;
@@ -34,36 +34,34 @@ export class ProjectListComponent implements OnInit, OnChanges {
     private authService: AuthService,
     private userService: UserService
   ) {
-    this.getProject();
   }
 
 
   ngOnInit(): void {
-    this.authService.userData$.subscribe((myUser) => {
-      this.myUser = myUser;
-    });
-    this.userService.getUsers().subscribe((membersList) => {
-      this.membersList = membersList;
-    });
-    this.projectService
-      .getProject()
-      ?.userIds.map((id) =>
-        this.userService
-          .getUserById(id)
-          .subscribe((user) => this.membersList.push(user))
-      );
-    console.log(this.membersList);
+    this.getProjects();
+
+    // this.authService.userData$.subscribe((myUser) => {
+    //   this.myUser = myUser;
+    // });
+    // this.userService.getUsers().subscribe((membersList) => {
+    //   this.membersList = membersList;
+    // });
+    // this.projectService
+    //   .getProject()
+    //   ?.userIds.map((id) =>
+    //     this.userService
+    //       .getUserById(id)
+    //       .subscribe((user) => this.membersList.push(user))
+    //   );
+    // console.log(this.membersList);
   }
 
   ngOnChanges(): void {
   }
 
-  getProject() {
-    this.projectService.getProjects().subscribe((data: Project[]) => {
-      this.projects = data.filter((project) =>
-        project.userIds?.includes(this.myUser.id!)
-      );
-    });
+  getProjects() {
+    this.projects = this.projectService.getProjectsForCurrentUser();
+    this.projectService.projects = this.projects;
   }
 
   openCreateProjectModal() {

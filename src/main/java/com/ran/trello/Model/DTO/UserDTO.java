@@ -17,6 +17,7 @@ public class UserDTO {
     private String password;
     private String firstname;
     private String lastname;
+    private String icon;
     private List<Integer> projectsIds;
     private String role;
     private String icon;

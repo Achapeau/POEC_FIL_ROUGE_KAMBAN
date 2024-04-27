@@ -1,8 +1,7 @@
 .container {
-    width: 100%;
-    margin-top: 15px;
-    margin-left: 30px;
-
+    width: 95%;
+    margin-top: 25px;
+    margin-left: 50px;
 }
 
 .container h1 {
@@ -50,8 +49,37 @@ h2 {
     background-color: #e6f0ff; 
 }
 
+.my-projects .projects {
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+}
 
+.my-projects {
+    margin: 20px 0;
+}
 
+.projects-container {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Espacement entre le texte et les projets */
+}
+
+.project-intro {
+    flex: 1; /* Prend l'espace nécessaire sans dépasser la largeur du contenu */
+    max-width: 200px; /* Fixe une largeur maximale pour le texte */
+}
+
+.list-projects {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    flex-grow: 1; /* Permet aux projets de remplir l'espace restant */
+}
+
+.my-projects p {
+	margin-right: 50px;
+}
 
 .modal-content {
 	background: #fff;
@@ -106,33 +134,24 @@ h2 {
 .member-option:active {
   background-color: #f5f5f5;
 }
-
-/* Style pour le conteneur principal de la section des projets */
-.projects-container {
+.modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  justify-content: space-between; 
-  align-items: flex-start; 
-  margin: 20px 0;
-  padding: 20px; 
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* S'assurer que la modal est au-dessus de tout le contenu */
 }
 
-/* Style pour l'introduction des projets */
-.project-intro {
-  flex: 1;  
-  max-width: 300px; 
-  margin-right: 50px; 
-}
-
-/* Style pour la liste des projets */
-.list-projects {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  flex: 2; 
-}
-
-/* Style pour chaque projet individuel */
-.app-project {
-  flex: 1 1 30%; 
-  min-width: 250px; 
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px; /* Maximum width */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Assure que tout le contenu reste dans la boîte */
 }

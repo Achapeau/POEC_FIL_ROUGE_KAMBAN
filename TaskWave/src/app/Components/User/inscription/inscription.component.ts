@@ -6,13 +6,14 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { User } from '../../../Model/model';
-import { NgIf } from '@angular/common';
+import { Icon, User } from '../../../Model/model';
+import { CommonModule, NgIf } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-inscription',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, NgIf],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgIf, RouterLink],
   templateUrl: './inscription.component.html',
   styleUrl: './inscription.component.css',
 })
@@ -25,7 +26,28 @@ export class InscriptionComponent {
     email: ['', [Validators.required, Validators.email]],
     firstname: ['', [Validators.required]],
     lastname: ['', [Validators.required]],
+    icon: ['', [Validators.required]],
   });
+  iconsList: Icon[] = [
+    {
+      lien: 'icone-admin.svg',
+    },
+    {
+      lien: 'icone-admin2.svg',
+    },
+    {
+      lien: 'icone-admin3.svg',
+    },
+    {
+      lien: 'icone-admin4.svg',
+    },
+    {
+      lien: 'icone-admin5.svg',
+    },
+    {
+      lien: 'icone-admin6.svg',
+    }
+  ];
 
   onSubmit(event: Event) {
     // event.preventDefault();
@@ -33,14 +55,14 @@ export class InscriptionComponent {
       console.log(this.connectionForm.value);
 
       let user: Partial<User> = {
-        id: 0,
         email: this.connectionForm.value.email as string,
         password: this.connectionForm.value.password as string,
         firstname: this.connectionForm.value.firstname as string,
         lastname: this.connectionForm.value.lastname as string,
+        icon: this.connectionForm.value.icon as string,
         projectsIds: [],
       };
-
+      console.log(user);
       this.userService.inscription(user);
     } else {
       let alerts = [];
@@ -60,6 +82,9 @@ export class InscriptionComponent {
         } else {
           alerts.push(' Email');
         }
+      }
+      if (this.connectionForm.controls['icon'].invalid) {
+        alerts.push(' icon');
       }
       if (alerts.length > 0 && mail != '') {
         alert(`Le ou les champs suivants sont requis: ${alerts}. ${mail}`);

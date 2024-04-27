@@ -27,7 +27,7 @@ export class UserService {
     return this.http.get<User>(this.serviceURL + '/' + id);
   }
   // update user
-  updateUser(user: User): Observable<User> {
+  updateUser(user: Partial<User>): Observable<User> {
     return this.http.put<User>(this.serviceURL + '/' + user.id, user);
   }
 
@@ -38,6 +38,7 @@ export class UserService {
       password: user.password,
       firstname: user.firstname,
       lastname: user.lastname,
+      icon: user.icon,
       projectsIds: user.projectsIds,
       token: user.token,
     };
@@ -64,7 +65,7 @@ export class UserService {
 
   inscription(User: Partial<User>) {
     this.http
-      .post<User>(this.serviceURL + '/register', User)
+      .post<User>(this.serviceURL + '/register', newUser)
       .subscribe((data: User) => {
         console.log(data);
         this.currentUser = data;

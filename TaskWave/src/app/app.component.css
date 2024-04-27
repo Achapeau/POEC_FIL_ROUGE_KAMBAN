@@ -11,8 +11,8 @@
   }
   
   .body-container {
-    margin-left: 250px; /* Décale le contenu pour ne pas être caché par la sidebar */
-    min-height: 100vh; /* Hauteur minimum */
+    margin-left: 250px; 
+    min-height: 100vh; 
   }
   
 
@@ -24,6 +24,4 @@
     width: 100vw;
 }
 
-/* .app-container {
-  background-color: #B6D8F2; ;
-} */
+

@@ -62,19 +62,19 @@ h2 {
 .projects-container {
     display: flex;
     align-items: center;
-    gap: 20px; /* Espacement entre le texte et les projets */
+    gap: 20px; 
 }
 
 .project-intro {
-    flex: 1; /* Prend l'espace nécessaire sans dépasser la largeur du contenu */
-    max-width: 200px; /* Fixe une largeur maximale pour le texte */
+    flex: 1; 
+    max-width: 200px; 
 }
 
 .list-projects {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    flex-grow: 1; /* Permet aux projets de remplir l'espace restant */
+    flex-grow: 1; 
 }
 
 .my-projects p {
@@ -144,14 +144,14 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* S'assurer que la modal est au-dessus de tout le contenu */
+  z-index: 1000; 
 }
 
 .modal-content {
   background: white;
   padding: 20px;
   border-radius: 8px;
-  max-width: 600px; /* Maximum width */
+  max-width: 600px; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden; /* Assure que tout le contenu reste dans la boîte */
+  overflow: hidden; 
 }

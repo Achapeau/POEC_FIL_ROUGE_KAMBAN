@@ -1,5 +1,5 @@
-import { Component, Inject, Injectable, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WrapperService } from '../../../Service/wrapper.service';
 import { Wrapper, Card } from '../../../Model/model';
 import { ProjectService } from '../../../Service/project.service';
@@ -33,7 +33,7 @@ export class WrapperCreateComponent implements OnInit {
       let newWrapper : Partial<Wrapper> = {
         title: this.checkoutForm.value.newTitle as string,
         position: this.wrappersList.length,
-        projectId: this.projectId
+        projectId: this.projectService.project.id
       }
       this.wrapperService.addWrapper(newWrapper).subscribe((data : Wrapper) => {
         let returnWrapper = data;
