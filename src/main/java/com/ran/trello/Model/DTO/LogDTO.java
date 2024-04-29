@@ -11,4 +11,13 @@ public class LogDTO {
     private String email;
     private String password;
     private Integer id;
+
+    @Override
+    public String toString() {
+        return "LogDTO{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", id=" + id +
+                '}';
+    }
 }

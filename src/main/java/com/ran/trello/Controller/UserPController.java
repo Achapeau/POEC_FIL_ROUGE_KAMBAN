@@ -9,6 +9,8 @@ import com.ran.trello.Service.AuthenticationService;
 import com.ran.trello.Service.JwtService;
 import com.ran.trello.Service.UserPService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,9 +20,8 @@ import java.util.List;
 @CrossOrigin("*")
 public class UserPController {
     private final JwtService jwtService;
-
     private final AuthenticationService authenticationService;
-    private UserPService userPService;
+    private final UserPService userPService;
 
     public UserPController(UserPService userPService, JwtService jwtService,
             AuthenticationService authenticationService) {
@@ -62,13 +63,19 @@ public class UserPController {
         String jwtToken = jwtService.generateToken(authenticatedUser);
         LoginResponse loginResponse = new LoginResponse().setToken(jwtToken)
                 .setExpiresIn(jwtService.getExpirationTime());
-
         return ResponseEntity.ok(loginResponse);
     }
 
-    @GetMapping("/mail/{email}")
+    @GetMapping("/email/{email}")
     public UserDTO findByEmail(@PathVariable String email) {
         return userPService.findByEmail(email);
     }
 
+    @GetMapping("/me")
+    public ResponseEntity<UserP> authenticatedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        UserP currentUser = (UserP) authentication.getPrincipal();
+        return ResponseEntity.ok(currentUser);
+    }
 }

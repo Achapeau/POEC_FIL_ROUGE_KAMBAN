@@ -68,10 +68,23 @@ public class UserP implements UserDetails {
         this.icon = icon;
         this.projects = projects;
         this.role = "USER";
-        this.icon = icon;
     }
 
     public void removeProject(Project project) {
         this.projects.remove(project);
+    }
+
+    @Override
+    public String toString() {
+        return "UserP{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", role='" + role + '\'' +
+                ", icon='" + icon + '\'' +
+                ", projects=" + projects +
+                '}';
     }
 }

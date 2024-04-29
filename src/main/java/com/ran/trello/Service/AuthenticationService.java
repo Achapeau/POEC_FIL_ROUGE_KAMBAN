@@ -9,12 +9,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class AuthenticationService {
     private final UserPRepository userPRepository;
-
     private final PasswordEncoder passwordEncoder;
-
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationService(UserPRepository userPRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager) {
@@ -24,10 +25,13 @@ public class AuthenticationService {
     }
 
    public UserP signup(RegisterUserDTO input) {
-       UserP userP = new UserP();
+       var userP = new UserP();
                userP.setFirstname(input.getFirstname());
                userP.setEmail(input.getEmail());
                userP.setPassword(passwordEncoder.encode(input.getPassword()));
+               userP.setRole("USER");
+               userP.setLastname(input.getLastname());
+               userP.setIcon(input.getIcon());
 
                return userPRepository.save(userP);
    }
@@ -40,5 +44,11 @@ public class AuthenticationService {
             )
         );
         return userPRepository.findByEmail(input.getEmail()).orElseThrow();
+   }
+
+   public List<UserP> allUsers() {
+        List<UserP> users = new ArrayList<>();
+        userPRepository.findAll().forEach(users::add);
+        return users;
    }
 }

@@ -6,6 +6,7 @@ import com.ran.trello.Model.Entity.UserP;
 import com.ran.trello.Model.Repository.UserPRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -55,8 +56,8 @@ public class UserPService {
 
     public UserDTO convertToUserDTO(UserP userP) {
         return new UserDTO(userP.getId(), userP.getEmail(), userP.getPassword(), userP.getFirstname(),
-                userP.getLastname(), userP.getProjects().stream().map(project -> project.getId()).toList(),
-                userP.getRole(), userP.getIcon());
+                userP.getLastname(), userP.getRole(), userP.getIcon(),
+                userP.getProjects().stream().map(project -> project.getId()).toList());
     }
 
     public UserP convertToUserP(UserDTO userDTO) {
@@ -72,5 +73,11 @@ public class UserPService {
 
     public UserDTO findByEmail(String email) {
         return convertToUserDTO(userPRepository.findByEmail(email).get());
+    }
+
+    public List<UserP> allUsers() {
+        List<UserP> users = new ArrayList<>();
+        userPRepository.findAll().forEach(users::add);
+        return users;
     }
 }

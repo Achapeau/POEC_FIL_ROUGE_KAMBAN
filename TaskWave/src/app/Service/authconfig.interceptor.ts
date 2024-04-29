@@ -9,15 +9,21 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       },
     });
 
+    console.log('if :', cloned);
+
     return next(cloned);
   }
+  console.log(req);
+
   return next(req);
 };
 
 function getJwtToken(): string | null {
-  let tokens: any = localStorage.getItem('currentUser');
+  let tokens: string | null = localStorage.getItem('currentUser');
+
   if (!tokens) return null;
-  const token = JSON.parse(tokens).access_token;
+  const token = JSON.parse(tokens);
+  // .access_token;
   console.log(token);
 
   return token;

@@ -23,6 +23,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserP user = userPRepository.findByFirstname(username);
 
+        System.out.println(user);
+
         return new User(user.getEmail(), user.getPassword(), getGrantedAuthorities(user.getRole()));
     }
 

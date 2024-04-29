@@ -46,14 +46,11 @@ export class InscriptionComponent {
     },
     {
       lien: 'icone-admin6.svg',
-    }
+    },
   ];
 
   onSubmit(event: Event) {
-    // event.preventDefault();
     if (this.connectionForm.valid) {
-      console.log(this.connectionForm.value);
-
       let user: Partial<User> = {
         email: this.connectionForm.value.email as string,
         password: this.connectionForm.value.password as string,
