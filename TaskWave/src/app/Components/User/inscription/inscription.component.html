@@ -7,16 +7,20 @@
         <h1>Inscription chez WaveTask</h1>
         <p>Entrez vos informations pour vous inscrire.</p>
         <form [formGroup]="connectionForm" (ngSubmit)="onSubmit($event)" >
+            <div class="Name">
             <div class="form-group">
                 <label for="firstname" class="form-label">Prénom</label>
                 <input type="text" class="form-control" id="firstname" formControlName="firstname">
                 
-            </div>
+           
+        </div>
             <div class="form-group">
                 <label for="lastname" class="form-label">Nom</label>
                 <input type="text" class="form-control" id="lastname" formControlName="lastname">
                 
-            </div>
+            </div> 
+        </div>
+            <div class="connexion">
             <div class="form-group">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" formControlName="email">
@@ -25,6 +29,7 @@
                 <label for="password"   class="form-label">Mot de passe</label>
                 <input type="password" class="form-control" id="password" formControlName="password" required="">
             </div>
+        </div>
             <div class="form-group">
                 <label for="icon">Choisissez une icône</label>
                 <select id="icon" class="form-control" formControlName="icon">
