@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { WrapperService } from '../../../Service/wrapper.service';
-import { Wrapper, Project, User } from '../../../Model/model';
+import { Wrapper, Project } from '../../../Model/model';
 import { CommonModule } from '@angular/common';
 import { WrapperComponent } from '../wrapper/wrapper.component';
 import { ActivatedRoute } from '@angular/router';
@@ -10,10 +10,11 @@ import { WrapperCreateComponent } from '../wrapper-create/wrapper-create.compone
 import { forkJoin } from 'rxjs';
 import { ModalComponent } from '../../../modal/modal.component';
 import { UserService } from '../../../Service/user.service';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-wrapper-list',
   standalone: true,
-  imports: [CommonModule, WrapperComponent, CdkDropListGroup, WrapperCreateComponent, CdkDropList, CdkDrag, ModalComponent],
+  imports: [FormsModule, CommonModule, WrapperComponent, CdkDropListGroup, WrapperCreateComponent, CdkDropList, CdkDrag, ModalComponent],
   templateUrl: './wrapper-list.component.html',
   styleUrls: ['./wrapper-list.component.css']
 })
@@ -26,6 +27,10 @@ export class WrapperListComponent implements OnInit {
   active: boolean = false;
   routeParam: any;
   membersIcons: { [key: number]: string } = {}; 
+  @Input() is_editing_title: boolean = false;
+  @Input() title: string = this.projectService.project.title;
+  @Input() is_editing_description: boolean = false;
+  @Input() description: string = this.projectService.project.description;
   
 	
 constructor(public userService : UserService, public wrapperService : WrapperService, public projectService : ProjectService, private route: ActivatedRoute) {
@@ -86,6 +91,26 @@ ngOnInit() : void {
       this.projectService.deleteProject(this.projectService.project.id).subscribe();
       this.projectService.projects = this.projectService.projects.filter(project => project.id !== this.project.id);
       this.projectService.redirectToProjectList();
+    }
+  }
+
+  is_editing_mode_title() {
+    if (!this.is_editing_description) {
+      if (this.is_editing_title) {
+        this.projectService.project.title = this.title;
+        this.projectService.updateProject(this.projectService.project).subscribe();
+      }
+      this.is_editing_title = !this.is_editing_title;
+    }
+  }
+
+  is_editing_mode_description() {
+    if(!this.is_editing_title) {
+      if (this.is_editing_description) {
+        this.projectService.project.description = this.description;
+        this.projectService.updateProject(this.projectService.project).subscribe();
+      }
+      this.is_editing_description = !this.is_editing_description;
     }
   }
 }
