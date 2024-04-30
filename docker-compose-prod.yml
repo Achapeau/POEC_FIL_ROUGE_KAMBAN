@@ -1,0 +1,75 @@
+version: '3.7'
+
+services:
+  mysql-prod:
+    image: mysql:8.0.36-debian
+    ports:
+      - "3306:3306"
+    networks:
+      - springboot-mysql-network
+    volumes:
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: on-failure
+    environment:
+      MYSQL_ROOT_PASSWORD: trello_admin
+      MYSQL_DATABASE: trello
+      MYSQL_USER: trello_admin
+      MYSQL_PASSWORD: trello_admin
+
+
+  compilation:
+    image: maven:3.9.6-eclipse-temurin-21-alpine
+    working_dir: /app
+    volumes:
+      - java-data:/app
+      - ./pom.xml:/app/pom.xml
+      - ./src:/app/src
+    networks:
+      - springboot-mysql-network
+    command: mvn -Dmaven.test.skip=true -DskipTests=true clean install
+
+
+  spring:
+    image: openjdk:21-jdk
+    ports:
+      - "3050:3050"
+    networks:
+      - springboot-mysql-network
+    links:
+      - mysql-prod
+    volumes:
+      - java-data:/app
+    environment:
+      - spring.datasource.url=jdbc:mysql://mysql-prod:3306/trello
+      - spring.jpa.hibernate.ddl-auto=update
+    depends_on:
+      compilation:
+        condition: service_completed_successfully
+    working_dir: /app
+    command: ["java", "-jar", "./target/trello-0.0.1-SNAPSHOT.jar"]
+
+  node:
+    image: "node:18.20.2-slim"
+    # environment:
+    #   NODE_ENV: production
+    volumes:
+      - ./TaskWave/.:/app
+      - /app/node_modules
+    working_dir: /app
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"
+    networks:
+      - springboot-mysql-network
+    command: sh -c "npm install -g @angular/cli@17.3.2
+      && npm install
+      && npm start"
+    depends_on:
+      - spring
+  
+networks:
+  springboot-mysql-network:
+
+volumes:
+  java-data:
