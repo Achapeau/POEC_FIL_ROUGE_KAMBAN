@@ -13,10 +13,10 @@ import { jwtDecode } from 'jwt-decode';
   providedIn: 'root',
 })
 export class AuthService {
-  endpoint: string = 'http://localhost:3050';
+  endpoint: string = 'http://localhost:3050/user';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
-  private loggedUser?: string;
+  public loggedUser!: string;
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   private router = inject(Router);
   private http = inject(HttpClient);
@@ -60,24 +60,48 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
-  signIn(LogsDTO: LogsDTO): Observable<Partial<User>> {
-    const value = this.http
-      .post<Partial<User>>(`${this.endpoint}/login`, LogsDTO)
-      .pipe(
-        tap((res: Partial<User>) => {
-          if (res.token) {
-            this.router.navigate(['project-list']);
-            this.doLoginUser(LogsDTO.email, res.token);
-          }
-        })
-      );
-    console.log(value);
-    return value;
+  // signIn(LogsDTO: LogsDTO): Observable<Partial<User>> {
+  //   console.log('step 3: service signIn() called, with user :', LogsDTO);    
+  //   const value = this.http
+  //     .post<Partial<User>>(`${this.endpoint}/login`, LogsDTO)      
+  //     .pipe(
+  //       tap((res: Partial<User>) => {
+  //         if (res) {
+  //           console.log(res);            
+  //         }
+  //         if (res.token) {
+  //           console.log(res);
+  //           this.router.navigate(['project-list']);
+  //           this.doLoginUser(LogsDTO.email, res.token);
+  //         }
+  //       })
+  //     );
+  //   console.log(value);
+  //   return value;
+  // }
+
+  signIn(LogsDTO: LogsDTO) {
+    console.log('step 3: service signIn() called, with user :', LogsDTO);
+    this.http.post<Partial<User>>(`${this.endpoint}/login`, LogsDTO).subscribe((data: Partial<User>) => {
+      console.log('step 4: Get user data', data);
+      this.doLoginUser(data.email as string, data.token as Token);
+      console.log('step 6: try to navigate on project-list');
+      this.router.navigate(['project-list']);      
+    })
   }
 
   public doLoginUser(email: string, token: Token) {
+    console.log('step 5: Trying to login user', email, token);
+
     this.loggedUser = email;
     this.setToken(token);
+    if (this.getToken()?.length) {
+      console.log('token pushed to local storage');
+    } else {
+
+      console.log('setToken failed');
+    }
+
     this.isAuthenticatedSubject.next(true);
   }
 

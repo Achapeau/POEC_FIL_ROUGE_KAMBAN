@@ -47,22 +47,26 @@ export class UserService {
 
   // Connect user
   connectUser(logDTO: LogsDTO) {
-    this.http
-      .post<User>(this.serviceURL + '/login', logDTO)
-      .subscribe((data: User) => {
-        this.authService.doLoginUser(logDTO.email, data.token);
-        const userMail = this.authService.decodeToken()?.sub;
-        console.log(userMail);
+    console.log('step 2: service connectUser() called with user :', logDTO);
 
-        this.getUserByEmail(userMail as string).subscribe((user) => {
-          this.currentUser = user;
-          this.connected = true;
-          this.router.navigate(['project-list'], { relativeTo: this.route });
-        });
-      });
-    let Log = this.authService.getToken();
+    this.authService.signIn(logDTO);
 
-    console.log(Log);
+    // this.http
+    //   .post<User>(this.serviceURL + '/login', logDTO)
+    //   .subscribe((data: User) => {
+    //     console.log("step 3: Post User service called")
+    //     this.authService.doLoginUser(logDTO.email, data.token);
+    //     const userMail = this.authService.decodeToken()?.sub;
+    //     console.log("step 4: Get usermail",userMail);
+
+    //     this.getUserByEmail(userMail as string).subscribe((user: User) => {
+    //       console.log("Enter getUserByEmail service");
+          
+    //       this.currentUser = user;
+    //       this.connected = true;
+    //       this.router.navigate(['project-list'], { relativeTo: this.route });
+    //     });
+    //   });
   }
 
   inscription(User: Partial<User>) {

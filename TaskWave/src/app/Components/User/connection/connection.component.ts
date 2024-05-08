@@ -30,12 +30,14 @@ export class ConnectionComponent {
   });
 
   onSubmit() {
+    console.log("step 1: validate btn clicked");
+    
     let user: LogsDTO = {
       email: this.connectionForm.value.email as string,
       password: this.connectionForm.value.password as string,
     };
     this.user.connectUser(user);
-    console.log(this.authService.isLoggedIn());
+    console.log("Last step: is the user logged? ", this.authService.isLoggedIn());
 
     // this.authService.signIn(user);
   }

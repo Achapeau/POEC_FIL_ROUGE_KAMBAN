@@ -10,34 +10,32 @@
             <div class="Name">
             <div class="form-group">
                 <label for="firstname" class="form-label">Prénom</label>
-                <input type="text" class="form-control" id="firstname" formControlName="firstname">
-                
-           
-        </div>
-            <div class="form-group">
-                <label for="lastname" class="form-label">Nom</label>
-                <input type="text" class="form-control" id="lastname" formControlName="lastname">
-                
-            </div> 
-        </div>
-            <div class="connexion">
-            <div class="form-group">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" formControlName="email">
-           </div>
-            <div class="form-group">
-                <label for="password"   class="form-label">Mot de passe</label>
-                <input type="password" class="form-control" id="password" formControlName="password" required="">
+                <input type="text" class="form-control" id="firstname" formControlName="firstname">  
             </div>
-        </div>
+                <div class="form-group">
+                    <label for="lastname" class="form-label">Nom</label>
+                    <input type="text" class="form-control" id="lastname" formControlName="lastname">
+                    
+                </div> 
+            </div>
+                <div class="connexion">
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" formControlName="email">
+            </div>
+                <div class="form-group">
+                    <label for="password"   class="form-label">Mot de passe</label>
+                    <input type="password" class="form-control" id="password" formControlName="password" required="">
+                </div>
+            </div>
             <div class="form-group">
                 <label for="icon">Choisissez une icône</label>
                 <select id="icon" class="form-control" formControlName="icon">
-                  <option *ngFor="let icon of iconsList" value={{icon.lien}}>
-                      {{icon.lien}}
-                  </option>
+                <option *ngFor="let icon of iconsList" value={{icon.lien}}>
+                    {{icon.lien}}
+                </option>
                 </select>
-              </div>
+            </div>
             <button type="submit" class="submit-btn">Valider</button>
         </form>
         <div>
