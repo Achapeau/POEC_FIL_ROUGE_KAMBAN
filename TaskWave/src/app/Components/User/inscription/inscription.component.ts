@@ -9,6 +9,7 @@ import {
 import { Icon, User } from '../../../Model/model';
 import { CommonModule, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../../Service/auth.service';
 
 @Component({
   selector: 'app-inscription',
@@ -18,7 +19,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './inscription.component.css',
 })
 export class InscriptionComponent {
-  constructor(public userService: UserService, public fb: FormBuilder) {}
+  constructor(public userService: UserService, public fb: FormBuilder, private authService: AuthService) {}
 
   public connectionForm = this.fb.group({
     // name: ['', [Validators.required]],
@@ -60,7 +61,7 @@ export class InscriptionComponent {
         projectsIds: [],
       };
       console.log(user);
-      this.userService.inscription(user);
+      this.authService.signUp(user);
     } else {
       let alerts = [];
       let mail = '';

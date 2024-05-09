@@ -36,7 +36,7 @@ export class ConnectionComponent {
       email: this.connectionForm.value.email as string,
       password: this.connectionForm.value.password as string,
     };
-    this.user.connectUser(user);
+    this.authService.signIn(user);
     console.log("Last step: is the user logged? ", this.authService.isLoggedIn());
 
     // this.authService.signIn(user);

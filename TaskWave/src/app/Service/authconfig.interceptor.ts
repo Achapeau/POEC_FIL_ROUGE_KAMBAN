@@ -1,4 +1,4 @@
-import { HttpInterceptorFn, HttpResponse } from '@angular/common/http';
+import { HttpEvent, HttpInterceptorFn, HttpResponse } from '@angular/common/http';
 import { tap } from 'rxjs';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
@@ -11,24 +11,28 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         Authorization: `Bearer ${jwtToken}`,
       },
     });
-    console.log('with token');
+    console.log('with token', cloned);
     return next(cloned).pipe(
-      tap((res) => {
-        if (res instanceof HttpResponse) {
-          
-          console.log('transitory step :', res);
+      tap((event: HttpEvent<any>) => {
+        if (event instanceof HttpResponse) {
+          console.log('api response', event);
         }
       })
-    );
+    )
   }
   console.log('without token');
-  return next(req);
+  return next(req).pipe(
+    tap((event: HttpEvent<any>) => {
+      if (event instanceof HttpResponse) {
+        console.log('api response', event);
+      }
+    })
+  );
 };
 
 function getJwtToken(): string | null {
   let tokens: string | null = localStorage.getItem('currentUser');
   if (!tokens) return null;
   const token = JSON.parse(tokens);
-  // .access_token;
   return token;
 }

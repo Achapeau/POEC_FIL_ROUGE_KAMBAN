@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { User, LogsDTO } from '../Model/model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +12,6 @@ export class UserService {
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthService
   ) {}
 
   serviceURL = 'http://localhost:3050/user';
@@ -41,61 +39,39 @@ export class UserService {
       lastname: user.lastname,
       icon: user.icon,
       projectsIds: user.projectsIds,
-      token: user.token,
     };
     return User;
   }
 
-  // Connect user
-  connectUser(logDTO: LogsDTO) {
-    console.log('step 2: service connectUser() called with user :', logDTO);
-
-    this.authService.signIn(logDTO);
-    
-
-    // this.http
-    //   .post<User>(this.serviceURL + '/login', logDTO)
-    //   .subscribe((data: User) => {
-    //     console.log("step 3: Post User service called")
-    //     this.authService.doLoginUser(logDTO.email, data.token);
-    //     const userMail = this.authService.decodeToken()?.sub;
-    //     console.log("step 4: Get usermail",userMail);
-
-    //     this.getUserByEmail(userMail as string).subscribe((user: User) => {
-    //       console.log("Enter getUserByEmail service");
-          
-    //       this.currentUser = user;
-    //       this.connected = true;
-    //       this.router.navigate(['project-list'], { relativeTo: this.route });
-    //     });
-    //   });
+  setCurrentUser(user: User) {
+    this.currentUser = user;
   }
 
-  inscription(User: Partial<User>) {
-    this.http
-      .post<User>(this.serviceURL + '/register', User)
-      .subscribe((data: User) => {
-        console.log(data);
-        this.currentUser = data;
-        this.connected = true;
-        this.custommer = {
-          email: this.currentUser.email,
-          password: this.currentUser.password,
-        }
-      });
-      this.authService.signIn(this.custommer as LogsDTO);
+  // inscription(User: Partial<User>) {
+  //   this.http
+  //     .post<User>(this.serviceURL + '/register', User)
+  //     .subscribe((data: User) => {
+  //       console.log(data);
+  //       this.currentUser = data;
+  //       this.connected = true;
+  //       this.custommer = {
+  //         email: this.currentUser.email,
+  //         password: this.currentUser.password,
+  //       }
+  //     });
+  //     this.authService.signIn(this.custommer as LogsDTO);
       
 
-    this.router.navigate(['project-list'], { relativeTo: this.route });
-  }
+  //   this.router.navigate(['project-list'], { relativeTo: this.route });
+  // }
 
   // Disconnect user
-  disconnectUser() {
-    this.authService.deleteToken();
-    this.currentUser = null;
-    this.connected = false;
-    this.router.navigate([''], { relativeTo: this.route });
-  }
+  // disconnectUser() {
+  //   this.authService.deleteToken();
+  //   this.currentUser = null;
+  //   this.connected = false;
+  //   this.router.navigate([''], { relativeTo: this.route });
+  // }
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.serviceURL);

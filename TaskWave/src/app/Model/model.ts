@@ -26,7 +26,6 @@ export interface User {
   lastname: string;
   icon: string;
   projectsIds: number[];
-  token: Token;
 }
 
 export interface Wrapper {
@@ -35,6 +34,12 @@ export interface Wrapper {
   position: number;
   cardsIds: number[];
   projectId: number;
+}
+
+export interface ResponseData {
+  expiresIn: number;
+  token: Token;
+  customer: User
 }
 
 export interface CardDTO {

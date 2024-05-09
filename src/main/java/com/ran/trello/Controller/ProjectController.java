@@ -2,6 +2,7 @@ package com.ran.trello.Controller;
 
 import com.ran.trello.Model.DTO.ProjectDTO;
 import com.ran.trello.Service.ProjectService;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +24,8 @@ public class ProjectController {
     }
 
     @GetMapping("/{id}")
-    public ProjectDTO getByProjectId(@PathVariable Integer id) {
+    public ProjectDTO getByProjectId(@PathVariable Integer id, @RequestHeader HttpHeaders headers) {
+        headers.forEach((key, value) -> System.out.println(key + " : " + value));
         return projectService.findByProjectId(id);
     }
 

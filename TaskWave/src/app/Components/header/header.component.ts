@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UserService } from '../../Service/user.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../Service/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +17,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     public userService: UserService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -34,7 +36,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.userService.disconnectUser();
+    this.authService.logout();
   }
 
   goHomework() {

@@ -98,6 +98,6 @@ export class SidebarComponent implements OnInit {
   }
 
   logout() {
-    this.userService.disconnectUser();
+    this.authService.logout();
   }
 }

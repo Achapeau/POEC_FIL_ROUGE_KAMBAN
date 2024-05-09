@@ -16,7 +16,7 @@ import { authInterceptor } from './Service/authconfig.interceptor';
     RouterOutlet,
     ProjectListComponent,
     HeaderComponent,
-    SidebarComponent,
+    SidebarComponent,    
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

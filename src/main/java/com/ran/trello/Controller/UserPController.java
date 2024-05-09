@@ -8,6 +8,8 @@ import com.ran.trello.Model.LoginResponse;
 import com.ran.trello.Service.AuthenticationService;
 import com.ran.trello.Service.JwtService;
 import com.ran.trello.Service.UserPService;
+import jakarta.servlet.http.HttpServlet;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,7 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 @CrossOrigin("*")
-public class UserPController {
+public class UserPController extends HttpServlet {
     private final JwtService jwtService;
     private final AuthenticationService authenticationService;
     private final UserPService userPService;
@@ -31,7 +33,8 @@ public class UserPController {
     }
 
     @GetMapping
-    public List<UserDTO> getAllUsers() {
+    public List<UserDTO> getAllUsers(@RequestHeader HttpHeaders headers) {
+        headers.forEach((key, value) -> System.out.println(key + " : " + value));
         return userPService.findAllUsers();
     }
 
@@ -41,14 +44,20 @@ public class UserPController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserP> register(@RequestBody RegisterUserDTO registerUserDTO) {
+    public ResponseEntity<LoginResponse> register(@RequestBody RegisterUserDTO registerUserDTO) {
         UserP registeredUser = authenticationService.signup(registerUserDTO);
-        registeredUser.setPassword(null);
-        return ResponseEntity.ok(registeredUser);
+        UserDTO userP = userPService.findByEmail(registerUserDTO.getEmail());
+        String jwtToken = jwtService.generateToken(registeredUser);
+        LoginResponse loginResponse = new LoginResponse()
+                .setToken(jwtToken)
+                .setCustomer(userP)
+                .setExpiresIn(jwtService.getExpirationTime());
+        return ResponseEntity.ok(loginResponse);
     }
 
     @PutMapping("/{id}")
     public UserDTO updateUser(@PathVariable Integer id, @RequestBody UserDTO body) {
+        System.out.println();
         return userPService.updateUser(id, body);
     }
 
@@ -61,7 +70,11 @@ public class UserPController {
     public ResponseEntity<LoginResponse> authenticate(@RequestBody LogDTO logDTO) {
         UserP authenticatedUser = authenticationService.authenticate(logDTO);
         String jwtToken = jwtService.generateToken(authenticatedUser);
-        LoginResponse loginResponse = new LoginResponse().setToken(jwtToken)
+        UserDTO userP = userPService.findByEmail(logDTO.getEmail());
+
+        LoginResponse loginResponse = new LoginResponse()
+                .setToken(jwtToken)
+                .setCustomer(userP)
                 .setExpiresIn(jwtService.getExpirationTime());
         return ResponseEntity.ok(loginResponse);
     }
