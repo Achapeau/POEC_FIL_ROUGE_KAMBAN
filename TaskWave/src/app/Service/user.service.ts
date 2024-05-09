@@ -20,6 +20,7 @@ export class UserService {
 
   connected: boolean = false;
   currentUser: User | null = null;
+  custommer: LogsDTO | null = null;
 
   // get user by id
 
@@ -50,6 +51,7 @@ export class UserService {
     console.log('step 2: service connectUser() called with user :', logDTO);
 
     this.authService.signIn(logDTO);
+    
 
     // this.http
     //   .post<User>(this.serviceURL + '/login', logDTO)
@@ -76,9 +78,15 @@ export class UserService {
         console.log(data);
         this.currentUser = data;
         this.connected = true;
+        this.custommer = {
+          email: this.currentUser.email,
+          password: this.currentUser.password,
+        }
       });
+      this.authService.signIn(this.custommer as LogsDTO);
+      
 
-    this.router.navigate(['connexion'], { relativeTo: this.route });
+    this.router.navigate(['project-list'], { relativeTo: this.route });
   }
 
   // Disconnect user

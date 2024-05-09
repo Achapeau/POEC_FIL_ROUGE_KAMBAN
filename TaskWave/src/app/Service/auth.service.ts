@@ -8,6 +8,7 @@ import {
 } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -61,13 +62,13 @@ export class AuthService {
   }
 
   // signIn(LogsDTO: LogsDTO): Observable<Partial<User>> {
-  //   console.log('step 3: service signIn() called, with user :', LogsDTO);    
+  //   console.log('step 3: service signIn() called, with user :', LogsDTO);
   //   const value = this.http
-  //     .post<Partial<User>>(`${this.endpoint}/login`, LogsDTO)      
+  //     .post<Partial<User>>(`${this.endpoint}/login`, LogsDTO)
   //     .pipe(
   //       tap((res: Partial<User>) => {
   //         if (res) {
-  //           console.log(res);            
+  //           console.log(res);
   //         }
   //         if (res.token) {
   //           console.log(res);
@@ -82,26 +83,24 @@ export class AuthService {
 
   signIn(LogsDTO: LogsDTO) {
     console.log('step 3: service signIn() called, with user :', LogsDTO);
-    this.http.post<Partial<User>>(`${this.endpoint}/login`, LogsDTO).subscribe((data: Partial<User>) => {
-      console.log('step 4: Get user data', data);
-      this.doLoginUser(data.email as string, data.token as Token);
-      console.log('step 6: try to navigate on project-list');
-      this.router.navigate(['project-list']);      
-    })
+    this.http
+      .post<Partial<User>>(`${this.endpoint}/login`, LogsDTO)
+      .subscribe((data: Partial<User>) => {
+        console.log('step 4: Get user data', data);
+        this.doLoginUser(data.token as Token);
+        console.log('step 6: try to navigate on project-list');
+        this.router.navigate(['project-list']);
+      });
   }
 
-  public doLoginUser(email: string, token: Token) {
-    console.log('step 5: Trying to login user', email, token);
-
-    this.loggedUser = email;
+  public doLoginUser(token: Token) {
+    console.log('step 5: Trying to login user', token);
     this.setToken(token);
     if (this.getToken()?.length) {
       console.log('token pushed to local storage');
     } else {
-
       console.log('setToken failed');
     }
-
     this.isAuthenticatedSubject.next(true);
   }
 
@@ -168,5 +167,9 @@ export class AuthService {
 
   decodeToken() {
     return this.getToken() ? jwtDecode(this.getToken() as string) : null;
+  }
+
+  getUserByEmail(email: string): Observable<User> {
+    return this.http.get<User>(this.endpoint + '/email/' + email);
   }
 }
