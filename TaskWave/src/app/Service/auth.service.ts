@@ -83,9 +83,17 @@ export class AuthService {
 
   signIn(LogsDTO: LogsDTO) {
     console.log('step 3: service signIn() called, with user :', LogsDTO);
+    // this.http
+    //   .post<Partial<User>>(`${this.endpoint}/login`, LogsDTO)
+    //   .subscribe((data: Partial<User>) => {
+    //     console.log('step 4: Get user data', data);
+    //     this.doLoginUser(data.token as Token);
+    //     console.log('step 6: try to navigate on project-list');
+    //     this.router.navigate(['project-list']);
+    //   });
     this.http
-      .post<Partial<User>>(`${this.endpoint}/login`, LogsDTO)
-      .subscribe((data: Partial<User>) => {
+      .post<User>(`${this.endpoint}/login`, LogsDTO)
+      .subscribe((data: User) => {
         console.log('step 4: Get user data', data);
         this.doLoginUser(data.token as Token);
         console.log('step 6: try to navigate on project-list');
