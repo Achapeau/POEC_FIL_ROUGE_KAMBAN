@@ -36,6 +36,12 @@ export interface Wrapper {
   projectId: number;
 }
 
+export interface ResponseData {
+  expiresIn: number;
+  token: Token;
+  customer: User
+}
+
 export interface CardDTO {
   title: string;
   description: string;
@@ -52,6 +58,11 @@ export interface LogsDTO {
 export interface Themes {
   name: string;
   background: string;
+}
+
+export interface Token {
+  token: string;
+  expiresIn: number;
 }
 
 export interface Icon {

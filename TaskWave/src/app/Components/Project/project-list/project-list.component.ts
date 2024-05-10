@@ -1,11 +1,16 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectComponent } from '../project/project.component';
 import { Project, Themes, User } from '../../../Model/model';
 import { ModalComponent } from '../../../modal/modal.component';
 import { ProjectService } from '../../../Service/project.service';
 import { AuthService } from '../../../Service/auth.service';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../../../Service/user.service';
 import { ModalNewProjectComponent } from '../../../modal/modal-new-project/modal-new-project.component';
 
@@ -17,7 +22,7 @@ import { ModalNewProjectComponent } from '../../../modal/modal-new-project/modal
     ProjectComponent,
     ModalComponent,
     ReactiveFormsModule,
-    ModalNewProjectComponent
+    ModalNewProjectComponent,
   ],
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.css'],
@@ -33,11 +38,16 @@ export class ProjectListComponent implements OnInit, OnChanges {
     private projectService: ProjectService,
     private authService: AuthService,
     private userService: UserService
-  ) {
-  }
-
+  ) {}
 
   ngOnInit(): void {
+    // this.myUser.email = this.authService.decodeToken()?.sub;
+    // this.userService
+    //   .getUserByEmail(this.myUser.email as string)
+    //   .subscribe((user) => {
+    //     this.userService.currentUser = user;
+    //     this.userService.connected = true;
+    //   });
     this.getProjects();
 
     // this.authService.userData$.subscribe((myUser) => {
@@ -56,8 +66,7 @@ export class ProjectListComponent implements OnInit, OnChanges {
     // console.log(this.membersList);
   }
 
-  ngOnChanges(): void {
-  }
+  ngOnChanges(): void {}
 
   getProjects() {
     this.projects = this.projectService.getProjectsForCurrentUser();
@@ -67,7 +76,7 @@ export class ProjectListComponent implements OnInit, OnChanges {
   openCreateProjectModal() {
     this.isModalOpen = true;
   }
-  
+
   openModal(): void {
     this.isModalOpen = true;
   }
