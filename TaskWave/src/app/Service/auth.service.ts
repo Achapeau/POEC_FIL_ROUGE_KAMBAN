@@ -95,25 +95,27 @@ export class AuthService {
   isTokenExpired() {
     const tokens = this.getToken();
     if (!tokens) return true;
-    const token = JSON.parse(tokens).token;
-    const decoded = jwtDecode(token);
-    if (!decoded.exp) return true;
+    const decoded = this.decodeToken();
+    if (!decoded?.exp) {
+      this.deleteToken();
+      return true;
+    }
     const expirationDate = decoded.exp * 1000;
-    const now = new Date().getTime();
+    const now = new Date().getTime();    
     return expirationDate < now;
   }
 
-  refreshToken() {
-    let tokens: any = this.getToken();
-    if (!tokens) return true;
-    tokens = JSON.parse(tokens);
-    let refreshToken = tokens.refresh_Token;
-    return this.http
-      .post<Partial<Token>>(`${this.endpoint}/refresh-token`, {
-        refreshToken,
-      })
-      .pipe(tap((tokens: any) => this.setToken(tokens)));
-  }
+  // refreshToken() {
+  //   let tokens: any = this.getToken();
+  //   if (!tokens) return true;
+  //   tokens = JSON.parse(tokens);
+  //   let refreshToken = tokens.refresh_Token;
+  //   return this.http
+  //     .post<Partial<Token>>(`${this.endpoint}/refresh-token`, {
+  //       refreshToken,
+  //     })
+  //     .pipe(tap((tokens: any) => this.setToken(tokens)));
+  // }
 
   isLoggedIn(): boolean {
     return !!this.getToken();

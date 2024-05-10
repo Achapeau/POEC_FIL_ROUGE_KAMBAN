@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { User, LogsDTO } from '../Model/model';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +9,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class UserService {
   constructor(
     private http: HttpClient,
-    private router: Router,
-    private route: ActivatedRoute,
   ) {}
 
   serviceURL = 'http://localhost:3050/user';
