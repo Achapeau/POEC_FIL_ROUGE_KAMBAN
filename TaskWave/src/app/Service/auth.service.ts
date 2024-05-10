@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, delay, Observable, of, switchMap, tap, throwError, timer } from 'rxjs';
+import { BehaviorSubject, Observable, tap, throwError, timer } from 'rxjs';
 import { LogsDTO, ResponseData, Token, User } from '../Model/model';
 import {
   HttpClient,
@@ -9,6 +9,7 @@ import {
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { UserService } from './user.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,7 @@ export class AuthService {
   private http = inject(HttpClient);
   private userService = inject(UserService);
 
-  constructor() {}
+  constructor(private cookieService: CookieService) {}
 
   private userDataSubject: BehaviorSubject<Partial<User>> = new BehaviorSubject<
     Partial<User>
@@ -119,15 +120,16 @@ export class AuthService {
   }
 
   setToken(token: Token): void {
-    localStorage.setItem('currentUser', JSON.stringify(token));
+    this.cookieService.set('token', JSON.stringify(token));
+    
   }
 
   getToken(): string | null {
-    return localStorage.getItem('currentUser');
+    return this.cookieService.get('token');
   }
 
   deleteToken(): void {
-    localStorage.removeItem('currentUser');
+    this.cookieService.delete('token');
   }
 
   handleError(error: HttpErrorResponse) {

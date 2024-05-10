@@ -1,5 +1,6 @@
-import { HttpEvent, HttpInterceptorFn, HttpResponse } from '@angular/common/http';
-import { tap } from 'rxjs';
+import { HttpInterceptorFn } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { AuthService } from './auth.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   
@@ -16,7 +17,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 };
 
 function getJwtToken(): string | null {
-  let tokens: string | null = localStorage.getItem('currentUser');
+  let authService = inject(AuthService);
+  let tokens: string | null = authService.getToken();
   if (!tokens) return null;
   const token = JSON.parse(tokens);
   return token;
