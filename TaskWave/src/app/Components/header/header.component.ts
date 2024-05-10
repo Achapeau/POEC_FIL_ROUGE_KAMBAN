@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { UserService } from '../../Service/user.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -29,10 +29,6 @@ export class HeaderComponent implements OnInit {
 
   sidebarClick(): boolean {
     return (this.sidebarToggle = !this.sidebarToggle);
-  }
-
-  run() {
-    console.log('header');
   }
 
   logout() {

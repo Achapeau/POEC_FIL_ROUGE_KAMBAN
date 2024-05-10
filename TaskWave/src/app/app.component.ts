@@ -5,8 +5,6 @@ import { ProjectListComponent } from './Components/Project/project-list/project-
 import { HeaderComponent } from './Components/header/header.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { authInterceptor } from './Service/authconfig.interceptor';
 
 @Component({
   selector: 'app-root',

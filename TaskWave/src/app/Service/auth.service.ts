@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, delay, Observable, of, switchMap, tap, throwError, timer } from 'rxjs';
 import { LogsDTO, ResponseData, Token, User } from '../Model/model';
 import {
   HttpClient,
@@ -56,18 +56,28 @@ export class AuthService {
     this.usersDataSubject.next(filteredUsersData);
   }
 
-  signUp(user: Partial<User>): Observable<Partial<User>> {
-    return this.http
-      .post(`${this.endpoint}/register`, user)
-      .pipe(catchError(this.handleError));
+  signUp(user: Partial<User>){
+    this.deleteToken();
+    this.http
+      .post<Partial<User>>(`${this.endpoint}/register`, user)
+      .subscribe(() => {
+        var newCustommerDTO: LogsDTO = {
+          email: user.email as string,
+          password: user.password as string,
+        }
+        timer(250).subscribe(() => this.signIn(newCustommerDTO))    
+      })
+
   }
 
-  signIn(LogsDTO: LogsDTO) {
+  signIn(logsDTO: LogsDTO) {  
+    this.deleteToken();      
     this.http
-      .post<ResponseData>(`${this.endpoint}/login`, LogsDTO)
+      .post<ResponseData>(`${this.endpoint}/login`, logsDTO)
       .subscribe((data: ResponseData) => {
-        this.userService.setCurrentUser(data.customer as User);      
+        this.userService.setCurrentUser(data.customer as User);
         this.doLoginUser(data.token as Token);
+        this.userService.connected = true;
         this.router.navigate(['project-list']);
       });
   }
@@ -134,8 +144,9 @@ export class AuthService {
 
   logout() {
     this.deleteToken();
+    this.userService.connected = false;
     this.isAuthenticatedSubject.next(false);
-    this.router.navigate(['login']);
+    this.router.navigate(['connexion']);
   }
 
   decodeToken() {

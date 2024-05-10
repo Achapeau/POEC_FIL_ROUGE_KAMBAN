@@ -60,7 +60,6 @@ export class InscriptionComponent {
         icon: this.connectionForm.value.icon as string,
         projectsIds: [],
       };
-      console.log(user);
       this.authService.signUp(user);
     } else {
       let alerts = [];

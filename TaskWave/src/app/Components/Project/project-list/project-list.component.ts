@@ -1,10 +1,8 @@
 import {
   Component,
-  EventEmitter,
   Input,
   OnChanges,
   OnInit,
-  Output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectComponent } from '../project/project.component';
@@ -12,7 +10,7 @@ import { Project, Themes, User } from '../../../Model/model';
 import { ModalComponent } from '../../../modal/modal.component';
 import { ProjectService } from '../../../Service/project.service';
 import { AuthService } from '../../../Service/auth.service';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../../../Service/user.service';
 import { ModalNewProjectComponent } from '../../../modal/modal-new-project/modal-new-project.component';
 

@@ -29,17 +29,7 @@ export class ProjectService {
 
   project!: Project;
   projects!: Project[];
-  // private projectDataSubject: BehaviorSubject<Project[]> = new BehaviorSubject<
-  //   Project[]
-  // >([]);
-  // projectData$: Observable<Project[]> = this.projectDataSubject.asObservable();
-
-  // crud operations
-
-  // setProjectData(projectData: Project[]) {
-  //   console.log(projectData);
-  //   this.projectDataSubject.next(projectData);
-  // }
+  
 
   // get all project
   getProjects(): Observable<Project[]> {
@@ -50,12 +40,6 @@ export class ProjectService {
   getProjectById(id: number): Observable<Project> {
     return this.http.get<Project>(this.serviceURL + '/' + id);
   }
-
-  // getProjectsByArrayOfId(ids : number[]){
-  //   const dataProject = ids.map(id => this.getProjectById(id));
-  //   this.setProjectData(dataProject);
-
-  // }
 
   // add project
   addProject(project: Partial<Project>): Observable<Project> {

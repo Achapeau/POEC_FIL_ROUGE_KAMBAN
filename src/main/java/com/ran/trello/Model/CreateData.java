@@ -18,18 +18,18 @@ public class CreateData {
                 TaskCardRepository taskCardRepository = context.getBean(TaskCardRepository.class);
                 UserP u1 = new UserP("JeanValJean@gmail.com",
                                 "$2a$10$kfitBkbrOnmtDEoiYthDxOtdZ4LU/oAM9ZZe3Ul3bERcPkHtT8ZTO", "Jean", "ValJean",
-                                new ArrayList<Project>(), "");
+                                new ArrayList<Project>(), "icone-admin6.svg");
                 UserP u2 = new UserP("BillyBob@gmail.com",
                                 "$2a$10$PGv61eS8L6US3nChav/YjOWuuQEZvBWb2j6aWulwDzd1oVAoCKzVq", "Billy", "Bob",
-                                new ArrayList<Project>(), "");
+                                new ArrayList<Project>(), "icone-admin2.svg");
                 UserP u3 = new UserP("BobbyLarnak@gmail.com",
                                 "$2a$10$9A0Zevq15btphGS4MYcX0uwuUD/uLw2B5YPSiQKBeFlQiRXyKqihG", "Bobby", "larnak",
-                                new ArrayList<Project>(), "");
+                                new ArrayList<Project>(), "icone-admin3.svg");
                 UserP u4 = new UserP("JohnnyLembrouille@gmail.com",
                                 "$2a$10$vjmZ/ljcSG.6gz/u4FXdNOC3nujhhCataT8g1Dzr/hV8svSUQtUSW", "Johnny", "lembrouille",
-                                new ArrayList<Project>(), "");
+                                new ArrayList<Project>(), "icone-admin4.svg");
                 UserP u5 = new UserP("admin@mail.com", "$2a$10$HAutSR2yVEP9ZrMINr9hQu/ky2JwbL2/gDplfh5P6MmrxukLWdh2O",
-                                "admin", "admin", new ArrayList<Project>(), "");
+                                "admin", "admin", new ArrayList<Project>(), "icone-admin5.svg");
 
                 userRepository.save(u1);
                 userRepository.save(u2);

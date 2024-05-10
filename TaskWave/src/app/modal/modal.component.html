@@ -1,6 +1,6 @@
 <div *ngIf="isOpen" class="modal-background" (click)="onClose()">
   <div class="modal-content" (click)="$event.stopPropagation()">
-    <ng-content></ng-content> <!-- Pour le contenu inséré -->
+    <ng-content></ng-content> 
   </div>
 </div>
   

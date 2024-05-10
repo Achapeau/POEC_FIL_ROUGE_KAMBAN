@@ -47,32 +47,6 @@ export class UserService {
     this.currentUser = user;
   }
 
-  // inscription(User: Partial<User>) {
-  //   this.http
-  //     .post<User>(this.serviceURL + '/register', User)
-  //     .subscribe((data: User) => {
-  //       console.log(data);
-  //       this.currentUser = data;
-  //       this.connected = true;
-  //       this.custommer = {
-  //         email: this.currentUser.email,
-  //         password: this.currentUser.password,
-  //       }
-  //     });
-  //     this.authService.signIn(this.custommer as LogsDTO);
-      
-
-  //   this.router.navigate(['project-list'], { relativeTo: this.route });
-  // }
-
-  // Disconnect user
-  // disconnectUser() {
-  //   this.authService.deleteToken();
-  //   this.currentUser = null;
-  //   this.connected = false;
-  //   this.router.navigate([''], { relativeTo: this.route });
-  // }
-
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.serviceURL);
   }

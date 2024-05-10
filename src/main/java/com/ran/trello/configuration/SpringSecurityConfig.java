@@ -51,7 +51,7 @@ public class SpringSecurityConfig{
 
         configuration.addAllowedOriginPattern("*");
         configuration.setAllowCredentials(false);
-        configuration.setAllowedMethods(List.of("GET","POST"));
+        configuration.setAllowedMethods(List.of("GET","POST", "PUT", "DELETE"));
         configuration.setAllowedHeaders(List.of("Authorization","Content-Type"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
