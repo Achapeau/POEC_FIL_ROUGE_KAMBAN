@@ -42,6 +42,8 @@ export class SidebarComponent implements OnInit {
   searchQuery: string = '';
 
   ngOnInit(): void {
+    
+    
     this.authService.userData$.subscribe((myUser) => {
       this.myUser = myUser;
     });

@@ -13,6 +13,7 @@ import { AuthService } from '../../../Service/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../../../Service/user.service';
 import { ModalNewProjectComponent } from '../../../modal/modal-new-project/modal-new-project.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-project-list',
@@ -31,39 +32,28 @@ export class ProjectListComponent implements OnInit, OnChanges {
   projects: Project[] = this.projectService.projects;
   @Input() isOpenChange!: boolean;
   isModalOpen: boolean = this.isOpenChange;
-  myUser!: Partial<User>;
+  myUser!: User
   membersList!: Partial<User>[];
 
   constructor(
     private projectService: ProjectService,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private route: Router
   ) {}
 
   ngOnInit(): void {
-    // this.myUser.email = this.authService.decodeToken()?.sub;
-    // this.userService
-    //   .getUserByEmail(this.myUser.email as string)
-    //   .subscribe((user) => {
-    //     this.userService.currentUser = user;
-    //     this.userService.connected = true;
-    //   });
-    this.getProjects();
-
-    // this.authService.userData$.subscribe((myUser) => {
-    //   this.myUser = myUser;
-    // });
-    // this.userService.getUsers().subscribe((membersList) => {
-    //   this.membersList = membersList;
-    // });
-    // this.projectService
-    //   .getProject()
-    //   ?.userIds.map((id) =>
-    //     this.userService
-    //       .getUserById(id)
-    //       .subscribe((user) => this.membersList.push(user))
-    //   );
-    // console.log(this.membersList);
+    if (this.authService.getToken() !== null) {            
+      let token = this.authService.decodeToken();
+      this.userService.getUserByEmail(token?.sub as string).subscribe((user) => {
+        this.myUser = user;
+        this.userService.setCurrentUser(this.myUser);
+        this.getProjects();
+      });
+      this.userService.connected = true;
+    } else {
+      this.route.navigate(['connexion']);
+    }    
   }
 
   ngOnChanges(): void {}
