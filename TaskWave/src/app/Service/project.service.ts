@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, Input } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WrapperService } from './wrapper.service';
 import { UserService } from './user.service';
-import { BehaviorSubject, forkJoin } from 'rxjs';
-import { Project, Wrapper } from '../Model/model';
+import { Project } from '../Model/model';
 
 @Injectable({
   providedIn: 'root',

@@ -2,8 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { User, LogsDTO } from '../Model/model';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,15 +9,13 @@ import { AuthService } from './auth.service';
 export class UserService {
   constructor(
     private http: HttpClient,
-    private router: Router,
-    private route: ActivatedRoute,
-    private authService: AuthService
   ) {}
 
   serviceURL = 'http://localhost:3050/user';
 
   connected: boolean = false;
   currentUser: User | null = null;
+  custommer: LogsDTO | null = null;
 
   // get user by id
 
@@ -44,45 +40,15 @@ export class UserService {
     return User;
   }
 
-  // Connect user
-  connectUser(logDTO: LogsDTO) {
-    this.http
-      .post<User>(this.serviceURL + '/login', logDTO)
-      .subscribe((data: User) => {
-        console.log(data);
-        this.currentUser = data;
-        this.connected = true;
-        this.router.navigate(['project-list'], { relativeTo: this.route });
-        this.authService.setToken(
-          JSON.stringify({
-            mail: this.currentUser.email,
-            id: this.currentUser.id,
-          })
-        );
-        this.authService.setUserData(data);
-      });
-  }
-  inscription(newUser: Partial<User>) {
-    console.log(newUser);
-    this.http
-      .post<User>(this.serviceURL + '/register', newUser)
-      .subscribe((data: User) => {
-        console.log(data);
-        this.currentUser = data;
-        this.connected = true;
-        this.router.navigate(['project-list'], { relativeTo: this.route });
-      });
-  }
-
-  // Disconnect user
-  disconnectUser() {
-    localStorage.removeItem('currentUser');
-    this.currentUser = null;
-    this.connected = false;
-    this.router.navigate([''], { relativeTo: this.route });
+  setCurrentUser(user: User) {
+    this.currentUser = user;
   }
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.serviceURL);
+  }
+
+  getUserByEmail(email: string): Observable<User> {
+    return this.http.get<User>(this.serviceURL + '/email/' + email);
   }
 }
