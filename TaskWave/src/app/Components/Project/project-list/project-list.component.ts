@@ -1,13 +1,19 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectComponent } from '../project/project.component';
 import { Project, Themes, User } from '../../../Model/model';
 import { ModalComponent } from '../../../modal/modal.component';
 import { ProjectService } from '../../../Service/project.service';
 import { AuthService } from '../../../Service/auth.service';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../../../Service/user.service';
 import { ModalNewProjectComponent } from '../../../modal/modal-new-project/modal-new-project.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-project-list',
@@ -17,7 +23,7 @@ import { ModalNewProjectComponent } from '../../../modal/modal-new-project/modal
     ProjectComponent,
     ModalComponent,
     ReactiveFormsModule,
-    ModalNewProjectComponent
+    ModalNewProjectComponent,
   ],
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.css'],
@@ -26,38 +32,31 @@ export class ProjectListComponent implements OnInit, OnChanges {
   projects: Project[] = this.projectService.projects;
   @Input() isOpenChange!: boolean;
   isModalOpen: boolean = this.isOpenChange;
-  myUser!: Partial<User>;
+  myUser!: User
   membersList!: Partial<User>[];
 
   constructor(
     private projectService: ProjectService,
     private authService: AuthService,
-    private userService: UserService
-  ) {
-  }
-
+    private userService: UserService,
+    private route: Router
+  ) {}
 
   ngOnInit(): void {
-    this.getProjects();
-
-    // this.authService.userData$.subscribe((myUser) => {
-    //   this.myUser = myUser;
-    // });
-    // this.userService.getUsers().subscribe((membersList) => {
-    //   this.membersList = membersList;
-    // });
-    // this.projectService
-    //   .getProject()
-    //   ?.userIds.map((id) =>
-    //     this.userService
-    //       .getUserById(id)
-    //       .subscribe((user) => this.membersList.push(user))
-    //   );
-    // console.log(this.membersList);
+    if (this.authService.getToken() !== null) {            
+      let token = this.authService.decodeToken();
+      this.userService.getUserByEmail(token?.sub as string).subscribe((user) => {
+        this.myUser = user;
+        this.userService.setCurrentUser(this.myUser);
+        this.getProjects();
+      });
+      this.userService.connected = true;
+    } else {
+      this.route.navigate(['connexion']);
+    }    
   }
 
-  ngOnChanges(): void {
-  }
+  ngOnChanges(): void {}
 
   getProjects() {
     this.projects = this.projectService.getProjectsForCurrentUser();
@@ -67,7 +66,7 @@ export class ProjectListComponent implements OnInit, OnChanges {
   openCreateProjectModal() {
     this.isModalOpen = true;
   }
-  
+
   openModal(): void {
     this.isModalOpen = true;
   }

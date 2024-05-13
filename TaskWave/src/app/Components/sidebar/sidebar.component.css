@@ -184,3 +184,6 @@
   justify-content: center;
 }
 
+.dropdown-item {
+  cursor: pointer;
+}

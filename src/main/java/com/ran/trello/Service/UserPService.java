@@ -6,6 +6,7 @@ import com.ran.trello.Model.Entity.UserP;
 import com.ran.trello.Model.Repository.UserPRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,6 +16,7 @@ public class UserPService {
     public UserPService(UserPRepository userPRepository) {
         this.userPRepository = userPRepository;
     }
+
     public List<UserDTO> findAllUsers() {
         return userPRepository.findAll().stream().map(userP -> convertToUserDTO(userP)).toList();
     }
@@ -33,20 +35,31 @@ public class UserPService {
 
     public UserDTO updateUser(Integer id, UserDTO body) {
         UserP userP = userPRepository.findById(id).get();
-        if (body.getEmail() != null) userP.setEmail(body.getEmail());
-        if (body.getFirstname() != null) userP.setFirstname(body.getFirstname());
-        if (body.getLastname() != null) userP.setLastname(body.getLastname());
-        if (body.getPassword() != null) userP.setPassword(body.getPassword());
-        if (body.getIcon() != null) userP.setIcon(body.getIcon());
+        if (body.getEmail() != null)
+            userP.setEmail(body.getEmail());
+        if (body.getFirstname() != null)
+            userP.setFirstname(body.getFirstname());
+        if (body.getLastname() != null)
+            userP.setLastname(body.getLastname());
+        if (body.getPassword() != null)
+            userP.setPassword(body.getPassword());
+        if (body.getIcon() != null)
+            userP.setIcon(body.getIcon());
+        if (body.getRole() != null)
+            userP.setRole(body.getRole());
         return convertToUserDTO(userPRepository.save(userP));
     }
 
     public void deleteUser(Integer id) {
         userPRepository.deleteById(id);
     }
+
     public UserDTO convertToUserDTO(UserP userP) {
-        return new UserDTO(userP.getId(), userP.getEmail(), userP.getPassword(), userP.getFirstname(), userP.getLastname(), userP.getIcon(), userP.getProjects().stream().map(project -> project.getId()).toList() );
+        return new UserDTO(userP.getId(), userP.getEmail(), userP.getPassword(), userP.getFirstname(),
+                userP.getLastname(), userP.getRole(), userP.getIcon(),
+                userP.getProjects().stream().map(project -> project.getId()).toList());
     }
+
     public UserP convertToUserP(UserDTO userDTO) {
         UserP userP = new UserP();
         userP.setId(userDTO.getId());
@@ -56,5 +69,15 @@ public class UserPService {
         userP.setPassword(userDTO.getPassword());
         userP.setIcon(userDTO.getIcon());
         return userP;
+    }
+
+    public UserDTO findByEmail(String email) {
+        return convertToUserDTO(userPRepository.findByEmail(email).get());
+    }
+
+    public List<UserP> allUsers() {
+        List<UserP> users = new ArrayList<>();
+        userPRepository.findAll().forEach(users::add);
+        return users;
     }
 }

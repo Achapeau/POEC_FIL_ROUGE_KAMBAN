@@ -7,17 +7,25 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-public class LogDTO {
+public class RegisterUserDTO {
+
     private String email;
     private String password;
-    private Integer id;
+    private String firstname;
+    private String lastname;
+    private String role;
+    private String icon;
+
 
     @Override
     public String toString() {
-        return "LogDTO{" +
+        return "RegisterUserDTO{" +
                 "email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", id=" + id +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
+
 }
