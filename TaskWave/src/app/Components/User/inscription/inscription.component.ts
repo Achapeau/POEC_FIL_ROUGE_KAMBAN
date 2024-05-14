@@ -10,6 +10,7 @@ import { Icon, User } from '../../../Model/model';
 import { CommonModule, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../Service/auth.service';
+import { iconsList } from '../../../Model/data';
 
 @Component({
   selector: 'app-inscription',
@@ -29,26 +30,7 @@ export class InscriptionComponent {
     lastname: ['', [Validators.required]],
     icon: ['', [Validators.required]],
   });
-  iconsList: Icon[] = [
-    {
-      lien: 'icone-admin.svg',
-    },
-    {
-      lien: 'icone-admin2.svg',
-    },
-    {
-      lien: 'icone-admin3.svg',
-    },
-    {
-      lien: 'icone-admin4.svg',
-    },
-    {
-      lien: 'icone-admin5.svg',
-    },
-    {
-      lien: 'icone-admin6.svg',
-    },
-  ];
+  iconsList: Icon[] = iconsList;
 
   onSubmit(event: Event) {
     if (this.connectionForm.valid) {

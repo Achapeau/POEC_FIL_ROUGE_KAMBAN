@@ -1,4 +1,4 @@
-import { Themes } from "./model";
+import { Icon, Themes } from "./model";
 
 export const themesList: Themes[] = [
     {
@@ -42,4 +42,25 @@ export const themesList: Themes[] = [
       background:
         'https://cdn.pixabay.com/photo/2016/12/17/14/33/wave-1913559_1280.jpg',
     },
+  ];
+  
+  export const iconsList: Icon[] = [
+    {
+      lien: 'icone-admin.svg',
+    },
+    {
+      lien: 'icone-admin2.svg',
+    },
+    {
+      lien: 'icone-admin3.svg',
+    },
+    {
+      lien: 'icone-admin4.svg',
+    },
+    {
+      lien: 'icone-admin5.svg',
+    },
+    {
+      lien: 'icone-admin6.svg',
+    }
   ];

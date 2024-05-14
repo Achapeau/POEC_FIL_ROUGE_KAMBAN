@@ -4,6 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Icon, User } from '../../Model/model';
 import { UserService } from '../../Service/user.service';
 import { SidebarComponent } from '../../Components/sidebar/sidebar.component';
+import { iconsList } from '../../Model/data';
 
 @Component({
   selector: 'app-modal-update-user',
@@ -19,26 +20,7 @@ export class ModalUpdateUserComponent {
   constructor(public fb: FormBuilder, private userService: UserService, private sidebarService: SidebarComponent) { }
   @Input() isOpen = false;
   @Output() isOpenChange = new EventEmitter<boolean>();
-  iconsList: Icon[] = [
-    {
-      lien: 'icone-admin.svg',
-    },
-    {
-      lien: 'icone-admin2.svg',
-    },
-    {
-      lien: 'icone-admin3.svg',
-    },
-    {
-      lien: 'icone-admin4.svg',
-    },
-    {
-      lien: 'icone-admin5.svg',
-    },
-    {
-      lien: 'icone-admin6.svg',
-    }
-  ];
+  iconsList: Icon[] = iconsList;
   
   public checkoutForm = this.fb.group({
     firstname: ['', [Validators.required]],
