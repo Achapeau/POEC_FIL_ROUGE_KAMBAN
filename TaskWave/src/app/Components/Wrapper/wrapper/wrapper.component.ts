@@ -15,18 +15,20 @@ import { CardService } from '../../../Service/card.service';
 import { CardNewComponent } from '../../Card/card-new/card-new.component';
 import { ProjectService } from '../../../Service/project.service';
 import { WrapperListComponent } from '../wrapper-list/wrapper-list.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-wrapper',
   standalone: true,
-  imports: [CommonModule, CardComponent, WrapperComponent, WrapperListComponent, CardNewComponent, CdkDropList, CdkDrag],
+  imports: [CommonModule, FormsModule, CardComponent, WrapperComponent, WrapperListComponent, CardNewComponent, CdkDropList, CdkDrag],
   templateUrl: './wrapper.component.html',
   styleUrl: './wrapper.component.css'
 })
 export class WrapperComponent implements OnInit {
   @Input() wrapper!: Wrapper;
   @Input() card!: Card;
-  @Input() newTitle!: String;
+  @Input() is_editing_title: boolean = false;
+  @Input() title!: string;
   @Input() project: Project = this.projectService.project;
   @Input() cardList: Card[] = [];
   
@@ -37,6 +39,7 @@ export class WrapperComponent implements OnInit {
   ngOnInit() {
     // this.projectService.getProjectById(this.projectService.project.id).subscribe(project => this.project = project);
     this.cardList = this.cardService.convertIdListToCardList(this.wrapper.cardsIds);
+    this.title = this.wrapper.title;
   }
   drop(event: CdkDragDrop<Card[]>) {
     if (event.previousContainer === event.container) {
@@ -84,5 +87,15 @@ export class WrapperComponent implements OnInit {
     }
   // }
    
+  }
+
+  is_editing_mode_title() {
+    // if (!this.is_editing_description) {
+      if (this.is_editing_title) {
+        this.wrapper.title = this.title;
+        this.wrapperService.updateWrapper(this.wrapper).subscribe();
+      }
+      this.is_editing_title = !this.is_editing_title;
+    // }
   }
 }
