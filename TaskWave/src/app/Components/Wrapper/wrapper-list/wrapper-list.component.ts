@@ -11,10 +11,11 @@ import { forkJoin } from 'rxjs';
 import { ModalComponent } from '../../../modal/modal.component';
 import { UserService } from '../../../Service/user.service';
 import { FormsModule } from '@angular/forms';
+import { ModalUpdateProjectComponent } from '../../../modal/modal-update-project/modal-update-project.component';
 @Component({
   selector: 'app-wrapper-list',
   standalone: true,
-  imports: [FormsModule, CommonModule, WrapperComponent, CdkDropListGroup, WrapperCreateComponent, CdkDropList, CdkDrag, ModalComponent],
+  imports: [FormsModule, CommonModule, WrapperComponent, CdkDropListGroup, WrapperCreateComponent, CdkDropList, CdkDrag, ModalComponent, ModalUpdateProjectComponent],
   templateUrl: './wrapper-list.component.html',
   styleUrls: ['./wrapper-list.component.css']
 })
@@ -23,37 +24,38 @@ export class WrapperListComponent implements OnInit {
   @Input() projectId!: number;
   @Input() wrappersId : number[] = [];
   @Input() wrappersList : Wrapper[] = this.wrapperService.wrappers;
-  newTitle! : string;
   active: boolean = false;
   routeParam: any;
-  membersIcons: { [key: number]: string } = {}; 
-  @Input() is_editing_title: boolean = false;
+  membersIcons: { [key: number]: string } = {};
   @Input() title: string = this.projectService.project.title;
-  @Input() is_editing_description: boolean = false;
   @Input() description: string = this.projectService.project.description;
+  @Input() isOpenChange!: boolean;
+  isModalOpen: boolean = this.isOpenChange;
   
 	
 constructor(public userService : UserService, public wrapperService : WrapperService, public projectService : ProjectService, private route: ActivatedRoute) {
 
 }
 ngOnInit() : void {
-  this.routeParam = this.route.snapshot.params['id'];
-  this.loadProjectDetails();
-  this.projectService.getProject().subscribe(project => console.log(project));
-  this.route.paramMap.subscribe(params => {
-    let projectId = Number(params.get('id'));
-    this.projectService.getProjectById(projectId).subscribe(project => {
-      this.project = project;
-      this.projectService.project = project;
-      this.getWrappers();
+    this.routeParam = this.route.snapshot.params['id'];
+    this.loadProjectDetails();
+    this.projectService.getProject().subscribe(project => console.log(project));
+    this.route.paramMap.subscribe(params => {
+      let projectId = Number(params.get('id'));
+      this.projectService.getProjectById(projectId).subscribe(project => {
+        this.project = project;
+        this.projectService.project = project;
+        this.title = project.title;
+        this.description = project.description;
+        this.getWrappers();
+      });
     });
-  });
   }
 
   loadProjectDetails() {
     this.projectService.getProjectById(this.routeParam).subscribe(project => {
       this.project = project;
-      this.getWrappers();
+      // this.getWrappers();
       this.loadMemberIcons(project);
     });
   }
@@ -94,23 +96,7 @@ ngOnInit() : void {
     }
   }
 
-  is_editing_mode_title() {
-    if (!this.is_editing_description) {
-      if (this.is_editing_title) {
-        this.projectService.project.title = this.title;
-        this.projectService.updateProject(this.projectService.project).subscribe();
-      }
-      this.is_editing_title = !this.is_editing_title;
-    }
-  }
-
-  is_editing_mode_description() {
-    if(!this.is_editing_title) {
-      if (this.is_editing_description) {
-        this.projectService.project.description = this.description;
-        this.projectService.updateProject(this.projectService.project).subscribe();
-      }
-      this.is_editing_description = !this.is_editing_description;
-    }
+  openUpdateProjectModal() {
+    this.isModalOpen = true;
   }
 }

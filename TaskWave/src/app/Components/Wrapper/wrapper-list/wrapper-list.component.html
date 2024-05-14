@@ -8,10 +8,8 @@
     <!-- Header pour le titre et la description du projet -->
     <div class="header-wrapper">
         <div class="titre-description">
-            <strong><h1 (click)="is_editing_mode_title()" *ngIf="!is_editing_title">{{ title }}</h1></strong>
-			<input aria-label="this.title"  *ngIf="is_editing_title" (blur)="is_editing_mode_title()" [(ngModel)]="this.title" dir="auto" maxlength="50" type="text" name="title" id="title" value="{{ title }}">
-            <p (click)="is_editing_mode_description()"*ngIf="!is_editing_description">{{ description }}</p>
-			<textarea aria-label="this.description"  *ngIf="is_editing_description" (blur)="is_editing_mode_description()" [(ngModel)]="this.description" dir="auto" maxlength="512">{{ description }}</textarea>
+            <strong><h1 [(ngModel)]="title">{{ this.projectService.project.title }}</h1></strong>
+            <p [(ngModel)]="description">{{ this.projectService.project.description }}</p>
         </div>
         <div class="header-actions">
             <ng-container *ngFor="let userId of project.userIds">
@@ -28,7 +26,7 @@
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow text-dark" aria-labelledby="dropdownUser1">
                     <li>
                         <button>
-                            <a class="dropdown-item">Settings</a>
+                            <a class="dropdown-item" (click)="openUpdateProjectModal()">Settings</a>
                         </button>
                     </li>
                     <li><hr class="dropdown-divider"></li>
@@ -47,3 +45,4 @@
         <app-wrapper-create></app-wrapper-create>
     </div>
 </div>
+<app-modal-update-project [(isOpen)]="isModalOpen"></app-modal-update-project>
