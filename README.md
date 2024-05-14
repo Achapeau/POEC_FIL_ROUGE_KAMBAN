@@ -32,7 +32,7 @@ Save the **application.properties** file after making the necessary changes.
 
 # Example Configuration
 
-```java
+```properties
 spring.application.name=YourProjectName
 server.port=8080
 spring.datasource.url=jdbc:mysql://localhost:3306/your_database_name
