@@ -28,7 +28,7 @@ Open the **application.properties** file in a text editor and update the followi
 
 3. Save the Changes:
 
-... Save the **application.properties** file after making the necessary changes.
+Save the **application.properties** file after making the necessary changes.
 
 # Example Configuration
 
