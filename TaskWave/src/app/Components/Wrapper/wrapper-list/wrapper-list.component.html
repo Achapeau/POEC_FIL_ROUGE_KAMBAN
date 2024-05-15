@@ -41,7 +41,7 @@
     </div>
     <!-- Box contenant les éléments de la liste, séparée du header -->
     <div class="container-box" cdkDropListGroup>
-        <app-wrapper *ngFor="let wrapper of wrappersList" [wrapper]="wrapper" cdkDrag></app-wrapper>
+        <app-wrapper *ngFor="let wrapper of wrappersList" [wrapper]="wrapper"></app-wrapper>
         <app-wrapper-create></app-wrapper-create>
     </div>
 </div>

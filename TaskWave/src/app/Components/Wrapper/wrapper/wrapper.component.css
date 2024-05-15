@@ -9,7 +9,7 @@
     background-color: #F5F8FC;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease; 
+    /* transition: all 0.3s ease;  */
 
 }
 
@@ -46,3 +46,22 @@
     margin-bottom: 10px;
 }
 
+.cdk-drag-disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    user-select: none;
+  }
+
+.cdk-drag-placeholder {
+    opacity: 0.5;
+  }
+
+/* Animate items as they're being sorted. */
+.cdk-drop-list-dragging .cdk-drag {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* Animate an item that has been dropped. */
+.cdk-drag-animating {
+    transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+}

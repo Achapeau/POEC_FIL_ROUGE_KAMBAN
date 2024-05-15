@@ -115,19 +115,6 @@
   margin-left: 15px;
 }
 
-/* Styles pour le drag-drop CDK */
-.cdk-drag-preview {
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2);
-}
-
-.cdk-drag-placeholder {
-  opacity: 0;
-}
-
-.cdk-drag-animating {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}
-
 
 /* Cible le menu déroulant et ajuste le fond et les bordures */
 .dropdown-menu.dropdown-menu-dark.text-small.shadow.text-dark.show {

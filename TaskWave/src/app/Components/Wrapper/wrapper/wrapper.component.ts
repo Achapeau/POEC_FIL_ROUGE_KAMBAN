@@ -1,9 +1,9 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Inject, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
 import { WrapperService } from '../../../Service/wrapper.service';
 import { UserService } from '../../../Service/user.service';
 import { Wrapper, Card, Project } from '../../../Model/model';
 import { CardComponent } from '../../Card/card/card.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -27,13 +27,13 @@ import { FormsModule } from '@angular/forms';
 export class WrapperComponent implements OnInit {
   @Input() wrapper!: Wrapper;
   @Input() card!: Card;
-  @Input() is_editing_title: boolean = false;
+  @Output() is_editing_title: boolean = false;
   @Input() title!: string;
   @Input() project: Project = this.projectService.project;
   @Input() cardList: Card[] = [];
+  @Output() is_editing_title_Event = new EventEmitter<boolean>();
   
   constructor(private wrapperListComponent: WrapperListComponent, private projectService: ProjectService, public wrapperService: WrapperService, public cardService: CardService, public users: UserService) {
-    
    }
 
   ngOnInit() {
@@ -96,6 +96,10 @@ export class WrapperComponent implements OnInit {
         this.wrapperService.updateWrapper(this.wrapper).subscribe();
       }
       this.is_editing_title = !this.is_editing_title;
+      this.is_editing_title_Event.emit(this.is_editing_title);
+      setTimeout(() => {
+        document.getElementById('title')?.focus();
+      }, 10);
     // }
   }
 }
