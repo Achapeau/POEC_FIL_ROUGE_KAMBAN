@@ -10,7 +10,7 @@ import { UserService } from '../../../Service/user.service';
   standalone: true,
   imports: [CommonModule, TaskModalComponent],
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css']
+  styleUrls: ['./card.component.css'],
 })
 export class CardComponent implements OnInit, OnChanges {
   @Input() card!: Card;
@@ -19,14 +19,33 @@ export class CardComponent implements OnInit, OnChanges {
   showModal: boolean = false;
   selectedCard: Card | null = null;
   userIcons: string[] = []; // Ce devrait être un tableau pour gérer potentiellement plusieurs icônes
+  isDragging: boolean = false;
 
   constructor(
-    private cardService: CardService, 
+    private cardService: CardService,
     private userService: UserService // Injecter UserService pour accéder aux infos utilisateur
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.fetchUserIcon();
+  }
+
+  onMouseDown(event: MouseEvent): void {
+    this.isDragging = false;
+  }
+
+  onMouseMove(event: MouseEvent): void {
+    if (!this.isDragging) {
+      this.isDragging = true;
+    }
+  }
+
+  onClick(event: MouseEvent): void {
+    if (!this.isDragging) {
+      this.openModal();
+    }
+
+    console.log('click', this.isDragging);
   }
 
   ngOnChanges(): void {
@@ -49,7 +68,7 @@ export class CardComponent implements OnInit, OnChanges {
             this.userIcons = ['/assets/svg/default-icon.svg'];
           }
         },
-        error => {
+        (error) => {
           console.error('Error fetching user icon:', error);
         }
       );
@@ -64,12 +83,10 @@ export class CardComponent implements OnInit, OnChanges {
   closeModal(): void {
     this.showModal = false;
     if (this.selectedCard) {
-      this.cardService.getCardById(this.selectedCard.id).subscribe(
-        card => {
-          this.card = card;
-          console.log("Modal closed");
-        }
-      );
+      this.cardService.getCardById(this.selectedCard.id).subscribe((card) => {
+        this.card = card;
+        console.log('Modal closed');
+      });
     }
   }
 }
