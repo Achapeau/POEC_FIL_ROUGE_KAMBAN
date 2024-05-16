@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { WrapperService } from '../../../Service/wrapper.service';
-import { Wrapper, Project } from '../../../Model/model';
+import { Wrapper, Project, User } from '../../../Model/model';
 import { CommonModule } from '@angular/common';
 import { WrapperComponent } from '../wrapper/wrapper.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from '../../../Service/project.service';
 import { CdkDropList, CdkDrag, CdkDragDrop, CdkDropListGroup, moveItemInArray } from '@angular/cdk/drag-drop';
 import { WrapperCreateComponent } from '../wrapper-create/wrapper-create.component';
@@ -12,6 +12,7 @@ import { ModalComponent } from '../../../modal/modal.component';
 import { UserService } from '../../../Service/user.service';
 import { FormsModule } from '@angular/forms';
 import { ModalUpdateProjectComponent } from '../../../modal/modal-update-project/modal-update-project.component';
+import { AuthService } from '../../../Service/auth.service';
 @Component({
   selector: 'app-wrapper-list',
   standalone: true,
@@ -27,37 +28,45 @@ export class WrapperListComponent implements OnInit {
   active: boolean = false;
   routeParam: any;
   membersIcons: { [key: number]: string } = {};
-  @Input() title: string = this.projectService.project.title;
-  @Input() description: string = this.projectService.project.description;
+  @Input() title!: string;
+  @Input() description!: string;
+  background!: string;
   @Input() isOpenChange!: boolean;
   isModalOpen: boolean = this.isOpenChange;
+  myUser!: User;
   
 	
-constructor(public userService : UserService, public wrapperService : WrapperService, public projectService : ProjectService, private route: ActivatedRoute) {
+constructor(public userService : UserService, public wrapperService : WrapperService, public projectService : ProjectService, private router: Router, private authService : AuthService) {}
 
-}
+
 ngOnInit() : void {
-    this.routeParam = this.route.snapshot.params['id'];
-    this.loadProjectDetails();
-    this.projectService.getProject().subscribe(project => console.log(project));
-    this.route.paramMap.subscribe(params => {
-      let projectId = Number(params.get('id'));
-      this.projectService.getProjectById(projectId).subscribe(project => {
-        this.project = project;
-        this.projectService.project = project;
-        this.title = project.title;
-        this.description = project.description;
-        this.getWrappers();
+    if (this.authService.getToken() !== null) {            
+      let token = this.authService.decodeToken();
+      this.userService.getUserByEmail(token?.sub as string).subscribe((user) => {
+        this.myUser = user;
+        this.userService.setCurrentUser(this.myUser);
       });
-    });
+      this.userService.connected = true;
+    } else {
+      this.router.navigate(['connexion']);
+    }
+    if (!this.projectService.project) {
+      this.projectService.getProjectById(Number(localStorage.getItem('project'))).subscribe(project => {
+        this.loadProjectDetails(project);
+      })
+    } else {
+      this.loadProjectDetails(this.projectService.project);
+    }
   }
 
-  loadProjectDetails() {
-    this.projectService.getProjectById(this.routeParam).subscribe(project => {
-      this.project = project;
-      // this.getWrappers();
-      this.loadMemberIcons(project);
-    });
+  loadProjectDetails(project: Project): void {
+    this.project = project;
+    this.projectService.project = project;
+    this.title = project.title;
+    this.description = project.description;
+    this.background = project.background;
+    this.loadMemberIcons(project);
+    this.getWrappers();
   }
 
   

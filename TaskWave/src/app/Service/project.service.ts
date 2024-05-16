@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WrapperService } from './wrapper.service';
@@ -9,7 +9,7 @@ import { Project } from '../Model/model';
 @Injectable({
   providedIn: 'root',
 })
-export class ProjectService {
+export class ProjectService{
   getProject(): Observable<Project> {
     let proj = new Observable<Project>(observer => {
       observer.next(this.project);
@@ -37,7 +37,6 @@ export class ProjectService {
   // crud operations
 
   // setProjectData(projectData: Project[]) {
-  //   console.log(projectData);
   //   this.projectDataSubject.next(projectData);
   // }
 
@@ -85,15 +84,24 @@ export class ProjectService {
 
   // select project
   selectProject(project: Project) {
-    this.project = project;
-    this.wrapperService.convertIdListToWrapperList(project.wrappersIds as number[]);
+    localStorage.setItem('project', project.id.toString());
+    this.getProjectById(project.id).subscribe((project) => {
+      this.project = project;
+      this.wrapperService.convertIdListToWrapperList(project.wrappersIds as number[]);
+      if (this.router.url === '/project') {
+        this.router.navigate(['temporary-route'], { relativeTo: this.route }).then(() => {
+          this.router.navigate(['project'], { relativeTo: this.route });
+        });
+      } else {
+        this.router.navigate(['project'], { relativeTo: this.route });
+      }
+    })
     // this.wrapperService.wrappers = []
     // project.wrappersIds.map((id) => {
     //   this.wrapperService.getWrapperById(id).subscribe((wrapper) => {
     //     this.wrapperService.wrappers.push(wrapper);
     //   });
     // })
-    this.router.navigate(['project', project.id], { relativeTo: this.route });
   }
 
   convertProjectIdsToProjects(projectIds: number[]): Project[] {

@@ -42,8 +42,6 @@ export class SidebarComponent implements OnInit {
   searchQuery: string = '';
 
   ngOnInit(): void {
-    
-    
     this.authService.userData$.subscribe((myUser) => {
       this.myUser = myUser;
     });
@@ -77,8 +75,8 @@ export class SidebarComponent implements OnInit {
   }
 
   selectProject(project: Project) {
-    this.myProjects = this.projectService.getProjectsForCurrentUser();
-    this.projects = this.projectService.projects
+    // this.myProjects = this.projectService.getProjectsForCurrentUser();
+    // this.projects = this.projectService.projects
     this.searchQuery = '';
     this.projectService.selectProject(project);
   }
@@ -95,7 +93,6 @@ export class SidebarComponent implements OnInit {
     this.isModalOpen = false;
   }
   openUpdateUserModal() {
-    console.log("openUpdateUserModal");
     this.isModalOpenUpdateUser = true;
   }
 

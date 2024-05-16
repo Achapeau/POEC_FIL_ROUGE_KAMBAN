@@ -45,8 +45,6 @@ export class ModalUpdateUserComponent {
         icon: this.checkoutForm.value.icon as string,
       };
       this.userService.updateUser(newUser).subscribe((user) => {
-        console.log('Utilisateur mis a jour');
-        console.log(user);
         this.userService.currentUser = user;
       })
       this.closeModal();
