@@ -15,7 +15,5 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     importProvidersFrom(HttpClientModule),
     provideHttpClient(withInterceptors([authInterceptor])),
-
-    SidebarComponent,
   ],
 };

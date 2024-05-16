@@ -83,10 +83,11 @@ export class CardComponent implements OnInit, OnChanges {
   closeModal(): void {
     this.showModal = false;
     if (this.selectedCard) {
-      this.cardService.getCardById(this.selectedCard.id).subscribe((card) => {
-        this.card = card;
-        console.log('Modal closed');
-      });
+      this.cardService.getCardById(this.selectedCard.id).subscribe(
+        card => {
+          this.card = card;
+        }
+      );
     }
   }
 }

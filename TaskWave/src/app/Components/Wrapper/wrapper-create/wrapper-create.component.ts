@@ -3,6 +3,7 @@ import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { WrapperService } from '../../../Service/wrapper.service';
 import { Wrapper, Card } from '../../../Model/model';
 import { ProjectService } from '../../../Service/project.service';
+import { WrapperListComponent } from '../wrapper-list/wrapper-list.component';
 @Component({
   selector: 'app-wrapper-create',
   standalone: true,
@@ -12,7 +13,7 @@ import { ProjectService } from '../../../Service/project.service';
 })
 export class WrapperCreateComponent implements OnInit {
   @Input() newTitle!: string | null;
-  @Input() projectId : number = this.projectService.project.id;
+  // @Input() projectId : number = this.projectService.project.id;
   @Input() wrappersList : Wrapper[] = [];
   @Input() cardList : Card[] = [];
 	constructor(private wrapperService : WrapperService, private projectService : ProjectService, public fb : FormBuilder) {
@@ -38,8 +39,9 @@ export class WrapperCreateComponent implements OnInit {
       this.wrapperService.addWrapper(newWrapper).subscribe((data : Wrapper) => {
         let returnWrapper = data;
         this.wrappersList.push(returnWrapper);
-
+        this.projectService.project.wrappersIds.push(returnWrapper.id);
         this.wrapperService.wrappers = this.wrappersList;
+        // this.wrapperListComponent.wrappersList = this.wrappersList;
       });
       this.checkoutForm.reset();
     }

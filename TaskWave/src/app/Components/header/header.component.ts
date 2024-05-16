@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.connected = this.userService.connected;
-    console.log("header connected" + this.connected);
   }
 
 

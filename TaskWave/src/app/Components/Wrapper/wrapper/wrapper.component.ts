@@ -72,7 +72,6 @@ export class WrapperComponent implements OnInit {
     });
   }
   deleteWrapper() {
-  //   console.log(this.cardList);
   // if (this.cardList.length > 0) {
   //   alert('Veuillez d\'abord supprimer ou déplacer tous les cartes de cette liste !');
   //   return;
@@ -83,7 +82,6 @@ export class WrapperComponent implements OnInit {
       this.wrapperService.wrappers = this.wrapperService.wrappers.filter(wrapper => wrapper.id != this.wrapper.id);
       this.wrapperListComponent.wrappersList = this.wrapperService.wrappers;
       this.projectService.project.wrappersIds = this.wrapperService.wrappers.map(wrapper => wrapper.id).filter(id => id != this.wrapper.id) as number[];
-
     }
   // }
    

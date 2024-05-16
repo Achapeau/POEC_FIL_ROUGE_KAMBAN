@@ -58,7 +58,6 @@ export class ModalNewProjectComponent implements OnInit, OnChanges {
 
   onSubmit() {
     if (this.checkoutForm.valid) {
-      console.log('Titre : ', this.checkoutForm.value.newTitle);
       let memberIds: number[] = [];
       memberIds.push(this.myUser.id!);
       this.checkoutForm.value.newMembers
@@ -76,14 +75,8 @@ export class ModalNewProjectComponent implements OnInit, OnChanges {
       };
       this.wrapperService.wrappers = [];
       this.projectService.addProject(newProject).subscribe((res) => {
-        
         this.userService.currentUser?.projectsIds?.push(res.id!);
-            
-        console.log("this.projectService.projects");
-        console.log(this.projectService.projects);
         this.projectService.projects.push(res);
-        // this.sidebarComponent.projects.push(res);
-        console.log(this.projectService.projects);
         this.projectService.selectProject(res);
       });
 
