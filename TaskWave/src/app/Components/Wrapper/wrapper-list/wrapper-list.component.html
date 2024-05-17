@@ -12,10 +12,10 @@
             <p [(ngModel)]="description">{{ this.projectService.project.description }}</p>
         </div>
         <div class="header-actions">
-            <ng-container *ngFor="let userId of project.userIds">
-                <img *ngIf="membersIcons[userId]" [src]="membersIcons[userId]" width="38" height="38" class="rounded-circle me-1" alt="Member Icon">
+            <ng-container *ngFor="let member of members">
+                <img *ngIf="member.icon" [src]="member.icon" width="38" height="38" class="rounded-circle me-1" alt="Member Icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ member.firstname }} {{ member.lastname }}">
             </ng-container>
-            <button class="user-add-icon">
+            <button (click)="openUpdateProjectMemberModal()" class="user-add-icon">
                 <p>Membres</p>
             </button>
             <button class="share-button">Partager</button>
@@ -46,3 +46,4 @@
     </div>
 </div>
 <app-modal-update-project [(isOpen)]="isModalOpen"></app-modal-update-project>
+<app-modal-update-project-member [(isOpen)]="isModalUpdateMemberOpen"></app-modal-update-project-member>

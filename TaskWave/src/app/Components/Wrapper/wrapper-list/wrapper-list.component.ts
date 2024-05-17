@@ -13,10 +13,11 @@ import { UserService } from '../../../Service/user.service';
 import { FormsModule } from '@angular/forms';
 import { ModalUpdateProjectComponent } from '../../../modal/modal-update-project/modal-update-project.component';
 import { AuthService } from '../../../Service/auth.service';
+import { ModalUpdateProjectMemberComponent } from '../../../modal/modal-update-project-member/modal-update-project-member.component';
 @Component({
   selector: 'app-wrapper-list',
   standalone: true,
-  imports: [FormsModule, CommonModule, WrapperComponent, CdkDropListGroup, WrapperCreateComponent, CdkDropList, CdkDrag, ModalComponent, ModalUpdateProjectComponent],
+  imports: [FormsModule, CommonModule, WrapperComponent, CdkDropListGroup, WrapperCreateComponent, CdkDropList, CdkDrag, ModalComponent, ModalUpdateProjectComponent, ModalUpdateProjectMemberComponent],
   templateUrl: './wrapper-list.component.html',
   styleUrls: ['./wrapper-list.component.css']
 })
@@ -27,12 +28,13 @@ export class WrapperListComponent implements OnInit {
   @Input() wrappersList : Wrapper[] = this.wrapperService.wrappers;
   active: boolean = false;
   routeParam: any;
-  membersIcons: { [key: number]: string } = {};
+  members: Partial<User>[] = [];
   @Input() title!: string;
   @Input() description!: string;
   background!: string;
   @Input() isOpenChange!: boolean;
   isModalOpen: boolean = this.isOpenChange;
+  isModalUpdateMemberOpen: boolean = false;
   myUser!: User;
   
 	
@@ -81,8 +83,14 @@ ngOnInit() : void {
 
   loadMemberIcons(project: Project): void {
     project.userIds.forEach(userId => {
+      this.members = [];
       this.userService.getUserById(userId).subscribe(user => {
-        this.membersIcons[user.id] = `/assets/svg/${user.icon}`; 
+        let memberInfo = {
+          icon: `/assets/svg/${user.icon}`,
+          firstname: user.firstname,
+          lastname: user.lastname
+        }
+        this.members.push(memberInfo);
       });
     });
   }
@@ -107,5 +115,9 @@ ngOnInit() : void {
 
   openUpdateProjectModal() {
     this.isModalOpen = true;
+  }
+
+  openUpdateProjectMemberModal() {
+    this.isModalUpdateMemberOpen = true;
   }
 }
