@@ -13,10 +13,11 @@
         [cdkDropListData]="cardList"
         class="example-list"
         id="{{wrapper.id}}"
-        (cdkDropListDropped)="drop($event)">
+        (cdkDropListDropped)="drop($event)"
+        [cdkDropListDisabled]="isOpenModal">
         @for (card of cardList; track card) {
             <div class="example-box" cdkDrag>
-                <app-card [card]="card"></app-card>
+                <app-card [card]="card" (isOpenModal)="isOpenModal" cdkDrag [cdkDragDisabled]="isOpenModal"></app-card>
             </div>
         }
     </div>

@@ -19,7 +19,7 @@
 
 /* Contenu du modal avec une meilleure couleur de fond et de l'ombre pour un effet de profondeur */
 .modal-content {
-  background: #FFFFFF; /* Fond clair pour le contraste */
+  background: #E7E9F3; /* Fond clair pour le contraste */
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);

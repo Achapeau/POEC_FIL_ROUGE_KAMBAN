@@ -1,25 +1,35 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Card, User } from '../../../Model/model';
 import { TaskModalComponent } from '../task-modal/task-modal.component';
 import { CommonModule } from '@angular/common';
 import { CardService } from '../../../Service/card.service';
 import { UserService } from '../../../Service/user.service';
+import { ClickInsideDirective } from '../../../click-inside.directive';
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [CommonModule, TaskModalComponent],
+  imports: [CommonModule, TaskModalComponent, ClickInsideDirective],
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css'],
 })
 export class CardComponent implements OnInit, OnChanges {
   @Input() card!: Card;
   @Input() cardList!: Card[];
+  @Output() isOpenModal: EventEmitter<boolean> = new EventEmitter();
 
   showModal: boolean = false;
   selectedCard: Card | null = null;
   userIcons: string[] = []; // Ce devrait être un tableau pour gérer potentiellement plusieurs icônes
   isDragging: boolean = false;
+  isInside: boolean = false;
 
   constructor(
     private cardService: CardService,
@@ -35,7 +45,7 @@ export class CardComponent implements OnInit, OnChanges {
   }
 
   onMouseMove(event: MouseEvent): void {
-    if (!this.isDragging) {
+    if (!this.isDragging && this.isInside) {
       this.isDragging = true;
     }
   }
@@ -44,8 +54,6 @@ export class CardComponent implements OnInit, OnChanges {
     if (!this.isDragging) {
       this.openModal();
     }
-
-    console.log('click', this.isDragging);
   }
 
   ngOnChanges(): void {
@@ -78,16 +86,16 @@ export class CardComponent implements OnInit, OnChanges {
   openModal(): void {
     this.selectedCard = this.card;
     this.showModal = true;
+    this.isOpenModal.emit(this.showModal);
   }
 
   closeModal(): void {
     this.showModal = false;
+    this.isOpenModal.emit(this.showModal);
     if (this.selectedCard) {
-      this.cardService.getCardById(this.selectedCard.id).subscribe(
-        card => {
-          this.card = card;
-        }
-      );
+      this.cardService.getCardById(this.selectedCard.id).subscribe((card) => {
+        this.card = card;
+      });
     }
   }
 }

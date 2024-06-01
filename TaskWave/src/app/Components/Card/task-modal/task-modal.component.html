@@ -1,5 +1,5 @@
 <div class="modal" *ngIf="isVisible">
-  <div class="modal-content">
+  <div class="modal-content" (clickOutside)="closeModal()">
     <span class="close-btn" (click)="closeModal()">&times;</span>
     <form [formGroup]="taskForm" (ngSubmit)="submitTask()">
       <div card-title>
