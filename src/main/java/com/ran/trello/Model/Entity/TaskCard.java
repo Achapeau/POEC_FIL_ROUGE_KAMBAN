@@ -21,6 +21,7 @@ public class TaskCard {
     private Integer wrapperId;
     private String status;
     private Integer assignedTo;
+    private Date createdDate;
     private Date dueDate;
 
     public TaskCard(String title, String description, int position, int wrapperId, String status) {
