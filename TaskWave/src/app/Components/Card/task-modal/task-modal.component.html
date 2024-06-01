@@ -1,6 +1,10 @@
 <div class="modal" *ngIf="isVisible">
   <div class="modal-content" (clickOutside)="closeModal()">
-    <span class="close-btn" (click)="closeModal()">&times;</span>
+    <div class="close-modal">
+      <button  (click)="closeModal()" type="button">
+        <p class="close-icon">&times;</p>
+      </button>
+    </div>
     <form [formGroup]="taskForm" (ngSubmit)="submitTask()">
       <div card-title>
         <h2>
@@ -30,8 +34,10 @@
           <option *ngFor="let member of membersList" [value]="member.id">{{ member.firstname }} {{ member.lastname }}</option>
         </select>
       </div>
-      <button type="submit">Enregistrer</button>
-      <button (click)="deleteTask()" type="button">Supprimer</button>
+      <div class="btn-choice">
+        <button type="submit">Enregistrer</button>
+        <button (click)="deleteTask()" type="button" class="btn-delete">Supprimer</button>
+      </div>
     </form>
   </div>
 </div>

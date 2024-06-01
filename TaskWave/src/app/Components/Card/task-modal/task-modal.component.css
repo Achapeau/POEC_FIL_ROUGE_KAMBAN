@@ -10,6 +10,7 @@
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.6); /* Fond légèrement plus clair pour moins d'opacité */
   z-index: 1000;
+  cursor: default;
 }
 
 .card-title h2{
@@ -19,13 +20,15 @@
 
 /* Contenu du modal avec une meilleure couleur de fond et de l'ombre pour un effet de profondeur */
 .modal-content {
-  background: #E7E9F3; /* Fond clair pour le contraste */
+  background: #E7F1F3; /* Fond clair pour le contraste */
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   width: 90%;
   max-width: 500px; /* Taille plus adaptée pour les modales */
   animation: slideIn 0.3s;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Disposition des champs form-half avec ajustements pour l'alignement */
@@ -37,19 +40,32 @@
   margin: 0 1% 20px 0;
 }
 
-.close-btn {
-  float: right;
-  font-size: 24px;
-  color: #606060;
+.close-modal button{
+  position: absolute;
+  background-color: #ccc;
   cursor: pointer;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0;
+  margin: 0;
 }
 
 textarea, input[type="datetime-local"], select {
   width: 100%;
   padding: 8px;
-  border: 2px solid #ccc;
+  border: none;
   border-radius: 5px;
   box-sizing: border-box;
+  background-color: #091e420f;
+}
+
+textarea:focus, input[type="datetime-local"]:focus, select:focus {
+  border: 2px solid #ccc;
+  background-color: #ffffff;
+  outline: none;
 }
 
 button {
@@ -65,4 +81,45 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+.close-icon {
+  font-size: 24px;
+  margin-top: -0.3rem;  
+  color: #666;
+}
+
+.close-modal button:hover {
+  /* background-color: #b3b3b3; */
+  scale: 1.1;
+  transition: 300ms;
+  box-shadow: #B3B3B3 0px 0px 3px 2px;
+}
+
+h2 input {
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color: #E7F1F3;
+}
+
+h2 input:focus {
+  outline: none;
+  border: 2px solid #ccc;
+  background-color: #ffffff;
+}
+
+.btn-choice {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.btn-delete {
+  background-color: red;
+}
+
+.btn-delete:hover {
+  background-color: darkred;
 }
