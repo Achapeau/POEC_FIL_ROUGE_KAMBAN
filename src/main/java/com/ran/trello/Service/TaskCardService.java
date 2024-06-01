@@ -29,6 +29,7 @@ public class TaskCardService {
             newTaskCard.setWrapperId(taskCard.getWrapperId());
             newTaskCard.setStatus(taskCard.getStatus());
             newTaskCard.setAssignedTo(taskCard.getAssignedTo());
+            newTaskCard.setCreatedDate(taskCard.getCreatedDate());
             newTaskCard.setDueDate(taskCard.getDueDate());
             newTaskCard = taskCardRepository.save(newTaskCard);
             wrapper.addCard(newTaskCard);
@@ -67,15 +68,14 @@ public class TaskCardService {
                 wrapper.removeCard(taskCard);
                 wrapperRepository.save(wrapper);
                 taskCardRepository.delete(taskCard);
-            }else {
+            } else {
                 System.out.println("Wrapper not found");
                 throw new RuntimeException("Wrapper not found");
             }
-        }else{
+        } else {
             System.out.println("Task card not found");
             throw new RuntimeException("Task card not found");
         }
-
 
     }
 }

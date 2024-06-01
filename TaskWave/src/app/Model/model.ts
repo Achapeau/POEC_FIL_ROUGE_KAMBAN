@@ -6,6 +6,7 @@ export interface Card {
   wrapperId: number;
   status: string;
   dueDate: string | null;
+  createdDate: string | null;
   assignedTo: number | null;
 }
 
@@ -39,7 +40,7 @@ export interface Wrapper {
 export interface ResponseData {
   expiresIn: number;
   token: Token;
-  customer: User
+  customer: User;
 }
 
 export interface CardDTO {
