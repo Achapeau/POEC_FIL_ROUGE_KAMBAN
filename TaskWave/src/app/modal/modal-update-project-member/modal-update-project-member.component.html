@@ -1,0 +1,16 @@
+<div *ngIf="isOpen" class="modal-background" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-content">
+            <h2>Modifier les membres du projet</h2>
+            <form class="project-form" [formGroup]="checkoutForm" (ngSubmit)="onSubmit()"> 
+                <div class="form-group">
+                  <label for="projectMembers">Ajouter/Enlever des membres</label>
+                  <select id="projectMembers" class="form-control" formControlName="newMembers" multiple>
+                    <option *ngFor="let member of membersList" [value]="member.id" class="member-option" [disabled]="member.id === currentUserId">{{ member.firstname }} {{ member.lastname }}</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn-submit">valider</button>
+            </form>
+        </div>
+    </div>
+</div>
