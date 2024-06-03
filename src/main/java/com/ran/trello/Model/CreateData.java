@@ -8,6 +8,7 @@ import com.ran.trello.Model.Repository.WrapperRepository;
 import org.springframework.context.ApplicationContext;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CreateData {
 
@@ -86,56 +87,56 @@ public class CreateData {
                 wrapperRepository.save(w7);
                 System.out.println("wrapper crées");
                 TaskCard t1 = new TaskCard("Ajouter une fonction create()", "la fonction create() n'existe pas", 0,
-                                w1.getId(), TaskStatus.TODO.getStatus());
+                                w1.getId(), PriorityStatus.LOW.getStatus(), new Date(124, 1, 24));
                 w1.addCard(t1);
                 taskCardRepository.save(t1);
                 TaskCard t2 = new TaskCard("login", "Faire un syteme de login", 1, w2.getId(),
-                                TaskStatus.TODO.getStatus());
+                        PriorityStatus.LOW.getStatus(), new Date(124, 4, 25));
                 w2.addCard(t2);
                 taskCardRepository.save(t2);
                 TaskCard t3 = new TaskCard("update", "Faire une fonction update", 2, w3.getId(),
-                                TaskStatus.TODO.getStatus());
+                        PriorityStatus.LOW.getStatus(), new Date());
                 w3.addCard(t3);
                 taskCardRepository.save(t3);
                 TaskCard t4 = new TaskCard("delete", "Faire une fonction delete", 3, w4.getId(),
-                                TaskStatus.TODO.getStatus());
+                        PriorityStatus.LOW.getStatus(), new Date());
                 w4.addCard(t4);
                 taskCardRepository.save(t4);
                 TaskCard t5 = new TaskCard("add", "Faire une fonction add", 3, w5.getId(),
-                                TaskStatus.IN_PROGRESS.getStatus());
+                        PriorityStatus.LOW.getStatus(), new Date());
                 w5.addCard(t5);
                 taskCardRepository.save(t5);
                 TaskCard t6 = new TaskCard("read", "Faire une fonction read", 4, w6.getId(),
-                                TaskStatus.IN_PROGRESS.getStatus());
+                        PriorityStatus.LOW.getStatus(), new Date());
                 w6.addCard(t6);
                 taskCardRepository.save(t6);
-                TaskCard t7 = new TaskCard("get", "Faire une fonction get", 5, w7.getId(), TaskStatus.DONE.getStatus());
+                TaskCard t7 = new TaskCard("get", "Faire une fonction get", 5, w7.getId(), PriorityStatus.LOW.getStatus(), new Date());
                 w7.addCard(t7);
                 taskCardRepository.save(t7);
-                TaskCard t8 = new TaskCard("add", "Faire une fonction add", 0, w1.getId(), TaskStatus.TODO.getStatus());
+                TaskCard t8 = new TaskCard("add", "Faire une fonction add", 0, w1.getId(), PriorityStatus.LOW.getStatus(), new Date());
                 w1.addCard(t8);
                 taskCardRepository.save(t8);
-                TaskCard t9 = new TaskCard("get", "Faire une fonction get", 1, w2.getId(), TaskStatus.TODO.getStatus());
+                TaskCard t9 = new TaskCard("get", "Faire une fonction get", 1, w2.getId(), PriorityStatus.LOW.getStatus(), new Date());
                 w2.addCard(t9);
                 taskCardRepository.save(t9);
                 TaskCard t10 = new TaskCard("delete", "Faire une fonction delete", 2, w3.getId(),
-                                TaskStatus.TODO.getStatus());
+                        PriorityStatus.LOW.getStatus(), new Date());
                 w3.addCard(t10);
                 taskCardRepository.save(t10);
                 TaskCard t11 = new TaskCard("update", "Faire une fonction update", 3, w4.getId(),
-                                TaskStatus.IN_PROGRESS.getStatus());
+                        PriorityStatus.LOW.getStatus(), new Date());
                 w4.addCard(t11);
                 taskCardRepository.save(t11);
                 TaskCard t12 = new TaskCard("delete", "Faire une fonction delete", 3, w5.getId(),
-                                TaskStatus.IN_PROGRESS.getStatus());
+                        PriorityStatus.LOW.getStatus(), new Date());
                 w5.addCard(t12);
                 taskCardRepository.save(t12);
                 TaskCard t13 = new TaskCard("read", "Faire une fonction read", 4, w6.getId(),
-                                TaskStatus.IN_PROGRESS.getStatus());
+                        PriorityStatus.LOW.getStatus(), new Date());
                 w6.addCard(t13);
                 taskCardRepository.save(t13);
                 TaskCard t14 = new TaskCard("update", "Faire une fonction update", 5, w7.getId(),
-                                TaskStatus.DONE.getStatus());
+                        PriorityStatus.LOW.getStatus(), new Date());
                 w7.addCard(t14);
                 taskCardRepository.save(t14);
                 System.out.println("card crées");

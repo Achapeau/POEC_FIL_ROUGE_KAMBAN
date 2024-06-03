@@ -54,22 +54,22 @@
 }
 
 
-.status-to-do {
+.priority-medium {
     background-color: #ffa502; 
     color: white;
 }
 
-.status-in-progress {
-    background-color: #346BC8; 
+.priority-high {
+    background-color: #ff4757; 
     color: white;
 }
 
-.status-done {
-    background-color: #28B463; 
+.priority-low {
+    background-color: #2ED573; 
     color: white;
 }
 
-.task-card .status {
+.task-card .priority {
     display: inline-block;
     padding: 3px 10px;
     border-radius: 15px;

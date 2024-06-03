@@ -17,10 +17,12 @@ import { Card, User } from '../../../Model/model';
 import { ProjectService } from '../../../Service/project.service';
 import { UserService } from '../../../Service/user.service';
 import { CardService } from '../../../Service/card.service';
-import { TaskStatus } from '../../../Model/TaskStatus';
+import { PriorityDelay } from '../../../Model/enum';
 import { WrapperComponent } from '../../Wrapper/wrapper/wrapper.component';
 import { ClickInsideDirective } from '../../../click-inside.directive';
 import { ClickOutsideDirective } from '../../../click-outside.directive';
+import { CalculateService } from '../../../Service/calculate.service';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-task-modal',
@@ -31,6 +33,7 @@ import { ClickOutsideDirective } from '../../../click-outside.directive';
     ReactiveFormsModule,
     ClickInsideDirective,
     ClickOutsideDirective,
+    MatProgressBarModule,
   ],
   standalone: true,
 })
@@ -39,15 +42,18 @@ export class TaskModalComponent implements OnInit, OnChanges {
   @Input() card!: Card;
   @Output() closeModalEvent = new EventEmitter<void>();
   @Input() membersList: Partial<User>[] = [];
-  taskStatusOptions: string[] = Object.values(TaskStatus);
+  taskStatusOptions: string[] = Object.values(PriorityDelay);
   isOpen: boolean = false;
+  newDueDate: string = '';
+  progressBarValue: number = 0;
 
   constructor(
     private projectService: ProjectService,
     private userService: UserService,
     private cardService: CardService,
     private fb: FormBuilder,
-    private wrapperComponent: WrapperComponent
+    private wrapperComponent: WrapperComponent,
+    private calculateService: CalculateService
   ) {}
 
   public taskForm = this.fb.group({
@@ -64,18 +70,40 @@ export class TaskModalComponent implements OnInit, OnChanges {
         .subscribe((user) => this.membersList.push(user))
     );
     this.isOpen = true;
+    if (this.card.dueDate) {
+      this.progressBarValue =
+        100 -
+        this.calculateService.calculateRatioDate(
+          this.card.dueDate,
+          this.card?.createdDate
+        );
+    }
   }
 
   ngOnChanges(): void {
-    // this.cardData = this.card;
     if (this.card) {
+      this.newDueDate = this.card.dueDate?.toString() || '-';
       this.taskForm.reset({
         title: this.card.title || '',
         description: this.card.description || '',
-        dueDate: this.card.dueDate?.split('.')[0] || null,
+        dueDate: this.newDueDate.split('.')[0] || null,
         assignedTo: this.card.assignedTo?.toString() || '',
         status: this.card?.status || '',
       });
+    }
+  }
+
+  closeDate(): void {
+    console.log(this.taskForm.value.dueDate);
+
+    if (this.taskForm.value.dueDate) {
+      this.progressBarValue =
+        100 -
+        this.calculateService.calculateRatioDate(
+          this.taskForm.value.dueDate,
+          this.card?.createdDate
+        );
+      console.log(this.progressBarValue);
     }
   }
 
@@ -95,13 +123,12 @@ export class TaskModalComponent implements OnInit, OnChanges {
         position: this.card?.position,
         wrapperId: this.card?.wrapperId,
         description: this.taskForm.value.description as string,
-        dueDate: this.taskForm.value.dueDate
-          ? this.taskForm.value.dueDate
-          : null,
+        createdDate: this.card?.createdDate,
+        dueDate: this.taskForm.value.dueDate,
         assignedTo: this.taskForm.value.assignedTo
           ? parseInt(this.taskForm.value.assignedTo, 10)
           : null,
-        status: this.taskForm.value.status || undefined,
+        status: this.checkRatio(),
       };
       this.cardService.updateCard(updatedCard).subscribe(
         (response) => {
@@ -126,5 +153,16 @@ export class TaskModalComponent implements OnInit, OnChanges {
       );
       this.closeModal();
     }
+  }
+
+  checkRatio(): string {
+    if (this.taskForm.value.dueDate) {
+      const ratio = this.calculateService.calculateRatioDate(
+        this.taskForm.value.dueDate,
+        this.card?.createdDate
+      );
+      return ratio > 66 ? 'Basse' : ratio > 33 ? 'Moyenne' : 'Elevée';
+    }
+    return 'Basse';
   }
 }

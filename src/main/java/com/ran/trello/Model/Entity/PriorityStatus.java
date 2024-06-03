@@ -1,9 +1,9 @@
 package com.ran.trello.Model.Entity;
 
 public enum PriorityStatus {
-    LOW("basse"),
-    MEDIUM("moyenne"),
-    HIGH("élevée");
+    LOW("Basse"),
+    MEDIUM("Moyenne"),
+    HIGH("Elevée");
 
     private final String status;
 

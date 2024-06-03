@@ -6,6 +6,7 @@ import com.ran.trello.Model.Repository.TaskCardRepository;
 import com.ran.trello.Model.Repository.WrapperRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,7 @@ public class TaskCardService {
             newTaskCard.setWrapperId(taskCard.getWrapperId());
             newTaskCard.setStatus(taskCard.getStatus());
             newTaskCard.setAssignedTo(taskCard.getAssignedTo());
-            newTaskCard.setCreatedDate(taskCard.getCreatedDate());
+            newTaskCard.setCreatedDate(new Date());
             newTaskCard.setDueDate(taskCard.getDueDate());
             newTaskCard = taskCardRepository.save(newTaskCard);
             wrapper.addCard(newTaskCard);
@@ -56,6 +57,7 @@ public class TaskCardService {
         taskCard.setPosition(body.getPosition());
         taskCard.setStatus(body.getStatus());
         taskCard.setAssignedTo(body.getAssignedTo());
+        taskCard.setCreatedDate(body.getCreatedDate());
         taskCard.setDueDate(body.getDueDate());
         return taskCardRepository.save(taskCard);
     }

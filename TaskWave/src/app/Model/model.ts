@@ -6,7 +6,7 @@ export interface Card {
   wrapperId: number;
   status: string;
   dueDate: string | null;
-  createdDate: string | null;
+  createdDate: string;
   assignedTo: number | null;
 }
 

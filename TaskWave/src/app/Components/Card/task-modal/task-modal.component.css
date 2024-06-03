@@ -41,6 +41,27 @@
   margin: 0 1% 20px 0;
 }
 
+.progressbar {
+  margin-top: 0.5rem;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.low {
+  color: #2ED573;
+  background-color: #ffffff;
+}
+
+.medium {
+  color: #FFA502;
+  background-color: #ffffff;
+}
+
+.high {
+  color: #FF4757;
+  background-color: #ffffff;
+}
+
 .close-modal button{
   position: absolute;
   background-color: #ccc;
@@ -123,4 +144,8 @@ h2 input:focus {
 
 .btn-delete:hover {
   background-color: darkred;
+}
+
+button {
+  border-radius: 15px;
 }

@@ -24,11 +24,12 @@ public class TaskCard {
     private Date createdDate;
     private Date dueDate;
 
-    public TaskCard(String title, String description, int position, int wrapperId, String status) {
+    public TaskCard(String title, String description, int position, int wrapperId, String status, Date createdDate) {
         this.title = title;
         this.description = description;
         this.position = position;
         this.wrapperId = wrapperId;
         this.status = status;
+        this.createdDate = createdDate;
     }
 }
