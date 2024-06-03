@@ -1,13 +1,13 @@
 package com.ran.trello.Model.Entity;
 
-public enum TaskStatus {
-    TODO("à faire"),
-    IN_PROGRESS("en cours"),
-    DONE("terminé");
+public enum PriorityStatus {
+    LOW("basse"),
+    MEDIUM("moyenne"),
+    HIGH("élevée");
 
     private final String status;
 
-    TaskStatus(String status) {
+    PriorityStatus(String status) {
         this.status = status;
     }
 
