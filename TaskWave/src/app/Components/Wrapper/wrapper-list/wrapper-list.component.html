@@ -13,7 +13,12 @@
         </div>
         <div class="header-actions">
             <ng-container *ngFor="let member of members">
-                <img *ngIf="member.icon" [src]="member.icon" width="38" height="38" class="rounded-circle me-1" alt="Member Icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ member.firstname }} {{ member.lastname }}">
+                <div  class="tooltip-container">
+                    <img *ngIf="member.icon" [src]="member.icon" width="38" height="38" class="rounded-circle me-1" alt="Member Icon" >
+                    <div class="tooltip-text">
+                        <p>{{ member.firstname }} {{ member.lastname }}</p>
+                    </div>
+                </div>
             </ng-container>
             <button (click)="openUpdateProjectMemberModal()" class="user-add-icon">
                 <p>Membres</p>
