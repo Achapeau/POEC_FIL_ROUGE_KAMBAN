@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Inject, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { WrapperService } from '../../../Service/wrapper.service';
 import { UserService } from '../../../Service/user.service';
 import { Wrapper, Card, Project } from '../../../Model/model';
@@ -20,9 +20,18 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-wrapper',
   standalone: true,
-  imports: [CommonModule, FormsModule, CardComponent, WrapperComponent, WrapperListComponent, CardNewComponent, CdkDropList, CdkDrag],
+  imports: [
+    CommonModule,
+    FormsModule,
+    CardComponent,
+    WrapperComponent,
+    WrapperListComponent,
+    CardNewComponent,
+    CdkDropList,
+    CdkDrag,
+  ],
   templateUrl: './wrapper.component.html',
-  styleUrl: './wrapper.component.css'
+  styleUrl: './wrapper.component.css',
 })
 export class WrapperComponent implements OnInit {
   @Input() wrapper!: Wrapper;
@@ -32,72 +41,100 @@ export class WrapperComponent implements OnInit {
   @Input() project: Project = this.projectService.project;
   @Input() cardList: Card[] = [];
   @Output() is_editing_title_Event = new EventEmitter<boolean>();
-  
-  constructor(private wrapperListComponent: WrapperListComponent, private projectService: ProjectService, public wrapperService: WrapperService, public cardService: CardService, public users: UserService) {
-   }
+  @Input() isOpenModal: boolean = false;
+
+  constructor(
+    private wrapperListComponent: WrapperListComponent,
+    private projectService: ProjectService,
+    public wrapperService: WrapperService,
+    public cardService: CardService,
+    public users: UserService
+  ) {}
 
   ngOnInit() {
     // this.projectService.getProjectById(this.projectService.project.id).subscribe(project => this.project = project);
-    this.cardList = this.cardService.convertIdListToCardList(this.wrapper.cardsIds);
+    this.cardList = this.cardService.convertIdListToCardList(
+      this.wrapper.cardsIds
+    );
     this.title = this.wrapper.title;
   }
   drop(event: CdkDragDrop<Card[]>) {
+    if (this.isOpenModal) {
+      return;
+    }
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
     } else {
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex,
+        event.currentIndex
       );
       event.previousContainer.data.forEach((card, index) => {
         card.position = index;
         this.cardService.updateCard(card).subscribe();
-      })
-      this.wrapperService.getWrapperById(Number(event.previousContainer.id)).subscribe((data : Wrapper) => {
-        let prevWrapper = data;
-        prevWrapper.cardsIds = event.previousContainer.data.map(card => card.id) as number[];
-        this.wrapperService.updateWrapper(prevWrapper).subscribe();
       });
+      this.wrapperService
+        .getWrapperById(Number(event.previousContainer.id))
+        .subscribe((data: Wrapper) => {
+          let prevWrapper = data;
+          prevWrapper.cardsIds = event.previousContainer.data.map(
+            (card) => card.id
+          ) as number[];
+          this.wrapperService.updateWrapper(prevWrapper).subscribe();
+        });
     }
     event.container.data.forEach((card, index) => {
       card.position = index;
       this.cardService.updateCard(card).subscribe();
-    })
-    this.wrapperService.getWrapperById(Number(event.container.id)).subscribe((data : Wrapper) => {
-      let nextWrapper = data;
-      nextWrapper.cardsIds = event.container.data.map(card => card.id) as number[];
-      this.wrapperService.updateWrapper(nextWrapper).subscribe();
     });
+    this.wrapperService
+      .getWrapperById(Number(event.container.id))
+      .subscribe((data: Wrapper) => {
+        let nextWrapper = data;
+        nextWrapper.cardsIds = event.container.data.map(
+          (card) => card.id
+        ) as number[];
+        this.wrapperService.updateWrapper(nextWrapper).subscribe();
+      });
   }
   deleteWrapper() {
-  // if (this.cardList.length > 0) {
-  //   alert('Veuillez d\'abord supprimer ou déplacer tous les cartes de cette liste !');
-  //   return;
-  // }else {
-    const confirmation = confirm('Etes vous étes sur de vouloir supprimer cette liste ?');
+    // if (this.cardList.length > 0) {
+    //   alert('Veuillez d\'abord supprimer ou déplacer tous les cartes de cette liste !');
+    //   return;
+    // }else {
+    const confirmation = confirm(
+      'Etes vous étes sur de vouloir supprimer cette liste ?'
+    );
     if (confirmation) {
       this.wrapperService.deleteWrapper(this.wrapper.id).subscribe();
-      this.wrapperService.wrappers = this.wrapperService.wrappers.filter(wrapper => wrapper.id != this.wrapper.id);
+      this.wrapperService.wrappers = this.wrapperService.wrappers.filter(
+        (wrapper) => wrapper.id != this.wrapper.id
+      );
       this.wrapperListComponent.wrappersList = this.wrapperService.wrappers;
-      this.projectService.project.wrappersIds = this.wrapperService.wrappers.map(wrapper => wrapper.id).filter(id => id != this.wrapper.id) as number[];
+      this.projectService.project.wrappersIds = this.wrapperService.wrappers
+        .map((wrapper) => wrapper.id)
+        .filter((id) => id != this.wrapper.id) as number[];
     }
-  // }
-   
+    // }
   }
 
   is_editing_mode_title() {
     // if (!this.is_editing_description) {
-      if (this.is_editing_title) {
-        this.wrapper.title = this.title;
-        this.wrapperService.updateWrapper(this.wrapper).subscribe();
-      }
-      this.is_editing_title = !this.is_editing_title;
-      this.is_editing_title_Event.emit(this.is_editing_title);
-      setTimeout(() => {
-        document.getElementById('title')?.focus();
-      }, 10);
+    if (this.is_editing_title) {
+      this.wrapper.title = this.title;
+      this.wrapperService.updateWrapper(this.wrapper).subscribe();
+    }
+    this.is_editing_title = !this.is_editing_title;
+    this.is_editing_title_Event.emit(this.is_editing_title);
+    setTimeout(() => {
+      document.getElementById('title')?.focus();
+    }, 10);
     // }
   }
 }

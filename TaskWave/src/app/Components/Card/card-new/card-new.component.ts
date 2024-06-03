@@ -1,35 +1,52 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { CardService } from '../../../Service/card.service';
 import { Card, Project, Wrapper } from '../../../Model/model';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { WrapperService } from '../../../Service/wrapper.service';
 import { Router } from '@angular/router';
 import { ProjectService } from '../../../Service/project.service';
 import { CommonModule } from '@angular/common';
-import { TaskStatus } from '../../../Model/TaskStatus';
+import { TaskStatus } from '../../../Model/enum';
 
 @Component({
   selector: 'app-card-new',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule,],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './card-new.component.html',
-  styleUrl: './card-new.component.css'
-  
+  styleUrl: './card-new.component.css',
 })
 export class CardNewComponent implements OnInit, OnChanges {
   newTitle!: string;
-  @Input() wrapper! : Wrapper;
-  projectId : number = this.projectService.project.id;
-  @Input() cardList : Card[] = [];
+  @Input() wrapper!: Wrapper;
+  projectId: number = this.projectService.project.id;
+  @Input() cardList: Card[] = [];
   @Output() cardListChange = new EventEmitter<Card[]>();
-  @Input() project! : Project;
+  @Input() project!: Project;
   isAddingTask: boolean = false;
 
-	constructor(private projectService : ProjectService, public wrapperService : WrapperService, private cardService : CardService, public fb : FormBuilder, private router : Router) {  }
+  constructor(
+    private projectService: ProjectService,
+    public wrapperService: WrapperService,
+    private cardService: CardService,
+    public fb: FormBuilder,
+    private router: Router
+  ) {}
 
-	public checkoutForm = this.fb.group({
-		newTitle: ['', [Validators.required]],
-	});
+  public checkoutForm = this.fb.group({
+    newTitle: ['', [Validators.required]],
+  });
 
   showInput(): void {
     this.isAddingTask = true;
@@ -39,7 +56,7 @@ export class CardNewComponent implements OnInit, OnChanges {
     this.isAddingTask = false;
   }
 
-  ngOnInit() : void {
+  ngOnInit(): void {
     this.projectId = this.projectService.project.id;
     this.project = this.projectService.project;
   }
@@ -49,22 +66,24 @@ export class CardNewComponent implements OnInit, OnChanges {
     this.project = this.projectService.project;
   }
 
-	onSubmit(): void {
+  onSubmit(): void {
     if (this.checkoutForm.valid) {
-      let newCard : Partial<Card> = {
+      let newCard: Partial<Card> = {
         title: this.checkoutForm.value.newTitle as string,
         description: '',
         position: this.cardList.length + 1,
         wrapperId: this.wrapper.id,
         status: TaskStatus.TODO,
-      }
-      this.cardService.addCard(newCard).subscribe((data : Card) => {
-         let returnCard = data;
-         this.cardList.push(returnCard);
-         this.wrapper.cardsIds = this.cardList.map(card => card.id) as number[];
-         this.isAddingTask = false;
+      };
+      this.cardService.addCard(newCard).subscribe((data: Card) => {
+        let returnCard = data;
+        this.cardList.push(returnCard);
+        this.wrapper.cardsIds = this.cardList.map(
+          (card) => card.id
+        ) as number[];
+        this.isAddingTask = false;
       });
       this.checkoutForm.reset();
     }
-	}
+  }
 }
