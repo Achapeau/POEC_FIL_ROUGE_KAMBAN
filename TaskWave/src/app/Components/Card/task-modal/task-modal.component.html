@@ -21,7 +21,7 @@
         <input type="datetime-local" id="dueDate" formControlName="dueDate" (clickOutside)="closeDate()">
       </div>
       <div class="form-half">
-        <label for="status">Temps restant: {{progressBarValue ? progressBarValue + '%': "non défini"}} </label>
+        <label for="status">Temps restant: {{progressBarValue ? 100 -progressBarValue + '%': "non défini"}} </label>
         <mat-progress-bar class="progressbar" [ngClass]="{'low': progressBarValue < 34, 'medium': progressBarValue >= 34 && progressBarValue < 66, 'high': progressBarValue >= 66}" color="accent" mode="determinate" value={{progressBarValue}}></mat-progress-bar>        
       </div>
       <div class="form-half">
