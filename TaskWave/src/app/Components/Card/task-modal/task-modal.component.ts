@@ -94,8 +94,6 @@ export class TaskModalComponent implements OnInit, OnChanges {
   }
 
   closeDate(): void {
-    console.log(this.taskForm.value.dueDate);
-
     if (this.taskForm.value.dueDate) {
       this.progressBarValue =
         100 -
@@ -103,7 +101,6 @@ export class TaskModalComponent implements OnInit, OnChanges {
           this.taskForm.value.dueDate,
           this.card?.createdDate
         );
-      console.log(this.progressBarValue);
     }
   }
 

@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { ModalUpdateProjectComponent } from '../../../modal/modal-update-project/modal-update-project.component';
 import { AuthService } from '../../../Service/auth.service';
 import { ModalUpdateProjectMemberComponent } from '../../../modal/modal-update-project-member/modal-update-project-member.component';
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-wrapper-list',
   standalone: true,
@@ -59,7 +60,8 @@ export class WrapperListComponent implements OnInit {
     public wrapperService: WrapperService,
     public projectService: ProjectService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private cookieService: CookieService
   ) {}
 
   ngOnInit(): void {
@@ -77,7 +79,7 @@ export class WrapperListComponent implements OnInit {
     }
     if (!this.projectService.project) {
       this.projectService
-        .getProjectById(Number(localStorage.getItem('project')))
+        .getProjectById(Number(this.cookieService.get('project')))
         .subscribe((project) => {
           this.loadProjectDetails(project);
         });

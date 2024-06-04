@@ -74,6 +74,7 @@ export class CardNewComponent implements OnInit, OnChanges {
         position: this.cardList.length + 1,
         wrapperId: this.wrapper.id,
         status: TaskStatus.TODO,
+        createdDate: new Date().toISOString(),
       };
       this.cardService.addCard(newCard).subscribe((data: Card) => {
         let returnCard = data;

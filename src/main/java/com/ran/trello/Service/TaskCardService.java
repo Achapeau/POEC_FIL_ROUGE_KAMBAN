@@ -30,7 +30,7 @@ public class TaskCardService {
             newTaskCard.setWrapperId(taskCard.getWrapperId());
             newTaskCard.setStatus(taskCard.getStatus());
             newTaskCard.setAssignedTo(taskCard.getAssignedTo());
-            newTaskCard.setCreatedDate(new Date());
+            newTaskCard.setCreatedDate(new Date(System.currentTimeMillis()));
             newTaskCard.setDueDate(taskCard.getDueDate());
             newTaskCard = taskCardRepository.save(newTaskCard);
             wrapper.addCard(newTaskCard);

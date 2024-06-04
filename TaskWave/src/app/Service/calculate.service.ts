@@ -15,7 +15,7 @@ export class CalculateService {
   }
 
   calculateOriginalDate(dueDate: string, createdDate: string): number {
-    const createdDateObj = new Date(createdDate);
+    const createdDateObj = new Date(createdDate.split('.')[0] || createdDate);
     const dueDateObj = new Date(dueDate);
     const difference = dueDateObj.getTime() - createdDateObj.getTime();
     const days = Math.floor(difference / (1000 * 60 * 60 * 24));

@@ -51,7 +51,6 @@ export class CardComponent implements OnInit, OnChanges {
   onMouseMove(event: MouseEvent): void {
     if (!this.isDragging && this.isInside) {
       this.isDragging = true;
-      console.log(this.card.createdDate);
     }
   }
 
@@ -96,17 +95,6 @@ export class CardComponent implements OnInit, OnChanges {
     let now: Date | null = null;
     if (this.card.dueDate) {
       now = new Date(this.card.dueDate);
-    }
-    console.log(now);
-    console.log(this.card.createdDate);
-
-    if (this.card.createdDate && this.card.dueDate) {
-      console.log(
-        this.calculateService.calculateRatioDate(
-          this.card.dueDate,
-          this.card.createdDate
-        )
-      );
     }
   }
 

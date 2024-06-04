@@ -5,13 +5,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { WrapperService } from './wrapper.service';
 import { UserService } from './user.service';
 import { Project } from '../Model/model';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProjectService{
+export class ProjectService {
   getProject(): Observable<Project> {
-    let proj = new Observable<Project>(observer => {
+    let proj = new Observable<Project>((observer) => {
       observer.next(this.project);
     });
     return proj;
@@ -22,7 +23,8 @@ export class ProjectService{
     private router: Router,
     private route: ActivatedRoute,
     private wrapperService: WrapperService,
-    private userService: UserService
+    private userService: UserService,
+    private cookieService: CookieService
   ) {}
 
   serviceURL = 'http://localhost:3050/project';
@@ -68,8 +70,11 @@ export class ProjectService{
 
   // delete project
 
-  deleteProject(id: number) : Observable<void> {
-    if (this.userService.currentUser && this.userService.currentUser.projectsIds) {
+  deleteProject(id: number): Observable<void> {
+    if (
+      this.userService.currentUser &&
+      this.userService.currentUser.projectsIds
+    ) {
       const index = this.userService.currentUser.projectsIds.indexOf(id);
       if (index !== -1) {
         this.userService.currentUser.projectsIds.splice(index, 1);
@@ -84,18 +89,22 @@ export class ProjectService{
 
   // select project
   selectProject(project: Project) {
-    localStorage.setItem('project', project.id.toString());
+    this.cookieService.set('project', project.id.toString());
     this.getProjectById(project.id).subscribe((project) => {
       this.project = project;
-      this.wrapperService.convertIdListToWrapperList(project.wrappersIds as number[]);
+      this.wrapperService.convertIdListToWrapperList(
+        project.wrappersIds as number[]
+      );
       if (this.router.url === '/project') {
-        this.router.navigate(['temporary-route'], { relativeTo: this.route }).then(() => {
-          this.router.navigate(['project'], { relativeTo: this.route });
-        });
+        this.router
+          .navigate(['temporary-route'], { relativeTo: this.route })
+          .then(() => {
+            this.router.navigate(['project'], { relativeTo: this.route });
+          });
       } else {
         this.router.navigate(['project'], { relativeTo: this.route });
       }
-    })
+    });
     // this.wrapperService.wrappers = []
     // project.wrappersIds.map((id) => {
     //   this.wrapperService.getWrapperById(id).subscribe((wrapper) => {
@@ -115,7 +124,9 @@ export class ProjectService{
     return projects;
   }
   getProjectsForCurrentUser(): Project[] {
-    this.projects = this.convertProjectIdsToProjects(this.userService.currentUser?.projectsIds as number[]);
+    this.projects = this.convertProjectIdsToProjects(
+      this.userService.currentUser?.projectsIds as number[]
+    );
     return this.projects;
   }
 }

@@ -57,7 +57,7 @@ export class AuthService {
     this.usersDataSubject.next(filteredUsersData);
   }
 
-  signUp(user: Partial<User>){
+  signUp(user: Partial<User>) {
     this.deleteToken();
     this.http
       .post<Partial<User>>(`${this.endpoint}/register`, user)
@@ -65,14 +65,13 @@ export class AuthService {
         var newCustommerDTO: LogsDTO = {
           email: user.email as string,
           password: user.password as string,
-        }
-        timer(250).subscribe(() => this.signIn(newCustommerDTO))    
-      })
-
+        };
+        timer(250).subscribe(() => this.signIn(newCustommerDTO));
+      });
   }
 
-  signIn(logsDTO: LogsDTO) {  
-    this.deleteToken();      
+  signIn(logsDTO: LogsDTO) {
+    this.deleteToken();
     this.http
       .post<ResponseData>(`${this.endpoint}/login`, logsDTO)
       .subscribe((data: ResponseData) => {
@@ -101,21 +100,9 @@ export class AuthService {
       return true;
     }
     const expirationDate = decoded.exp * 1000;
-    const now = new Date().getTime();    
+    const now = new Date().getTime();
     return expirationDate < now;
   }
-
-  // refreshToken() {
-  //   let tokens: any = this.getToken();
-  //   if (!tokens) return true;
-  //   tokens = JSON.parse(tokens);
-  //   let refreshToken = tokens.refresh_Token;
-  //   return this.http
-  //     .post<Partial<Token>>(`${this.endpoint}/refresh-token`, {
-  //       refreshToken,
-  //     })
-  //     .pipe(tap((tokens: any) => this.setToken(tokens)));
-  // }
 
   isLoggedIn(): boolean {
     return !!this.getToken();
@@ -123,7 +110,6 @@ export class AuthService {
 
   setToken(token: Token): void {
     this.cookieService.set('token', JSON.stringify(token));
-    
   }
 
   getToken(): string | null {
