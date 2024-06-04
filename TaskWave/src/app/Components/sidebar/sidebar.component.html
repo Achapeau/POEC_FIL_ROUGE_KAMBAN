@@ -30,38 +30,54 @@
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-width="2" d="M2 5C2 4.17157 2.67157 3.5 3.5 3.5H8.87868C9.2765 3.5 9.65804 3.65804 9.93934 3.93934L11.5607 5.56066C11.842 5.84197 12.2235 6 12.6213 6H20.5C21.3284 6 22 6.67157 22 7.5V18C22 18.8284 21.3284 19.5 20.5 19.5H3.5C2.67157 19.5 2 18.8284 2 18V5Z"/>
               </svg>
-            </div>
-            <span>{{ project.title }}</span>
-          </button>
-        </div>
-      </div>
-      <div class="sidebar-tags">
-        <div class="tags-title">
-          <span>Tags</span>
-          <button class="add-tag-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
-              <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M3.5 12H20.5"/>
-              <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M12 20.5L12 3.5"/>
-            </svg>
-          </button>
-        </div>
-      <div class="tag-list">
-        <div class="tag-item">
-          <span class="tag-color" style="background-color: #ff4757;"></span>
-          <span>High</span>
-        </div>
-        <div class="tag-item">
-          <span class="tag-color" style="background-color: #ffa502;"></span>
-          <span>Medium</span>
-        </div>
-        <div class="tag-item">
-          <span class="tag-color" style="background-color: #2ed573;"></span>
-          <span>Low</span>
-        </div>
+          </div>
+          <span>{{ project.title }}</span>
+        </button>
       </div>
     </div>
-    
-		<div class="sidebar-user">
+    <div class="sidebar-tags">
+      <div class="tags-title">
+        <span>Tags</span>
+        <!-- <button class="add-tag-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M3.5 12H20.5"/>
+            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M12 20.5L12 3.5"/>
+          </svg>
+        </button> -->
+      </div>
+      <!-- <mat-accordion class="tag-list">
+        <mat-expansion-panel class="tag-item">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <span class="tag-color" style="background-color: #ff4757;"></span>
+              <span>High</span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>1</p>
+        </mat-expansion-panel>
+        <mat-expansion-panel class="tag-item">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <span class="tag-color" style="background-color: #ffa502;"></span>
+              <span>Medium</span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>2</p>
+        </mat-expansion-panel>
+        <mat-expansion-panel class="tag-item">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <span class="tag-color" style="background-color: #2ed573;"></span>
+              <span>Low</span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>3</p>
+        </mat-expansion-panel>
+      </mat-accordion>     -->
+     <app-tag-dropdown class="ng-star-inserted"></app-tag-dropdown>
+
+    </div>  
+    <div class="sidebar-user">
       <a href="#" class="d-flex align-items-center text-dark text-decoration-none ps-3" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
         <img src="../../../assets/svg/{{this.userService.currentUser?.icon}}" alt="{{ this.userService.currentUser?.firstname }}" width="45" height="45" class="rounded-circle me-3">
         <strong style="font-weight: normal; text-transform: capitalize;">{{ this.userService.currentUser?.firstname }}</strong>
@@ -72,8 +88,7 @@
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" (click)="logout()">Déconnexion</a></li>
       </ul>
-  </div>
-  
+    </div>      
   </div>
 </div>
 <app-modal-new-project [(isOpen)]="isModalOpen"></app-modal-new-project>

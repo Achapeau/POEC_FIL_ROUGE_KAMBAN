@@ -15,11 +15,22 @@ import { ModalComponent } from '../../modal/modal.component';
 import { ModalNewProjectComponent } from '../../modal/modal-new-project/modal-new-project.component';
 import { FormsModule } from '@angular/forms';
 import { ModalUpdateUserComponent } from '../../modal/modal-update-user/modal-update-user.component';
+import { TagDropdownComponent } from './tag-dropdown/tag-dropdown.component';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [RouterLink, MatIconModule, CommonModule, RouterOutlet, ModalNewProjectComponent, ModalUpdateUserComponent, ModalComponent, FormsModule],
+  imports: [
+    RouterLink,
+    MatIconModule,
+    CommonModule,
+    RouterOutlet,
+    ModalNewProjectComponent,
+    ModalUpdateUserComponent,
+    ModalComponent,
+    FormsModule,
+    TagDropdownComponent,
+  ],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css'],
 })
@@ -45,12 +56,17 @@ export class SidebarComponent implements OnInit {
     this.authService.userData$.subscribe((myUser) => {
       this.myUser = myUser;
     });
-    this.projects = this.projectService.convertProjectIdsToProjects(this.userService.currentUser?.projectsIds!);
+    this.projects = this.projectService.convertProjectIdsToProjects(
+      this.userService.currentUser?.projectsIds!
+    );
     this.getProject();
     this.router.events.subscribe(() => {
-      this.projects = this.projectService.convertProjectIdsToProjects(this.userService.currentUser?.projectsIds!);
+      this.projects = this.projectService.convertProjectIdsToProjects(
+        this.userService.currentUser?.projectsIds!
+      );
       this.getProject();
     });
+    console.log("it's working!");
   }
 
   getProject() {
