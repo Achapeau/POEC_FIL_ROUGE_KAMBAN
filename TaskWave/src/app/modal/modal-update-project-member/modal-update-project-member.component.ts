@@ -5,6 +5,7 @@ import { Project, User } from '../../Model/model';
 import { UserService } from '../../Service/user.service';
 import { CommonModule } from '@angular/common';
 import { WrapperListComponent } from '../../Components/Wrapper/wrapper-list/wrapper-list.component';
+import { AuthService } from '../../Service/auth.service';
 
 @Component({
   selector: 'app-modal-update-project-member',
@@ -17,11 +18,11 @@ import { WrapperListComponent } from '../../Components/Wrapper/wrapper-list/wrap
   styleUrl: './modal-update-project-member.component.css'
 })
 export class ModalUpdateProjectMemberComponent implements OnInit, OnChanges {
-  constructor(public fb: FormBuilder, private projectService: ProjectService, private userService: UserService, private wrapperListComponent: WrapperListComponent) { }
+  constructor(public fb: FormBuilder, private projectService: ProjectService, private userService: UserService, private wrapperListComponent: WrapperListComponent, private authService: AuthService) { }
   @Input() isOpen: boolean = false;
   @Output() isOpenChange = new EventEmitter<boolean>();
-  currentUserId!: number;
   membersList!: Partial<User>[];
+  currentUserId!: number;
   
   
   public checkoutForm = this.fb.group({
@@ -29,8 +30,7 @@ export class ModalUpdateProjectMemberComponent implements OnInit, OnChanges {
   });
 
   ngOnInit(): void {
-    let currentUser = localStorage.getItem('currentUser');
-    this.currentUserId = JSON.parse(currentUser!).id;
+    this.currentUserId = this.userService.currentUser?.id!;
     this.userService.getUsers().subscribe((membersList) => {
       this.membersList = membersList;
     });
@@ -45,11 +45,12 @@ export class ModalUpdateProjectMemberComponent implements OnInit, OnChanges {
   onSubmit() {
     if (this.checkoutForm.valid) {
       let memberIds: number[] = [];
-      memberIds.push(this.currentUserId!);
+      memberIds.push(this.currentUserId);
       this.checkoutForm.value.newMembers
-        ?.filter((id) => id !== this.currentUserId)
+      ?.filter((id) => id !== this.currentUserId)
         .forEach((id) => {
           memberIds.push(id as number);
+          console.log(memberIds);
         });
 
       let newProject: Project = this.projectService.project;
