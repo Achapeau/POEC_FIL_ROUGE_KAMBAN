@@ -10,12 +10,13 @@ import { CommonModule } from '@angular/common';
 import { UserService } from '../../Service/user.service';
 import { AuthService } from '../../Service/auth.service';
 import { ProjectService } from '../../Service/project.service';
-import { User, Project } from '../../Model/model';
+import { User, Project, Card } from '../../Model/model';
 import { ModalComponent } from '../../modal/modal.component';
 import { ModalNewProjectComponent } from '../../modal/modal-new-project/modal-new-project.component';
 import { FormsModule } from '@angular/forms';
 import { ModalUpdateUserComponent } from '../../modal/modal-update-user/modal-update-user.component';
-import { TagDropdownComponent } from './tag-dropdown/tag-dropdown.component';
+import { CardService } from '../../Service/card.service';
+import { Observable, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -29,7 +30,6 @@ import { TagDropdownComponent } from './tag-dropdown/tag-dropdown.component';
     ModalUpdateUserComponent,
     ModalComponent,
     FormsModule,
-    TagDropdownComponent,
   ],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css'],
@@ -40,7 +40,8 @@ export class SidebarComponent implements OnInit {
     public authService: AuthService,
     public projectService: ProjectService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public cardService: CardService
   ) {}
   userLog!: string;
   isActive: boolean = true;
@@ -51,6 +52,10 @@ export class SidebarComponent implements OnInit {
   isModalOpen = false;
   isModalOpenUpdateUser = false;
   searchQuery: string = '';
+  highIsOpen: boolean = false;
+  mediumIsOpen: boolean = false;
+  lowIsOpen: boolean = false;
+  listOfTasks!: Observable<Card[]> | Card[];
 
   ngOnInit(): void {
     this.authService.userData$.subscribe((myUser) => {
@@ -66,7 +71,13 @@ export class SidebarComponent implements OnInit {
       );
       this.getProject();
     });
-    console.log("it's working!");
+    let arrayIdProjects: number[] = this.userService.currentUser?.projectsIds!;
+    let observables = arrayIdProjects.map((id) =>
+      this.cardService.getCardsByWrapperId(id)
+    );
+    forkJoin(observables).subscribe((data: Card[][]) => {
+      this.listOfTasks = [...data[0], ...data[1]];
+    });
   }
 
   getProject() {
@@ -114,5 +125,23 @@ export class SidebarComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  changeHighOpen() {
+    this.highIsOpen = !this.highIsOpen;
+    this.mediumIsOpen = false;
+    this.lowIsOpen = false;
+    console.log(this.listOfTasks);
+    console.log(this.projects);
+  }
+  changeMediumOpen() {
+    this.mediumIsOpen = !this.mediumIsOpen;
+    this.highIsOpen = false;
+    this.lowIsOpen = false;
+  }
+  changeLowOpen() {
+    this.lowIsOpen = !this.lowIsOpen;
+    this.highIsOpen = false;
+    this.mediumIsOpen = false;
   }
 }

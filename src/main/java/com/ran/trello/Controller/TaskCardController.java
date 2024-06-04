@@ -41,4 +41,10 @@ public class TaskCardController {
     {
         taskCardService.deleteTaskCard(id);
     }
+
+    @GetMapping("/wrapper/{id}")
+    public List<TaskCard> getCardsByWrapperId(@PathVariable Integer id)
+    {
+        return taskCardService.findByWrapperId(id);
+    }
 }

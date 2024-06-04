@@ -150,9 +150,36 @@
   width: 200px;
 }
 
+.tag-item {
+  display: flex;
+  align-items: center;
+  border-radius: 0.35rem; 
+  transition: background-color 0.3s ease; 
+  cursor: pointer;
+  margin-bottom: 5px;
+  padding: 0.5rem 1rem 0.5rem 0;
+}
 
+.tag-item:hover {
+  background-color: #B6D8F2; 
+  color: #346BC8;
+  padding: 10px;
+}
 
+.tag-color {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%; 
+  margin-right: 10px;
+}
 
+.tag-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+  max-height: 15rem;
+  overflow: hidden;
+}
 
 
 /* User style */

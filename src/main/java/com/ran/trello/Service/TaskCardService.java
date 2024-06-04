@@ -80,4 +80,8 @@ public class TaskCardService {
         }
 
     }
+
+    public List<TaskCard> findByWrapperId(Integer id) {
+        return taskCardRepository.findByWrapperId(id);
+    }
 }

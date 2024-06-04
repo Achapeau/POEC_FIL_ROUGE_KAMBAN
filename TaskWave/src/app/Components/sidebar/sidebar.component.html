@@ -45,37 +45,33 @@
           </svg>
         </button> -->
       </div>
-      <!-- <mat-accordion class="tag-list">
-        <mat-expansion-panel class="tag-item">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <span class="tag-color" style="background-color: #ff4757;"></span>
-              <span>High</span>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <p>1</p>
-        </mat-expansion-panel>
-        <mat-expansion-panel class="tag-item">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <span class="tag-color" style="background-color: #ffa502;"></span>
-              <span>Medium</span>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <p>2</p>
-        </mat-expansion-panel>
-        <mat-expansion-panel class="tag-item">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <span class="tag-color" style="background-color: #2ed573;"></span>
-              <span>Low</span>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <p>3</p>
-        </mat-expansion-panel>
-      </mat-accordion>     -->
-     <app-tag-dropdown class="ng-star-inserted"></app-tag-dropdown>
-
+      <div class="tag-list">
+        <div class="tag-item" (click)="changeHighOpen()">
+          <span class="tag-color" style="background-color: #ff4757;"></span>
+          <span>High</span>
+        </div>
+        <div *ngIf="highIsOpen" class="tag-container">
+          <div>test</div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <div class="tag-item" (click)="changeMediumOpen()">
+          <span class="tag-color" style="background-color: #ffa502;"></span>
+          <span>Medium</span>
+        </div>
+        <div *ngIf="mediumIsOpen" class="tag-container">
+          <div>test</div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <div class="tag-item" (click)="changeLowOpen()">
+          <span class="tag-color" style="background-color: #2ed573;"></span>
+          <span>Low</span>
+        </div>
+        <div *ngIf="lowIsOpen" class="tag-container">
+          <div>test</div>
+        </div>
+      </div>
     </div>  
     <div class="sidebar-user">
       <a href="#" class="d-flex align-items-center text-dark text-decoration-none ps-3" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
