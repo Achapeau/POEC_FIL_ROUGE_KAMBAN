@@ -11,10 +11,10 @@ services:
       - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql
     restart: on-failure
     environment:
-      MYSQL_ROOT_PASSWORD: trello_admin
-      MYSQL_DATABASE: trello
-      MYSQL_USER: trello_admin
-      MYSQL_PASSWORD: trello_admin
+      MYSQL_ROOT_PASSWORD: waveTask_admin
+      MYSQL_DATABASE: waveTask
+      MYSQL_USER: waveTask_admin
+      MYSQL_PASSWORD: waveTask_admin
 
 
   compilation:
@@ -40,8 +40,15 @@ services:
     volumes:
       - java-data:/app
     environment:
+      - spring.application.name=POEC_FIL_ROUGE_KAMBAN
+      - server.port=3050
       - spring.datasource.url=jdbc:mysql://mysql-prod:3306/trello
-      - spring.jpa.hibernate.ddl-auto=update
+      # - spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+      - spring.datasource.username=trello_admin
+      - spring.datasource.password=trello_admin
+      - security.jwt.secret-key=3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b
+      - security.jwt.expiration-time=3600000
+      - spring.jpa.hibernate.ddl-auto=create-drop
     depends_on:
       compilation:
         condition: service_completed_successfully
@@ -64,7 +71,8 @@ services:
       - springboot-mysql-network
     command: sh -c "npm install -g @angular/cli@17.3.2
       && npm install
-      && npm start"
+      && npm run build
+      && npm run deploy"
     depends_on:
       - spring
   
