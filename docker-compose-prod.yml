@@ -43,7 +43,7 @@ services:
       - spring.application.name=POEC_FIL_ROUGE_KAMBAN
       - server.port=3050
       - spring.datasource.url=jdbc:mysql://mysql-prod:3306/trello
-      # - spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+      - spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
       - spring.datasource.username=trello_admin
       - spring.datasource.password=trello_admin
       - security.jwt.secret-key=3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b
